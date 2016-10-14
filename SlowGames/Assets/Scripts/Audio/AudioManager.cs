@@ -417,7 +417,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <param name="index">BGM番号</param>
     /// <param name="loop">ループするか</param>
     /// <returns></returns>
-    public AudioManager play3DSe(GameObject gameobject, int index, bool loop = false)
+    public AudioSource play3DSe(GameObject gameobject, int index, bool loop = false)
     {
         AudioSource audioSource = null;
 
@@ -450,7 +450,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
         audioSource.Play();
 
-        return this;
+        return audioSource;
     }
 
     /// <summary>
@@ -460,7 +460,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <param name="index">BGM番号</param>
     /// <param name="loop">ループするか</param>
     /// <returns></returns>
-    public AudioManager play3DBgm(GameObject gameobject, int index, bool loop = true)
+    public AudioSource play3DBgm(GameObject gameobject, int index, bool loop = true)
     {
         AudioSource audioSource = null;
 
@@ -493,7 +493,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
         audioSource.Play();
 
-        return this;
+        return audioSource;
     }
 
     /// <summary>
@@ -503,11 +503,10 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <param name="name">SEの名前</param>
     /// <param name="loop">ループするか</param>
     /// <returns></returns>
-    public AudioManager play3DSe(GameObject gameobject, AudioName.SeName name, bool loop = false)
+    public AudioSource play3DSe(GameObject gameobject, AudioName.SeName name, bool loop = false)
     {
         var index = (int)name;
-        play3DSe(gameobject, index, loop);
-        return this;
+        return play3DSe(gameobject, index, loop);
     }
 
     /// <summary>
@@ -517,11 +516,10 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <param name="name">BGMの名前</param>
     /// <param name="loop">ループするか</param>
     /// <returns></returns>
-    public AudioManager play3DBgm(GameObject gameobject, AudioName.BgmName name, bool loop = false)
+    public AudioSource play3DBgm(GameObject gameobject, AudioName.BgmName name, bool loop = false)
     {
         var index = (int)name;
-        play3DSe(gameobject, index, loop);
-        return this;
+        return play3DSe(gameobject, index, loop);
     }
 
     /// <summary>
@@ -596,6 +594,17 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         }
         return this;
     }
+
+    /// <summary>
+    /// 特定のオブジェクトのAudioSourceを取得
+    /// </summary>
+    /// <param name="gameobject"></param>
+    /// <returns></returns>
+    public IEnumerable<AudioSource> get3DAudioSources(GameObject gameobject)
+    {
+        return gameobject.GetComponents<AudioSource>();
+    }
+
 
     //============================================================================================
 
