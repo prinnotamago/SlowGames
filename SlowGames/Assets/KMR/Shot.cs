@@ -21,7 +21,7 @@ public class Shot : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet") return;
+        if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Bullet") return;
 
         Destroy(gameObject);
     }
