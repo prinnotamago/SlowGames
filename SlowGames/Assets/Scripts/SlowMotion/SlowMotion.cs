@@ -1,71 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// ゲームのスピードを変える。
-/// スローモーション
-/// </summary>
 public class SlowMotion : MonoBehaviour {
 
-    [SerializeField]
-    UnityStandardAssets.ImageEffects.MotionBlur blur = null;
-    // UnityStandardAssets.ImageEffects
-
-    /// <summary>
-    /// 残り時間
-    /// </summary>
-    private float remainingTime = 0.0f;
-    //public float RemainingTime { get; set; }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        TimeElapsed();
-    }
-
-    /// <summary>
-    /// 残り時間を減らして、ゲームスピードを元に戻す処理
-    /// </summary>
-    public void TimeElapsed()
-    {
-        if (remainingTime > 0.0f && Time.timeScale != 1.0f)
-        {
-            remainingTime -= Time.unscaledDeltaTime;
-
-            if (remainingTime <= 0.0f)
-            {
-                Time.timeScale = 1.0f;
-                if(blur != null)
-                {
-                    blur.enabled = false;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// ゲームの速度とその速度にする時間(秒)を決める。
-    /// </summary>
-    /// <param name="speed">ゲームの速度</param>
-    /// <param name="time">時間(秒)</param>
-    public void SetMotionTime(float speed, float time)
-    {
-        Time.timeScale = speed;
-        remainingTime = time;
-        blur.enabled = true;
-    }
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 
     /// <summary>
     /// ゲーム速度を元に戻す。
     /// １回だけ呼ぶようにしてください。
     /// </summary>
-    public static void ResetSpeed()
+    static void ResetSpeed()
     {
         Time.timeScale = 1.0f;
     }
@@ -79,7 +31,7 @@ public class SlowMotion : MonoBehaviour {
     /// 1.0f 以上で早く、
     /// 1.0f 以下で遅くなる
     /// </param>
-    public static void GameSpeed(float speed)
+    static void GameSpeed(float speed)
     {
         Time.timeScale = speed;
     }
