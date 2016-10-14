@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/TestScenes/SlowMotion.unity
-  isLoaded: 1
-  isActive: 1
