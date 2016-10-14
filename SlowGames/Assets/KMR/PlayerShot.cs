@@ -40,7 +40,7 @@ public class PlayerShot : MonoBehaviour
     {
         device = SteamVR_Controller.Input((int)tracked_Object.index);
         ThreeBurst();
-        //if (!device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
+        if (!device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
         is_shot = true;
         
