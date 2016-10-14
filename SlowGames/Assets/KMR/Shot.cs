@@ -7,7 +7,6 @@ public class Shot : MonoBehaviour
     [SerializeField]
     float bullet_speed = 100.0f;
 
-
     void Start()
     {
         ShotTest();

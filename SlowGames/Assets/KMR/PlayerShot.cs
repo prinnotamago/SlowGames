@@ -7,9 +7,9 @@ public class PlayerShot : MonoBehaviour
     GameObject Bullet;
 
     SteamVR_TrackedObject tracked_Object;
-    GameObject steamVR_Camera;
     SteamVR_Controller.Device device;
-    Vector2 position;
+    //GameObject steamVR_Camera;
+    //Vector2 position;
 
     void Start()
     {
@@ -21,11 +21,11 @@ public class PlayerShot : MonoBehaviour
     {
         device = SteamVR_Controller.Input((int)tracked_Object.index);
 
-        if (!Input.GetKeyDown(KeyCode.A) || !device.GetPress(SteamVR_Controller.ButtonMask.Trigger)){ return;}
-
+        if (!device.GetPress(SteamVR_Controller.ButtonMask.Trigger)){ return;}
+        //if (!Input.GetKeyDown(KeyCode.A)) { return; }
         GameObject Shotbullet = Instantiate(Bullet);
         //Vector3 front = transform.position;
         Shotbullet.transform.rotation = transform.rotation;
-        Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.position = transform.position + transform.forward;
     }
 }
