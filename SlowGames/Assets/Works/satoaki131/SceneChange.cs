@@ -5,7 +5,7 @@ using System.Collections;
 public class SceneChange : MonoBehaviour
 {
 
-    public static void ChangeScene(SceneName name, float fadeOutTime, float fadeInTime, Color color)
+    public static void ChangeScene(SceneName.Name name, float fadeOutTime, float fadeInTime, Color color)
     {
         SteamVR_LoadLevel.Begin(name.ToString(), false, fadeOutTime, fadeInTime, color.r, color.g, color.b, color.a);
     }
@@ -17,7 +17,7 @@ public class SceneChange : MonoBehaviour
     /// <param name="name">遷移先の名前</param>
     /// <param name="time">FadeOutとFadeInの時間</param>
     /// <param name="color">Fadeの色</param>
-    public static void ChangeScene(SceneName name, float time, Color color)
+    public static void ChangeScene(SceneName.Name name, float time, Color color)
     {
         ChangeScene(name, time, time, color);
     }
@@ -29,7 +29,7 @@ public class SceneChange : MonoBehaviour
     /// </summary>
     /// <param name="name">遷移先の名前</param>
     /// <param name="time">FadeOutとFadeInの時間</param>
-    public static void ChangeScene(SceneName name, float time)
+    public static void ChangeScene(SceneName.Name name, float time)
     {
         ChangeScene(name, time, time, Color.black);
     }
@@ -42,7 +42,7 @@ public class SceneChange : MonoBehaviour
     /// <param name="name">遷移先の名前</param>
     /// <param name="fadeOutTime">FadeOut時間</param>
     /// <param name="fadeInTime">FadeIn時間</param>
-    public static void ChangeScene(SceneName name, float fadeOutTime, float fadeInTime)
+    public static void ChangeScene(SceneName.Name name, float fadeOutTime, float fadeInTime)
     {
         ChangeScene(name, fadeOutTime, fadeInTime, Color.black);
     }
@@ -53,7 +53,7 @@ public class SceneChange : MonoBehaviour
     /// </summary>
     /// <param name="name">遷移先の名前</param>
     /// <param name="color">Fadeの色</param>
-    public static void ChangeScene(SceneName name, Color color)
+    public static void ChangeScene(SceneName.Name name, Color color)
     {
         ChangeScene(name, 1.0f, 1.0f, color);
     }
@@ -64,7 +64,7 @@ public class SceneChange : MonoBehaviour
     /// Color：黒
     /// </summary>
     /// <param name="name">遷移先の名前</param>
-    public static void ChangeScene(SceneName name)
+    public static void ChangeScene(SceneName.Name name)
     {
         ChangeScene(name, 1.0f, 1.0f, Color.black);
     }
