@@ -102,13 +102,14 @@ public class SteamVR_LoadLevel : MonoBehaviour
 
 	// Helper function to quickly and simply load a level from script.
 	public static void Begin(string levelName,
-		bool showGrid = false, float fadeOutTime = 0.5f,
-		float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f)
+		bool showGrid = false, float fadeOutTime = 0.5f,float fadeInTime = 0.5f,
+        float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f)
 	{
 		var loader = new GameObject("loader").AddComponent<SteamVR_LoadLevel>();
 		loader.levelName = levelName;
 		loader.showGrid = showGrid;
 		loader.fadeOutTime = fadeOutTime;
+        loader.fadeInTime = fadeInTime;
 		loader.backgroundColor = new Color(r, g, b, a);
 		loader.Trigger();
 	}
