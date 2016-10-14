@@ -12,10 +12,17 @@ public class Shot : MonoBehaviour
         ShotTest();
     }
 
-    void Update(){}
+    void Update() { }
 
     public void ShotTest()
     {
-         gameObject.GetComponent<Rigidbody>().velocity = transform.forward * bullet_speed;
+        gameObject.GetComponent<Rigidbody>().velocity = transform.forward * bullet_speed;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet") return;
+
+        Destroy(gameObject);
     }
 }

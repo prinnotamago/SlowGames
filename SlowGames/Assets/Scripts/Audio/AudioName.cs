@@ -10,5 +10,6 @@ public enum BgmName
 public enum SeName
 {
 	Thunder,
+	gun1,
 }
 }
