@@ -30,7 +30,7 @@ public class Shot : MonoBehaviour
 
     public void ShotTest()
     {
-        gameObject.transform.Translate(0, -1 * bullet_speed, 1 * bullet_speed);
+        gameObject.transform.Translate(0, 0 * bullet_speed, 1 * bullet_speed);
     }
 
     public void OnCollisionEnter(Collision collision)
