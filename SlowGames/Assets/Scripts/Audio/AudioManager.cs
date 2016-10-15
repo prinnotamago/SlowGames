@@ -18,10 +18,10 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <summary>
     /// Seの最大音数
     /// </summary>
-    const uint SE_CHANNEL = 128;
+    const uint SE_CHANNEL = 32;
 
     [SerializeField, Tooltip("同じSEが鳴るときの最大音数")]
-    uint LIMIT_SE_COUNT = 64;
+    uint LIMIT_SE_COUNT = 16;
 
     [SerializeField]
     AudioClip[] _bgmClips = null;
