@@ -11,6 +11,8 @@ public class SlowMotion : MonoBehaviour {
     //UnityStandardAssets.ImageEffects.MotionBlur blur = null;
     // UnityStandardAssets.ImageEffects
 
+    public static SlowMotion instance = null;
+
     /// <summary>
     /// 残り時間
     /// </summary>
@@ -20,62 +22,61 @@ public class SlowMotion : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        if(instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        TimeElapsed();
-    }
+    //void Update()
+    //{
+    //    TimeElapsed();
+    //}
 
     /// <summary>
     /// 残り時間を減らして、ゲームスピードを元に戻す処理
     /// </summary>
-    public void TimeElapsed()
-    {
-        if (remainingTime > 0.0f && Time.timeScale != 1.0f)
-        {
-            remainingTime -= Time.unscaledDeltaTime;
+    //public void TimeElapsed()
+    //{
+    //    if (remainingTime > 0.0f && Time.timeScale != 1.0f)
+    //    {
+    //        remainingTime -= Time.unscaledDeltaTime;
 
-            if (remainingTime <= 0.0f)
-            {
-                Time.timeScale = 1.0f;
-                //if(blur != null)
-                //{
-                //    blur.enabled = false;
-                //}
-            }
-        }
-    }
+    //        if (remainingTime <= 0.0f)
+    //        {
+    //            Time.timeScale = 1.0f;
+    //            //if(blur != null)
+    //            //{
+    //            //    blur.enabled = false;
+    //            //}
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// ゲームの速度とその速度にする時間(秒)を決める。
     /// </summary>
     /// <param name="speed">ゲームの速度</param>
     /// <param name="time">時間(秒)</param>
-    public void SetMotionTime(float speed, float time)
-    {
-        Time.timeScale = speed;
-        remainingTime = time;
-        //if (blur != null)
-        //{
-        //    blur.enabled = true;
-        //}
-    }
+    //public void SetMotionTime(float speed, float time)
+    //{
+    //    Time.timeScale = speed;
+    //    remainingTime = time;
+    //    //if (blur != null)
+    //    //{
+    //    //    blur.enabled = true;
+    //    //}
+    //}
 
     /// <summary>
     /// ゲーム速度を元に戻す。
     /// １回だけ呼ぶようにしてください。
     /// </summary>
-    public static void ResetSpeed()
+    public void ResetSpeed()
     {
         Time.timeScale = 1.0f;
-        var ses = AudioManager.instance.findSeSources(AudioName.SeName.Thunder);
-        foreach (var se in ses)
-        {
-            se.pitch = 1.0f;
-        }
+
         AudioManager.instance.changeSourceAllPitch(1.0f);
     }
 
@@ -88,14 +89,9 @@ public class SlowMotion : MonoBehaviour {
     /// 1.0f 以上で早く、
     /// 1.0f 以下で遅くなる
     /// </param>
-    public static void GameSpeed(float speed)
+    public void GameSpeed(float speed)
     {
         Time.timeScale = speed;
-
-        var ses = AudioManager.instance.findSeSources(AudioName.SeName.Thunder);
-        foreach (var se in ses){
-            se.pitch = speed;
-        }
 
         AudioManager.instance.changeSourceAllPitch(speed);
     }
