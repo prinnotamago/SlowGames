@@ -645,7 +645,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// </summary>
     /// <param name="value">-3 to +3</param>
     /// <returns></returns>
-    public AudioManager change3DSourceAllPitch(float value)
+    public AudioManager changeSourceAllPitch(float value)
     {
         change3DSourcePitch(value);
         changeBGMPitch(value);
