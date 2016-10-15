@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 20
+  _deathEffect: {fileID: 1000010536851154, guid: 6d3f46942e3094243a0451c9ba10e93c,
+    type: 2}
   _targetDirection: {x: 2, y: 2, z: 2}
 --- !u!135 &135000011033307528
 SphereCollider:
