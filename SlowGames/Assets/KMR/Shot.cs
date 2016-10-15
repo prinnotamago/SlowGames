@@ -12,22 +12,26 @@ public class Shot : MonoBehaviour
     void Start()
     {
         //a = gameObject.transform.position;
-        
+
     }
 
-    void Update() {
+    void Update(){}
+
+    public void FixedUpdate()
+    {
         ShotTest();
     }
 
+
     public void ShotTest()
     {
-        gameObject.transform.Translate(0,-1*bullet_speed,1 * bullet_speed);
+        gameObject.transform.Translate(0, -1 * bullet_speed, 1 * bullet_speed);
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Bullet") return;
-
+        if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Player") return;
+        GetComponent<CapsuleCollider>().enabled = false;
         Destroy(gameObject);
     }
 }

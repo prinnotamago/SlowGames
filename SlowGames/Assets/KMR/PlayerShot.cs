@@ -81,7 +81,8 @@ public class PlayerShot : MonoBehaviour
             //device.TriggerHapticPulse(1000);
             GameObject Shotbullet = Instantiate(Bullet);
             Shotbullet.transform.rotation = transform.rotation;
-            Shotbullet.transform.position = transform.position + transform.forward;
+        //弾の発生位置変更
+            Shotbullet.transform.position = transform.position;
             time = burst_interval_time;
             burst_count--;
         bullets_number--;

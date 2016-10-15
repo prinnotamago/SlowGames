@@ -279,6 +279,7 @@ GameObject:
   - 33: {fileID: 1465163730}
   - 65: {fileID: 1465163729}
   - 23: {fileID: 1465163728}
+  - 114: {fileID: 1465163732}
   - 114: {fileID: 1465163727}
   m_Layer: 11
   m_Name: Cube
@@ -299,10 +300,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1000010024009322, guid: 7ff5ab4824873074dbe7d545a60fe2cc, type: 2}
-  one_shot_count: 3
+  one_shot_count: 1
   vibration_power: 200
-  burst_interval_time: 0.1
+  burst_interval_time: 0
   max_burst_count: 3
+  max_bullets_numbers: 20
 --- !u!23 &1465163728
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -358,12 +360,24 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1465163726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -24.7}
+  m_LocalPosition: {x: 0, y: 0, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1465163732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465163726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71ee8e99a9873045b2598e1cf26fe7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reloadTime: 0.5
 --- !u!1001 &1583664107
 Prefab:
   m_ObjectHideFlags: 0
@@ -402,6 +416,16 @@ Prefab:
     - target: {fileID: 4000013906875394, guid: 7ff5ab4824873074dbe7d545a60fe2cc, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 136000011387955742, guid: 7ff5ab4824873074dbe7d545a60fe2cc,
+        type: 2}
+      propertyPath: m_Height
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 136000011387955742, guid: 7ff5ab4824873074dbe7d545a60fe2cc,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ff5ab4824873074dbe7d545a60fe2cc, type: 2}
