@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(PlayerShot))]
 public class Reload : MonoBehaviour {
 
     [SerializeField]
