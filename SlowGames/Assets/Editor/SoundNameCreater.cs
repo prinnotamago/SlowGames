@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// サウンドのファイル名を定数名とし、生成する機能
@@ -61,12 +62,14 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("{");
 
             var path = "Assets/Resources/Audio/BGM";
-            var bgmsName = Directory.GetFiles(path, "*.wav", SearchOption.TopDirectoryOnly);
 
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
+
+            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
                 builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
             }
+
             builder.AppendLine("}");
         }
 
@@ -75,12 +78,14 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("{");
 
             var path = "Assets/Resources/Audio/SE";
-            var bgmsName = Directory.GetFiles(path, "*.wav", SearchOption.TopDirectoryOnly);
 
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
+
+            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
                 builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
             }
+
             builder.AppendLine("}");
         }
 

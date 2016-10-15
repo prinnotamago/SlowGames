@@ -14,8 +14,11 @@ public class Enemy : MonoBehaviour
         {
             //エフェクト
             var effect = Instantiate(_deathEffect);
-            _deathEffect.transform.position = transform.position;
+            effect.transform.position = transform.position;
+            //音
+            AudioManager.instance.play3DSe(effect,AudioName.SeName.Thunder);
 
+            //死ぬ
             Destroy(this.gameObject);
         }
     }
