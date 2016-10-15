@@ -42,19 +42,14 @@ public class TestMoveAndSlow : MonoBehaviour {
         }
        
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            slowMotion.SetMotionTime(0.1f, 3.0f);
-        }
-
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SlowMotion.ResetSpeed();
+            SlowMotion.instance.ResetSpeed();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            SlowMotion.GameSpeed(0.1f);
+            SlowMotion.instance.GameSpeed(0.1f);
         }
     }
 }
