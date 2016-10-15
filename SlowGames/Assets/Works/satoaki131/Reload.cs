@@ -6,6 +6,11 @@ public class Reload : MonoBehaviour {
     [SerializeField]
     private float _reloadTime = 0.5f;
 
+    private PlayerShot _shot = null;
+
+    SteamVR_TrackedObject _trackedObject;
+    SteamVR_Controller.Device _device;
+
     /// <summary>
     /// trueならリロード中
     /// falseならリロードしてない状態
@@ -15,9 +20,21 @@ public class Reload : MonoBehaviour {
         get; private set;
     }
 
+    void Start()
+    {
+        _shot = GetComponent<PlayerShot>();
+        if (!SteamVR.active) return;
+        _trackedObject = GetComponent<SteamVR_TrackedObject>();
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)) //あとでリロードボタンに変更
+        if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
+        if (_shot.MaxBulletsNumbers == _shot.BulletsNumber) return;
+        if (isReload) return;
+        if((!SteamVR.active && Input.GetKeyDown(KeyCode.R)) ||
+            (SteamVR.active && _device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            ) //あとでリロードボタンに変更
         {
             StartCoroutine(ShotReload());
         }
