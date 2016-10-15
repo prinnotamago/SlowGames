@@ -281,9 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490db166179db4ecb9fd05b1ce10a168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyBullet: {fileID: 114000013834796662, guid: 2c9e3fb88b6d54e1d9102c0b602968c2,
+  _enemyBullet: {fileID: 114000011230568322, guid: 2c9e3fb88b6d54e1d9102c0b602968c2,
     type: 2}
   _randomShotRange: {x: 2, y: 2, z: 2}
+  _shotDelay: 3
 --- !u!114 &114000013127171654
 MonoBehaviour:
   m_ObjectHideFlags: 1
