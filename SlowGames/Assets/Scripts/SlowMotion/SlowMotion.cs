@@ -7,8 +7,8 @@ using System.Collections;
 /// </summary>
 public class SlowMotion : MonoBehaviour {
 
-    [SerializeField]
-    UnityStandardAssets.ImageEffects.MotionBlur blur = null;
+    //[SerializeField]
+    //UnityStandardAssets.ImageEffects.MotionBlur blur = null;
     // UnityStandardAssets.ImageEffects
 
     /// <summary>
@@ -41,10 +41,10 @@ public class SlowMotion : MonoBehaviour {
             if (remainingTime <= 0.0f)
             {
                 Time.timeScale = 1.0f;
-                if(blur != null)
-                {
-                    blur.enabled = false;
-                }
+                //if(blur != null)
+                //{
+                //    blur.enabled = false;
+                //}
             }
         }
     }
@@ -58,7 +58,10 @@ public class SlowMotion : MonoBehaviour {
     {
         Time.timeScale = speed;
         remainingTime = time;
-        blur.enabled = true;
+        //if (blur != null)
+        //{
+        //    blur.enabled = true;
+        //}
     }
 
     /// <summary>
@@ -68,6 +71,11 @@ public class SlowMotion : MonoBehaviour {
     public static void ResetSpeed()
     {
         Time.timeScale = 1.0f;
+        var ses = AudioManager.instance.findSeSources(AudioName.SeName.Thunder);
+        foreach (var se in ses)
+        {
+            se.pitch = 1.0f;
+        }
     }
 
     /// <summary>
@@ -82,5 +90,11 @@ public class SlowMotion : MonoBehaviour {
     public static void GameSpeed(float speed)
     {
         Time.timeScale = speed;
+
+        var ses = AudioManager.instance.findSeSources(AudioName.SeName.Thunder);
+        foreach (var se in ses){
+            se.pitch = speed;
+
+        }
     }
 }
