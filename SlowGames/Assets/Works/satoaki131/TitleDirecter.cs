@@ -16,18 +16,20 @@ public class TitleDirecter : MonoBehaviour {
     void Update()
     {
         _device = SteamVR_Controller.Input((int)_trackedObject.index);
+        Debug.Log(_collition);
+
         if (!_collition) return;
-        if (_device.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
+        if (_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             SceneChange.ChangeScene(SceneName.Name.MainGame);
         }
 
-        Debug.Log(_collition);
 
     }
 
     void OnTriggerStay(Collider col)
     {
+        Debug.Log("Stay");
         if (col.gameObject.tag == "UI")
         {
             _collition = true;
@@ -36,6 +38,7 @@ public class TitleDirecter : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        Debug.Log("Enter");
         if (col.gameObject.tag == "UI")
         {
             _collition = true;
@@ -44,6 +47,7 @@ public class TitleDirecter : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
+        Debug.Log("Exit");
         if (col.gameObject.tag == "UI")
         {
             _collition = false;

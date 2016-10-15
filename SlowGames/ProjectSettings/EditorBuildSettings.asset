@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/satoaki131/FadeTest.unity
+    path: Assets/Scenes/Title.unity
   - enabled: 1
-    path: Assets/satoaki131/test.unity
+    path: Assets/Scenes/MainGame.unity
