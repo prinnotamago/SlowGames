@@ -35,6 +35,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
     List<AudioMixerGroup> _audioMixerGroup = new List<AudioMixerGroup>();
 
+    List<AudioSource> _3dSources = new List<AudioSource>();
+
     //=====================================================================================================
 
     /// <summary>
@@ -271,6 +273,20 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     }
 
     /// <summary>
+    /// SEのピッチを変更
+    /// </summary>
+    /// <param name="value">-3 to +3</param>
+    /// <returns></returns>
+    public AudioManager changeSEPitch(float value)
+    {
+        foreach (var source in _seSources)
+        {
+            source.pitch = value;
+        }
+        return this;
+    }
+
+    /// <summary>
     /// フェードインしながらBGMを再生
     /// 現在のボリュームからMaxVolume(1.0f)までフェードする
     /// </summary>
@@ -438,6 +454,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         {
             audioSource = gameobject.AddComponent<AudioSource>();
 
+            _3dSources.Add(audioSource);
+
             audioSource.dopplerLevel = 0.0f;
             audioSource.spatialBlend = 1.0f;
 
@@ -480,6 +498,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         if (audioSource == null)
         {
             audioSource = gameobject.AddComponent<AudioSource>();
+
+            _3dSources.Add(audioSource);
 
             audioSource.dopplerLevel = 0.0f;
             audioSource.spatialBlend = 1.0f;
@@ -605,6 +625,34 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         return gameobject.GetComponents<AudioSource>();
     }
 
+    /// <summary>
+    /// 3D音響用のピッチを変更
+    /// </summary>
+    /// <param name="value">-3 to +3</param>
+    /// <returns></returns>
+    public AudioManager change3DSourcePitch(float value)
+    {
+        foreach (var source in _3dSources)
+        {
+            if (source == null) continue;
+            source.pitch = value;
+        }
+        return this;
+    }
+
+    /// <summary>
+    /// 全てのAudioSourceのピッチを変更
+    /// </summary>
+    /// <param name="value">-3 to +3</param>
+    /// <returns></returns>
+    public AudioManager change3DSourceAllPitch(float value)
+    {
+        change3DSourcePitch(value);
+        changeBGMPitch(value);
+        changeSEPitch(value);
+        return this;
+    }
+
 
     //============================================================================================
 
@@ -645,6 +693,12 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             if (source.clip == null) continue;
             if (source.isPlaying) continue;
             source.clip = null;
+        }
+
+        foreach (var source in _3dSources)
+        {
+            if (source != null) continue;
+            _3dSources.Remove(source);
         }
     }
 
