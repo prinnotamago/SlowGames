@@ -20,7 +20,7 @@ public class SlowMotion : MonoBehaviour {
     //public float RemainingTime { get; set; }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if(instance == null)
         {

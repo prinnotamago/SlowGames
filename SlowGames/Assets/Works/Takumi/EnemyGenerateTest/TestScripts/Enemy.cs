@@ -22,4 +22,10 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void Start()
+    {
+//        SlowMotion.instance.GameSpeed(0.5f);
+
+    }
 }
