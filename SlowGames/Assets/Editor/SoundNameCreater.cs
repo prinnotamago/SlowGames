@@ -63,23 +63,9 @@ public class SoundNameCreater : MonoBehaviour
 
             var path = "Assets/Resources/Audio/BGM";
 
-            var bgmsName = Directory.GetFiles(path, "*.wav", SearchOption.TopDirectoryOnly);
+            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
 
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
-            {
-                builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
-            }
-
-            bgmsName = Directory.GetFiles(path, "*.mp3", SearchOption.TopDirectoryOnly);
-
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
-            {
-                builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
-            }
-
-            bgmsName = Directory.GetFiles(path, "*.ogg", SearchOption.TopDirectoryOnly);
-
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
                 builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
             }
@@ -92,23 +78,10 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("{");
 
             var path = "Assets/Resources/Audio/SE";
-            var bgmsName = Directory.GetFiles(path, "*.wav", SearchOption.TopDirectoryOnly);
 
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
-            {
-                builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
-            }
+            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
 
-            bgmsName = Directory.GetFiles(path, "*.mp3", SearchOption.TopDirectoryOnly);
-
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
-            {
-                builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
-            }
-
-            bgmsName = Directory.GetFiles(path, "*.ogg", SearchOption.TopDirectoryOnly);
-
-            foreach (var n in bgmsName.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
                 builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
             }
