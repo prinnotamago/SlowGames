@@ -86,7 +86,7 @@ public class PlayerShot : MonoBehaviour
         }
             GameObject Shotbullet = Instantiate(Bullet);
         Shotbullet.transform.rotation = transform.rotation;
-        Shotbullet.transform.Rotate(45,0,0);
+        //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
 //            Shotbullet.transform.position = transform.position;
             Shotbullet.transform.position = transform.position;

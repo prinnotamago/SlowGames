@@ -19,23 +19,18 @@ public class Shot : MonoBehaviour
 
     void Update()
     {
-        ShotTest();
+        
     }
 
     public void FixedUpdate()
     {
-        
+        ShotTest();
     }
 
 
     public void ShotTest()
     {
-        gameObject.transform.Translate(0, 0 * bullet_speed, 1 * bullet_speed);
+        gameObject.transform.Translate(0, -1 * bullet_speed, 1 * bullet_speed);
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Player") return;
-        Destroy(gameObject);
-    }
 }
