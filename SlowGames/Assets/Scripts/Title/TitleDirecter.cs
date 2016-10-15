@@ -16,24 +16,14 @@ public class TitleDirecter : MonoBehaviour {
     void Update()
     {
         _device = SteamVR_Controller.Input((int)_trackedObject.index);
-        Debug.Log(_collition);
 
         if (!_collition) return;
         if (_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
-            SceneChange.ChangeScene(SceneName.Name.MainGame);
+            SceneChange.ChangeScene(SceneName.Name.Select);
         }
 
 
-    }
-
-    void OnTriggerStay(Collider col)
-    {
-        Debug.Log("Stay");
-        if (col.gameObject.tag == "UI")
-        {
-            _collition = true;
-        }
     }
 
     void OnTriggerEnter(Collider col)

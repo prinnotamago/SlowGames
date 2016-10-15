@@ -5,9 +5,15 @@ public static class SceneName
 {
 public enum Name
 {
-	MainGame,
 	Title,
+	MainGame,
+	FistGame,
+	SwordGame,
+	Select,
 }
-	public const string MainGame = "MainGame";
 	public const string Title = "Title";
+	public const string MainGame = "MainGame";
+	public const string FistGame = "FistGame";
+	public const string SwordGame = "SwordGame";
+	public const string Select = "Select";
 }
