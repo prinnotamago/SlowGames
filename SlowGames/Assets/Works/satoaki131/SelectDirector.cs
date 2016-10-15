@@ -14,10 +14,21 @@ public class SelectDirector : MonoBehaviour
 
     private GameObject _selectObj = null;
 
+    private SteamVR_TrackedObject _trackedObject = null;
+    private SteamVR_Controller.Device _device = null;
+
+    void Start()
+    {
+        if (!SteamVR.active) return;
+        _trackedObject = GetComponent<SteamVR_TrackedObject>();
+    }
+
     void Update()
     {
+        if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
         if (!_collision) return;
         if (_selectObj == null) return;
+        if (!_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) return;
         if(_selectObj == _candidateObj[GUN_NUMBER]) //Gun
         {
             SceneChange.ChangeScene(SceneName.Name.MainGame);
@@ -38,6 +49,7 @@ public class SelectDirector : MonoBehaviour
         {
             _collision = true;
             _selectObj = col.gameObject;
+            Debug.Log(_selectObj);
         }
     }
 
@@ -46,6 +58,7 @@ public class SelectDirector : MonoBehaviour
         if (col.gameObject.tag == "UI")
         {
             _collision = false;
+            _selectObj = null;
         }
     }
 }
