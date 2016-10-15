@@ -6,6 +6,8 @@ using System.Collections;
 /// </summary>
 public class ViveControllerVisualizer : MonoBehaviour
 {
+    readonly int MAIN_CAMERA_TAG_NAME_HASH = "MainCamera".GetHashCode();
+
     /// <summary>
     /// カメラに映っているか
     /// </summary>
@@ -14,12 +16,13 @@ public class ViveControllerVisualizer : MonoBehaviour
         get; private set;
     }
 
-    public void OnBecameInvisible()
+    public void OnWillRenderObject()
     {
+        if (Camera.current.tag.GetHashCode() != MAIN_CAMERA_TAG_NAME_HASH) return;
         isVisualize = true;
     }
 
-    public void OnBecameVisible()
+    void Update()
     {
         isVisualize = false;
     }
