@@ -22,7 +22,7 @@ public class ViveControllerVisualizer : MonoBehaviour
         isVisualize = true;
     }
 
-    void Update()
+    void LateUpdate()
     {
         isVisualize = false;
     }
