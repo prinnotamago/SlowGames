@@ -76,6 +76,7 @@ public class SlowMotion : MonoBehaviour {
         {
             se.pitch = 1.0f;
         }
+        AudioManager.instance.changeSourceAllPitch(1.0f);
     }
 
     /// <summary>
@@ -94,7 +95,8 @@ public class SlowMotion : MonoBehaviour {
         var ses = AudioManager.instance.findSeSources(AudioName.SeName.Thunder);
         foreach (var se in ses){
             se.pitch = speed;
-
         }
+
+        AudioManager.instance.changeSourceAllPitch(speed);
     }
 }
