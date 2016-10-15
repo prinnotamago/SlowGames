@@ -11,15 +11,20 @@ public class Shot : MonoBehaviour
 
     void Start()
     {
+        
+         
         //a = gameObject.transform.position;
 
     }
 
-    void Update(){}
+    void Update()
+    {
+        ShotTest();
+    }
 
     public void FixedUpdate()
     {
-        ShotTest();
+        
     }
 
 
@@ -31,7 +36,6 @@ public class Shot : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Player") return;
-        GetComponent<CapsuleCollider>().enabled = false;
         Destroy(gameObject);
     }
 }

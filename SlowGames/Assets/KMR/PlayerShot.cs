@@ -54,16 +54,18 @@ public class PlayerShot : MonoBehaviour
         reload = GetComponent<Reload>();
         burst_count = max_burst_count;
         time = burst_interval_time;
-        //tracked_Object = GetComponent<SteamVR_TrackedObject>();
+        if (!SteamVR.active) return;
+        tracked_Object = GetComponent<SteamVR_TrackedObject>();
         //steamVR_Camera = FindObjectOfType<SteamVR_Camera>().gameObject;
     }
 
         void Update()
     {
-        //device = SteamVR_Controller.Input((int)tracked_Object.index);
+        if (SteamVR.active) { device = SteamVR_Controller.Input((int)tracked_Object.index); }
         ThreeBurst();
-        //if (!device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
-        if (!Input.GetKeyDown(KeyCode.A)) { return; }
+        if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A)||
+            SteamVR.active && !device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
+        //if (!Input.GetKeyDown(KeyCode.A)) { return; }
         is_shot = true;
         burst_count = one_shot_count;
     }
@@ -78,7 +80,10 @@ public class PlayerShot : MonoBehaviour
 
             //int vibration = 200 * i;
             AudioManager.instance.playSe(AudioName.SeName.gun1);
-            //device.TriggerHapticPulse(1000);
+        if (SteamVR.active)
+        {
+            device.TriggerHapticPulse(1000);
+        }
             GameObject Shotbullet = Instantiate(Bullet);
             Shotbullet.transform.rotation = transform.rotation;
         //弾の発生位置変更
