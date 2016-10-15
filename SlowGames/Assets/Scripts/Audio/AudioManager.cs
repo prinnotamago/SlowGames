@@ -18,10 +18,10 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <summary>
     /// Seの最大音数
     /// </summary>
-    const uint SE_CHANNEL = 15;
+    const uint SE_CHANNEL = 128;
 
     [SerializeField, Tooltip("同じSEが鳴るときの最大音数")]
-    uint LIMIT_SE_COUNT = 3;
+    uint LIMIT_SE_COUNT = 64;
 
     [SerializeField]
     AudioClip[] _bgmClips = null;
@@ -430,7 +430,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// 3D音SE再生
     /// </summary>
     /// <param name="gameobject"></param>
-    /// <param name="index">BGM番号</param>
+    /// <param name="index">SE番号</param>
     /// <param name="loop">ループするか</param>
     /// <returns></returns>
     public AudioSource play3DSe(GameObject gameobject, int index, bool loop = false)
@@ -463,7 +463,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             audioSource.outputAudioMixerGroup = _audioMixerGroup[typeIndex];
         }
 
-        audioSource.clip = _bgmClips[index];
+        audioSource.clip = _seClips[index];
         audioSource.loop = loop;
 
         audioSource.Play();
@@ -539,7 +539,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public AudioSource play3DBgm(GameObject gameobject, AudioName.BgmName name, bool loop = false)
     {
         var index = (int)name;
-        return play3DSe(gameobject, index, loop);
+        return play3DBgm(gameobject, index, loop);
     }
 
     /// <summary>
