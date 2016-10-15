@@ -23,4 +23,9 @@ public class ViveControllerManager : MonoBehaviour
     {
         _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
     }
+
+    void Update()
+    {
+        //Debug.Log(canSlowMode);
+    }
 }
