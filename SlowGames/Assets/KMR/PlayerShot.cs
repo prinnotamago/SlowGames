@@ -62,6 +62,7 @@ public class PlayerShot : MonoBehaviour
         void Update()
     {
         if (SteamVR.active) { device = SteamVR_Controller.Input((int)tracked_Object.index); }
+        if (reload.isReload) return;
         ThreeBurst();
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A)||
             SteamVR.active && !device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
@@ -72,7 +73,8 @@ public class PlayerShot : MonoBehaviour
 
     void ThreeBurst()
     {
-        if (reload.isReload) return;
+        
+        if (bullets_number <= 0) return;
         if (is_shot == false) return;
 
             time -= Time.deltaTime;
@@ -90,6 +92,7 @@ public class PlayerShot : MonoBehaviour
         //弾の発生位置変更
 //            Shotbullet.transform.position = transform.position;
             Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.Translate(0,-1,1);
 
             time = burst_interval_time;
             burst_count--;
