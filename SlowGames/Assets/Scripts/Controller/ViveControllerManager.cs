@@ -13,14 +13,9 @@ public class ViveControllerManager : MonoBehaviour
     {
         get
         {
-            if (_viveControllerVisualizers.Length >= 2)
-            {
-                return _viveControllerVisualizers.All(viveControllerVisualizer => viveControllerVisualizer.isVisualize);
-            }
-            else
-            {
-                return false;
-            }
+            if (!(_viveControllerVisualizers.Length >= 2)) return false;
+            return _viveControllerVisualizers.All(viveControllerVisualizer => viveControllerVisualizer.isVisualize);
+
         }
     }
 
@@ -36,15 +31,14 @@ public class ViveControllerManager : MonoBehaviour
         if (!(_viveControllerVisualizers.Length >= 2))
         {
             _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
+            return;
         }
 
         foreach (var viveControllerVisualizer in _viveControllerVisualizers)
         {
-            if (viveControllerVisualizer == null)
-            {
-                _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
-                break;
-            }
+            if (viveControllerVisualizer != null) continue;
+            _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
+            break;
         }
         //Debug.Log(canSlowMode);
     }
