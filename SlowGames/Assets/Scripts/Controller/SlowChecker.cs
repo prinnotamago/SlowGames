@@ -25,6 +25,6 @@ public class SlowChecker : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(canSlow);
+        //Debug.Log(canSlow);
     }
 }
