@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - UI
   - EnemyBullet
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Enemy
   - Bullet
   - Weapon
-  - 
+  - Sword
   - 
   - 
   - 
