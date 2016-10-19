@@ -11,20 +11,24 @@ public class SlowMotion : MonoBehaviour {
     //UnityStandardAssets.ImageEffects.MotionBlur blur = null;
     // UnityStandardAssets.ImageEffects
 
-    public static SlowMotion instance = null;
+    public static SlowMotion _instance = null;
 
     /// <summary>
     /// 残り時間
     /// </summary>
-    private float remainingTime = 0.0f;
+    private float _remainingTime = 0.0f;
     //public float RemainingTime { get; set; }
+
+    // 今スロー中かどうか
+    bool _isSlow = false;
+    public bool isSlow { get { return _isSlow; } }
 
     // Use this for initialization
     void Awake()
     {
-        if(instance == null)
+        if(_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
     }
 

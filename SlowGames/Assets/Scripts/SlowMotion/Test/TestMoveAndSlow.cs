@@ -4,17 +4,17 @@ using System.Collections;
 public class TestMoveAndSlow : MonoBehaviour {
 
     [SerializeField]
-    GameObject obj = null;
+    GameObject _obj = null;
 
     [SerializeField]
-    SlowMotion slowMotion;
+    SlowMotion _slowMotion;
 
     enum Mode
     {
         Left,
         Right,
     }
-    Mode mode = Mode.Left;
+    Mode _mode = Mode.Left;
 
     // Use this for initialization
     void Start () {
@@ -24,32 +24,32 @@ public class TestMoveAndSlow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(Time.unscaledDeltaTime);
-        if(mode == Mode.Left)
+        if(_mode == Mode.Left)
         {
-            obj.transform.position += new Vector3(10.0f, 0, 0) * Time.deltaTime;
-            if(obj.transform.position.x > 10)
+            _obj.transform.position += new Vector3(10.0f, 0, 0) * Time.deltaTime;
+            if(_obj.transform.position.x > 10)
             {
-                mode = Mode.Right;
+                _mode = Mode.Right;
             }
         }
         else
         {
-            obj.transform.position += new Vector3(-10.0f, 0, 0) * Time.deltaTime;
-            if (obj.transform.position.x < -10)
+            _obj.transform.position += new Vector3(-10.0f, 0, 0) * Time.deltaTime;
+            if (_obj.transform.position.x < -10)
             {
-                mode = Mode.Left;
+                _mode = Mode.Left;
             }
         }
        
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SlowMotion.instance.ResetSpeed();
+            SlowMotion._instance.ResetSpeed();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            SlowMotion.instance.GameSpeed(0.1f);
+            SlowMotion._instance.GameSpeed(0.1f);
         }
     }
 }

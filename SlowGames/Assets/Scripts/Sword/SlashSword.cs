@@ -11,6 +11,11 @@ public class SlashSword : MonoBehaviour {
     [SerializeField]
     float acceleration;
 
+    // 攻撃判定があるかないか
+    bool isAttack = false;
+    public bool IsAttack { get { return isAttack; } }
+
+    // テスト用
     [SerializeField]
     MeshRenderer mat;
 
@@ -44,6 +49,9 @@ public class SlashSword : MonoBehaviour {
         {
             mat.material.color = Color.white;
         }
+
+        // 判定があるかないか
+        isAttack = (length > acceleration);
 
         // 毎フレーム座標を更新
         prev = transform.position;

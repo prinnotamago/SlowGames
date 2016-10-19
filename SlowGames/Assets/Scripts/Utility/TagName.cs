@@ -15,4 +15,5 @@ public static class TagName
 	public const string Weapon = "Weapon";
 	public const string UI = "UI";
 	public const string EnemyBullet = "EnemyBullet";
+	public const string Sword = "Sword";
 }
