@@ -19,6 +19,6 @@ public class RemainingBulletTexter : MonoBehaviour
 
     void Update()
     {
-        _text.text = _playerShot.BulletsNumber.ToString() + "/" + _playerShot.MaxBulletsNumbers.ToString();
+        _text.text = _playerShot.bulletsNumber.ToString() + "/" + _playerShot.maxBulletsNumbers.ToString();
     }
 }
