@@ -268,8 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathEffect: {fileID: 1000010536851154, guid: 6d3f46942e3094243a0451c9ba10e93c,
-    type: 2}
+  _deathEffect: {fileID: 159750, guid: 275af1ff6b976c540a9dd478a5c473ee, type: 2}
 --- !u!114 &114000012406190932
 MonoBehaviour:
   m_ObjectHideFlags: 1

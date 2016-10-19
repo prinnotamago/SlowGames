@@ -5,22 +5,7 @@ public class Shot : MonoBehaviour
 {
 
     [SerializeField]
-    float bullet_speed = 100.0f;
-
-    Vector3 a;
-
-    void Start()
-    {
-        
-         
-        //a = gameObject.transform.position;
-
-    }
-
-    void Update()
-    {
-        
-    }
+    float _bulletSpeed = 100.0f;
 
     public void FixedUpdate()
     {
@@ -30,7 +15,7 @@ public class Shot : MonoBehaviour
 
     public void ShotTest()
     {
-        gameObject.transform.Translate(0, -1 * bullet_speed, 1 * bullet_speed);
+        gameObject.transform.Translate(0, -1 * _bulletSpeed, 1 * _bulletSpeed);
     }
 
 }

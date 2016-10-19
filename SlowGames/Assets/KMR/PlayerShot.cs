@@ -3,104 +3,112 @@ using UnityEngine;
 [RequireComponent(typeof(Reload))]
 public class PlayerShot : MonoBehaviour
 {
-    Reload reload;
+    Reload _reload;
 
     [SerializeField]
-    GameObject Bullet;
+    GameObject _mazzleFlush;
 
     [SerializeField]
-    int one_shot_count = 3;
+    GameObject _bullet;
 
     [SerializeField]
-    float vibration_power = 200;
+    int _oneShotCount = 3;
 
     [SerializeField]
-    float burst_interval_time = 0.2f;
+    float _vibrationPower = 200;
 
     [SerializeField]
-    int max_burst_count = 3;
+    float _burstIntervalTime = 0.2f;
 
     [SerializeField]
-    int max_bullets_numbers = 20;
+    int _maxBurstCount = 3;
 
-    int bullets_number;
+    [SerializeField]
+    int _maxBulletsNumbers = 20;
 
-    public int MaxBulletsNumbers
+    int _bulletsNumber;
+
+    public int maxBulletsNumbers
     {
-        get { return max_bullets_numbers; }
-        set { max_bullets_numbers = value; }
+        get { return _maxBulletsNumbers; }
+        set { _maxBulletsNumbers = value; }
     }
 
-    public int BulletsNumber
+    public int bulletsNumber
     {
-        get { return bullets_number; }
-        set { bullets_number = value; }
+        get { return _bulletsNumber; }
+        set { _bulletsNumber = value; }
     }
 
-    bool is_shot = false;
+    bool _isShot = false;
 
-    float time;
+    float _time;
 
-    int burst_count;
+    int _burstCount;
 
-    SteamVR_TrackedObject tracked_Object;
-    SteamVR_Controller.Device device;
+    SteamVR_TrackedObject _trackedObject;
+    SteamVR_Controller.Device _device;
     //GameObject steamVR_Camera;
     //Vector2 position;
 
     void Start()
     {
-        bullets_number = max_bullets_numbers;
-        reload = GetComponent<Reload>();
-        burst_count = max_burst_count;
-        time = burst_interval_time;
+        _bulletsNumber = _maxBulletsNumbers;
+        _reload = GetComponent<Reload>();
+        _burstCount = _maxBurstCount;
+        _time = _burstIntervalTime;
         if (!SteamVR.active) return;
-        tracked_Object = GetComponent<SteamVR_TrackedObject>();
+        _trackedObject = GetComponent<SteamVR_TrackedObject>();
         //steamVR_Camera = FindObjectOfType<SteamVR_Camera>().gameObject;
     }
 
-        void Update()
+    void Update()
     {
-        if (SteamVR.active) { device = SteamVR_Controller.Input((int)tracked_Object.index); }
-        if (reload.isReload) return;
+        if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
+        if (_reload.isReload) return;
         ThreeBurst();
-        if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A)||
-            SteamVR.active && !device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
+        if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
+            SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
-        is_shot = true;
-        burst_count = one_shot_count;
+        _isShot = true;
+        _burstCount = _oneShotCount;
     }
 
     void ThreeBurst()
     {
-        
-        if (bullets_number <= 0) return;
-        if (is_shot == false) return;
 
-            time -= Time.deltaTime;
-            if (time > 0) return;
+        if (_bulletsNumber <= 0) return;
+        if (_isShot == false) return;
 
-            //int vibration = 200 * i;
-            AudioManager.instance.playSe(AudioName.SeName.gun1);
+        _time -= Time.unscaledDeltaTime;
+        if (_time > 0) return;
+
+        //int vibration = 200 * i;
+        AudioManager.instance.playSe(AudioName.SeName.gun1);
+        var effectTest = Instantiate(_mazzleFlush);
+        effectTest.transform.rotation = transform.rotation;
+        effectTest.transform.position = transform.position;
+        effectTest.transform.Translate(0, -1, 1);
+        effectTest.transform.rotation = Quaternion.Euler(0, 180, 0);
         if (SteamVR.active)
         {
-            device.TriggerHapticPulse(1000);
+            _device.TriggerHapticPulse(1000);
         }
-            GameObject Shotbullet = Instantiate(Bullet);
+        GameObject Shotbullet = Instantiate(_bullet);
         Shotbullet.transform.rotation = transform.rotation;
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
-//            Shotbullet.transform.position = transform.position;
-            Shotbullet.transform.position = transform.position;
-        Shotbullet.transform.Translate(0,-1,1);
+        //            Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.Translate(0, -1, 1);
 
-            time = burst_interval_time;
-            burst_count--;
-        bullets_number--;
-        if (burst_count < 1)
+        _time = _burstIntervalTime;
+        _burstCount--;
+        _bulletsNumber--;
+        if (_burstCount < 1)
         {
-            burst_count = one_shot_count;
-            is_shot = false;
+            _burstCount = _oneShotCount;
+            _isShot = false;
         }
     }
 

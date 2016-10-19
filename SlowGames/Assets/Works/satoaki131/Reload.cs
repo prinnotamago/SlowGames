@@ -31,7 +31,7 @@ public class Reload : MonoBehaviour {
     void Update()
     {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); } //Viveが接続されていたら読み込む
-        if (_shot.MaxBulletsNumbers == _shot.BulletsNumber) return;
+        if (_shot.maxBulletsNumbers == _shot.bulletsNumber) return;
         if (isReload) return;
         if((!SteamVR.active && Input.GetKeyDown(KeyCode.R)) ||
             (SteamVR.active && _device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
@@ -52,11 +52,11 @@ public class Reload : MonoBehaviour {
         //Audioを追加する(カシャッ)
         while(time < _reloadTime)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
         isReload = false;
-        _shot.BulletsNumber = _shot.MaxBulletsNumbers;  //弾の数を最大数に変更する
+        _shot.bulletsNumber = _shot.maxBulletsNumbers;  //弾の数を最大数に変更する
         //音を追加する(カチッ)
     }
 }
