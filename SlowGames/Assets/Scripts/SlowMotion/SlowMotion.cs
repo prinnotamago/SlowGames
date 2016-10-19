@@ -82,6 +82,8 @@ public class SlowMotion : MonoBehaviour {
         Time.timeScale = 1.0f;
 
         AudioManager.instance.changeSourceAllPitch(1.0f);
+
+        _isSlow = false;
     }
 
     /// <summary>
@@ -98,5 +100,10 @@ public class SlowMotion : MonoBehaviour {
         Time.timeScale = speed;
 
         AudioManager.instance.changeSourceAllPitch(speed);
+
+        if (speed != 1.0f)
+        {
+            _isSlow = true;
+        }
     }
 }
