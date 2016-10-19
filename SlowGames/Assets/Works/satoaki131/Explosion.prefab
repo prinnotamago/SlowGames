@@ -101,7 +101,7 @@ ParticleRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2bfb86018a9b6c640ac969c5408bf2f0, type: 2}
+  - {fileID: 2100000, guid: 4891a4d4ff28fd449b0c3da42b9347b6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
