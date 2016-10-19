@@ -3,28 +3,28 @@ using System.Collections;
 
 public class SlowChecker : MonoBehaviour
 {
-    public bool canSlow
+    public bool isHit
     {
         get; private set;
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        canSlow = true;
+        isHit = true;
     }
 
     public void OnTriggerExit(Collider other)
     {
-        canSlow = false;
+        isHit = false;
     }
 
     public void OnTriggerStay(Collider other)
     {
-        canSlow = true;
+        isHit = true;
     }
 
     void Update()
     {
-        //Debug.Log(canSlow);
+        //Debug.Log(isHit);
     }
 }
