@@ -6,6 +6,9 @@ public class PlayerShot : MonoBehaviour
     Reload reload;
 
     [SerializeField]
+    GameObject _mazzleFlush;
+
+    [SerializeField]
     GameObject Bullet;
 
     [SerializeField]
@@ -59,13 +62,13 @@ public class PlayerShot : MonoBehaviour
         //steamVR_Camera = FindObjectOfType<SteamVR_Camera>().gameObject;
     }
 
-        void Update()
+    void Update()
     {
         if (SteamVR.active) { device = SteamVR_Controller.Input((int)tracked_Object.index); }
         if (reload.isReload) return;
         ThreeBurst();
-        if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A)||
-            SteamVR.active && !device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)){ return;}
+        if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
+            SteamVR.active && !device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
         is_shot = true;
         burst_count = one_shot_count;
@@ -73,29 +76,34 @@ public class PlayerShot : MonoBehaviour
 
     void ThreeBurst()
     {
-        
+
         if (bullets_number <= 0) return;
         if (is_shot == false) return;
 
-            time -= Time.deltaTime;
-            if (time > 0) return;
+        time -= Time.unscaledDeltaTime;
+        if (time > 0) return;
 
-            //int vibration = 200 * i;
-            AudioManager.instance.playSe(AudioName.SeName.gun1);
+        //int vibration = 200 * i;
+        AudioManager.instance.playSe(AudioName.SeName.gun1);
+        var effectTest = Instantiate(_mazzleFlush);
+        effectTest.transform.rotation = transform.rotation;
+        effectTest.transform.position = transform.position;
+        effectTest.transform.Translate(0, -1, 1);
+        effectTest.transform.rotation = Quaternion.Euler(0, 180, 0);
         if (SteamVR.active)
         {
             device.TriggerHapticPulse(1000);
         }
-            GameObject Shotbullet = Instantiate(Bullet);
+        GameObject Shotbullet = Instantiate(Bullet);
         Shotbullet.transform.rotation = transform.rotation;
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
-//            Shotbullet.transform.position = transform.position;
-            Shotbullet.transform.position = transform.position;
-        Shotbullet.transform.Translate(0,-1,1);
+        //            Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.position = transform.position;
+        Shotbullet.transform.Translate(0, -1, 1);
 
-            time = burst_interval_time;
-            burst_count--;
+        time = burst_interval_time;
+        burst_count--;
         bullets_number--;
         if (burst_count < 1)
         {

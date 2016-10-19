@@ -52,7 +52,7 @@ public class Reload : MonoBehaviour {
         //Audioを追加する(カシャッ)
         while(time < _reloadTime)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
         isReload = false;
