@@ -23,13 +23,14 @@ public class Reload : MonoBehaviour {
     void Start()
     {
         _shot = GetComponent<PlayerShot>();
+        //以下Viveが接続されているときのみ使用する
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
     }
 
     void Update()
     {
-        if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
+        if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); } //Viveが接続されていたら読み込む
         if (_shot.MaxBulletsNumbers == _shot.BulletsNumber) return;
         if (isReload) return;
         if((!SteamVR.active && Input.GetKeyDown(KeyCode.R)) ||
@@ -55,6 +56,7 @@ public class Reload : MonoBehaviour {
             yield return null;
         }
         isReload = false;
+        _shot.BulletsNumber = _shot.MaxBulletsNumbers;  //弾の数を最大数に変更する
         //音を追加する(カチッ)
     }
 }

@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// タイトルの管理スクリプト
+/// シーン遷移とかやってる
+/// </summary>
 public class TitleDirecter : MonoBehaviour {
 
     private SteamVR_TrackedObject _trackedObject;
     private SteamVR_Controller.Device _device;
 
-    private bool _collition = false;
+    private bool _collition = false; //遷移するためのオブジェクトに触れているかどうか
 
     void Start()
     {
@@ -28,7 +32,6 @@ public class TitleDirecter : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Enter");
         if (col.gameObject.tag == "UI")
         {
             _collition = true;
@@ -37,7 +40,6 @@ public class TitleDirecter : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        Debug.Log("Exit");
         if (col.gameObject.tag == "UI")
         {
             _collition = false;

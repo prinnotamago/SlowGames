@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 武器選択シーンの管理スクリプト
+/// シーン遷移とかやってる
+/// </summary>
 public class SelectDirector : MonoBehaviour
 {
     const int GUN_NUMBER = 0;
@@ -49,7 +53,6 @@ public class SelectDirector : MonoBehaviour
         {
             _collision = true;
             _selectObj = col.gameObject;
-            Debug.Log(_selectObj);
         }
     }
 
