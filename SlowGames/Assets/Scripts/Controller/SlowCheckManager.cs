@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Collections;
 
-/// <summary>
-/// ViveControllerManager
-/// </summary>
-public class ViveControllerManager : MonoBehaviour
+public class SlowCheckManager : MonoBehaviour
 {
     /// <summary>
     /// スローモードになれるか
@@ -14,29 +12,29 @@ public class ViveControllerManager : MonoBehaviour
         get
         {
             if (!(_viveControllerVisualizers.Length >= 2)) return false;
-            return _viveControllerVisualizers.All(viveControllerVisualizer => viveControllerVisualizer.isVisualize);
+            return _viveControllerVisualizers.All(viveControllerVisualizer => viveControllerVisualizer.isHit);
         }
     }
 
-    ViveControllerVisualizer[] _viveControllerVisualizers = new ViveControllerVisualizer[2];
+    SlowChecker[] _viveControllerVisualizers = new SlowChecker[2];
 
     void Start()
     {
-        _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
+        _viveControllerVisualizers = FindObjectsOfType<SlowChecker>();
     }
 
     void Update()
     {
         if (!(_viveControllerVisualizers.Length >= 2))
         {
-            _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
+            _viveControllerVisualizers = FindObjectsOfType<SlowChecker>();
             return;
         }
 
         foreach (var viveControllerVisualizer in _viveControllerVisualizers)
         {
             if (viveControllerVisualizer != null) continue;
-            _viveControllerVisualizers = FindObjectsOfType<ViveControllerVisualizer>();
+            _viveControllerVisualizers = FindObjectsOfType<SlowChecker>();
             break;
         }
         //Debug.Log(canSlowMode);
