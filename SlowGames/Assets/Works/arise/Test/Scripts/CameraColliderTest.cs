@@ -21,6 +21,7 @@ public class CameraColliderTest : MonoBehaviour
     {
         trriger = true;
         Debug.Log("TrrigerStay");
+        Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
     }
 
     void Update()
