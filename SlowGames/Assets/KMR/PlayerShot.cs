@@ -40,22 +40,6 @@ public class PlayerShot : MonoBehaviour
         set { _bulletsNumber = value; }
     }
 
-    private static PlayerShot _instance = null;
-    public static PlayerShot instance
-    {
-        get { return _instance; }
-    }
-
-    public Vector3 getDirection
-    {
-        get
-        {
-            var test = transform.position;
-            test += Vector3.forward + Vector3.down;
-            var direction = test - transform.position;
-            return direction;
-        }
-    }
 
     bool _isShot = false;
 
@@ -67,11 +51,6 @@ public class PlayerShot : MonoBehaviour
     SteamVR_Controller.Device _device;
     //GameObject steamVR_Camera;
     //Vector2 position;
-
-    void Awake()
-    {
-        _instance = this;
-    }
 
     void Start()
     {
@@ -121,8 +100,8 @@ public class PlayerShot : MonoBehaviour
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
-        Shotbullet.transform.position = transform.position;
-        Shotbullet.transform.Translate(0, -1, 1);
+        Shotbullet.transform.position = transform.position + transform.forward;
+        //Shotbullet.transform.Translate(0, -1, 1);
 
         _time = _burstIntervalTime;
         _burstCount--;
