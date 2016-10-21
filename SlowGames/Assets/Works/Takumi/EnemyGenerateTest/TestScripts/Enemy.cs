@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     Transform _targetPostion;
 
-    public GeneratePosition _generatePostion;
+    public TargetPosition  _generatePostion;
 
     //たまにあたったら死にます
     void OnCollisionEnter(Collision other)

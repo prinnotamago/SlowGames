@@ -6,14 +6,14 @@ public class GenerateManager : MonoBehaviour
 {
    
     //生成した数を管理
-    int[] _currentEnemysCount = new int[((int)GeneratePosition.Last)];
+    int[] _currentEnemysCount = new int[((int)TargetPosition.Last)];
 
     EnemyGenerator _enemyGenerator;
 
     //死亡数をカウントします
     int _deathCount = 0;
 
-    public void AddDeathCount(GeneratePosition generatePosition)
+    public void AddDeathCount(TargetPosition generatePosition)
     {
         //死んだ数を死んだを更新
         _deathCount += 1;
@@ -75,11 +75,11 @@ public class GenerateManager : MonoBehaviour
         {
         
             //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
-            GeneratePosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 5);
+            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 5);
 
             //位置を示さないものが帰ってきたら処理しない
             //なおこれはよくない処理です
-            if (generatePosition == GeneratePosition.Last)
+            if (generatePosition == TargetPosition.Last)
             {
                 Debug.Log("生成できませんでした。");
                 return;

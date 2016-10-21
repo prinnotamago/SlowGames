@@ -11,7 +11,7 @@ public enum EnemyType
     Last,
 }
 
-public enum GeneratePosition
+public enum TargetPosition
 {
 
    Left = 0,
@@ -40,6 +40,9 @@ public class EnemyGenerator : MonoBehaviour
 
 
     [SerializeField]
+    List<Transform> _generateList = new List<Transform>();
+
+    [SerializeField]
     Transform _left;
     [SerializeField]
     Transform _front;
@@ -53,11 +56,26 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     Transform _upRight;
 
+    [SerializeField]
+    Transform _generateLeft;
+    [SerializeField]
+    Transform _generateFront;
+    [SerializeField]
+    Transform _generateRight;
+
+    [SerializeField]
+    Transform _generateUpLeft;
+    [SerializeField]
+    Transform _generateUpFront;
+    [SerializeField]
+    Transform _generateUpRight;
+
 
 
     //生成するエネミーを記憶 
     Dictionary<EnemyType,List<GameObject>> _enemysDic = new Dictionary<EnemyType, List<GameObject>>();
-    Dictionary<GeneratePosition,Transform> _generateDic = new Dictionary<GeneratePosition,Transform>();
+    public Dictionary<TargetPosition,Transform> _targetPositionDic = new Dictionary<TargetPosition,Transform>();
+    public Dictionary<TargetPosition,Transform> _generatePositionDic = new Dictionary<TargetPosition,Transform>();
 
     void Awake()
     {
@@ -66,20 +84,26 @@ public class EnemyGenerator : MonoBehaviour
         _enemysDic.Add(EnemyType.Normal, _normalEnemys);
         _enemysDic.Add(EnemyType.Hard, _hardEnemys);
 
-        _generateDic.Add(GeneratePosition.Left,_left);
-        _generateDic.Add(GeneratePosition.Right,_right);
-        _generateDic.Add(GeneratePosition.Front,_front);
-        _generateDic.Add(GeneratePosition.UpLeft,_upLeft);
-        _generateDic.Add(GeneratePosition.UpRight,_upRight);
-        _generateDic.Add(GeneratePosition.UpFront,_upFront);
+        _targetPositionDic.Add(TargetPosition.Left,_left);
+        _targetPositionDic.Add(TargetPosition.Right,_right);
+        _targetPositionDic.Add(TargetPosition.Front,_front);
+        _targetPositionDic.Add(TargetPosition.UpLeft,_upLeft);
+        _targetPositionDic.Add(TargetPosition.UpRight,_upRight);
+        _targetPositionDic.Add(TargetPosition.UpFront,_upFront);
 
+        _generatePositionDic.Add(TargetPosition.Left,_generateLeft);
+        _generatePositionDic.Add(TargetPosition.Right,_generateRight);
+        _generatePositionDic.Add(TargetPosition.Front,_generateFront);
+        _generatePositionDic.Add(TargetPosition.UpLeft,_generateUpLeft);
+        _generatePositionDic.Add(TargetPosition.UpRight,_generateUpRight);
+        _generatePositionDic.Add(TargetPosition.UpFront,_generateUpFront);
     }
 
     [SerializeField]
     EnemyType _testGenerateType;
 
     //ランダムに,生成位置を取得する
-    public  GeneratePosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
+    public  TargetPosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
     {
         //生成可能な,配列番号を記憶する
         List<int> canGeneratePos = new List<int>();
@@ -97,34 +121,34 @@ public class EnemyGenerator : MonoBehaviour
         //もし生成可能な場所が一つもなければ Lastを返す
         if (canGeneratePos.Count == 0)
         {
-            Debug.Log("生成可能な場所がないため GeneratePosition.Lastを返してます");
-            return GeneratePosition.Last;
+            Debug.Log("生成可能な場所がないため TargetPosition.Lastを返してます");
+            return TargetPosition.Last;
         }
 
         //生成可能場所からランダムに選ぶ
         int random = Random.Range(0,canGeneratePos.Count);
 
-        return (GeneratePosition)(canGeneratePos[random]);
+        return (TargetPosition)(canGeneratePos[random]);
 
     }
 
     //ランダムに,地上の生成位置を取得する
-    public  GeneratePosition GetRandomGroundGeneratePos()
+    public  TargetPosition GetRandomGroundGeneratePos()
     {
         int random = Random.Range(0,3);
-        return (GeneratePosition)random;
+        return (TargetPosition)random;
     }
 
     //ランダムに,空中の生成位置を取得する
-    public  GeneratePosition GetRandomSkyGeneratePos()
+    public  TargetPosition GetRandomSkyGeneratePos()
     {
-        int random = Random.Range(3,(int)GeneratePosition.Last);
-        return (GeneratePosition)random;
+        int random = Random.Range(3,(int)TargetPosition.Last);
+        return (TargetPosition)random;
     }
    
 
     //generatorの生成位置に敵キャラを配置
-    public void GenerateEnemy(EnemyType enemyType, GeneratePosition generatePosition  = GeneratePosition.Front)
+    public void GenerateEnemy(EnemyType enemyType, TargetPosition generatePosition  = TargetPosition.Front)
     {    
 
         //選んだエネミータイプから,ランダムでpatternを選び生成.
@@ -135,13 +159,14 @@ public class EnemyGenerator : MonoBehaviour
         GameObject enemy = enemyList[random];
         Instantiate(enemy);
 
-        //test: ジェネレーターの場所を基準に生成
-        var setTransform = _generateDic[generatePosition];
+        //todo: 出現位置からランダムに生成
+        var setTransform = _generatePositionDic[generatePosition];
         enemy.transform.position = setTransform.position;
         enemy.transform.rotation = setTransform.rotation;
 
         //自分がどこに生成された的なのかをキヲクさせる
         enemy.GetComponent<Enemy>()._generatePostion = generatePosition;
+        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition];
 
     }
 
