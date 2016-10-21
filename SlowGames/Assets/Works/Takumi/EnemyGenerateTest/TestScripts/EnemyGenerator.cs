@@ -54,13 +54,14 @@ public class EnemyGenerator : MonoBehaviour
     Transform _upRight;
 
 
+
     //生成するエネミーを記憶 
     Dictionary<EnemyType,List<GameObject>> _enemysDic = new Dictionary<EnemyType, List<GameObject>>();
     Dictionary<GeneratePosition,Transform> _generateDic = new Dictionary<GeneratePosition,Transform>();
 
-    void Start()
+    void Awake()
     {
-
+        
         _enemysDic.Add(EnemyType.Easy, _easyEnemys);
         _enemysDic.Add(EnemyType.Normal, _normalEnemys);
         _enemysDic.Add(EnemyType.Hard, _hardEnemys);
@@ -77,25 +78,43 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     EnemyType _testGenerateType;
 
-    void Update()
-    {
-
-        
-
-    }
-
     //ランダムに,生成位置を取得する
-    public  GeneratePosition GetRandomGeneratePos()
+    public  GeneratePosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
     {
-        int random = Random.Range(0,(int)GeneratePosition.Last);
-        return (GeneratePosition)random;
+        //生成可能な,配列番号を記憶する
+        List<int> canGeneratePos = new List<int>();
+
+        for (int i = 0; i < generateCount.Length; i++)
+        {   
+            ////敵キャラがいない、または生成上限に達していない場所だったら.
+            if (generateCount[i] <= (enemyLimit - 1))
+            {
+                //敵キャラがいない、または生成上限に達していない場所の、配列番号を記憶
+                canGeneratePos.Add(i);
+            }
+        }
+
+        //もし生成可能な場所が一つもなければ Lastを返す
+        if (canGeneratePos.Count == 0)
+        {
+            Debug.Log("生成可能な場所がないため GeneratePosition.Lastを返してます");
+            return GeneratePosition.Last;
+        }
+
+        //生成可能場所からランダムに選ぶ
+        int random = Random.Range(0,canGeneratePos.Count);
+
+        return (GeneratePosition)(canGeneratePos[random]);
+
     }
+
     //ランダムに,地上の生成位置を取得する
     public  GeneratePosition GetRandomGroundGeneratePos()
     {
         int random = Random.Range(0,3);
         return (GeneratePosition)random;
     }
+
     //ランダムに,空中の生成位置を取得する
     public  GeneratePosition GetRandomSkyGeneratePos()
     {
@@ -104,6 +123,7 @@ public class EnemyGenerator : MonoBehaviour
     }
    
 
+    //generatorの生成位置に敵キャラを配置
     public void GenerateEnemy(EnemyType enemyType, GeneratePosition generatePosition  = GeneratePosition.Front)
     {    
 
@@ -119,6 +139,9 @@ public class EnemyGenerator : MonoBehaviour
         var setTransform = _generateDic[generatePosition];
         enemy.transform.position = setTransform.position;
         enemy.transform.rotation = setTransform.rotation;
+
+        //自分がどこに生成された的なのかをキヲクさせる
+        enemy.GetComponent<Enemy>()._generatePostion = generatePosition;
 
     }
 

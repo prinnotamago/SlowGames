@@ -60,7 +60,7 @@ public class EnemyActor : MonoBehaviour
 
     void Update()
     {   
-        //
+        
         if (_activeCounter <= 0)
         {
 

@@ -24,8 +24,7 @@ public class EnemyBullet : MonoBehaviour {
 
 
 	}
-
-
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet")
@@ -36,7 +35,7 @@ public class EnemyBullet : MonoBehaviour {
                 var effect = Instantiate(_deathEffect);
                 effect.transform.position = transform.position;
                 //音
-                AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
+                //AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
 
                 //判定消す
                 _isBlow = true;
@@ -48,7 +47,7 @@ public class EnemyBullet : MonoBehaviour {
         }
     }
 
-
+    //ランダムに弾けます
     IEnumerator RandomBlow()
     {
         Vector3 randomDirec = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
@@ -75,6 +74,7 @@ public class EnemyBullet : MonoBehaviour {
             yield return null;
         }
 
+        //Todo :消す時にパッと消えるのいくないかも
         //消す
         Destroy(this.gameObject);
 
