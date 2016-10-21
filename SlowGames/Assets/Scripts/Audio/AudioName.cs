@@ -9,9 +9,9 @@ public enum BgmName
 }
 public enum SeName
 {
+	gunreload1,
 	gunreload2,
 	Thunder,
-	gunreload1,
 	gun1,
 }
 }
