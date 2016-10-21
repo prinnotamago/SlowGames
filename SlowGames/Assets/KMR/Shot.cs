@@ -18,4 +18,10 @@ public class Shot : MonoBehaviour
         gameObject.transform.Translate(0, -1 * _bulletSpeed, 1 * _bulletSpeed);
     }
 
+    public void OnCollisionEnter(Collision col) //子供のあたり判定のときも呼んでくれる
+    {
+        Debug.Log("Hit");
+        if (col.gameObject.tag == "Weapon" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Player") return;
+        Destroy(gameObject);
+    }
 }

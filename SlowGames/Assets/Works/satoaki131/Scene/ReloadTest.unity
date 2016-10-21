@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.24648513, g: 0.28232977, b: 0.34567365, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -432,12 +432,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6615e57a3e47742a8b4bcea1e16190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1000010024009322, guid: 7ff5ab4824873074dbe7d545a60fe2cc, type: 2}
-  one_shot_count: 3
-  vibration_power: 200
-  burst_interval_time: 0.2
-  max_burst_count: 3
-  max_bullets_numbers: 20
+  _mazzleFlush: {fileID: 1000012273995904, guid: a96c30a539fbcd249aecf8211017b7a0,
+    type: 2}
+  _bullet: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
+  _oneShotCount: 1
+  _vibrationPower: 200
+  _burstIntervalTime: 0.2
+  _maxBurstCount: 3
+  _maxBulletsNumbers: 20
 --- !u!23 &2023033143
 MeshRenderer:
   m_ObjectHideFlags: 0
