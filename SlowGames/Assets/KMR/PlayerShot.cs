@@ -46,9 +46,15 @@ public class PlayerShot : MonoBehaviour
         get { return _instance; }
     }
 
-    public Vector3 getRotation
+    public Vector3 getDirection
     {
-        get { return _instance.gameObject.transform.rotation.eulerAngles; }
+        get
+        {
+            var test = transform.position;
+            test += Vector3.forward + Vector3.down;
+            var direction = test - transform.position;
+            return direction;
+        }
     }
 
     bool _isShot = false;

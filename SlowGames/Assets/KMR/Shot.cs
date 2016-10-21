@@ -14,7 +14,7 @@ public class Shot : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _direction = PlayerShot.instance.getRotation;
+        _direction = PlayerShot.instance.getDirection;
         Debug.Log(_direction);
     }
 
@@ -27,7 +27,7 @@ public class Shot : MonoBehaviour
     public void ShotTest()
     {
         //gameObject.transform.Translate(0, -1 * _bulletSpeed * Time.unscaledDeltaTime, 1 * _bulletSpeed * Time.unscaledDeltaTime);
-        _rigidbody.velocity = _direction * Time.unscaledDeltaTime * SlowMotion._instance.RealSpeed();
+        _rigidbody.velocity = _direction * Time.unscaledDeltaTime * SlowMotion._instance.RealSpeed() * _bulletSpeed;
     }
 
     public void OnCollisionEnter(Collision col) //子供のあたり判定のときも呼んでくれる
