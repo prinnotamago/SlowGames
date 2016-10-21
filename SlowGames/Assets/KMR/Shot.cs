@@ -13,7 +13,7 @@ public class Shot : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _direction = transform.forward + -transform.up;
+        _direction = transform.forward - transform.up;
     }
 
     public void FixedUpdate()
