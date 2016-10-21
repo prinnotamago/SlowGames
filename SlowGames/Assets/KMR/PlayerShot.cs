@@ -40,6 +40,17 @@ public class PlayerShot : MonoBehaviour
         set { _bulletsNumber = value; }
     }
 
+    private static PlayerShot _instance = null;
+    public static PlayerShot instance
+    {
+        get { return _instance; }
+    }
+
+    public Vector3 getRotation
+    {
+        get { return _instance.gameObject.transform.rotation.eulerAngles; }
+    }
+
     bool _isShot = false;
 
     float _time;
@@ -50,6 +61,11 @@ public class PlayerShot : MonoBehaviour
     SteamVR_Controller.Device _device;
     //GameObject steamVR_Camera;
     //Vector2 position;
+
+    void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
