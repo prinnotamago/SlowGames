@@ -79,6 +79,7 @@ public class SlowMotion : MonoBehaviour {
     /// </summary>
     public void ResetSpeed()
     {
+
         Time.timeScale = 1.0f;
 
         AudioManager.instance.changeSourceAllPitch(1.0f);
@@ -97,6 +98,7 @@ public class SlowMotion : MonoBehaviour {
     /// </param>
     public void GameSpeed(float speed)
     {
+
         Time.timeScale = speed;
 
         AudioManager.instance.changeSourceAllPitch(speed);
@@ -104,6 +106,10 @@ public class SlowMotion : MonoBehaviour {
         if (speed != 1.0f)
         {
             _isSlow = true;
+        }
+        else
+        {
+            _isSlow = false;
         }
     }
 }

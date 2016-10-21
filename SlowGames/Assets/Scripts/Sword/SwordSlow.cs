@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SwordSlow : MonoBehaviour {
 
+    [SerializeField]
+    float _slowGage;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,11 +16,19 @@ public class SwordSlow : MonoBehaviour {
 	
 	}
 
-    void OnTriggerStay(Collider collider)
+    void OnTriggerEnter(Collider collider)
     {
-        //if (collider.tag == TagName.Sword)
-        //{
-        //    _isHit = true;
-        //}
+        if (collider.tag == TagName.Float)
+        {
+            SlowMotion._instance.GameSpeed(0.1f);
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == TagName.Float)
+        {
+            SlowMotion._instance.ResetSpeed();
+        }
     }
 }
