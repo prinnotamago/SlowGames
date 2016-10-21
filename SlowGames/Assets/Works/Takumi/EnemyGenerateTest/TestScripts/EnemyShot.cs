@@ -44,6 +44,7 @@ public class EnemyShot : MonoBehaviour
 
     }
 
+    //test:一定感覚で打ち続けます
     IEnumerator ShotDelay()
     {
         float delayMax = _shotDelay;
