@@ -12,4 +12,12 @@ public class SwordSlow : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnTriggerStay(Collider collider)
+    {
+        //if (collider.tag == TagName.Sword)
+        //{
+        //    _isHit = true;
+        //}
+    }
 }

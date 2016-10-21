@@ -16,4 +16,5 @@ public static class HashTagName
 	public static readonly int UI = "UI".GetHashCode();
 	public static readonly int EnemyBullet = "EnemyBullet".GetHashCode();
 	public static readonly int Sword = "Sword".GetHashCode();
+	public static readonly int Floor = "Floor".GetHashCode();
 }
