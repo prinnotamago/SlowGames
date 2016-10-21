@@ -86,21 +86,21 @@ public class PlayerShot : MonoBehaviour
 
         //int vibration = 200 * i;
         AudioManager.instance.playSe(AudioName.SeName.gun1);
-        var effectTest = Instantiate(_mazzleFlush);
-        effectTest.transform.rotation = transform.rotation;
-        effectTest.transform.position = transform.position;
-        effectTest.transform.Translate(0, -1, 1);
-        effectTest.transform.rotation = Quaternion.Euler(0, 180, 0);
+        var effect = Instantiate(_mazzleFlush);
+        effect.transform.rotation = transform.rotation;
+        effect.transform.position = transform.position;
+        effect.transform.Translate(0, -1, 1);
+        effect.transform.rotation = Quaternion.Euler(0, 180, 0);
         if (SteamVR.active)
         {
             _device.TriggerHapticPulse(1000);
         }
-        GameObject Shotbullet = Instantiate(_bullet);
-        Shotbullet.transform.rotation = transform.rotation;
+        GameObject shotBullet = Instantiate(_bullet);
+        shotBullet.transform.rotation = transform.rotation;
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
-        Shotbullet.transform.position = transform.position + transform.forward;
+        shotBullet.transform.position = transform.position + transform.forward - transform.up;
         //Shotbullet.transform.Translate(0, -1, 1);
 
         _time = _burstIntervalTime;
