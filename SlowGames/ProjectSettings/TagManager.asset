@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - Sword
   - Floor
+  - Float
   layers:
   - Default
   - TransparentFX

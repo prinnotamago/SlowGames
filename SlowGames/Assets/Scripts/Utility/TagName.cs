@@ -17,4 +17,5 @@ public static class TagName
 	public const string EnemyBullet = "EnemyBullet";
 	public const string Sword = "Sword";
 	public const string Floor = "Floor";
+	public const string Float = "Float";
 }
