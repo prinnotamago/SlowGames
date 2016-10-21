@@ -123,7 +123,10 @@ public class SteamVR_LaserPointer : MonoBehaviour
         }
         if (bHit && hit.distance < 100f)
         {
-            dist = hit.distance;
+            if (hit.transform.gameObject.tag != "SlowCheck")
+            {
+                dist = hit.distance;
+            }
         }
 
         if (controller != null && controller.triggerPressed)
