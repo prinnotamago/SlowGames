@@ -30,7 +30,7 @@ public class TestEnemy : MonoBehaviour {
             _mesh.material.color = new Color(255, 132, 0, 255);
         }
 
-        _navMeshAgent.SetDestination(Vector3.forward * 22);
+        _navMeshAgent.SetDestination(Vector3.forward * -22);
     }
 
     void OnTriggerEnter(Collider collider)

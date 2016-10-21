@@ -15,12 +15,13 @@ public class SelectObjectTouch : MonoBehaviour {
         
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
+        Debug.Log("OK");
         _renderer.material.color = Color.red;
     }
 
-    void OnCollisionExit(Collision col)
+    void OnTriggerExit(Collider col)
     {
         _renderer.material.color = Color.white;
     }
