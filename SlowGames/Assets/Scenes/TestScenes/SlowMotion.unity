@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18053588, g: 0.22601774, b: 0.30718702, a: 1}
+  m_IndirectSpecularColor: {r: 0.24648513, g: 0.28232977, b: 0.34567365, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -552,8 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fb272b056f92343b1db5982234f553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 1443807119}
-  slowMotion: {fileID: 1443807125}
+  _obj: {fileID: 1443807119}
+  _slowMotion: {fileID: 1443807125}
 --- !u!23 &1443807121
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -626,7 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2cfd39725ea2040a177e279ba7e7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blur: {fileID: 0}
 --- !u!114 &1443807126
 MonoBehaviour:
   m_ObjectHideFlags: 0

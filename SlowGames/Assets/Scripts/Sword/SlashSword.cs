@@ -30,7 +30,7 @@ public class SlashSword : MonoBehaviour {
 
         //Debug.Log("前 " + prev);
         //Debug.Log("後 " + transform.localPosition);
-        Debug.Log(prev == transform.position);
+        //Debug.Log(prev == transform.position);
 
         // 前フレームと違う座標に今いるなら
         //if (prev == transform.position) {

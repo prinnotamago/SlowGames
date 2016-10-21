@@ -19,8 +19,13 @@ public class SlowMotion : MonoBehaviour {
     private float _remainingTime = 0.0f;
     //public float RemainingTime { get; set; }
 
-    // 今スロー中かどうか
+    /// <summary>
+    /// 今スロー中かどうか
+    /// </summary>
     bool _isSlow = false;
+    /// <summary>
+    /// 今スロー中かどうか
+    /// </summary>
     public bool isSlow { get { return _isSlow; } }
 
     // Use this for initialization
@@ -111,5 +116,20 @@ public class SlowMotion : MonoBehaviour {
         {
             _isSlow = false;
         }
+    }
+
+    /// <summary>
+    /// スロー時に通常のスピードになるような値を返す。
+    /// かけてあげれば通常のスピードになる
+    /// </summary>
+    /// <returns></returns>
+    public float RealSpeed()
+    {
+        // 1.0f  1.0f
+        // 0.75f 1.5f
+        // 0.5f  2.0f
+        // 0.2f  5.0f
+        // 0.1f  10.0f
+        return 1.0f / Time.timeScale;
     }
 }

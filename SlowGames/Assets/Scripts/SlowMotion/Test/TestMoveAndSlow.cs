@@ -26,15 +26,32 @@ public class TestMoveAndSlow : MonoBehaviour {
         //Debug.Log(Time.unscaledDeltaTime);
         if(_mode == Mode.Left)
         {
-            _obj.transform.position += new Vector3(10.0f, 0, 0) * Time.deltaTime;
-            if(_obj.transform.position.x > 10)
+            if (SlowMotion._instance.isSlow)
+            {
+                _obj.transform.position += new Vector3(10.0f, 0, 0) * Time.deltaTime * SlowMotion._instance.RealSpeed();
+            }
+            else
+            {
+                _obj.transform.position += new Vector3(10.0f, 0, 0) * Time.deltaTime;
+            }
+
+
+            if (_obj.transform.position.x > 10)
             {
                 _mode = Mode.Right;
             }
         }
         else
         {
-            _obj.transform.position += new Vector3(-10.0f, 0, 0) * Time.deltaTime;
+            if (SlowMotion._instance.isSlow)
+            {
+                _obj.transform.position += new Vector3(-10.0f, 0, 0) * Time.deltaTime * SlowMotion._instance.RealSpeed();
+            }
+            else
+            {
+                _obj.transform.position += new Vector3(-10.0f, 0, 0) * Time.deltaTime;
+            }
+
             if (_obj.transform.position.x < -10)
             {
                 _mode = Mode.Left;
@@ -45,11 +62,13 @@ public class TestMoveAndSlow : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S))
         {
             SlowMotion._instance.ResetSpeed();
+            Debug.Log("通常");
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             SlowMotion._instance.GameSpeed(0.1f);
+            Debug.Log("スロー");
         }
     }
 }
