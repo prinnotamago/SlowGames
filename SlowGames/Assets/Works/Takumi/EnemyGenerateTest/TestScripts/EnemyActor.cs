@@ -11,10 +11,12 @@ public class EnemyActor : MonoBehaviour
     {
         TargetRun,
         ProvocationMove,
-
+        Stay,
     }
     [SerializeField]
     ActionType _currentAction;
+
+    NavMeshAgent _navimesh;
 
     [SerializeField,Range(0,100)]
     float _playerToMaxDistance = 10;
@@ -42,41 +44,52 @@ public class EnemyActor : MonoBehaviour
     float _activeCounter = 0;
 
     //エネミーが向かう方向
-    Transform _currentTarget;
+    public Transform _currentTarget;
+    GameObject _playerTransform;
 
     Dictionary<ActionType,System.Action> _actionDic = new Dictionary<ActionType, System.Action>();
-            
+
+    void Awake()
+    {
+
+        _navimesh = this.gameObject.GetComponent<NavMeshAgent>();
+
+    }
+
+
     void Start()
     {
 
-        _currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _actionDic = new Dictionary<ActionType, System.Action>();
-
+       
         _actionDic.Add(ActionType.TargetRun,TargetRun);
         _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
 
-
+        _playerTransform = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {   
         
-        if (_activeCounter <= 0)
-        {
+//        if (_activeCounter <= 0)
+//        {
+//
+//            //位置が一定以上はなれてたら追いかける
+//            if (CheckPlayerToDistance(_playerToMaxDistance))
+//            {
+//                _currentAction = ActionType.TargetRun;
+//            }
+//            else
+//            {
+//                _currentAction = ActionType.ProvocationMove; 
+//            }
+//
+//        }
 
-            //位置が一定以上はなれてたら追いかける
-            if (CheckPlayerToDistance(_playerToMaxDistance))
-            {
-                _currentAction = ActionType.TargetRun; 
-            }
-            else
-            {
-                _currentAction = ActionType.ProvocationMove; 
-            }
-
-        }
 
         _actionDic[_currentAction]();
+        transform.LookAt(_playerTransform.transform.position);
 
     }
 
@@ -100,19 +113,19 @@ public class EnemyActor : MonoBehaviour
     //ターゲットにむかって走り続けます
     void TargetRun()
     {   
+        
+        //ターゲットに向かって走る
+        _navimesh.SetDestination(_currentTarget.position);
+
+        transform.LookAt(_playerTransform.transform.position);
 
         //移動方向を計算,取得
-        Vector3 movedirection = (_currentTarget.position - transform.position).normalized;
-
-
-        if (CheckPlayerToDistance(_playerToMaxDistance))
-        {
-            _currentAction = ActionType.ProvocationMove;
-        }
-
-        //移動
-        transform.LookAt(movedirection);
-        transform.Translate(movedirection * _moveSpeed * Time.deltaTime);
+//       Vector3 movedirection = (_currentTarget.position - transform.position).normalized;
+//        if (CheckPlayerToDistance(_playerToMaxDistance))
+//        {
+//            _currentAction = ActionType.ProvocationMove;
+//        }
+//        transform.Translate(movedirection * _moveSpeed * Time.deltaTime);
                      
     }
 
@@ -124,8 +137,6 @@ public class EnemyActor : MonoBehaviour
         if (_activeCounter > 0)
         {
             _activeCounter -= Time.deltaTime;
-            //見つめて移動
-            transform.LookAt(_currentTarget.position);
             transform.Translate(Vector3.left * _sideMoveSpeed * Time.deltaTime);
         }
         //リセット
@@ -139,4 +150,12 @@ public class EnemyActor : MonoBehaviour
     } 
 
 
+    void OnTriggerEnter(Collider other)
+    {
+        
+        _currentAction = ActionType.ProvocationMove;
+        gameObject.GetComponentInChildren<EnemyShot>()._isShotStart = true;
+        _navimesh.enabled = false;
+
+    }
 }

@@ -20,6 +20,8 @@ public class EnemyShot : MonoBehaviour
     [SerializeField]
     float _shotDelay = 3.0f;
 
+    public bool _isShotStart;
+
     public void Shot()
     {
         
@@ -49,16 +51,20 @@ public class EnemyShot : MonoBehaviour
     {
         float delayMax = _shotDelay;
         float count = _shotDelay;
+
+
         while (true)
         {
-            count -= Time.deltaTime;
-
-            if (count < 0)
+            if (_isShotStart)
             {
-                Shot();
-                count = delayMax;
-            }
+                count -= Time.deltaTime;
 
+                if (count < 0)
+                {
+                    Shot();
+                    count = delayMax;
+                }
+            }
             yield return null;
         }
 
@@ -66,8 +72,10 @@ public class EnemyShot : MonoBehaviour
 
     void Start()
     {
+        _isShotStart = false;
         StartCoroutine(ShotDelay());
     }
+
 
     // Update is called once per frame
 	void Update ()

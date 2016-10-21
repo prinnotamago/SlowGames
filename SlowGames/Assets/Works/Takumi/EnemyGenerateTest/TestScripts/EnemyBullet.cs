@@ -43,8 +43,11 @@ public class EnemyBullet : MonoBehaviour {
             }
 
             StartCoroutine(RandomBlow());
-           
+
+            return;
         }
+
+        Destroy(gameObject);
     }
 
     //ランダムに弾けます
