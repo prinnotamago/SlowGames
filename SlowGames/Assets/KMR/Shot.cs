@@ -8,14 +8,12 @@ public class Shot : MonoBehaviour
     float _bulletSpeed = 100.0f;
 
     Rigidbody _rigidbody;
+    Vector3 _direction = Vector3.zero;
 
-    private Vector3 _direction = Vector3.zero;
-    
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _direction = PlayerShot.instance.getDirection;
-        Debug.Log(_direction);
+        _direction = transform.forward + -transform.up;
     }
 
     public void FixedUpdate()
