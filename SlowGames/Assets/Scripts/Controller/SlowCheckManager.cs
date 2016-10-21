@@ -25,7 +25,6 @@ public class SlowCheckManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_viveControllerVisualizers[0].isHit);
         if (!(_viveControllerVisualizers.Length >= 2))
         {
             _viveControllerVisualizers = FindObjectsOfType<SlowChecker>();
