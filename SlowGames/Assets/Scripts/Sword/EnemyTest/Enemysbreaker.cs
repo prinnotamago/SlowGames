@@ -35,11 +35,16 @@ public class Enemysbreaker : MonoBehaviour {
         {
             if (enemy.isHit)
             {
+                var nav = enemy.GetComponent<NavMeshAgent>();
+
+                nav.enabled = false;
+
                 var rigidBody = enemy.gameObject.GetComponent<Rigidbody>();
 
                 var vector = (enemy.transform.position - _player.transform.position).normalized;
 
                 rigidBody.velocity = vector * _power;
+
             }
         }
     }

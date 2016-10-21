@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SwordSlow : MonoBehaviour {
 
@@ -15,6 +16,10 @@ public class SwordSlow : MonoBehaviour {
     [SerializeField]
     Enemysbreaker _breaker;
 
+    // とりあえずゲージを表示させる(テスト)
+    [SerializeField]
+    Image _image = null;
+
 	// Use this for initialization
 	void Start () {
 	    
@@ -22,11 +27,13 @@ public class SwordSlow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        _image.rectTransform.sizeDelta = new Vector2(_slowGage / _slowGageMax, 0.1f);
+
         if (SlowMotion._instance.isSlow)
         {
             if(_slowGage > 0.0f)
             {
-                _slowGage -= Time.deltaTime;
+                _slowGage -= Time.unscaledDeltaTime;
             }
             else
             {
@@ -38,7 +45,7 @@ public class SwordSlow : MonoBehaviour {
         {
             if (_slowGage < _slowGageMax)
             {
-                _slowGage += Time.deltaTime;
+                _slowGage += Time.unscaledDeltaTime; ;
             }
             else
             {
