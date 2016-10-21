@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010136451448}
   - 198: {fileID: 198000010497932660}
   - 199: {fileID: 199000010255375302}
+  - 114: {fileID: 114000010566504022}
   m_Layer: 0
   m_Name: Spark
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000010566504022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012314537836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03fcdbdf6e352a42abeaa9824f515be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198000010497932660
 ParticleSystem:
   m_ObjectHideFlags: 1
