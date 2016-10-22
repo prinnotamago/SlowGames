@@ -27,8 +27,6 @@ public class GenerateManager : MonoBehaviour
         //２体死ぬごとに、敵キャラを生成
         if (_deathCount % 2 == 0)
         {
-            Debug.Log("deathCount" +_deathCount);
-
                 SetEnemy(2);
         }
     }
@@ -68,12 +66,44 @@ public class GenerateManager : MonoBehaviour
 
     //敵を生成する場所の数、　またそこから出す敵のカウントを設定、敵キャラを配置]
     //*敵キャラがいる場合は生成させない
-    void SetEnemy(int Count = 1, bool isGround = true, bool isSky = true)
+    void SetEnemy(int count = 1, bool isGround = true, bool isSky = true)
     {
 
-        for (int i = 0; i < Count; i++)
-        {
+        StartCoroutine(DelayGenerate(count,0.5f));
+
+
+//        for (int i = 0; i < count; i++)
+//        {
+//        
+//            //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
+//            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 5);
+//
+//            //位置を示さないものが帰ってきたら処理しない
+//            //なおこれはよくない処理です
+//            if (generatePosition == TargetPosition.Last)
+//            {
+//                Debug.Log("生成できませんでした。");
+//                return;
+//            }
+//
+//            //生成した場所のカウントを覚えておく
+//            _currentEnemysCount[(int)generatePosition] += 1;
+//
+//            //生成
+//            _enemyGenerator.GenerateEnemy(EnemyType.Easy, generatePosition);
+//        }
+                                
+    }
+
+    //一気に生成させない
+    IEnumerator DelayGenerate(int count = 1, float delayTime = 0.5f)
+    {
+
+        float counter = 0;
         
+        for (int i = 0; i < count; i++)
+        {
+
             //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
             TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 5);
 
@@ -82,7 +112,8 @@ public class GenerateManager : MonoBehaviour
             if (generatePosition == TargetPosition.Last)
             {
                 Debug.Log("生成できませんでした。");
-                return;
+
+                break;
             }
 
             //生成した場所のカウントを覚えておく
@@ -90,10 +121,28 @@ public class GenerateManager : MonoBehaviour
 
             //生成
             _enemyGenerator.GenerateEnemy(EnemyType.Easy, generatePosition);
-        }
-                                
-    }
 
+            counter = delayTime;
+
+            yield return null;
+
+            while (true)
+            {
+                counter -= Time.deltaTime;
+
+                if (counter < 0)
+                {
+                  break;
+                }
+
+                yield return null;
+            }
+
+            yield return null;
+        }
+
+
+    }
 
   
 }
