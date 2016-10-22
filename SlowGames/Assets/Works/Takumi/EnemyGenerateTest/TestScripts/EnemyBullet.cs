@@ -36,7 +36,7 @@ public class EnemyBullet : MonoBehaviour {
                 effect.transform.position = transform.position;
                 //音
                 //
-                AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
+                //AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
 
                 //判定消す
                 _isBlow = true;
