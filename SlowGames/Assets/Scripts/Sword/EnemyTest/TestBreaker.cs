@@ -22,5 +22,6 @@ public class TestBreaker : MonoBehaviour {
         {
             breaker.Breaker();
         }
+        breaker.Breaker();
     }
 }

@@ -35,10 +35,10 @@ public class SteamVR_LaserPointer : MonoBehaviour
     {
         holder = new GameObject();
         holder.transform.parent = this.transform;
-        holder.transform.localPosition = Vector3.zero;
+        //holder.transform.localPosition = Vector3.zero;
 
         pointer = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        pointer.transform.parent = holder.transform;
+        //pointer.transform.parent = holder.transform;
         pointer.transform.localScale = new Vector3(thickness, thickness, 100f);
         pointer.transform.localPosition = new Vector3(0f, 0f, 50f);
         BoxCollider collider = pointer.GetComponent<BoxCollider>();
@@ -113,9 +113,9 @@ public class SteamVR_LaserPointer : MonoBehaviour
             {
                 argsIn.controllerIndex = controller.controllerIndex;
             }
-            Color setcolor = new Color(1, 0, 0);
-            color = setcolor;
-            newMaterial.SetColor("_Color", color);
+            //Color setcolor = new Color(1, 0, 0);
+            //color = setcolor;
+            //newMaterial.SetColor("_Color", color);
             argsIn.distance = hit.distance;
             argsIn.flags = 0;
             argsIn.target = hit.transform;
@@ -124,9 +124,9 @@ public class SteamVR_LaserPointer : MonoBehaviour
         }
         if(!bHit)
         {
-            Color setcolor = new Color(0, 1, 0);
-            color = setcolor;
-            newMaterial.SetColor("_Color", color);
+            //Color setcolor = new Color(0, 1, 0);
+            //color = setcolor;
+            //newMaterial.SetColor("_Color", color);
             previousContact = null;
         }
         if (bHit && hit.distance < 100f)
@@ -140,13 +140,13 @@ public class SteamVR_LaserPointer : MonoBehaviour
             }
            
         }
-        else
-        {
-            Color setcolor = new Color(0, 1, 0);
-            color = setcolor;
-            newMaterial.SetColor("_Color", color);
+        //else
+        //{
+        //    Color setcolor = new Color(0, 1, 0);
+        //    color = setcolor;
+        //    newMaterial.SetColor("_Color", color);
 
-        }
+        //}
 
         if (controller != null && controller.triggerPressed)
         {

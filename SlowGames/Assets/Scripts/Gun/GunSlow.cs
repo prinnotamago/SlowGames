@@ -20,6 +20,11 @@ public class GunSlow : MonoBehaviour {
     [SerializeField]
     float _speed = 0.1f;
 
+    [SerializeField]
+    Reload _reloadRight;
+    [SerializeField]
+    Reload _reloadLeft;
+
     // Use this for initialization
     void Start () {
 	
@@ -28,7 +33,8 @@ public class GunSlow : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (_right.bulletsNumber > 0 && _left.bulletsNumber > 0)
+        if (_right.bulletsNumber > 0 && _left.bulletsNumber > 0
+            && !_reloadRight.isReload && !_reloadLeft.isReload)
         {
             if (_viveCon.canSlowMode)
             {
