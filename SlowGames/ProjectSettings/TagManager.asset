@@ -12,6 +12,7 @@ TagManager:
   - Sword
   - Floor
   - Float
+  - SlowCheck
   layers:
   - Default
   - TransparentFX
