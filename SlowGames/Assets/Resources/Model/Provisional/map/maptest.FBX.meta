@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: d81d26787f058ad4386d494d0d4ba1c6
+timeCreated: 1477123161
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pCylinder21
+    100004: pCylinder22
+    100006: pCylinder23
+    100008: pCylinder24
+    100010: pCylinder25
+    100012: pCylinder26
+    100014: pCylinder27
+    100016: pCylinder28
+    100018: pCylinder29
+    100020: pCylinder30
+    100022: pCylinder31
+    100024: pCylinder32
+    100026: pCylinder33
+    100028: pCylinder34
+    100030: pCylinder35
+    100032: pCylinder36
+    100034: pCylinder37
+    100036: pCylinder38
+    100038: pCylinder39
+    100040: pCylinder40
+    100042: pCylinder41
+    100044: polySurface212
+    100046: polySurface215
+    100048: polySurface218
+    100050: polySurface238
+    100052: polySurface301
+    100054: polySurface302
+    100056: polySurface31
+    400000: //RootNode
+    400002: pCylinder21
+    400004: pCylinder22
+    400006: pCylinder23
+    400008: pCylinder24
+    400010: pCylinder25
+    400012: pCylinder26
+    400014: pCylinder27
+    400016: pCylinder28
+    400018: pCylinder29
+    400020: pCylinder30
+    400022: pCylinder31
+    400024: pCylinder32
+    400026: pCylinder33
+    400028: pCylinder34
+    400030: pCylinder35
+    400032: pCylinder36
+    400034: pCylinder37
+    400036: pCylinder38
+    400038: pCylinder39
+    400040: pCylinder40
+    400042: pCylinder41
+    400044: polySurface212
+    400046: polySurface215
+    400048: polySurface218
+    400050: polySurface238
+    400052: polySurface301
+    400054: polySurface302
+    400056: polySurface31
+    2300000: pCylinder21
+    2300002: pCylinder22
+    2300004: pCylinder23
+    2300006: pCylinder24
+    2300008: pCylinder25
+    2300010: pCylinder26
+    2300012: pCylinder27
+    2300014: pCylinder28
+    2300016: pCylinder29
+    2300018: pCylinder30
+    2300020: pCylinder31
+    2300022: pCylinder32
+    2300024: pCylinder33
+    2300026: pCylinder34
+    2300028: pCylinder35
+    2300030: pCylinder36
+    2300032: pCylinder37
+    2300034: pCylinder38
+    2300036: pCylinder39
+    2300038: pCylinder40
+    2300040: pCylinder41
+    2300042: polySurface301
+    2300044: polySurface302
+    3300000: pCylinder21
+    3300002: pCylinder22
+    3300004: pCylinder23
+    3300006: pCylinder24
+    3300008: pCylinder25
+    3300010: pCylinder26
+    3300012: pCylinder27
+    3300014: pCylinder28
+    3300016: pCylinder29
+    3300018: pCylinder30
+    3300020: pCylinder31
+    3300022: pCylinder32
+    3300024: pCylinder33
+    3300026: pCylinder34
+    3300028: pCylinder35
+    3300030: pCylinder36
+    3300032: pCylinder37
+    3300034: pCylinder38
+    3300036: pCylinder39
+    3300038: pCylinder40
+    3300040: pCylinder41
+    3300042: polySurface301
+    3300044: polySurface302
+    4300000: polySurface301
+    4300002: polySurface302
+    4300004: pCylinder21
+    4300006: pCylinder22
+    4300008: pCylinder23
+    4300010: pCylinder24
+    4300012: pCylinder25
+    4300014: pCylinder26
+    4300016: pCylinder27
+    4300018: pCylinder28
+    4300020: pCylinder29
+    4300022: pCylinder30
+    4300024: pCylinder31
+    4300026: pCylinder32
+    4300028: pCylinder33
+    4300030: pCylinder34
+    4300032: pCylinder35
+    4300034: pCylinder36
+    4300036: pCylinder37
+    4300038: pCylinder38
+    4300040: pCylinder39
+    4300042: pCylinder40
+    4300044: pCylinder41
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
