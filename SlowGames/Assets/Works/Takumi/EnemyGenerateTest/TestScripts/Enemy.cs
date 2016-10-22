@@ -8,13 +8,14 @@ public class Enemy : MonoBehaviour
 
     Transform _targetPostion;
 
+
     public TargetPosition  _generatePostion;
 
     //たまにあたったら死にます
     void OnCollisionEnter(Collision other)
     {
        
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == TagName.Bullet)
         {
             //エフェクト
             var effect = Instantiate(_deathEffect);
