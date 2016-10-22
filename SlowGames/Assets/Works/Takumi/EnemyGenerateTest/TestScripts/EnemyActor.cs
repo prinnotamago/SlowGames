@@ -15,6 +15,7 @@ public class EnemyActor : MonoBehaviour
     }
     [SerializeField]
     ActionType _currentAction;
+    ActionType _nextAction;
 
     NavMeshAgent _navimesh;
 
@@ -65,6 +66,7 @@ public class EnemyActor : MonoBehaviour
        
         _actionDic.Add(ActionType.TargetRun,TargetRun);
         _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
+        _actionDic.Add(ActionType.Stay,Stay);
 
         _playerTransform = GameObject.FindGameObjectWithTag("Player");
     }
@@ -91,6 +93,13 @@ public class EnemyActor : MonoBehaviour
         _actionDic[_currentAction]();
         transform.LookAt(_playerTransform.transform.position);
 
+    }
+
+    void ChangeAction(ActionType action,float activeTime = 1)
+    {
+        _currentAction = action;
+        _activeCounter = activeTime;
+        
     }
 
 
@@ -144,16 +153,36 @@ public class EnemyActor : MonoBehaviour
         {
             //移動時間,移動速度をランダムに生成
             _sideMoveSpeed = _sideMoveSpeedMax - Random.Range(0,(_sideMoveSpeedMax * 2));
-            _activeCounter = Random.Range(0.0f, _moveTimeMax);
+            //_activeCounter = Random.Range(0.0f, _moveTimeMax);
+
+            ChangeAction(ActionType.Stay,1);
+
         }
 
-    } 
+    }
+
+    //
+    void Stay()
+    {
+        if (_activeCounter > 0)
+        {
+            _activeCounter -= Time.deltaTime;
+
+        }
+        else
+        {
+            //stay前に決めておいた動きをします
+            ChangeAction(ActionType.ProvocationMove);
+        }
+        
+
+    }
 
 
     void OnTriggerEnter(Collider other)
     {
-        
-        _currentAction = ActionType.ProvocationMove;
+
+        ChangeAction(ActionType.ProvocationMove,1);
         gameObject.GetComponentInChildren<EnemyShot>()._isShotStart = true;
         _navimesh.enabled = false;
 

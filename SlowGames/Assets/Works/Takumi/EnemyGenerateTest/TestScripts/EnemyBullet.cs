@@ -35,7 +35,8 @@ public class EnemyBullet : MonoBehaviour {
                 var effect = Instantiate(_deathEffect);
                 effect.transform.position = transform.position;
                 //音
-                //AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
+                //
+                AudioManager.instance.play3DSe(effect, AudioName.SeName.Thunder);
 
                 //判定消す
                 _isBlow = true;
@@ -57,9 +58,10 @@ public class EnemyBullet : MonoBehaviour {
         float deathTime   = 1.0f;
         float acceraition = 2.0f;
         float unacceration = 3.0f;
+        float firstTime = 300.0f;
 
         //初速
-        transform.position += randomDirec * (_bulletSpeed + 300) * Time.deltaTime;
+        transform.position += randomDirec * (_bulletSpeed + firstTime) * Time.deltaTime;
 
         //加速
         while (true)
