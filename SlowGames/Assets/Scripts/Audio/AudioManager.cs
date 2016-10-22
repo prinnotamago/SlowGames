@@ -694,12 +694,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             if (source.isPlaying) continue;
             source.clip = null;
         }
-
-        foreach (var source in _3dSources)
-        {
-            if (source != null) continue;
-            _3dSources.Remove(source);
-        }
+        _3dSources.RemoveAll(source => source == null);
     }
 
     IEnumerator fade(float fade_time, float start_volume, float end_volume)
