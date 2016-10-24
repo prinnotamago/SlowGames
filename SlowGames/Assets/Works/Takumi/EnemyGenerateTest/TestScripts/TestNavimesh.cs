@@ -7,11 +7,11 @@ public class TestNavimesh : MonoBehaviour {
     [SerializeField]
     GameObject Target;
 
-    NavMeshAgent _navimesh;
+    UnityEngine.AI.NavMeshAgent _navimesh;
 
     void Start()
     {
-        _navimesh = GetComponent<NavMeshAgent>();
+        _navimesh = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
  
 

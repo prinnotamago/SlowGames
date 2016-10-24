@@ -10,12 +10,12 @@ public class TestEnemy : MonoBehaviour {
     bool _isHit = false;
     public bool isHit { get { return _isHit; } }
 
-    NavMeshAgent _navMeshAgent;
+    UnityEngine.AI.NavMeshAgent _navMeshAgent;
 
 	// Use this for initialization
 	void Start () {
         _mesh = GetComponent<MeshRenderer>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
     }
 	
