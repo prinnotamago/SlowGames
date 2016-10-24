@@ -17,7 +17,7 @@ public class EnemyActor : MonoBehaviour
     ActionType _currentAction;
     ActionType _nextAction;
 
-    NavMeshAgent _navimesh;
+    UnityEngine.AI.NavMeshAgent _navimesh;
 
     [SerializeField,Range(0,100)]
     float _playerToMaxDistance = 10;
@@ -53,7 +53,7 @@ public class EnemyActor : MonoBehaviour
     void Awake()
     {
 
-        _navimesh = this.gameObject.GetComponent<NavMeshAgent>();
+        _navimesh = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
     }
 

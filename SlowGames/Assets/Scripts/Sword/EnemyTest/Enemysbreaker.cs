@@ -35,7 +35,7 @@ public class Enemysbreaker : MonoBehaviour {
         {
             if (enemy.isHit)
             {
-                var nav = enemy.GetComponent<NavMeshAgent>();
+                var nav = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
                 nav.enabled = false;
 
