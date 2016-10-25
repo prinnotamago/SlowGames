@@ -36,10 +36,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010875852734}
   - 33: {fileID: 33000010220168324}
-  - 135: {fileID: 135000014184172554}
   - 23: {fileID: 23000013487852090}
-  - 114: {fileID: 114000013512603366}
   - 54: {fileID: 54000010544645038}
+  - 114: {fileID: 114000013512603366}
   m_Layer: 10
   m_Name: Bullet 1
   m_TagString: Bullet
@@ -137,18 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 4000
---- !u!135 &135000014184172554
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014089496684}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136000013621949966
 CapsuleCollider:
   m_ObjectHideFlags: 1
