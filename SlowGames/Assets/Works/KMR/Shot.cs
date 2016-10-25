@@ -10,10 +10,35 @@ public class Shot : MonoBehaviour
     Rigidbody _rigidbody;
     Vector3 _direction = Vector3.zero;
 
-    void Start()
+    AimAssist[] _aimAssist;
+
+    public void Start(Vector3 bulletBirection)
     {
+        //_aimAssist =  FindObjectsOfType<AimAssist>();
+        //float b = 1000;
+        //int count = -1;
+        //for(int i = 0; i < _aimAssist.Length; i++)
+        //{
+        //    float a = (_aimAssist[i].transform.position - gameObject.transform.position).magnitude;
+        //    if(b >= a)
+        //    {
+        //        b = a;
+        //        count++;
+        //    }
+        //}
+
+        //if (_aimAssist[count].enemyHit == false)
+        //{
+        //    _direction = transform.forward - transform.up;
+        //}else
+        //if (_aimAssist[count].enemyHit == true)
+        //{
+        //    _direction = _aimAssist[count].enemyDirection;
+        //}
+
+        //_direction = transform.forward - transform.up;
+        _direction = bulletBirection;
         _rigidbody = GetComponent<Rigidbody>();
-        _direction = transform.forward - transform.up;
     }
 
     public void FixedUpdate()

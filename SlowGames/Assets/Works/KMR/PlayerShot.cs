@@ -20,8 +20,6 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     float _burstIntervalTime = 0.2f;
 
-    [SerializeField]
-    int _maxBurstCount = 3;
 
     [SerializeField]
     int _maxBulletsNumbers = 20;
@@ -47,6 +45,8 @@ public class PlayerShot : MonoBehaviour
 
     int _burstCount;
 
+    AimAssist _aimAssist;
+
     SteamVR_TrackedObject _trackedObject;
     SteamVR_Controller.Device _device;
     //GameObject steamVR_Camera;
@@ -54,9 +54,10 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
+        _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
         _reload = GetComponent<Reload>();
-        _burstCount = _maxBurstCount;
+        _burstCount = _oneShotCount;
         _time = _burstIntervalTime;
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
@@ -66,11 +67,16 @@ public class PlayerShot : MonoBehaviour
     void Update()
     {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
-        if (_reload.isReload) return;
+        if (_reload.isReload)
+        {
+            if(_isShot)_isShot = false;
+            return;
+        }
         ThreeBurst();
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
+        _aimAssist.OrientationCorrection();
         _isShot = true;
         _burstCount = _oneShotCount;
     }
@@ -93,10 +99,21 @@ public class PlayerShot : MonoBehaviour
         effect.transform.rotation = Quaternion.Euler(0, 180, 0);
         if (SteamVR.active)
         {
-            _device.TriggerHapticPulse(1000);
+            _device.TriggerHapticPulse(4000);
         }
         GameObject shotBullet = Instantiate(_bullet);
-        shotBullet.transform.rotation = transform.rotation;
+        
+        if (_aimAssist.enemyHit == false)
+        {
+            shotBullet.transform.rotation = transform.rotation;
+            shotBullet.GetComponent<Shot>().Start(shotBullet.transform.forward - shotBullet.transform.up);
+        }
+        else
+        if(_aimAssist.enemyHit == true)
+        {
+            shotBullet.transform.rotation = transform.rotation;
+            shotBullet.GetComponent<Shot>().Start(_aimAssist.enemyDirection);
+        }
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
