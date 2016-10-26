@@ -28,4 +28,9 @@ public abstract class SingletonMonoBegaviour<T> : MonoBehaviour where T : MonoBe
             DestroyImmediate(this);
         }
     }
+
+    virtual protected void Update()
+    {
+
+    }
 }
