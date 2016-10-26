@@ -8,9 +8,9 @@ public class AudioSourceTest : MonoBehaviour
         //// 3D音用BGM再生
         //AudioManager.instance.play3DBgm(gameObject, AudioName.BgmName.stage01);
 
-        
-
         //AudioManager.instance.playSe(AudioName.SeName.gun1);
+
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.gun1);
     }
 
     void Update()
