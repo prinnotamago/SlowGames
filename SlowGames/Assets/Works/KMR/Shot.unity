@@ -401,7 +401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010875852734, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 6.19
       objectReference: {fileID: 0}
     - target: {fileID: 4000010875852734, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
       propertyPath: m_LocalRotation.x
@@ -426,6 +426,50 @@ Prefab:
     - target: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
       propertyPath: m_Name
       value: Bullet 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].inSlope
+      value: -1.0227743
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outSlope
+      value: -1.0227743
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.colorGradient.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: -0.55480653
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outSlope
+      value: -0.55480653
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.89285713
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
@@ -651,10 +695,12 @@ MonoBehaviour:
   _mazzleFlush: {fileID: 1000012273995904, guid: a96c30a539fbcd249aecf8211017b7a0,
     type: 2}
   _bullet: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
-  _oneShotCount: 3
+  _oneShotCount: 1
   _vibrationPower: 200
-  _burstIntervalTime: 0.2
+  _burstIntervalTime: 0
   _maxBulletsNumbers: 20
+  _triggerAnim: {fileID: 0}
+  _shotType: 1
 --- !u!23 &1465163728
 MeshRenderer:
   m_ObjectHideFlags: 0
