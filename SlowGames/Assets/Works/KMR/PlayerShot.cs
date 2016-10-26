@@ -41,6 +41,11 @@ public class PlayerShot : MonoBehaviour
         set { _bulletsNumber = value; }
     }
 
+    enum shotType
+    {
+        notReload,
+        autoReload
+    }
 
     bool _isShot = false;
 
@@ -48,16 +53,22 @@ public class PlayerShot : MonoBehaviour
 
     int _burstCount;
 
+    
     AimAssist _aimAssist;
 
     SteamVR_TrackedObject _trackedObject;
     SteamVR_Controller.Device _device;
+
+    [SerializeField]
+    shotType _shotType = shotType.autoReload;
+
     //GameObject steamVR_Camera;
     //Vector2 position;
 
     void Start()
     {
-        _aimAssist = GetComponentInChildren<AimAssist>();
+        //_shotType = shotType.autoReload;
+        // _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
         _reload = GetComponent<Reload>();
         _burstCount = _oneShotCount;
@@ -84,15 +95,17 @@ public class PlayerShot : MonoBehaviour
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
-        _aimAssist.OrientationCorrection();
+        //_aimAssist.OrientationCorrection();
         _isShot = true;
         _burstCount = _oneShotCount;
     }
 
     void ThreeBurst()
     {
-
-        if (_bulletsNumber <= 0) return;
+        if (_shotType == shotType.autoReload)
+        {
+            if (_bulletsNumber <= 0) return;
+        }
         if (_isShot == false) return;
 
         _time -= Time.unscaledDeltaTime;
@@ -111,17 +124,17 @@ public class PlayerShot : MonoBehaviour
         }
         GameObject shotBullet = Instantiate(_bullet);
         
-        if (_aimAssist.enemyHit == false)
-        {
+        //if (_aimAssist.enemyHit == false)
+        //{
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = transform.forward - transform.up;
-        }
-        else
-        if(_aimAssist.enemyHit == true)
-        {
-            shotBullet.transform.rotation = transform.rotation;
-            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
-        }
+        //}
+        //else
+        //if(_aimAssist.enemyHit == true)
+        //{
+        //    shotBullet.transform.rotation = transform.rotation;
+        //    shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
+        //}
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
@@ -130,7 +143,10 @@ public class PlayerShot : MonoBehaviour
 
         _time = _burstIntervalTime;
         _burstCount--;
-        _bulletsNumber--;
+        if (_shotType == shotType.autoReload)
+        {
+            _bulletsNumber--;
+        }
         if (_burstCount < 1)
         {
             _burstCount = _oneShotCount;

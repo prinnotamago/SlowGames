@@ -33,9 +33,10 @@ public class Reload : MonoBehaviour {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); } //Viveが接続されていたら読み込む
         if (_shot.maxBulletsNumbers == _shot.bulletsNumber) return;
         if (isReload) return;
-        if((!SteamVR.active && Input.GetKeyDown(KeyCode.R)) ||
+   
+        if(!SteamVR.active && Input.GetKeyDown(KeyCode.R) ||
             (SteamVR.active && _device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
-            ) //あとでリロードボタンに変更
+            || _shot.bulletsNumber == 0) //あとでリロードボタンに変更
         {
             StartCoroutine(ShotReload());
         }
