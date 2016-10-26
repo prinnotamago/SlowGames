@@ -18,16 +18,16 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <summary>
     /// Seの最大音数
     /// </summary>
-    const uint SE_CHANNEL = 32;
+    protected const uint SE_CHANNEL = 32;
 
     [SerializeField, Tooltip("同じSEが鳴るときの最大音数")]
-    uint LIMIT_SE_COUNT = 16;
+    protected uint LIMIT_SE_COUNT = 16;
 
     [SerializeField]
     AudioClip[] _bgmClips = null;
 
     [SerializeField]
-    AudioClip[] _seClips = null;
+    protected AudioClip[] _seClips = null;
 
     AudioSource _bgmSource = null;
 
@@ -445,6 +445,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             {
                 if (tempAudioSource.isPlaying) continue;
                 if (tempAudioSource.outputAudioMixerGroup.name != "SE") continue;
+                var name = ((AudioName.SeName)index).ToString().GetHashCode();
+                if (tempAudioSource.clip.name.GetHashCode() != name) continue;
                 audioSource = tempAudioSource;
                 break;
             }
@@ -685,7 +687,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         _seClips = Resources.LoadAll<AudioClip>("Audio/SE");
     }
 
-    void Update()
+    override protected void Update()
     {
         for (int i = 0; i < _seSources.Length; ++i)
         {
