@@ -138,7 +138,7 @@ public class PlayerShot : MonoBehaviour
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
-        shotBullet.transform.position = transform.position + transform.forward - transform.up;
+        shotBullet.transform.position = transform.position + transform.forward*0.4f-transform.up*0.4f /*- new Vector3(0, 0.1f, 0)*/;
         //Shotbullet.transform.Translate(0, -1, 1);
 
         _time = _burstIntervalTime;
