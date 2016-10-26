@@ -17,6 +17,9 @@ public class GunSlowButton : MonoBehaviour {
     bool _isPushButtonLeft = false;
     int _countLeft = 0;
 
+    [SerializeField]
+    UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration _v;
+
     // Use this for initialization
     void Start () {
 	
@@ -61,16 +64,38 @@ public class GunSlowButton : MonoBehaviour {
             if (SlowMotion._instance.isSlow)
             {
                 SlowMotion._instance.ResetSpeed();
+                StartCoroutine(SlowEnd());
             }
             else
             {
                 SlowMotion._instance.GameSpeed(0.1f);
+                StartCoroutine(SlowStart());
             }
 
             _isPushButtonRight = false;
             _isPushButtonLeft = false;
             _countRigth = 0;
             _countLeft = 0;
+        }
+    }
+
+    IEnumerator SlowStart()
+    {
+        while (_v.intensity < 0.8f)
+        {
+            if (!SlowMotion._instance.isSlow) { break; }
+            _v.intensity += 0.1f;
+            yield return 0;
+        }
+    }
+
+    IEnumerator SlowEnd()
+    {
+        while (_v.intensity > 0.0f)
+        {
+            if (SlowMotion._instance.isSlow) { break; }
+            _v.intensity -= 0.1f;
+            yield return 0;
         }
     }
 }

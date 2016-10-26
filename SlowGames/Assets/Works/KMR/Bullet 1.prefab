@@ -16,10 +16,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000011549606978}
-  - 136: {fileID: 136000013621949966}
+  - component: {fileID: 4000011549606978}
+  - component: {fileID: 136000013621949966}
   m_Layer: 10
   m_Name: BulletCollision
   m_TagString: Bullet
@@ -32,13 +32,14 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000010875852734}
-  - 33: {fileID: 33000010220168324}
-  - 23: {fileID: 23000013487852090}
-  - 54: {fileID: 54000010544645038}
-  - 114: {fileID: 114000013512603366}
+  - component: {fileID: 4000010875852734}
+  - component: {fileID: 33000010220168324}
+  - component: {fileID: 23000013487852090}
+  - component: {fileID: 54000010544645038}
+  - component: {fileID: 114000013512603366}
+  - component: {fileID: 135874004246021928}
   m_Layer: 10
   m_Name: Bullet 1
   m_TagString: Bullet
@@ -55,11 +56,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011549606978}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000011549606978
 Transform:
   m_ObjectHideFlags: 1
@@ -69,10 +70,10 @@ Transform:
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010875852734}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!23 &23000013487852090
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -87,7 +88,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -95,7 +98,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -135,7 +138,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca7045d7533a84e8934275d4b3ff55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 4000
+  _bulletSpeed: 5000
+--- !u!135 &135874004246021928
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014089496684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136000013621949966
 CapsuleCollider:
   m_ObjectHideFlags: 1
