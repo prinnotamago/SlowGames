@@ -24,6 +24,9 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     int _maxBulletsNumbers = 20;
 
+    [SerializeField]
+    private Animator _triggerAnim = null;
+
     int _bulletsNumber;
 
     public int maxBulletsNumbers
@@ -73,6 +76,11 @@ public class PlayerShot : MonoBehaviour
             return;
         }
         ThreeBurst();
+        if(_triggerAnim != null)
+        {
+            float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
+            SetAnimFrame(value); //Animationの決定
+        }
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         //if (!Input.GetKeyDown(KeyCode.A)) { return; }
@@ -129,5 +137,16 @@ public class PlayerShot : MonoBehaviour
             _isShot = false;
         }
     }
+
+    void SetAnimFrame(float frame)
+    {
+        //var clip = _animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+
+        //float time = (float)frame / clip.frameRate;
+
+        var animationHash = _triggerAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+        _triggerAnim.Play(animationHash, 0, frame);
+    }
+
 
 }
