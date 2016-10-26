@@ -12,7 +12,12 @@ public class Shot : MonoBehaviour
 
     AimAssist[] _aimAssist;
 
-    public void Start(Vector3 bulletBirection)
+   public Vector3 direction
+    {
+        set { _direction = value; }
+    }
+
+    public void Start()
     {
         //_aimAssist =  FindObjectsOfType<AimAssist>();
         //float b = 1000;
@@ -37,7 +42,7 @@ public class Shot : MonoBehaviour
         //}
 
         //_direction = transform.forward - transform.up;
-        _direction = bulletBirection;
+        //_direction = bulletBirection;
         _rigidbody = GetComponent<Rigidbody>();
     }
 

@@ -106,13 +106,13 @@ public class PlayerShot : MonoBehaviour
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
-            shotBullet.GetComponent<Shot>().Start(shotBullet.transform.forward - shotBullet.transform.up);
+            shotBullet.GetComponent<Shot>().direction = transform.forward - transform.up;
         }
         else
         if(_aimAssist.enemyHit == true)
         {
             shotBullet.transform.rotation = transform.rotation;
-            shotBullet.GetComponent<Shot>().Start(_aimAssist.enemyDirection);
+            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
