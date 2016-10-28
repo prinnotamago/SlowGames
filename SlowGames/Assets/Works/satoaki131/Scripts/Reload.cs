@@ -51,7 +51,7 @@ public class Reload : MonoBehaviour {
         var time = 0.0f;
         isReload = true;
         //Audioを追加する(カシャッ)
-        AudioManager.instance.play3DSe(gameObject, AudioName.SeName.gunreload1);
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.gunreload1);
         //AudioManager.instance.playSe(AudioName.SeName.gunreload1);
         while(time < _reloadTime)
         {
@@ -61,7 +61,7 @@ public class Reload : MonoBehaviour {
         isReload = false;
         _shot.bulletsNumber = _shot.maxBulletsNumbers;  //弾の数を最大数に変更する
         //音を追加する(カチッ)
-        AudioManager.instance.play3DSe(gameObject, AudioName.SeName.gunreload2);
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.gunreload2);
 
         //AudioManager.instance.playSe(AudioName.SeName.gunreload2);
     }
