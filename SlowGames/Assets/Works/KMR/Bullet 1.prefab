@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54000010544645038}
   - component: {fileID: 114000013512603366}
   - component: {fileID: 135874004246021928}
+  - component: {fileID: 114677468636547258}
   m_Layer: 10
   m_Name: Bullet 1
   m_TagString: Bullet
@@ -118,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014089496684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.19}
+  m_LocalPosition: {x: -0.041, y: 0, z: 6.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4190775356461324}
@@ -200,7 +201,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014089496684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -279,7 +280,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 2
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -304,7 +305,7 @@ TrailRenderer:
     colorGradient:
       key0:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278190335
       key1:
         serializedVersion: 2
         rgba: 16777215
@@ -383,7 +384,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 2
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -408,7 +409,7 @@ TrailRenderer:
     colorGradient:
       key0:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278190335
       key1:
         serializedVersion: 2
         rgba: 16777215
@@ -487,7 +488,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 2
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -512,7 +513,7 @@ TrailRenderer:
     colorGradient:
       key0:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278190335
       key1:
         serializedVersion: 2
         rgba: 16777215
@@ -591,7 +592,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 2
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -616,7 +617,7 @@ TrailRenderer:
     colorGradient:
       key0:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278190335
       key1:
         serializedVersion: 2
         rgba: 16777215
@@ -674,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca7045d7533a84e8934275d4b3ff55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 7000
+  _bulletSpeed: 9000
 --- !u!114 &114444714720433014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -686,6 +687,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adabe52a834f0f84397356070055c7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114677468636547258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014089496684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929e29d5e11747044be4e52ec2eae15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletHeal: 0.5
+  _enemyHeal: 1
 --- !u!135 &135874004246021928
 SphereCollider:
   m_ObjectHideFlags: 1

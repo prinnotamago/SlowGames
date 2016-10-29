@@ -3274,30 +3274,6 @@ Prefab:
       propertyPath: m_Name
       value: Bullet 1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
-        type: 2}
-      propertyPath: m_Parameters.colorGradient.atime0
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
-        type: 2}
-      propertyPath: m_Parameters.colorGradient.atime1
-      value: 2313
-      objectReference: {fileID: 0}
-    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
-        type: 2}
-      propertyPath: m_Parameters.colorGradient.atime2
-      value: 15227
-      objectReference: {fileID: 0}
-    - target: {fileID: 96557123526886410, guid: 3cd77c866aefb6c4ea3d514ac31ce907,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
   m_IsPrefabParent: 0
@@ -3974,6 +3950,7 @@ MonoBehaviour:
   _burstIntervalTime: 0
   _maxBulletsNumbers: 20
   _triggerAnim: {fileID: 0}
+  _bulletLineEffect: {fileID: 0}
   _shotType: 1
 --- !u!23 &1465163728
 MeshRenderer:

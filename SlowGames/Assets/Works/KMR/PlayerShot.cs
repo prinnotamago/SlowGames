@@ -88,6 +88,7 @@ public class PlayerShot : MonoBehaviour
             if(_isShot)_isShot = false;
             return;
         }
+        
         ThreeBurst();
         if(_triggerAnim != null)
         {
@@ -126,18 +127,17 @@ public class PlayerShot : MonoBehaviour
         }
         GameObject shotBullet = Instantiate(_bullet);
         //GameObject bulletLineEffect = Instantiate(_bulletLineEffect);
-
+        if (_aimAssist.enemyHit == true)
+        {
+            shotBullet.transform.rotation = transform.rotation;
+            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
+        }else
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = transform.forward - transform.up;
         }
-        else
-        if(_aimAssist.enemyHit == true)
-        {
-            shotBullet.transform.rotation = transform.rotation;
-            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
-        }
+  
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
