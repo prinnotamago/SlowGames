@@ -4,46 +4,28 @@ using System.Collections.Generic;
 
 public class GenerateManager : MonoBehaviour
 {
-   
-    //生成した数を管理
-    int[] _currentEnemysCount = new int[((int)TargetPosition.Last)];
 
     EnemyGenerator _enemyGenerator;
 
+    //生成した数を管理
+    int[] _currentEnemysCount = new int[((int)TargetPosition.Last)];
+   
+    //同じ場所に何体まで出せるか(全体数の限界値ではありません)
+    [SerializeField,Range(1,20)]
+    int _enemyLimit = 1;
+
     //死亡数をカウントします
     int _deathCount = 0;
-
-    public void AddDeathCount(TargetPosition generatePosition)
-    {
-        //死んだ数を死んだを更新
-        _deathCount += 1;
-        _currentEnemysCount[(int)generatePosition] -= 1;
-        UpdateEnemyCount();
-    }
-
-    //FixMe://２体死ぬごとに、敵キャラを生成
-    void UpdateEnemyCount()
-    {
-        //２体死ぬごとに、敵キャラを生成
-        if (_deathCount % 2 == 0)
-        {
-                SetEnemy(2);
-        }
-    }
-
 
     void Start()
     {
         //初期化
         _enemyGenerator = this.gameObject.GetComponent<EnemyGenerator>();
         _deathCount = 0;
-
+        //開幕３体配置.
         SetEnemy(3);
 
     }
-
-
-
 
     void Update()
     {
@@ -63,10 +45,28 @@ public class GenerateManager : MonoBehaviour
 
     }
 
+    //死んだ回数を記憶
+    public void AddDeathCount(TargetPosition generatePosition)
+    {
+        //死んだ数を死んだを更新
+        _deathCount += 1;
+        _currentEnemysCount[(int)generatePosition] -= 1;
+        UpdateEnemyCount();
+    }
+
+    //FixMe://２体死ぬごとに、敵キャラを生成
+    void UpdateEnemyCount()
+    {
+        //２体死ぬごとに、敵キャラを生成
+        if (_deathCount % 2 == 0)
+        {
+                SetEnemy(2);
+        }
+    }
 
     //敵を生成する場所の数、　またそこから出す敵のカウントを設定、敵キャラを配置]
     //*敵キャラがいる場合は生成させない
-    void SetEnemy(int count = 1, bool isGround = true, bool isSky = true)
+    void SetEnemy(int count = 1,EnemyType enemyType = EnemyType.Easy)
     {
 
         StartCoroutine(DelayGenerate(count,0.5f));
@@ -105,7 +105,7 @@ public class GenerateManager : MonoBehaviour
         {
 
             //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
-            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 1);
+            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, _enemyLimit);
 
             //位置を示さないものが帰ってきたら処理しない
             //なおこれはよくない処理です
