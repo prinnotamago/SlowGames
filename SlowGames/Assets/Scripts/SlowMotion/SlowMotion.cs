@@ -28,6 +28,36 @@ public class SlowMotion : MonoBehaviour {
     /// </summary>
     public bool isSlow { get { return _isSlow; } }
 
+    [SerializeField]
+    bool _isLimit = false;
+    [SerializeField]
+    float _slowTimeMax = 5.0f;
+    //[SerializeField]
+    float _slowTime = 0.0f;
+    public float slowTime {
+        get
+        {
+            return _slowTime;
+        }
+        set
+        {
+            _slowTime += value;
+            if(_slowTime < 0)
+            {
+                _slowTime = 0;
+            }
+            else if(_slowTime > _slowTimeMax)
+            {
+                _slowTime = _slowTimeMax;
+            }
+        }
+    }
+
+    [SerializeField]
+    bool _isEffect = false;
+    [SerializeField]
+    UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration _v;
+
     // Use this for initialization
     void Awake()
     {
@@ -35,13 +65,27 @@ public class SlowMotion : MonoBehaviour {
         {
             _instance = this;
         }
+
+        slowTime = _slowTimeMax;
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    TimeElapsed();
-    //}
+    void Update()
+    {
+        if (!_isLimit) { return; }
+        if (SlowMotion._instance.isSlow)
+        {
+            if (slowTime > 0.0f)
+            {
+                _slowTime -= Time.unscaledDeltaTime;
+            }
+            else
+            {
+                _slowTime = 0.0f;
+                SlowMotion._instance.ResetSpeed();
+            }
+        }
+    }
 
     /// <summary>
     /// 残り時間を減らして、ゲームスピードを元に戻す処理
@@ -90,6 +134,9 @@ public class SlowMotion : MonoBehaviour {
         AudioManager.instance.changeSourceAllPitch(1.0f);
 
         _isSlow = false;
+
+        if (!_isEffect) { return; }
+        StartCoroutine(SlowEnd());
     }
 
     /// <summary>
@@ -111,10 +158,14 @@ public class SlowMotion : MonoBehaviour {
         if (speed != 1.0f)
         {
             _isSlow = true;
+            if (!_isEffect) { return; }
+            StartCoroutine(SlowStart());
         }
         else
         {
             _isSlow = false;
+            if (!_isEffect) { return; }
+            StartCoroutine(SlowEnd());
         }
     }
 
@@ -131,5 +182,25 @@ public class SlowMotion : MonoBehaviour {
         // 0.2f  5.0f
         // 0.1f  10.0f
         return 1.0f / Time.timeScale;
+    }
+
+    IEnumerator SlowStart()
+    {
+        while (_v.intensity < 0.8f)
+        {
+            if (!SlowMotion._instance.isSlow) { break; }
+            _v.intensity += 0.1f;
+            yield return 0;
+        }
+    }
+
+    IEnumerator SlowEnd()
+    {
+        while (_v.intensity > 0.0f)
+        {
+            if (SlowMotion._instance.isSlow) { break; }
+            _v.intensity -= 0.1f;
+            yield return 0;
+        }
     }
 }

@@ -25,7 +25,7 @@ public class SlashSword : MonoBehaviour {
     MeshRenderer mat;
 
     // 斬る種類
-    enum SlashPattern
+    public enum SlashPattern
     {
         NONE,               // 斬ってない
 
@@ -41,6 +41,7 @@ public class SlashSword : MonoBehaviour {
         DOWNLEFT_UPRIGHT,   // 左下から右上に斬る
     }
     SlashPattern _pattern = SlashPattern.NONE;
+    public SlashPattern pattern { get { return _pattern; } }
 
     /// <summary>
     /// 斜め斬りの感度
@@ -105,7 +106,7 @@ public class SlashSword : MonoBehaviour {
         // 毎フレーム座標を更新
         prev = transform.position;
 
-       Debug.Log(_pattern);
+       //Debug.Log(_pattern);
     }
 
     SlashPattern UpdatePattern(Vector3 c)
