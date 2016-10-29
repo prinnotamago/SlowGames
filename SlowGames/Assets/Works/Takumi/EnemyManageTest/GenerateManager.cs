@@ -105,7 +105,7 @@ public class GenerateManager : MonoBehaviour
         {
 
             //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
-            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 5);
+            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, 1);
 
             //位置を示さないものが帰ってきたら処理しない
             //なおこれはよくない処理です

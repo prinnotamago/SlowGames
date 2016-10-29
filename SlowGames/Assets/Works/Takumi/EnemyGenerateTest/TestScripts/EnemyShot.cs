@@ -73,7 +73,7 @@ public class EnemyShot : MonoBehaviour
     void Start()
     {
         _isShotStart = false;
-        StartCoroutine(ShotDelay());
+        //StartCoroutine(ShotDelay());
     }
 
 

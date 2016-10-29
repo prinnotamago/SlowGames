@@ -27,6 +27,12 @@ public class EnemyBullet : MonoBehaviour {
     
     void OnTriggerEnter(Collider other)
     {
+        //敵キャラ自信にあたってもスルー Todo : 見栄えが悪かったら調整
+        if (other.gameObject.tag == TagName.Enemy)
+        {
+            return;
+        }
+        
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet")
         {
             if (other.gameObject.tag == "Bullet")
