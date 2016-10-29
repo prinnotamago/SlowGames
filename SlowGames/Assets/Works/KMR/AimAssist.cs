@@ -49,6 +49,8 @@ public class AimAssist : MonoBehaviour
 
     void Update()
     {
+        _enemyDirection = transform.forward + transform.up;
+
         //OrientationCorrection();
         //Debug.DrawRay(transform.position, transform.forward);
     }
@@ -64,7 +66,7 @@ public class AimAssist : MonoBehaviour
 
         if (isHit)
         {
-            Debug.Log(_hit.transform.gameObject.name);
+            //Debug.Log(_hit.transform.gameObject.name);
             if (_hit.transform.tag == "Enemy" || _hit.transform.tag == "EnemyBullet")
             {
                 _enemyHit = true;
