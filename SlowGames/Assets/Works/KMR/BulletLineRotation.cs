@@ -17,7 +17,7 @@ public class BulletLineRotation : MonoBehaviour
     void Update()
     {
 
-        transform.Rotate(0, 0, 30);
+        transform.Rotate(0, 0, 90);
         ScaleChange();
 
     }
@@ -26,10 +26,10 @@ public class BulletLineRotation : MonoBehaviour
     {
 
         {
-            transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f);
-            if (transform.localScale.x <= 0.1f)
+            transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+            if (transform.localScale.x <= 0.05f)
             {
-                transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             }
         }
 

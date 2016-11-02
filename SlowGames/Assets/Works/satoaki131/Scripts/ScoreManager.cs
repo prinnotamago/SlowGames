@@ -13,6 +13,15 @@ public class ScoreManager : MonoBehaviour {
 
     private int _flipEnemyBulletCount = 0;
 
+    [System.Serializable]
+    public struct EnemyData
+    {
+        public EnemyType type;
+        public int score;
+    }
+
+    public EnemyData[] _enemyData = null;
+
     /// <summary>
     /// インスタンスを所得
     /// </summary>
@@ -42,8 +51,9 @@ public class ScoreManager : MonoBehaviour {
         get{ return _lifeTimeCount; }
     }
 
-    public ScoreManager AddScore()
+    public ScoreManager AddScore(EnemyType type)
     {
+        _score += _enemyData[(int)type].score;
         return this;
     }
 

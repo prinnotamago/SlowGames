@@ -230,8 +230,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010612609758}
-  - component: {fileID: 114000011818661132}
   - component: {fileID: 114000012695826002}
+  - component: {fileID: 114000011818661132}
   m_Layer: 0
   m_Name: EnemyGenerateManager
   m_TagString: Untagged
@@ -973,9 +973,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _easyEnemys:
   - {fileID: 1000012269936432, guid: dff0bb10f6bff429c90afa8a9a9bc0a4, type: 2}
+  _normalEnemys:
   - {fileID: 1259590406897150, guid: 5025a7fb985cf43ce9cbb40b3dc957fd, type: 2}
-  _normalEnemys: []
-  _hardEnemys: []
+  _hardEnemys:
+  - {fileID: 0}
+  - {fileID: 0}
   _generateList: []
   _left: {fileID: 4000010448756442}
   _front: {fileID: 4000011029644534}
@@ -1001,3 +1003,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8590905076f8141f081aa99df9a0c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyLimit: 2
+  _waveDate:
+  - _startDieCount: 0
+    _generateTimingCount: 2
+    _generateCount: 2
+    _enemyLimit: 1
+    _generateTypeList: 00000000
+  - _startDieCount: 4
+    _generateTimingCount: 2
+    _generateCount: 3
+    _enemyLimit: 1
+    _generateTypeList: 0000000001000000
+  - _startDieCount: 12
+    _generateTimingCount: 2
+    _generateCount: 3
+    _enemyLimit: 1
+    _generateTypeList: 0100000001000000
