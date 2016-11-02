@@ -18,7 +18,7 @@ public class RagdollGenerator : MonoBehaviour
     // ついでに初速の設定も行う。
     private void CopyTransformRecursively(Transform src, Transform dst, Vector3 velocity)
     {
-        dst.localPosition = src.localPosition;
+        dst.position = src.position;
         dst.localRotation = src.localRotation;
 
         var rigidbody = dst.GetComponent<Rigidbody>();
