@@ -126,7 +126,7 @@ public class PlayerShot : MonoBehaviour
         }
         GameObject shotBullet = Instantiate(_bullet);
         //GameObject bulletLineEffect = Instantiate(_bulletLineEffect);
-        ScoreManager.instance.AddShotCount();
+
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
