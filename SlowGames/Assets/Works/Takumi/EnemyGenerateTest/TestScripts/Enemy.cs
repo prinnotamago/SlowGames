@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
     GameObject _deathEffect;
 
     //Transform _targetPostion;
+    //多重Hitを避ける
+    bool death = false;
+    void Start()
+    {
+        death = false;
+    }
 
 
     public TargetPosition  _generatePostion;
@@ -17,14 +23,21 @@ public class Enemy : MonoBehaviour
        
         if (other.gameObject.tag == TagName.Bullet)
         {
+            if (death)
+            {
+                return;
+            }
+    
+            death = true;
+            
             //エフェクト
             var effect = Instantiate(_deathEffect);
             effect.transform.position = transform.position;
             //音
             //AudioManager.instance.play3DSe(effect,AudioName.SeName.Thunder);
-
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
+            //Test:スコア
             ScoreManager.instance.AddHitEnemyCount();
             Destroy(this.gameObject);
         }
