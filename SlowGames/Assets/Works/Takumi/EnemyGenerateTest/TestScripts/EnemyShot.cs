@@ -25,7 +25,7 @@ public class EnemyShot : MonoBehaviour
     public void Shot()
     {
         
-        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 playerPos = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
 
         //playerの位置を意志的にずらす
         float randomXPos = _randomShotRange.x - Random.Range(0.0f,(_randomShotRange.x * 2.0f));

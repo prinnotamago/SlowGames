@@ -18,11 +18,13 @@ public class AimAssist : MonoBehaviour
     public Vector3 enemyDirection
     {
         get { return _enemyDirection; }
+        
     }
 
     public bool enemyHit
     {
         get { return _enemyHit; }
+        set { _enemyHit = value; }
     }
 
     void Start()
@@ -49,7 +51,7 @@ public class AimAssist : MonoBehaviour
 
     void Update()
     {
-        _enemyDirection = transform.forward + transform.up;
+        //_enemyDirection = transform.forward;
 
         //OrientationCorrection();
         //Debug.DrawRay(transform.position, transform.forward);
@@ -60,6 +62,7 @@ public class AimAssist : MonoBehaviour
         //var radius = transform.lossyScale.x * 0.5f;
         //int layerMask = (1 << LayerMask.NameToLayer("Enemy"));
         //int layerMask = 1 << 9;
+        _enemyHit = false;
         int layerMask = LayerMask.GetMask(new string[] { "Enemy"});
         isHit = Physics.SphereCast(transform.position, radius, transform.forward, out _hit,100, layerMask);
         
@@ -67,7 +70,7 @@ public class AimAssist : MonoBehaviour
         if (isHit)
         {
             //Debug.Log(_hit.transform.gameObject.name);
-            if (_hit.transform.tag == "Enemy" || _hit.transform.tag == "EnemyBullet")
+            if (_hit.transform.tag == "Enemy" && _enemyHit == false || _hit.transform.tag == "EnemyBullet" && _enemyHit == false)
             {
                 _enemyHit = true;
                 var a = _hit.transform.gameObject.GetComponentInChildren<Renderer>().bounds.center - gameObject.transform.position;

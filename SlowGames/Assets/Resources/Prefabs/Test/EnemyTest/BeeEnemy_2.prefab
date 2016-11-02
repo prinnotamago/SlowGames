@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327531873230978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy001
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,9 +34,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4162585483389356}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy003
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,9 +49,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4090556361310414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy002
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 114450986910859992}
   m_Layer: 9
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 114866320830617800}
   - component: {fileID: 195667130975300448}
   - component: {fileID: 65149889742056572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeeEnemy_2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 33135064794257242}
   - component: {fileID: 136453495627091132}
   - component: {fileID: 23616074843068774}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4729785382961480}
   - component: {fileID: 33840814890734412}
   - component: {fileID: 23192311533214718}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4019852795264918}
   - component: {fileID: 137980697511210866}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,8 +233,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1259590406897150}
   m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: 3.64, y: 46.2, z: 42.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.948001, y: 2.5500002, z: 10.26}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4327531873230978}
   - {fileID: 4090556361310414}
@@ -442,8 +442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyBullet: {fileID: 114000011230568322, guid: 2c9e3fb88b6d54e1d9102c0b602968c2,
     type: 2}
-  _randomShotRange: {x: 2, y: 2, z: 2}
-  _shotDelay: 3
+  _randomShotRange: {x: 1, y: 1, z: 1}
+  _shotDelay: 2
   _isShotStart: 0
 --- !u!114 &114866320830617800
 MonoBehaviour:
@@ -457,10 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 159750, guid: 275af1ff6b976c540a9dd478a5c473ee, type: 2}
-  _generatePostion: 5
+  _generatePostion: 2
   _moveSpeed: 10
   _stayTimeMax: 0.5
-  _sideMoveRange: 5
+  _sideMoveRange: 2
   _activeCounter: 0
   _activeTimeMax: 2
   _shotFrequency: 1
