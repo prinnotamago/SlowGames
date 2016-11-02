@@ -26,9 +26,6 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     private Animator _triggerAnim = null;
 
-    [SerializeField]
-    GameObject _bulletLineEffect;
-
     int _bulletsNumber;
 
     public int maxBulletsNumbers
@@ -125,7 +122,6 @@ public class PlayerShot : MonoBehaviour
             _device.TriggerHapticPulse(4000);
         }
         GameObject shotBullet = Instantiate(_bullet);
-        //GameObject bulletLineEffect = Instantiate(_bulletLineEffect);
         ScoreManager.instance.AddShotCount();
         if (_aimAssist.enemyHit == false)
         {
