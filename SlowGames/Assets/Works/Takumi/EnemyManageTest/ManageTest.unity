@@ -1022,8 +1022,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
         type: 2}
-      propertyPath: _waveDate.Array.data[2]._startDieCount
-      value: 12
+      propertyPath: _waveDate.Array.data[0]._generateTimingCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}
