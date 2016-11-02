@@ -57,7 +57,7 @@ public class EnemyActor : MonoBehaviour
 
     //
     bool _isShot = false;
-
+    int _stayCount = 0;
     //実行関数
     Dictionary<ActionType,System.Action> _actionDic = new Dictionary<ActionType, System.Action>();
 
@@ -74,7 +74,6 @@ public class EnemyActor : MonoBehaviour
 
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _isShot = false;
-
         _actionDic = new Dictionary<ActionType, System.Action>();
 
         _actionDic.Add(ActionType.TargetRun,TargetRun);
@@ -186,9 +185,6 @@ public class EnemyActor : MonoBehaviour
     }
 
     //待機状態,与えられたactiviTime分移動を止める
-
-    int _stayCount = 0;
-
     void Stay()
     {
 
@@ -273,10 +269,20 @@ public class EnemyActor : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        ChangeAction(ActionType.ProvocationMove,RandomActiveTime());
-        //目的位置に達したら攻撃を開始する.
-        gameObject.GetComponentInChildren<EnemyShot>()._isShotStart = true;
-        _navimesh.enabled = false;
+        if (_navimesh.enabled == true)
+        {
+            _stayCount = Random.Range(0, (_enemy._shotFrequency + 1)); //撃つ頻度は最初のみランダムに
+            //ランダムでしょっぱなうつ
+            if (_stayCount >= _enemy._shotFrequency)
+            {
+                ChangeAction(ActionType.Shot, RandomActiveTime());
+            }
+            else
+            {
+                ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+            }
+            _navimesh.enabled = false;
+        }
 
     }
 }
