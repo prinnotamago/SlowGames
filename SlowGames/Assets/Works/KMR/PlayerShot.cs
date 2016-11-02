@@ -55,7 +55,7 @@ public class PlayerShot : MonoBehaviour
 
     int _burstCount;
 
-    
+
     AimAssist _aimAssist;
 
     SteamVR_TrackedObject _trackedObject;
@@ -70,7 +70,7 @@ public class PlayerShot : MonoBehaviour
     void Start()
     {
         //_shotType = shotType.autoReload;
-         _aimAssist = GetComponentInChildren<AimAssist>();
+        _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
         _reload = GetComponent<Reload>();
         _burstCount = _oneShotCount;
@@ -85,12 +85,11 @@ public class PlayerShot : MonoBehaviour
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
         if (_reload.isReload)
         {
-            if(_isShot)_isShot = false;
+            if (_isShot) _isShot = false;
             return;
         }
-        
         ThreeBurst();
-        if(_triggerAnim != null)
+        if (_triggerAnim != null)
         {
             float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
             SetAnimFrame(value); //Animationの決定
@@ -127,21 +126,22 @@ public class PlayerShot : MonoBehaviour
         }
         GameObject shotBullet = Instantiate(_bullet);
         //GameObject bulletLineEffect = Instantiate(_bulletLineEffect);
-        if (_aimAssist.enemyHit == true)
-        {
-            shotBullet.transform.rotation = transform.rotation;
-            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
-        }else
+        ScoreManager.instance.AddShotCount();
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = transform.forward - transform.up;
         }
-  
+        else
+        if (_aimAssist.enemyHit == true)
+        {
+            shotBullet.transform.rotation = transform.rotation;
+            shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
+        }
         //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
         //            Shotbullet.transform.position = transform.position;
-        shotBullet.transform.position = transform.position + transform.forward*0.4f-transform.up*0.4f /*- new Vector3(0, 0.1f, 0)*/;
+        shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f /*- new Vector3(0, 0.1f, 0)*/;
         //Shotbullet.transform.Translate(0, -1, 1);
 
         _time = _burstIntervalTime;
