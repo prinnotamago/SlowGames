@@ -82,7 +82,7 @@ public class EnemyActor : MonoBehaviour
         _actionDic.Add(ActionType.Stay,Stay);
         _actionDic.Add(ActionType.Shot,Shot);
 
-        _playerTransform = GameObject.FindGameObjectWithTag("Player");
+        _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
 
     }
 

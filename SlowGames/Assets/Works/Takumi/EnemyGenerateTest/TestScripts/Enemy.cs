@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
+            ScoreManager.instance.AddHitEnemyCount();
             Destroy(this.gameObject);
         }
     }

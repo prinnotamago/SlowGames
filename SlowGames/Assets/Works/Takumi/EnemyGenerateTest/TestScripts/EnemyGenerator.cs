@@ -170,4 +170,31 @@ public class EnemyGenerator : MonoBehaviour
 
     }
 
+    //
+    public void GenerateEnemy(ref List<EnemyType> enemyTypes, TargetPosition generatePosition  = TargetPosition.Front)
+    {    
+
+        //生成可能なenemyのTypeからランダムでどれかを生成する
+        int randomType = Random.Range(0,enemyTypes.Count);
+        var type = enemyTypes[randomType];
+
+        //選んだエネミータイプから,ランダムでパターンを選び生成.:FixMe:ここは任意で決められた方がいいかも？
+        var enemyList = _enemysDic[type];
+        int random = Random.Range(0, (enemyList.Count));
+
+        //生成
+        GameObject enemy = enemyList[random];
+        Instantiate(enemy);
+
+        //todo: 出現位置からランダムに生成
+        var setTransform = _generatePositionDic[generatePosition];
+        enemy.transform.position = setTransform.position;
+        enemy.transform.rotation = setTransform.rotation;
+
+        //自分がどこに生成された的なのかをキヲクさせる
+        enemy.GetComponent<Enemy>()._generatePostion = generatePosition;
+        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition];
+
+    }
+
 }
