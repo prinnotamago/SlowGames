@@ -76,6 +76,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //スコアを更新せず静かに殺します 
+    public void SilentDestroy()
+    {
+        FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
+        Destroy(this.gameObject);
+    }
+
     //移動速度,移動時間,
     [SerializeField,Range(0,100)]
     public float _moveSpeed   = 3.0f;
