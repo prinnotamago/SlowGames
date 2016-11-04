@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerHP : MonoBehaviour {
 
     [SerializeField]
@@ -14,19 +14,34 @@ public class PlayerHP : MonoBehaviour {
         get { return _playerHp; }
     }
 
+    [SerializeField]
+    Image _gameOverImage;
 
     void Start ()
     {
         _playerHp = HP;
-
+        _gameOverImage.enabled = false;
     }
-	
 
+   
 	void Update ()
     {
-		
+
+      
+        if (_playerHp <= 0)
+        {
+            _gameOverImage.enabled = true;
+        }
+
 	}
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == TagName.EnemyBullet)
+        {
+            Damage();
+        }
+    }
    public void Damage()
     {
         _playerHp--;
