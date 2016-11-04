@@ -6,21 +6,31 @@ public class ScoreManager : MonoBehaviour {
 
     private int _score = 0;
 
-    private int _hitEnemyCount = 0;
+    private int _killedEnemyCount = 0;
     private int _shotCount = 0;
 
     private float _lifeTimeCount = 0.0f;
 
     private int _flipEnemyBulletCount = 0;
 
-    [System.Serializable]
-    public struct EnemyData
+    //List<CSVData> _data = null;
+
+    [System.Serializable] //Gun用
+    public struct GunEnemyData
     {
         public EnemyType type;
         public int score;
     }
 
-    public EnemyData[] _enemyData = null;
+    [System.Serializable]//Sword用
+    public struct SwordEnemyData
+    {
+
+        public int score;
+    }
+
+    public GunEnemyData[] _gunData = null;
+    public SwordEnemyData[] _swordData = null;
 
     /// <summary>
     /// インスタンスを所得
@@ -35,7 +45,7 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     public float getHitParsent
     {
-        get{ return (_hitEnemyCount / (float)_shotCount) * 100; }
+        get{ return (_killedEnemyCount / (float)_shotCount) * 100; }
     }
 
     /// <summary>
@@ -43,7 +53,7 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     public int HitEnemyCount
     {
-        get { return _hitEnemyCount; }
+        get { return _killedEnemyCount; }
     }
 
     public float LifeTime
@@ -51,9 +61,19 @@ public class ScoreManager : MonoBehaviour {
         get{ return _lifeTimeCount; }
     }
 
-    public ScoreManager AddScore(EnemyType type)
+    //後でソード用にも書き換え
+    public ScoreManager AddScore(GameType gameType, EnemyType type)
     {
-        _score += _enemyData[(int)type].score;
+        switch(gameType)
+        {
+            case GameType.Gun:
+                _score += _gunData[(int)type].score;
+                //_score += _data[(int)type].score;
+                break;
+            case GameType.Sword:
+                _score += _swordData[(int)type].score; //後で書き換え(配列の番号)
+                break;
+        }
         return this;
     }
 
@@ -83,7 +103,7 @@ public class ScoreManager : MonoBehaviour {
     /// <returns></returns>
     public ScoreManager AddHitEnemyCount()
     {
-        _hitEnemyCount++;
+        _killedEnemyCount++;
         return this;
     }
 
@@ -104,7 +124,7 @@ public class ScoreManager : MonoBehaviour {
     {
         _lifeTimeCount = 0.0f;
         _shotCount = 0;
-        _hitEnemyCount = 0;
+        _killedEnemyCount = 0;
         _flipEnemyBulletCount = 0;
         _score = 0;
     }
@@ -120,6 +140,8 @@ public class ScoreManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        //_data = CSVLoader.ScoreDataLoad("/Resources/CSV/test.csv");
     }
 
 

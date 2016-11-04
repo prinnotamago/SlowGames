@@ -4,28 +4,37 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+
+public class CSVData
+{
+    //新しい要素を追加したら、コンストラクタで代入すること
+    public CSVData(string name, int score, float test)
+    {
+        _score = score;
+        _name = name;
+        _test = test;
+    }
+
+    //必要な要素
+    public int _score;
+    public string _name;
+    public float _test;
+}
+
 /// <summary>
 /// CSV読み込み用
 /// Loadは、Score用
 /// </summary>
 public class CSVLoader : MonoBehaviour {
 
-    public class CSVData{
-        public CSVData(string name, int score) {
-            this.score = score;
-            this.name = name;
-        }
-
-        public int score;
-        public string name;
-    }
 
     /// <summary>
     /// CSVデータを読み込む
+    /// Score用
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    static List<CSVData> Load(string path)
+    public static List<CSVData> ScoreDataLoad(string path)
     {
         List<CSVData> data = new List<CSVData>();
 
@@ -40,18 +49,14 @@ public class CSVLoader : MonoBehaviour {
         // 行に分ける
         string[] lines = strStream.Split(new char[] { '\n', '\n' }, option);
 
-
-        // カンマで分けるのに使う
-        char[] spliter = new char[1] { ',' };
-
         // 行
         int heigth = lines.Length;
 
         // リストを生成
         for (int y = 0; y < heigth; ++y)
         {
-            string[] test = lines[y].Split(new char[] { ',', ',' }, option);
-            data.Add(new CSVData(test[0], int.Parse(test[1])));
+            string[] elements = lines[y].Split(new char[] { ',', ',' }, option);
+            data.Add(new CSVData(elements[0], int.Parse(elements[1]), float.Parse(elements[2])));
         }
 
         return data;
@@ -62,7 +67,7 @@ public class CSVLoader : MonoBehaviour {
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    static List<List<int>> intLoad(string path)
+    public static List<List<int>> intLoad(string path)
     {
         List<List<int>> date = new List<List<int>>();
         
@@ -107,11 +112,11 @@ public class CSVLoader : MonoBehaviour {
     void Start()
     {
         Debug.Log(Application.dataPath);
-        var data = Load("/Resources/CSV/test.csv");
+        var data = ScoreDataLoad("/Resources/CSV/test.csv");
         string s = "";
         foreach (var a in data)
         {
-            s += a.score.ToString() + ", " + a.name.ToString();
+            s += a._score.ToString() + ", " + a._name.ToString() + a._test.ToString();
 
         }
         Debug.Log(s);
