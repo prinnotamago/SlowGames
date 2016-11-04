@@ -46,7 +46,15 @@ public class GenerateManager : MonoBehaviour
 
     [SerializeField]
     List<WaveData> _waveDate = new List<WaveData>();
-    int _currentWaveCount = 0;
+
+    static int _currentWaveCount = 0;
+    public static int GetCurrentWave()
+    {
+         return _currentWaveCount;
+    }
+
+
+
 
     //死亡数をカウントします
     int _deathCount = 0;

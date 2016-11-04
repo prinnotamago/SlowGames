@@ -189,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012269936432}
   m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: 1.5120001, y: 13.27, z: 13.84}
+  m_LocalPosition: {x: 1.188, y: 13.33, z: 13.84}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4000010210335594}
@@ -357,7 +357,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 159750, guid: 275af1ff6b976c540a9dd478a5c473ee, type: 2}
-  _generatePostion: 5
+  _enemyAttackInfos:
+  - moveSpeed: 3
+    stayTimeMax: 1
+    sideMoveRange: 2
+    activeCounter: 0
+    activeTimeMax: 2
+    shotFrequency: 2
+    chamberValue: 2
+    shotDelay: 1
+  - moveSpeed: 3
+    stayTimeMax: 1
+    sideMoveRange: 2
+    activeCounter: 0
+    activeTimeMax: 2
+    shotFrequency: 2
+    chamberValue: 2
+    shotDelay: 1
+  _generatePostion: 3
   _moveSpeed: 3
   _stayTimeMax: 1
   _sideMoveRange: 2
