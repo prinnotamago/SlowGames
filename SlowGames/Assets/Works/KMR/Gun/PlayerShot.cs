@@ -11,14 +11,14 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     GameObject _bullet;
 
-    [SerializeField]
-    int _oneShotCount = 3;
+    //[SerializeField]
+    //int _oneShotCount = 3;
 
-    [SerializeField]
-    float _vibrationPower = 200;
+    //[SerializeField]
+    //float _vibrationPower = 200;
 
-    [SerializeField]
-    float _burstIntervalTime = 0.2f;
+    //[SerializeField]
+    //float _burstIntervalTime = 0.2f;
 
     [SerializeField]
     int _maxBulletsNumbers = 20;
@@ -48,7 +48,7 @@ public class PlayerShot : MonoBehaviour
 
     bool _isShot = false;
 
-    float _time;
+    //float _time;
 
     int _burstCount;
 
@@ -61,8 +61,6 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     shotType _shotType = shotType.autoReload;
 
-    //GameObject steamVR_Camera;
-    //Vector2 position;
 
     void Start()
     {
@@ -70,11 +68,10 @@ public class PlayerShot : MonoBehaviour
         _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
         _reload = GetComponent<Reload>();
-        _burstCount = _oneShotCount;
-        _time = _burstIntervalTime;
+        //_burstCount = _oneShotCount;
+       // _time = _burstIntervalTime;
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
-        //steamVR_Camera = FindObjectOfType<SteamVR_Camera>().gameObject;
     }
 
     void Update()
@@ -93,10 +90,10 @@ public class PlayerShot : MonoBehaviour
         }
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
-        //if (!Input.GetKeyDown(KeyCode.A)) { return; }
+        
         _aimAssist.OrientationCorrection();
         _isShot = true;
-        _burstCount = _oneShotCount;
+        //_burstCount = _oneShotCount;
     }
 
     void ThreeBurst()
@@ -107,10 +104,9 @@ public class PlayerShot : MonoBehaviour
         }
         if (_isShot == false) return;
 
-        _time -= Time.unscaledDeltaTime;
-        if (_time > 0) return;
+        //_time -= Time.unscaledDeltaTime;
+        //if (_time > 0) return;
 
-        //int vibration = 200 * i;
         AudioManager.instance.playSe(AudioName.SeName.gun1);
         var effect = Instantiate(_mazzleFlush);
         effect.transform.rotation = transform.rotation;
@@ -134,23 +130,21 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-        //Shotbullet.transform.Rotate(45,0,0);
         //弾の発生位置変更
-        //            Shotbullet.transform.position = transform.position;
-        shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f /*- new Vector3(0, 0.1f, 0)*/;
-        //Shotbullet.transform.Translate(0, -1, 1);
+        shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
 
-        _time = _burstIntervalTime;
+
+//        _time = _burstIntervalTime;
         _burstCount--;
         if (_shotType == shotType.autoReload)
         {
             _bulletsNumber--;
         }
-        if (_burstCount < 1)
-        {
-            _burstCount = _oneShotCount;
+        //if (_burstCount < 1)
+        //{
+        //    _burstCount = _oneShotCount;
             _isShot = false;
-        }
+        //}
     }
 
     void SetAnimFrame(float frame)
