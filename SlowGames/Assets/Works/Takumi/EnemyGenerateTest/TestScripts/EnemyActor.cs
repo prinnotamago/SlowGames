@@ -117,12 +117,16 @@ public class EnemyActor : MonoBehaviour
 
         if (_currentTarget == null)
         {
+            //うまくいってなかったら生成仕直し
+            this.gameObject.GetComponent<Enemy>().SilentDestroy();
             return;
         }
         else
         {
+               
             //しっかりターゲットがきまってたら移動開始
             _currentAction = ActionType.TargetRun;
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         } 
 
     }

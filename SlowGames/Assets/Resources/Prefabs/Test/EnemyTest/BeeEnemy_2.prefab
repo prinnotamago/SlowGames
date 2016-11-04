@@ -232,8 +232,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1259590406897150}
-  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: 1.188, y: 13.33, z: 13.84}
+  m_LocalRotation: {x: 3.6710517e-12, y: 0.39140502, z: 8.630881e-12, w: 0.9202186}
+  m_LocalPosition: {x: 22.050001, y: 2.3300002, z: 8.08}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4327531873230978}
@@ -444,7 +444,7 @@ MonoBehaviour:
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
-  _generatePostion: 3
+  _generatePostion: 2
   _moveSpeed: 3
   _stayTimeMax: 1
   _sideMoveRange: 2

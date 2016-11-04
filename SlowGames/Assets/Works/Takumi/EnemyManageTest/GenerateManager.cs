@@ -101,6 +101,8 @@ public class GenerateManager : MonoBehaviour
         UpdateEnemyCount();
     }
 
+
+
     //生きてるエネミーの総数を取得
     public int GetLiveEnemyCount()
     {
