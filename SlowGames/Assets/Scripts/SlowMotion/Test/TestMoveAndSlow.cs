@@ -9,9 +9,6 @@ public class TestMoveAndSlow : MonoBehaviour {
     [SerializeField]
     SlowMotion _slowMotion;
 
-    [SerializeField]
-    UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration _v;
-
     enum Mode
     {
         Left,
@@ -65,35 +62,13 @@ public class TestMoveAndSlow : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S))
         {
             SlowMotion._instance.ResetSpeed();
-            StartCoroutine(SlowEnd());
             Debug.Log("通常");
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             SlowMotion._instance.GameSpeed(0.1f);
-            StartCoroutine(SlowStart());
             Debug.Log("スロー");
-        }
-    }
-
-    IEnumerator SlowStart()
-    {
-        while (_v.intensity < 0.3f)
-        {
-            if (!SlowMotion._instance.isSlow) { break; }
-            _v.intensity += 0.05f;
-            yield return 0;
-        }
-    }
-
-    IEnumerator SlowEnd()
-    {
-        while (_v.intensity > 0.0f)
-        {
-            if (SlowMotion._instance.isSlow) { break; }
-            _v.intensity -= 0.05f;
-            yield return 0;
         }
     }
 }
