@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameType
+{
+    Gun,
+    Sword
+}
+
 public class GameDirector : MonoBehaviour {
 
     private bool _gamePlay = false;
