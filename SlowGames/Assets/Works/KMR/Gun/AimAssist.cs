@@ -18,7 +18,7 @@ public class AimAssist : MonoBehaviour
     public Vector3 enemyDirection
     {
         get { return _enemyDirection; }
-        
+
     }
 
     public bool enemyHit
@@ -35,8 +35,6 @@ public class AimAssist : MonoBehaviour
     void OnDrawGizmos()
     {
 
-        //var radius = transform.lossyScale.x * 0.5f;
-
         if (isHit)
         {
             Gizmos.DrawRay(transform.position, transform.forward * _hit.distance);
@@ -49,37 +47,26 @@ public class AimAssist : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //_enemyDirection = transform.forward;
-
-        //OrientationCorrection();
-        //Debug.DrawRay(transform.position, transform.forward);
-    }
+    //void Update()
+    //{
+    //    //OrientationCorrection();
+    //}
 
     public void OrientationCorrection()
     {
-        //var radius = transform.lossyScale.x * 0.5f;
-        //int layerMask = (1 << LayerMask.NameToLayer("Enemy"));
-        //int layerMask = 1 << 9;
         _enemyHit = false;
-        int layerMask = LayerMask.GetMask(new string[] { "Enemy"});
-        isHit = Physics.SphereCast(transform.position, radius, transform.forward, out _hit,100, layerMask);
-        
+        int layerMask = LayerMask.GetMask(new string[] { "Enemy" });
+        isHit = Physics.SphereCast(transform.position, radius, transform.forward, out _hit, 100, layerMask);
+
 
         if (isHit)
         {
-            //Debug.Log(_hit.transform.gameObject.name);
             if (_hit.transform.tag == "Enemy" && _enemyHit == false || _hit.transform.tag == "EnemyBullet" && _enemyHit == false)
             {
                 _enemyHit = true;
-                var a = _hit.transform.gameObject.GetComponentInChildren<Renderer>().bounds.center - gameObject.transform.position;
-                _enemyDirection = a.normalized;
-                
-                //_enemyDirection.x = _enemyDirection.x * 360;
-                //_enemyDirection.y = _enemyDirection.y * 360;
-                //_enemyDirection.z = _enemyDirection.z * 360;
-                //sDebug.Log("homo");
+                var distance = _hit.transform.gameObject.GetComponentInChildren<Renderer>().bounds.center - gameObject.transform.position;
+                _enemyDirection = distance.normalized;
+
             }
             else
             {
