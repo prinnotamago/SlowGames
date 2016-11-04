@@ -37,6 +37,7 @@ public class EnemyActor : MonoBehaviour
     {
 
         //MoveToGeneratePos,
+        FisrtAction,
         TargetRun,
         ProvocationMove,
         Stay,
@@ -66,6 +67,13 @@ public class EnemyActor : MonoBehaviour
         _enemy = this.gameObject.GetComponent<Enemy>();
         _navimesh = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
+        _actionDic = new Dictionary<ActionType, System.Action>();
+
+        _actionDic.Add(ActionType.FisrtAction,FirstAction);
+        _actionDic.Add(ActionType.TargetRun,TargetRun);
+        _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
+        _actionDic.Add(ActionType.Stay,Stay);
+        _actionDic.Add(ActionType.Shot,Shot);
     }
 
 
@@ -74,13 +82,6 @@ public class EnemyActor : MonoBehaviour
 
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _isShot = false;
-        _actionDic = new Dictionary<ActionType, System.Action>();
-
-        _actionDic.Add(ActionType.TargetRun,TargetRun);
-        _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
-        _actionDic.Add(ActionType.Stay,Stay);
-        _actionDic.Add(ActionType.Shot,Shot);
-
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
 
     }
@@ -107,6 +108,22 @@ public class EnemyActor : MonoBehaviour
         _actionDic[_currentAction]();
         //test:常に、プレイヤーをみるようようにしてる.違和感を感じたら変更
         transform.LookAt(_playerTransform.transform.position);
+
+    }
+
+    //生成
+    void FirstAction()
+    {
+
+        if (_currentTarget == null)
+        {
+            return;
+        }
+        else
+        {
+            //しっかりターゲットがきまってたら移動開始
+            _currentAction = ActionType.TargetRun;
+        } 
 
     }
 

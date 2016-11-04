@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,13 +10,45 @@ public class Enemy : MonoBehaviour
     //Transform _targetPostion;
     //多重Hitを避ける
     bool death = false;
+
+    [System.Serializable]
+    struct EnemyAttackInfo
+    {
+        public float moveSpeed;   //移動速度,移動時間,
+        public float stayTimeMax;   //待機時間
+        public float sideMoveRange; //横移動の幅
+        public float activeCounter;    //行動中(攻撃前)のカウントをする用
+        public float activeTimeMax;    //行動数の限界.
+        public int   shotFrequency;      //何回にどのくらい撃つかの頻度.
+        public int   chamberValue;       //何発連続で撃つか
+        public float shotDelay;     ////連続で撃つ時の遅延時間
+          
+    }
+
+    [SerializeField]
+    List<EnemyAttackInfo> _enemyAttackInfos;
+    EnemyAttackInfo _enemyInfo;
+
+    public TargetPosition  _generatePostion;
+
     void Start()
     {
         death = false;
+
+        int waveCount = GenerateManager.GetCurrentWave();
+
+        //それ以上のデータがない場合,最大の設定を入れる
+        if (waveCount >= _enemyAttackInfos.Count)
+        {
+            waveCount = _enemyAttackInfos.Count - 1;
+        }
+
+       _enemyInfo = _enemyAttackInfos[waveCount];
+
+       _moveSpeed = _enemyInfo.moveSpeed;
+
+
     }
-
-
-    public TargetPosition  _generatePostion;
 
     //たまにあたったら死にます
     void OnCollisionEnter(Collision other)
@@ -42,7 +75,6 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
 
     //移動速度,移動時間,
     [SerializeField,Range(0,100)]
@@ -71,4 +103,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public float _shotDelay = 1.0f;
 
+
+
+
+  
 }
