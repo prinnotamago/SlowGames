@@ -54,7 +54,7 @@ public class SwordEnemyMover : MonoBehaviour
         _state.Add(MoveState.Attack, Attack);
         _angle = UnityEngine.Random.Range(-50.0f, 50.0f);
         _data.speed.z = UnityEngine.Random.Range(0.05f, 0.1f);
-        _rigidBody = GetComponentInChildren<Rigidbody>();
+        _rigidBody = GetComponent<Rigidbody>();
 
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
