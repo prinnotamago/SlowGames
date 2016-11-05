@@ -198,6 +198,9 @@ public class SwordEnemyMover : MonoBehaviour
             //GetComponent<Rigidbody>().velocity = (length + (Vector3.up * 1.0f)) * 10.0f;
 
             _generator.Generate(transform, GetComponent<Rigidbody>().velocity);
+
+            //自分がどこで生成されていたかを死に際に渡す
+            FindObjectOfType<GenerateSwordEnemy>().UpdateEnemyCount(_data.generatePosNumber);
             Destroy(gameObject);
         }
     }
