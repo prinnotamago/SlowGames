@@ -30,12 +30,14 @@ public class SwordEnemyMover : MonoBehaviour
         public float maxWaitTime;
         public float appatchDistance;
         public int maxWaitCount;
-        public float[] stopDistance;
+        public int generatePosNumber;
     }
 
     private int _waitCount = 0;
     private float _angle = 0.0f;
     private float _width = 0.1f;
+    private float _playerDistance = 0.0f; //Playerまでの距離
+    private float _stopPosTest = 0.0f;
 
     [SerializeField]
     private SwordEnemyData _data;
@@ -49,6 +51,7 @@ public class SwordEnemyMover : MonoBehaviour
         _angle = UnityEngine.Random.Range(-50.0f, 50.0f);
         _data.speed.z = UnityEngine.Random.Range(0.05f, 0.1f);
         _rigidBody = GetComponentInChildren<Rigidbody>();
+
         var index = UnityEngine.Random.Range(0, 101);
         if(index < 80)
         {
@@ -58,6 +61,14 @@ public class SwordEnemyMover : MonoBehaviour
         {
             _width = 0;
         }
+
+        //プレイヤーとエネミーの距離を止まる回数で割った距離
+        var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
+        _playerDistance = totalDistance / _data.maxWaitCount;
+        _stopPosTest = UnityEngine.Random.Range(
+           _playerDistance * (_data.maxWaitCount - (_waitCount + 1)),
+           _playerDistance * (_data.maxWaitCount - _waitCount)
+           );
     }
 
     /// <summary>
@@ -74,9 +85,6 @@ public class SwordEnemyMover : MonoBehaviour
         _state[_moveState]();
     }
 
-    [SerializeField]
-    private float test = 0.5f;
-
     /// <summary>
     /// 接近状態
     /// </summary>
@@ -85,7 +93,7 @@ public class SwordEnemyMover : MonoBehaviour
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         _angle += Time.deltaTime;
         transform.Translate(Mathf.Sin(_angle * _data.speed.x) * _width, 0, _data.speed.z);
-        var distance = transform.localPosition.z - Camera.main.transform.localPosition.z;
+        var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
 
         //最後の接近前
         if (distance < _data.waitDistance)
@@ -96,12 +104,18 @@ public class SwordEnemyMover : MonoBehaviour
         }
         if (_waitCount >= _data.maxWaitCount) return;
 
-        if (distance < _data.stopDistance[_waitCount])
-        {
+        if (distance < _stopPosTest)
+        {            
             _moveState = MoveState.Wait;
             var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
             StartCoroutine(AttackReserve(waitTime, distance));
             _waitCount++;
+
+            _stopPosTest = UnityEngine.Random.Range(
+           _playerDistance * (_data.maxWaitCount - (_waitCount + 1)),
+           _playerDistance * (_data.maxWaitCount - _waitCount)
+           );
+
         }
     }
 
