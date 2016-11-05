@@ -7,17 +7,25 @@ public class BulletLineRotation : MonoBehaviour
 
     bool a = false;
 
+    [SerializeField]
+    float _rotation = 30;
+
+    [SerializeField]
+    float _minScaleSize = 0.1f;
+
+    [SerializeField]
+    float _changeScaleSpeed = 0.02f;
     // Use this for initialization
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        transform.Rotate(0, 0, 90);
+        transform.Rotate(0, 0, _rotation);
         ScaleChange();
 
     }
@@ -26,10 +34,10 @@ public class BulletLineRotation : MonoBehaviour
     {
 
         {
-            transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
-            if (transform.localScale.x <= 0.05f)
+            transform.localScale -= new Vector3(_changeScaleSpeed, _changeScaleSpeed, _changeScaleSpeed);
+            if (transform.localScale.x <= _minScaleSize)
             {
-                transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                transform.localScale = new Vector3(_minScaleSize, _minScaleSize, _minScaleSize);
             }
         }
 
