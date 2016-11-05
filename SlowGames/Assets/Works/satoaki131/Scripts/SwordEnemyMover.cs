@@ -22,15 +22,22 @@ public class SwordEnemyMover : MonoBehaviour
     [System.Serializable]
     public struct SwordEnemyData
     {
-        public float speed;
-        public float angle;
+        public Vector3 speed;
         public float xMoveWidth;
         public float attackMoveSpeed;
         public float waitDistance;
-        public float waitTime;
+        public float minWaitTime;
+        public float maxWaitTime;
         public float appatchDistance;
+        public int maxWaitCount;
+        public float[] stopDistance;
     }
 
+    private int _waitCount = 0;
+    private float _angle = 0.0f;
+    private float _width = 0.1f;
+
+    [SerializeField]
     private SwordEnemyData _data;
 
     void Start()
@@ -39,9 +46,18 @@ public class SwordEnemyMover : MonoBehaviour
         _state.Add(MoveState.Approach, Approach);
         _state.Add(MoveState.Wait, Wait);
         _state.Add(MoveState.Attack, Attack);
-        _data.angle = UnityEngine.Random.Range(-50.0f, 50.0f);
-        _data.speed = UnityEngine.Random.Range(0.05f, 0.1f);
+        _angle = UnityEngine.Random.Range(-50.0f, 50.0f);
+        _data.speed.z = UnityEngine.Random.Range(0.05f, 0.1f);
         _rigidBody = GetComponentInChildren<Rigidbody>();
+        var index = UnityEngine.Random.Range(0, 101);
+        if(index < 80)
+        {
+            _width = _data.xMoveWidth;
+        }
+        else
+        {
+            _width = 0;
+        }
     }
 
     /// <summary>
@@ -58,19 +74,34 @@ public class SwordEnemyMover : MonoBehaviour
         _state[_moveState]();
     }
 
+    [SerializeField]
+    private float test = 0.5f;
+
     /// <summary>
     /// 接近状態
     /// </summary>
     void Approach()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        _data.angle += Time.deltaTime;
-        transform.Translate(Mathf.Sin(_data.angle) * _data.xMoveWidth, 0, _data.speed);
+        _angle += Time.deltaTime;
+        transform.Translate(Mathf.Sin(_angle * _data.speed.x) * _width, 0, _data.speed.z);
         var distance = transform.localPosition.z - Camera.main.transform.localPosition.z;
-        if(distance < _data.waitDistance)
+
+        //最後の接近前
+        if (distance < _data.waitDistance)
         {
             _moveState = MoveState.Wait;
-            StartCoroutine(AttackReserve());
+            var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
+            StartCoroutine(AttackReserve(waitTime, distance));
+        }
+        if (_waitCount >= _data.maxWaitCount) return;
+
+        if (distance < _data.stopDistance[_waitCount])
+        {
+            _moveState = MoveState.Wait;
+            var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
+            StartCoroutine(AttackReserve(waitTime, distance));
+            _waitCount++;
         }
     }
 
@@ -94,11 +125,11 @@ public class SwordEnemyMover : MonoBehaviour
     /// 待機中の時間管理コルーチン
     /// </summary>
     /// <returns></returns>
-    IEnumerator AttackReserve()
+    IEnumerator AttackReserve(float waitTime, float distance)
     {
         var time = 0.0f;
         _rigidBody.freezeRotation = true;
-        while(time < _data.waitTime)
+        while(time < waitTime)
         {
             _rigidBody.velocity = Vector3.zero;
             time += Time.deltaTime;
@@ -106,7 +137,21 @@ public class SwordEnemyMover : MonoBehaviour
         }
         _rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        _moveState = MoveState.Attack;
+        _width = RandomMoveWidth();
+        _moveState = distance < _data.waitDistance ? MoveState.Attack : MoveState.Approach;
+    }
+
+    float RandomMoveWidth()
+    {
+        var index = UnityEngine.Random.Range(0, 101);
+        if(index < 80)
+        {
+            return _data.xMoveWidth;  
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 }
