@@ -18,6 +18,8 @@ public class SwordEnemyMover : MonoBehaviour
 
     private Rigidbody _rigidBody = null;
 
+    [SerializeField,Tooltip("当たった時のジェネレーター")]
+    RagdollGenerator _generator;
 
     [System.Serializable]
     public struct SwordEnemyData
@@ -30,6 +32,8 @@ public class SwordEnemyMover : MonoBehaviour
         public float maxWaitTime;
         public float appatchDistance;
         public int maxWaitCount;
+        [Range(0, 100), Tooltip("くねくね移動の確立(％)")]
+        public int meanderingPercent;  
         public int generatePosNumber;
     }
 
@@ -53,7 +57,7 @@ public class SwordEnemyMover : MonoBehaviour
         _rigidBody = GetComponentInChildren<Rigidbody>();
 
         var index = UnityEngine.Random.Range(0, 101);
-        if(index < 80)
+        if(index < _data.meanderingPercent)
         {
             _width = _data.xMoveWidth;
         }
@@ -62,9 +66,11 @@ public class SwordEnemyMover : MonoBehaviour
             _width = 0;
         }
 
-        //プレイヤーとエネミーの距離を止まる回数で割った距離
+        //プレイヤーとエネミーの距離
         var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
+        //プレイヤーとエネミーの距離を止まる回数で割った距離
         _playerDistance = totalDistance / _data.maxWaitCount;
+        //最初に止まるときの場所を決める
         _stopPosTest = UnityEngine.Random.Range(
            _playerDistance * (_data.maxWaitCount - (_waitCount + 1)),
            _playerDistance * (_data.maxWaitCount - _waitCount)
@@ -102,8 +108,10 @@ public class SwordEnemyMover : MonoBehaviour
             var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
             StartCoroutine(AttackReserve(waitTime, distance));
         }
+        //止まる回数が最大まで行ったら下は通らない
         if (_waitCount >= _data.maxWaitCount) return;
 
+        //最後の接近じゃなくて指定した距離まで進んだらWait状態
         if (distance < _stopPosTest)
         {            
             _moveState = MoveState.Wait;
@@ -130,7 +138,7 @@ public class SwordEnemyMover : MonoBehaviour
     void Attack()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        var distance = transform.localPosition.z - Camera.main.transform.localPosition.z;
+        var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         if(distance < _data.appatchDistance) { return; }
         transform.Translate(0, 0, _data.attackMoveSpeed);
     }
@@ -142,23 +150,33 @@ public class SwordEnemyMover : MonoBehaviour
     IEnumerator AttackReserve(float waitTime, float distance)
     {
         var time = 0.0f;
+        //RigidBodyのRotationを固定する
         _rigidBody.freezeRotation = true;
+        //一定時間止まる
         while(time < waitTime)
         {
+            //エネミー同市でぶつかって飛んでいかないように
             _rigidBody.velocity = Vector3.zero;
             time += Time.deltaTime;
             yield return null;
         }
+        //RigidBodyのRotationを動いてた時のに戻す
         _rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
+        //くねくねするか直線で進むか決める
         _width = RandomMoveWidth();
+        //接近モード、もしくはアタックモードに移行
         _moveState = distance < _data.waitDistance ? MoveState.Attack : MoveState.Approach;
     }
 
+    /// <summary>
+    /// くねくね動くか直線で動くかを決める関数
+    /// </summary>
+    /// <returns></returns>
     float RandomMoveWidth()
     {
         var index = UnityEngine.Random.Range(0, 101);
-        if(index < 80)
+        if(index < _data.meanderingPercent)
         {
             return _data.xMoveWidth;  
         }
@@ -168,4 +186,19 @@ public class SwordEnemyMover : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == TagName.Sword)
+        {
+            if (!col.GetComponent<SlashSword>().IsAttack) { return; }
+
+            //var obj = GetComponentInChildren<Rigidbody>();
+
+            //var length = (transform.position - col.transform.position).normalized;
+            //GetComponent<Rigidbody>().velocity = (length + (Vector3.up * 1.0f)) * 10.0f;
+
+            _generator.Generate(transform, GetComponent<Rigidbody>().velocity);
+            Destroy(gameObject);
+        }
+    }
 }
