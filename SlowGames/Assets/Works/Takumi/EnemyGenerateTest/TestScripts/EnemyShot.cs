@@ -41,8 +41,9 @@ public class EnemyShot : MonoBehaviour
 
         bullet.GetComponent<EnemyBullet>()._targetDirection = targetDirection;
         bullet.transform.position = transform.position;
-        bullet.transform.LookAt(targetDirection);
 
+        //bullet.transform.LookAt(targetDirection);
+        bullet.transform.LookAt(playerPos);
 
     }
 

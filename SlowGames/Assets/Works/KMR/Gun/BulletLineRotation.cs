@@ -18,17 +18,15 @@ public class BulletLineRotation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
+    }
+
+    public void Update()
+    {
+        transform.Rotate(0, 0, _rotation);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-        transform.Rotate(0, 0, _rotation);
-        ScaleChange();
-
-    }
 
     void ScaleChange()
     {
@@ -53,5 +51,5 @@ public class BulletLineRotation : MonoBehaviour
     //{
     //    Destroy(gameObject);
     //}
-    
+
 }
