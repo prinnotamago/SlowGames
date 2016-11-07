@@ -80,10 +80,11 @@ public class GenerateSwordEnemy : MonoBehaviour {
         _genereatePosCount[generatePosNumber] += 1;
 
         //生成位置をエネミー側にも記憶.
-        //_enemyData[waveCount].generatePosNumber = generatePosNumber;
+        SwordEnemyMover.SwordEnemyData enemyData = _enemyData[waveCount];
+        enemyData.generatePosNumber = generatePosNumber;
 
         //エネミーのステータスを更新
-        enemy.GetComponent<SwordEnemyMover>().setState(_enemyData[waveCount]);
+        enemy.GetComponent<SwordEnemyMover>().setState(enemyData);
 
 
         //生成位置を計算.//FixMe:生成毎に計算が無駄
