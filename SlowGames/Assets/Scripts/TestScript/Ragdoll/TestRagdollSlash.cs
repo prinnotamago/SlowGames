@@ -10,6 +10,9 @@ public class TestRagdollSlash : MonoBehaviour {
     //[SerializeField]
     //GameObject _children;
 
+    // プレイヤーの正面にいる奴だけ切れるように取る bool
+    bool isHit = false;
+
     // Use this for initialization
     void Start () {
 		
@@ -19,13 +22,15 @@ public class TestRagdollSlash : MonoBehaviour {
 	void Update () {
         //transform.position = _children.transform.position;
         //transform.localRotation = _children.transform.localRotation;
-
     }
 
     void OnTriggerEnter(Collider col)
     {
+
+
         if (col.tag == TagName.Sword)
         {
+            if (!isHit) { return; }
             if (!col.GetComponent<SlashSword>().IsAttack) { return; }
 
             //var obj = GetComponentInChildren<Rigidbody>();
@@ -35,6 +40,22 @@ public class TestRagdollSlash : MonoBehaviour {
 
             _generator.Generate(transform, GetComponent<Rigidbody>().velocity);
             Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == TagName.MainCamera)
+        {
+            isHit = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == TagName.MainCamera)
+        {
+            isHit = false;
         }
     }
 }
