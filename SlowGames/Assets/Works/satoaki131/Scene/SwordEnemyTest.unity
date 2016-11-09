@@ -132,19 +132,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4541035805746746, guid: 2a17ed02692d4bd4a928e18bc8e039c2, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.093746535
+      value: -0.09374654
       objectReference: {fileID: 0}
     - target: {fileID: 4541035805746746, guid: 2a17ed02692d4bd4a928e18bc8e039c2, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.6978551
+      value: 0.6978552
       objectReference: {fileID: 0}
     - target: {fileID: 4541035805746746, guid: 2a17ed02692d4bd4a928e18bc8e039c2, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.707469
+      value: 0.70746905
       objectReference: {fileID: 0}
     - target: {fileID: 4541035805746746, guid: 2a17ed02692d4bd4a928e18bc8e039c2, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.06080671
+      value: 0.060806714
       objectReference: {fileID: 0}
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
@@ -164,7 +164,7 @@ Prefab:
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: _data.attackMoveSpeed
-      value: 0.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
@@ -204,27 +204,32 @@ Prefab:
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: _data.minSpeed.x
-      value: 0.2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: _data.maxSpeed.x
-      value: 0.2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: _data.minSpeed.z
-      value: 0.05
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: _data.maxSpeed.z
-      value: 0.1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 54050437456730790, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
         type: 2}
       propertyPath: m_Constraints
-      value: 80
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
+        type: 2}
+      propertyPath: _data.X_MOVE_WIDTH
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a17ed02692d4bd4a928e18bc8e039c2, type: 2}

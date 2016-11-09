@@ -28,6 +28,7 @@ public class SwordEnemyMover : MonoBehaviour
         public Vector3 minSpeed;
         public Vector3 maxSpeed;
         public float attackMoveSpeed;
+        public float X_MOVE_WIDTH;
         public float waitDistance;
         public float minWaitTime;
         public float maxWaitTime;
@@ -45,7 +46,6 @@ public class SwordEnemyMover : MonoBehaviour
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
     private Vector3 _speed;
-    private const float X_MOVE_WIDTH = 10f;
 
     [SerializeField]
     private SwordEnemyData _data;
@@ -68,7 +68,7 @@ public class SwordEnemyMover : MonoBehaviour
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
         {
-            _width = X_MOVE_WIDTH;
+            _width = _data.X_MOVE_WIDTH;
         }
         else
         {
@@ -199,7 +199,7 @@ public class SwordEnemyMover : MonoBehaviour
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
         {
-            return X_MOVE_WIDTH;  
+            return _data.X_MOVE_WIDTH;  
         }
         else
         {
