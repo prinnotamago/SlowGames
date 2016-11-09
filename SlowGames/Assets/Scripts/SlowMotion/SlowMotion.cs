@@ -17,6 +17,7 @@ public class SlowMotion : MonoBehaviour {
     /// 残り時間
     /// </summary>
     private float _remainingTime = 0.0f;
+    public float remainingTime { get { return _remainingTime; } }
     //public float RemainingTime { get; set; }
 
     /// <summary>
