@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     GameObject _deathEffect;
 
+    [SerializeField]
+    private EnemyType _type = EnemyType.Easy;
+
     //Transform _targetPostion;
     //多重Hitを避ける
     bool death = false;
@@ -72,6 +75,8 @@ public class Enemy : MonoBehaviour
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             //Test:スコア
             ScoreManager.instance.AddHitEnemyCount();
+            ScoreManager.instance.AddScore(_type);
+            Debug.Log(ScoreManager.instance.getScore());
             Destroy(this.gameObject);
         }
     }
