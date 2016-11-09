@@ -76,7 +76,6 @@ public class Enemy : MonoBehaviour
             //Test:スコア
             ScoreManager.instance.AddHitEnemyCount();
             ScoreManager.instance.AddScore(_type);
-            Debug.Log(ScoreManager.instance.getScore());
             Destroy(this.gameObject);
         }
     }
