@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1222956502715242}
+  m_IsPrefabParent: 1
+--- !u!1 &1222956502715242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4390753670230458}
+  - component: {fileID: 114248705042398680}
+  - component: {fileID: 114067723858403964}
+  m_Layer: 0
+  m_Name: SwordEnemyGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4390753670230458
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222956502715242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6720858, y: -4.154146, z: -17.295265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114067723858403964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222956502715242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea077caac0ff48009e67bf5cc576a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _easyDates:
+  - speed: {x: 5, y: 0, z: 0.5}
+    xMoveWidth: 0.1
+    attackMoveSpeed: 0.1
+    waitDistance: 4
+    minWaitTime: 2
+    maxWaitTime: 4
+    appatchDistance: 1.2
+    maxWaitCount: 3
+    meanderingPercent: 80
+    generatePosNumber: 0
+  - speed: {x: 5, y: 0, z: 0.5}
+    xMoveWidth: 0.1
+    attackMoveSpeed: 0.1
+    waitDistance: 4
+    minWaitTime: 2
+    maxWaitTime: 4
+    appatchDistance: 1.2
+    maxWaitCount: 3
+    meanderingPercent: 80
+    generatePosNumber: 0
+  _normalDates:
+  - speed: {x: 0, y: 0, z: 0}
+    xMoveWidth: 0
+    attackMoveSpeed: 0
+    waitDistance: 0
+    minWaitTime: 0
+    maxWaitTime: 0
+    appatchDistance: 0
+    maxWaitCount: 0
+    meanderingPercent: 0
+    generatePosNumber: 0
+  - speed: {x: 0, y: 0, z: 0}
+    xMoveWidth: 0
+    attackMoveSpeed: 0
+    waitDistance: 0
+    minWaitTime: 0
+    maxWaitTime: 0
+    appatchDistance: 0
+    maxWaitCount: 0
+    meanderingPercent: 0
+    generatePosNumber: 0
+  _hardDates:
+  - speed: {x: 0, y: 0, z: 0}
+    xMoveWidth: 0
+    attackMoveSpeed: 0
+    waitDistance: 0
+    minWaitTime: 0
+    maxWaitTime: 0
+    appatchDistance: 0
+    maxWaitCount: 0
+    meanderingPercent: 0
+    generatePosNumber: 0
+  - speed: {x: 0, y: 0, z: 0}
+    xMoveWidth: 0
+    attackMoveSpeed: 0
+    waitDistance: 0
+    minWaitTime: 0
+    maxWaitTime: 0
+    appatchDistance: 0
+    maxWaitCount: 0
+    meanderingPercent: 0
+    generatePosNumber: 0
+--- !u!114 &114248705042398680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222956502715242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aecc054a37454ca692d2301d7264074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swordEnemy: {fileID: 114780351817938180, guid: 2a17ed02692d4bd4a928e18bc8e039c2,
+    type: 2}
+  _waveDataList:
+  - _startDieCount: 0
+    _generateTimingCount: 1
+    _generateCount: 2
+    _generateTypeList: 00000000
+  - _startDieCount: 10
+    _generateTimingCount: 1
+    _generateCount: 2
+    _generateTypeList: 0000000001000000
+  _enemyData:
+  - speed: {x: 5, y: 0, z: 0.5}
+    xMoveWidth: 0.1
+    attackMoveSpeed: 0.1
+    waitDistance: 4
+    minWaitTime: 2
+    maxWaitTime: 4
+    appatchDistance: 1.2
+    maxWaitCount: 3
+    meanderingPercent: 80
+    generatePosNumber: 0
+  - speed: {x: 5, y: 0, z: 0.5}
+    xMoveWidth: 0.1
+    attackMoveSpeed: 0.1
+    waitDistance: 4
+    minWaitTime: 2
+    maxWaitTime: 4
+    appatchDistance: 1.2
+    maxWaitCount: 3
+    meanderingPercent: 80
+    generatePosNumber: 0
+  _generateAngles:
+  - 0
+  - 25
+  - 60
+  - 75
+  - 110
+  - 135
+  - 180
+  _generateDistance: 10
