@@ -68,7 +68,7 @@ public class GenerateManager : MonoBehaviour
         //開幕３体配置.
         _currentWaveCount = 0;
         var waveData = _waveDate[_currentWaveCount];
-        SetEnemy(3,waveData._generateTypeList);
+        SetEnemy(1,waveData._generateTypeList);
        
     }
 

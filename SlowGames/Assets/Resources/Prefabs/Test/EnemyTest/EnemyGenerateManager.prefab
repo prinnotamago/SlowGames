@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _easyEnemys:
-  - {fileID: 1000012269936432, guid: dff0bb10f6bff429c90afa8a9a9bc0a4, type: 2}
+  - {fileID: 1104136010662886, guid: 8055aa93659874fc88c15ab7c15a389e, type: 2}
   _normalEnemys:
   - {fileID: 1259590406897150, guid: 5025a7fb985cf43ce9cbb40b3dc957fd, type: 2}
   _hardEnemys:
