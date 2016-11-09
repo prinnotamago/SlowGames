@@ -24,8 +24,9 @@ public class SwordEnemyMover : MonoBehaviour
     [System.Serializable]
     public struct SwordEnemyData
     {
-        public Vector3 speed;
-        public float xMoveWidth;
+        public SlashSword.SlashPattern _enemyPattern;
+        public Vector3 minSpeed;
+        public Vector3 maxSpeed;
         public float attackMoveSpeed;
         public float waitDistance;
         public float minWaitTime;
@@ -42,6 +43,9 @@ public class SwordEnemyMover : MonoBehaviour
     private float _width = 0.1f;
     private float _playerDistance = 0.0f; //Playerまでの距離
     private float _stopPosTest = 0.0f;
+    private float _waitDirection = 0.0f;
+    private Vector3 _speed;
+    private const float X_MOVE_WIDTH = 0.03f;
 
     [SerializeField]
     private SwordEnemyData _data;
@@ -53,13 +57,14 @@ public class SwordEnemyMover : MonoBehaviour
         _state.Add(MoveState.Wait, Wait);
         _state.Add(MoveState.Attack, Attack);
         _angle = UnityEngine.Random.Range(-50.0f, 50.0f);
-        _data.speed.z = UnityEngine.Random.Range(0.05f, 0.1f);
+        _speed.z = UnityEngine.Random.Range(_data.minSpeed.z, _data.maxSpeed.z);
+        _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
         _rigidBody = GetComponent<Rigidbody>();
 
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
         {
-            _width = _data.xMoveWidth;
+            _width = X_MOVE_WIDTH;
         }
         else
         {
@@ -88,6 +93,7 @@ public class SwordEnemyMover : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_angle);
         _state[_moveState]();
     }
 
@@ -98,7 +104,7 @@ public class SwordEnemyMover : MonoBehaviour
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         _angle += Time.deltaTime;
-        transform.Translate(Mathf.Sin(_angle * _data.speed.x) * _width, 0, _data.speed.z);
+        transform.Translate(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
 
         //最後の接近前
@@ -130,7 +136,12 @@ public class SwordEnemyMover : MonoBehaviour
     /// <summary>
     /// 待機状態
     /// </summary>
-    void Wait(){}
+    void Wait()
+    {
+        transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
+        if(_waitDirection != 0.0f)_angle += Time.deltaTime;
+        transform.Translate(Mathf.Sin(_angle * _waitDirection) * _width, 0, 0);
+    }
 
     /// <summary>
     /// 攻撃状態
@@ -152,8 +163,13 @@ public class SwordEnemyMover : MonoBehaviour
         var time = 0.0f;
         //RigidBodyのRotationを固定する
         _rigidBody.freezeRotation = true;
+
+        //wait中のじりじり動く方向を決める
+        _waitDirection = UnityEngine.Random.Range(-1, 2);
+        _waitDirection *= 0.01f;
+
         //一定時間止まる
-        while(time < waitTime)
+        while (time < waitTime)
         {
             //エネミー同市でぶつかって飛んでいかないように
             _rigidBody.velocity = Vector3.zero;
@@ -178,7 +194,7 @@ public class SwordEnemyMover : MonoBehaviour
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
         {
-            return _data.xMoveWidth;  
+            return X_MOVE_WIDTH;  
         }
         else
         {
