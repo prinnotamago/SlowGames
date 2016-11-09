@@ -35,6 +35,7 @@ public class Shot : MonoBehaviour
 
     public void OnCollisionEnter(Collision col) //子供のあたり判定のときも呼んでくれる
     {
+        
         if (col.gameObject.tag == "Weapon" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Player") return;
         Destroy(gameObject);
     }
