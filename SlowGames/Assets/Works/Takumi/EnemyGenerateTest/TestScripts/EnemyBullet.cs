@@ -47,6 +47,7 @@ public class EnemyBullet : MonoBehaviour {
                 //判定消す
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
+                Destroy(other.gameObject);
             }
 
             StartCoroutine(RandomBlow());
