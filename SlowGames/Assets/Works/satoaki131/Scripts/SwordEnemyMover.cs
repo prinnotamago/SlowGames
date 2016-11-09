@@ -45,12 +45,14 @@ public class SwordEnemyMover : MonoBehaviour
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
     private Vector3 _speed;
-    private const float X_MOVE_WIDTH = 100f;
+    private const float X_MOVE_WIDTH = 10f;
 
     [SerializeField]
     private SwordEnemyData _data;
 
     private bool isHit = false;
+
+    private bool _isCreate = false;
 
     void Start()
     {
@@ -107,6 +109,7 @@ public class SwordEnemyMover : MonoBehaviour
         _angle++;
         var movePos = new Vector3(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
         transform.Translate(movePos * Time.deltaTime);
+        //Debug.Log(movePos * Time.deltaTime);
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //最後の接近前
         if (distance < _data.waitDistance)
@@ -215,6 +218,9 @@ public class SwordEnemyMover : MonoBehaviour
 
             //var length = (transform.position - col.transform.position).normalized;
             //GetComponent<Rigidbody>().velocity = (length + (Vector3.up * 1.0f)) * 10.0f;
+
+            if (_isCreate) { return; }
+            else { _isCreate = true; }
 
             _generator.Generate(transform, GetComponent<Rigidbody>().velocity);
 

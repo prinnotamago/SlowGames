@@ -3608,7 +3608,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735439936240964}
-  m_LocalRotation: {x: -0.093746535, y: 0.6978551, z: 0.707469, w: 0.060806714}
+  m_LocalRotation: {x: -0.09374654, y: 0.6978552, z: 0.70746905, w: 0.060806718}
   m_LocalPosition: {x: -0.05543403, y: 0.0017306843, z: 0.098653734}
   m_LocalScale: {x: 1.0000004, y: 1.0000006, z: 1.0000005}
   m_Children:
@@ -5077,7 +5077,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1135157959128218}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94c3510ddf930974b8ba486f1e72ff70, type: 3}
   m_Name: 
@@ -5109,15 +5109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _generator: {fileID: 114239219189428962}
   _data:
-    speed: {x: 0, y: 0, z: 0}
-    xMoveWidth: 0
-    attackMoveSpeed: 0
-    waitDistance: 0
-    minWaitTime: 0
-    maxWaitTime: 0
-    appatchDistance: 0
-    maxWaitCount: 0
-    meanderingPercent: 0
+    _enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
+    attackMoveSpeed: 1
+    waitDistance: 3.7
+    minWaitTime: 1
+    maxWaitTime: 3
+    appatchDistance: 1.2
+    maxWaitCount: 3
+    meanderingPercent: 80
     generatePosNumber: 0
 --- !u!136 &136210440738434574
 CapsuleCollider:
