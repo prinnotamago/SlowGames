@@ -45,10 +45,12 @@ public class SwordEnemyMover : MonoBehaviour
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
     private Vector3 _speed;
-    private const float X_MOVE_WIDTH = 0.1f;
+    private const float X_MOVE_WIDTH = 100f;
 
     [SerializeField]
     private SwordEnemyData _data;
+
+    private bool isHit = false;
 
     void Start()
     {
@@ -103,7 +105,8 @@ public class SwordEnemyMover : MonoBehaviour
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         _angle++;
-        transform.Translate(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
+        var movePos = new Vector3(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
+        transform.Translate(movePos * Time.deltaTime);
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //最後の接近前
         if (distance < _data.waitDistance)
@@ -137,7 +140,8 @@ public class SwordEnemyMover : MonoBehaviour
     void Wait()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        transform.Translate(_waitDirection, 0, 0);
+        var movePos = new Vector3(_waitDirection, 0, 0);
+        transform.Translate(movePos * Time.deltaTime);
     }
 
     /// <summary>
@@ -148,7 +152,8 @@ public class SwordEnemyMover : MonoBehaviour
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         if(distance < _data.appatchDistance) { return; }
-        transform.Translate(0, 0, _data.attackMoveSpeed);
+        var movePos = new Vector3(0, 0, _data.attackMoveSpeed);
+        transform.Translate(movePos * Time.deltaTime);
     }
 
     /// <summary>
@@ -203,6 +208,7 @@ public class SwordEnemyMover : MonoBehaviour
     {
         if (col.tag == TagName.Sword)
         {
+            if (!isHit) { return; }
             if (!col.GetComponent<SlashSword>().IsAttack) { return; }
 
             //var obj = GetComponentInChildren<Rigidbody>();
@@ -217,4 +223,21 @@ public class SwordEnemyMover : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == TagName.MainCamera)
+        {
+            isHit = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == TagName.MainCamera)
+        {
+            isHit = false;
+        }
+    }
+
 }
