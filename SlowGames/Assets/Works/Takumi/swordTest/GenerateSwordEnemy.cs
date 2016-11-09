@@ -1,38 +1,35 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-
-enum SwordEnemyType
+public enum SwordEnemyType
 {
-    L_Sholder,
-    L_Leg,
-    L_Arm,
-
-    R_Sholder,
-    R_Leg,
-    R_Arm,
-
-
-    Last,
+    Easy,
+    Normal,
+    Hard
 
 }
 
 public class GenerateSwordEnemy : MonoBehaviour {
+
+    [SerializeField]
+    SwordEnemyMover _swordEnemy;
+
+
     //波状攻撃のデータ構造体です
     [System.Serializable]
-    public struct SwordWaveData
+    struct SwordWaveData
     {
         //敵の死亡数がこの値以上の場合以下の情報で敵を出現させます.
         public int _startDieCount;
 
         public int _generateTimingCount;     //シーン内にいるエネミーが残り何体再度出現させるか
         public int _generateCount;           //何体ずつだすか
-        //public List<SwordEnemyType> _generateTypeList;//どのタイプを出すか
+        public List<SwordEnemyType> _generateTypeList;//どのタイプを出すか
 
         public SwordWaveData(int startDieCount,
-                        int generateTimingCount,int generateCount)
-                       // List<SwordEnemyType> generateTypeList)
+                             int generateTimingCount,int generateCount,
+                             List<SwordEnemyType> generateTypeList)
         {
 
            _startDieCount = startDieCount;
@@ -40,8 +37,8 @@ public class GenerateSwordEnemy : MonoBehaviour {
            _generateTimingCount =  generateTimingCount;
            _generateCount       = generateCount;
 
-         //  _generateTypeList    = new List<SwordEnemyType>();
-         //  _generateTypeList    =  generateTypeList;
+           _generateTypeList    = new List<SwordEnemyType>();
+           _generateTypeList    =  generateTypeList;
 
         }    
     
@@ -52,10 +49,6 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
     int _waveCount = 0;
     int _killCount = 0;//testよう
- 
-    [SerializeField]
-    SwordEnemyMover _swordEnemy;
-
     [SerializeField]
     List<SwordEnemyMover.SwordEnemyData> _enemyData;
 
@@ -71,6 +64,7 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
         var enemy = Instantiate(_swordEnemy.gameObject);
 
+        //ウェーブ数にあわせたエネミーのデータがなければ、一番強いデータをとりあえず渡しておく
         int waveCount = _waveCount <= _enemyData.Count ?  _waveCount : (_enemyData.Count - 1);
 
 
@@ -79,8 +73,12 @@ public class GenerateSwordEnemy : MonoBehaviour {
         float randomAngle = _generateAngles[generatePosNumber];
         _genereatePosCount[generatePosNumber] += 1;
 
-        //生成位置をエネミー側にも記憶.
-        SwordEnemyMover.SwordEnemyData enemyData = _enemyData[waveCount];
+        //生成可能なenemyのTypeからランダムでどれかを生成する
+        int randomType = Random.Range(0,_waveDataList[waveCount]._generateTypeList.Count);
+        var type = _waveDataList[waveCount]._generateTypeList[randomType];
+
+        //生成
+        SwordEnemyMover.SwordEnemyData enemyData = SwordEnemyInfos.instace.GetEnemyData(type,waveCount);
         enemyData.generatePosNumber = generatePosNumber;
 
         //エネミーのステータスを更新
