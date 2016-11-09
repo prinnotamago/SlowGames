@@ -16,8 +16,8 @@ public class SlowMotion : MonoBehaviour {
     /// <summary>
     /// 残り時間
     /// </summary>
-    private float _remainingTime = 0.0f;
-    public float remainingTime { get { return _remainingTime; } }
+    //private float _remainingTime = 0.0f;
+    //public float remainingTime { get { return _remainingTime; } }
     //public float RemainingTime { get; set; }
 
     /// <summary>
@@ -33,6 +33,7 @@ public class SlowMotion : MonoBehaviour {
     bool _isLimit = false;
     [SerializeField]
     float _slowTimeMax = 5.0f;
+    public float slowTimeMax { get { return _slowTimeMax; } }
     //[SerializeField]
     float _slowTime = 0.0f;
     public float slowTime {
