@@ -39,6 +39,8 @@ public class SlashSword : MonoBehaviour {
 
         DOWNRIGHT_UPLEFT,   // 右下から左上に斬る
         DOWNLEFT_UPRIGHT,   // 左下から右上に斬る
+
+        ALL_RANGE,          // 全方向
     }
     SlashPattern _pattern = SlashPattern.NONE;
     public SlashPattern pattern { get { return _pattern; } }
