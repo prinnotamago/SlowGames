@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour {
+public class ScoreManager : MonoBehaviour
+{
 
     private int _score = 0;
 
@@ -25,7 +26,7 @@ public class ScoreManager : MonoBehaviour {
     [System.Serializable]//Sword用
     public struct SwordEnemyData
     {
-
+        public SlashSword.SlashPattern _type;
         public int score;
     }
 
@@ -45,7 +46,12 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     public float getHitParsent
     {
-        get{ return (_killedEnemyCount / (float)_shotCount) * 100; }
+        get { return (_killedEnemyCount / (float)_shotCount) * 100; }
+    }
+
+    public int getScore()
+    {
+        return _score;
     }
 
     /// <summary>
@@ -58,22 +64,23 @@ public class ScoreManager : MonoBehaviour {
 
     public float LifeTime
     {
-        get{ return _lifeTimeCount; }
+        get { return _lifeTimeCount; }
     }
 
-    //後でソード用にも書き換え
-    public ScoreManager AddScore(GameType gameType, EnemyType type)
+    public void AddScore(int score)
     {
-        switch(gameType)
-        {
-            case GameType.Gun:
-                _score += _gunData[(int)type].score;
-                //_score += _data[(int)type].score;
-                break;
-            case GameType.Sword:
-                _score += _swordData[(int)type].score; //後で書き換え(配列の番号)
-                break;
-        }
+        _score += score;
+    }
+    
+    public ScoreManager AddScore(EnemyType type)
+    {
+        AddScore(_gunData[(int)type].score);
+        return this;
+    }
+
+    public ScoreManager AddScore(SlashSword.SlashPattern type)
+    {
+        AddScore(_swordData[(int)type].score);
         return this;
     }
 
@@ -131,7 +138,7 @@ public class ScoreManager : MonoBehaviour {
 
     void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);

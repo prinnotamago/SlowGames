@@ -54,7 +54,7 @@ public class EnemyBullet : MonoBehaviour {
 
             return;
         }
-
+        ScoreManager.instance.AddFlipEnemyBulletCount();
         Destroy(gameObject);
     }
 
