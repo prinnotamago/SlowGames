@@ -39,13 +39,13 @@ public class SwordEnemyMover : MonoBehaviour
     }
 
     private int _waitCount = 0;
-    private float _angle = 0.0f;
+    private int _angle = 0;
     private float _width = 0.1f;
     private float _playerDistance = 0.0f; //Playerまでの距離
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
     private Vector3 _speed;
-    private const float X_MOVE_WIDTH = 0.03f;
+    private const float X_MOVE_WIDTH = 0.1f;
 
     [SerializeField]
     private SwordEnemyData _data;
@@ -56,7 +56,7 @@ public class SwordEnemyMover : MonoBehaviour
         _state.Add(MoveState.Approach, Approach);
         _state.Add(MoveState.Wait, Wait);
         _state.Add(MoveState.Attack, Attack);
-        _angle = UnityEngine.Random.Range(-50.0f, 50.0f);
+        _angle = UnityEngine.Random.Range(-50, 50);
         _speed.z = UnityEngine.Random.Range(_data.minSpeed.z, _data.maxSpeed.z);
         _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
         _rigidBody = GetComponent<Rigidbody>();
@@ -93,7 +93,6 @@ public class SwordEnemyMover : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_angle);
         _state[_moveState]();
     }
 
@@ -103,10 +102,9 @@ public class SwordEnemyMover : MonoBehaviour
     void Approach()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        _angle += Time.deltaTime;
+        _angle++;
         transform.Translate(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
-
         //最後の接近前
         if (distance < _data.waitDistance)
         {
@@ -139,8 +137,7 @@ public class SwordEnemyMover : MonoBehaviour
     void Wait()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        if(_waitDirection != 0.0f)_angle += Time.deltaTime;
-        transform.Translate(Mathf.Sin(_angle * _waitDirection) * _width, 0, 0);
+        transform.Translate(_waitDirection, 0, 0);
     }
 
     /// <summary>
