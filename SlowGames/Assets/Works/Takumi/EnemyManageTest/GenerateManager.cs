@@ -67,9 +67,40 @@ public class GenerateManager : MonoBehaviour
 
         //開幕３体配置.
         _currentWaveCount = 0;
-        var waveData = _waveDate[_currentWaveCount];
-        SetEnemy(1,waveData._generateTypeList);
-       
+//        var waveData = _waveDate[_currentWaveCount];
+//        SetEnemy(1,waveData._generateTypeList);
+
+        TutorialSet();
+    }
+
+    void TutorialSet()
+    {
+
+        List<TargetPosition> genePos = new List<TargetPosition>();
+
+        genePos.Add(TargetPosition.Left);
+        genePos.Add(TargetPosition.Right);
+        genePos.Add(TargetPosition.UpFront);
+
+        //チュートリアル用の三体を生成
+        for (int i = 0; i < genePos.Count; i++)
+        {
+            DefaultSetEnemy(EnemyType.Easy,genePos[i]);
+        }
+
+    }
+
+
+    //固定位置に生成
+    void DefaultSetEnemy(EnemyType enemyType = EnemyType.Easy,TargetPosition targetPosition = TargetPosition.Left)
+    {
+            //生成した場所のカウントを覚えておく
+            _currentEnemysCount[(int)targetPosition] += 1;
+            //生成
+            _enemyGenerator.GenerateEnemy(EnemyType.Easy, targetPosition);    
+
+
+                                        
     }
 
     void Update()

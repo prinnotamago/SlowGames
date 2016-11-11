@@ -22,7 +22,6 @@ public class EnemyBullet : MonoBehaviour {
         transform.position += _targetDirection * _bulletSpeed * Time.deltaTime;
         //transform.Translate(_targetDirection * _bulletSpeed * Time.deltaTime,Space.World);
 
-
 	}
     
     void OnTriggerEnter(Collider other)
@@ -47,6 +46,7 @@ public class EnemyBullet : MonoBehaviour {
                 //判定消す
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
+                //プレイヤーのたまを消す
                 Destroy(other.gameObject);
             }
 
