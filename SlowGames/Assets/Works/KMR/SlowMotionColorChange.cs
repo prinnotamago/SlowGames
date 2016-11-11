@@ -41,7 +41,7 @@ public class SlowMotionColorChange : MonoBehaviour
         _time = _intervalTime;
         _color = GetComponent<Renderer>().material;
         _startColor = _gaugeMaxColor;
-        gauge = SlowMotion._instance.slowTimeMax - count;
+        gauge = SlowMotion._instance.slowTime / SlowMotion._instance.slowTimeMax;
         _currentColor = new Color(_startColor.r * gauge, _startColor.g * gauge, _startColor.b * gauge);
         _color.EnableKeyword("_EMISSION");
         _color.SetColor("_EmissionColor", _currentColor);
