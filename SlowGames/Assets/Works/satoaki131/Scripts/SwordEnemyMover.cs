@@ -122,7 +122,6 @@ public class SwordEnemyMover : MonoBehaviour
         _moveWidth += move_pos.x;
         if (_moveWidth > _data.X_MOVE_WIDTH)
         {
-            Debug.Log("Test1");
             _moveWidth = _data.X_MOVE_WIDTH;
             _direction *= -1;
             _animState = AnimationState.Left;
@@ -130,7 +129,6 @@ public class SwordEnemyMover : MonoBehaviour
         }
         else if (_moveWidth < -_data.X_MOVE_WIDTH)
         {
-            Debug.Log("Test2");
             _moveWidth = -_data.X_MOVE_WIDTH;
             _direction *= -1;
             _animState = AnimationState.Right;
@@ -201,7 +199,6 @@ public class SwordEnemyMover : MonoBehaviour
 
         //wait中のじりじり動く方向を決める
         _waitDirection = UnityEngine.Random.Range(-1, 2);
-        Debug.Log("コルーチン１");
         _animState = _waitDirection == -1 ? AnimationState.Right : _waitDirection == 0 ? AnimationState.Run/*Waitに変える*/ : AnimationState.Left;
         _animator.SetInteger("motion", (int)_animState);
         _waitDirection *= _moveDirection;
@@ -237,14 +234,12 @@ public class SwordEnemyMover : MonoBehaviour
         var index = UnityEngine.Random.Range(0, 101);
         if (index < _data.meanderingPercent)
         {
-            Debug.Log("Random関数1");
             _animState = _direction == -1 ? AnimationState.Left : AnimationState.Right;
             _animator.SetInteger("motion", (int)_animState);
             return _data.X_MOVE_WIDTH;
         }
         else
         {
-            Debug.Log("Random関数2");
             _animState = AnimationState.Run;
             _animator.SetInteger("motion", (int)_animState);
             return 0;
