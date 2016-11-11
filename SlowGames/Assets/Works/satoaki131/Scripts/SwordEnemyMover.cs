@@ -18,7 +18,7 @@ public class SwordEnemyMover : MonoBehaviour
 
     private Rigidbody _rigidBody = null;
 
-    [SerializeField,Tooltip("当たった時のジェネレーター")]
+    [SerializeField, Tooltip("当たった時のジェネレーター")]
     RagdollGenerator _generator;
 
     [System.Serializable]
@@ -35,12 +35,11 @@ public class SwordEnemyMover : MonoBehaviour
         public float appatchDistance;
         public int maxWaitCount;
         [Range(0, 100), Tooltip("くねくね移動の確立(％)")]
-        public int meanderingPercent;  
+        public int meanderingPercent;
         public int generatePosNumber;
     }
 
     private int _waitCount = 0;
-    private int _angle = 0;
     private float _width = 0.1f;
     private float _playerDistance = 0.0f; //Playerまでの距離
     private float _stopPosTest = 0.0f;
@@ -54,26 +53,38 @@ public class SwordEnemyMover : MonoBehaviour
 
     private bool _isCreate = false;
 
+    private int _direction = -1;
+
+    ////////////////////////////////////////////////////////test//////////////////////////////////////////
+
+    public enum AnimationState
+    {
+        Run = 0,
+        Right,
+        Left
+    }
+
+    private Animator _animator = null;
+    private AnimationState _animState = AnimationState.Run;
+    ///////////////////////////////////////////////////////testEnd////////////////////////////////////////
+
+
     void Start()
     {
+        _animator = GetComponent<Animator>(); //test
         _state = new Dictionary<MoveState, Action>();
         _state.Add(MoveState.Approach, Approach);
         _state.Add(MoveState.Wait, Wait);
         _state.Add(MoveState.Attack, Attack);
-        _angle = UnityEngine.Random.Range(-50, 50);
         _speed.z = UnityEngine.Random.Range(_data.minSpeed.z, _data.maxSpeed.z);
         _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
         _rigidBody = GetComponent<Rigidbody>();
-
-        var index = UnityEngine.Random.Range(0, 101);
-        if(index < _data.meanderingPercent)
+        _direction = UnityEngine.Random.Range(-1, 2);
+        while (_direction == 0)
         {
-            _width = _data.X_MOVE_WIDTH;
+            _direction = UnityEngine.Random.Range(-1, 2);
         }
-        else
-        {
-            _width = 0;
-        }
+        _width = RandomMoveWidth();
 
         //プレイヤーとエネミーの距離
         var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
@@ -100,16 +111,31 @@ public class SwordEnemyMover : MonoBehaviour
         _state[_moveState]();
     }
 
+    private float _moveWidth = 0.0f; //移動した幅を保存する
     /// <summary>
     /// 接近状態
     /// </summary>
     void Approach()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        _angle++;
-        var movePos = new Vector3(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
-        transform.Translate(movePos * Time.deltaTime);
-        //Debug.Log(movePos * Time.deltaTime);
+        var move_pos = new Vector3(_direction * _speed.x, 0, _speed.z);
+        _moveWidth += move_pos.x;
+        if (_moveWidth > _data.X_MOVE_WIDTH)
+        {
+            _moveWidth = _data.X_MOVE_WIDTH;
+            _direction *= -1;
+            _animState = AnimationState.Left;
+            _animator.SetInteger("motion", (int)_animState);
+        }
+        else if (_moveWidth < -_data.X_MOVE_WIDTH)
+        {
+            _moveWidth = -_data.X_MOVE_WIDTH;
+            _direction *= -1;
+            _animState = AnimationState.Right;
+            _animator.SetInteger("motion", (int)_animState);
+        }
+        transform.Translate(move_pos * Time.deltaTime);
+
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //最後の接近前
         if (distance < _data.waitDistance)
@@ -123,7 +149,7 @@ public class SwordEnemyMover : MonoBehaviour
 
         //最後の接近じゃなくて指定した距離まで進んだらWait状態
         if (distance < _stopPosTest)
-        {            
+        {
             _moveState = MoveState.Wait;
             var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
             StartCoroutine(AttackReserve(waitTime, distance));
@@ -154,10 +180,12 @@ public class SwordEnemyMover : MonoBehaviour
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
-        if(distance < _data.appatchDistance) { return; }
+        if (distance < _data.appatchDistance) { return; }
         var movePos = new Vector3(0, 0, _data.attackMoveSpeed);
         transform.Translate(movePos * Time.deltaTime);
     }
+
+    private float _moveDirection = 0.5f;
 
     /// <summary>
     /// 待機中の時間管理コルーチン
@@ -171,7 +199,10 @@ public class SwordEnemyMover : MonoBehaviour
 
         //wait中のじりじり動く方向を決める
         _waitDirection = UnityEngine.Random.Range(-1, 2);
-        _waitDirection *= 0.01f;
+        _animState = _waitDirection == -1 ? AnimationState.Right : _waitDirection == 0 ? AnimationState.Run/*Waitに変える*/ : AnimationState.Left;
+        _animator.SetInteger("motion", (int)_animState);
+        _waitDirection *= _moveDirection;
+
 
         //一定時間止まる
         while (time < waitTime)
@@ -188,6 +219,10 @@ public class SwordEnemyMover : MonoBehaviour
         _width = RandomMoveWidth();
         //接近モード、もしくはアタックモードに移行
         _moveState = distance < _data.waitDistance ? MoveState.Attack : MoveState.Approach;
+        if (_moveState != MoveState.Attack) yield break;
+        _animState = AnimationState.Run; //後でアタックモーションに変える
+        _animator.SetInteger("motion", (int)_animState);
+
     }
 
     /// <summary>
@@ -197,15 +232,21 @@ public class SwordEnemyMover : MonoBehaviour
     float RandomMoveWidth()
     {
         var index = UnityEngine.Random.Range(0, 101);
-        if(index < _data.meanderingPercent)
+        if (index < _data.meanderingPercent)
         {
-            return _data.X_MOVE_WIDTH;  
+            _animState = _direction == -1 ? AnimationState.Left : AnimationState.Right;
+            _animator.SetInteger("motion", (int)_animState);
+            return _data.X_MOVE_WIDTH;
         }
         else
         {
+            _animState = AnimationState.Run;
+            _animator.SetInteger("motion", (int)_animState);
             return 0;
         }
     }
+
+    //以下あたり判定/////////////////////////////////////////////////////////////////////////////////////////
 
     void OnTriggerEnter(Collider col)
     {
