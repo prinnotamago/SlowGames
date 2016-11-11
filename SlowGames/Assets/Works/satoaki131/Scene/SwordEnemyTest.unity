@@ -414,7 +414,6 @@ MonoBehaviour:
     maxWaitCount: 3
     meanderingPercent: 100
     generatePosNumber: 0
-  test: 0.01
 --- !u!54 &988970375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -538,6 +537,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad96296423dcffe49b0782d169cb9c99, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1104186503 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1727256838832506, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2021947487}
+--- !u!114 &1104186510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1104186503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d19b67ab6df36c48abb426cbadda0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1429672970
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +765,36 @@ Prefab:
       propertyPath: _generator
       value: 
       objectReference: {fileID: 980741428}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.minSpeed.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.maxSpeed.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.appatchDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.maxWaitCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.meanderingPercent
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.X_MOVE_WIDTH
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a70d79c0308fcd541ab1af7335bd7b7e, type: 2}
   m_IsPrefabParent: 0

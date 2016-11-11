@@ -1817,10 +1817,10 @@ MonoBehaviour:
   _generator: {fileID: 0}
   _data:
     _enemyPattern: 1
-    minSpeed: {x: 0.02, y: 0, z: 1}
-    maxSpeed: {x: 0.05, y: 0, z: 5}
+    minSpeed: {x: 0.5, y: 0, z: 0.2}
+    maxSpeed: {x: 1, y: 0, z: 1}
     attackMoveSpeed: 5
-    X_MOVE_WIDTH: 5
+    X_MOVE_WIDTH: 15
     waitDistance: 5
     minWaitTime: 2
     maxWaitTime: 4
@@ -1828,7 +1828,6 @@ MonoBehaviour:
     maxWaitCount: 3
     meanderingPercent: 100
     generatePosNumber: 0
-  test: 0.5
 --- !u!136 &136392161012687568
 CapsuleCollider:
   m_ObjectHideFlags: 1
