@@ -108,11 +108,11 @@ public class PlayerShot : MonoBehaviour
         //if (_time > 0) return;
 
         AudioManager.instance.playSe(AudioName.SeName.gun1);
-        var effect = Instantiate(_mazzleFlush);
-        effect.transform.rotation = transform.rotation;
-        effect.transform.position = transform.position;
-        effect.transform.Translate(0, -1, 1);
-        effect.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+        //Quaternion a = transform.rotation;
+        //a = Quaternion.Euler(90, 0, 0);
+
+        //effect.transform.eulerAngles += new Vector3(90, 45, 0);
         if (SteamVR.active)
         {
             _device.TriggerHapticPulse(4000);
@@ -132,10 +132,13 @@ public class PlayerShot : MonoBehaviour
         }
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
+        var effect = Instantiate(_mazzleFlush);
+        effect.transform.position = transform.position;
+        effect.transform.LookAt(shotBullet.transform);
+        effect.transform.position = transform.position + transform.forward * 0.2f - transform.up * 0.2f;
 
-
-//        _time = _burstIntervalTime;
-        _burstCount--;
+       //        _time = _burstIntervalTime;
+       _burstCount--;
         if (_shotType == shotType.autoReload)
         {
             _bulletsNumber--;
