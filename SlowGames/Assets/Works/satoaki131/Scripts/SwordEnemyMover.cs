@@ -54,8 +54,24 @@ public class SwordEnemyMover : MonoBehaviour
 
     private bool _isCreate = false;
 
+    ////////////////////////////////////////////////////////test//////////////////////////////////////////
+
+    public enum AnimationState
+    {
+        Run = 0,
+        Right,
+        Left
+    }
+
+    private Animator _animator = null;
+    private AnimationState _animState = AnimationState.Run;
+
+    ///////////////////////////////////////////////////////testEnd////////////////////////////////////////
+
+
     void Start()
     {
+        _animator = GetComponent<Animator>(); //test
         _state = new Dictionary<MoveState, Action>();
         _state.Add(MoveState.Approach, Approach);
         _state.Add(MoveState.Wait, Wait);
@@ -65,15 +81,7 @@ public class SwordEnemyMover : MonoBehaviour
         _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
         _rigidBody = GetComponent<Rigidbody>();
 
-        var index = UnityEngine.Random.Range(0, 101);
-        if(index < _data.meanderingPercent)
-        {
-            _width = _data.X_MOVE_WIDTH;
-        }
-        else
-        {
-            _width = 0;
-        }
+        _width = RandomMoveWidth();
 
         //プレイヤーとエネミーの距離
         var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
@@ -97,6 +105,7 @@ public class SwordEnemyMover : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_animState);
         _state[_moveState]();
     }
 
@@ -109,7 +118,6 @@ public class SwordEnemyMover : MonoBehaviour
         _angle++;
         var movePos = new Vector3(Mathf.Sin(_angle * _speed.x) * _width, 0, _speed.z);
         transform.Translate(movePos * Time.deltaTime);
-        //Debug.Log(movePos * Time.deltaTime);
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //最後の接近前
         if (distance < _data.waitDistance)
@@ -159,6 +167,9 @@ public class SwordEnemyMover : MonoBehaviour
         transform.Translate(movePos * Time.deltaTime);
     }
 
+    [SerializeField]
+    private float test = 0.01f;
+
     /// <summary>
     /// 待機中の時間管理コルーチン
     /// </summary>
@@ -171,7 +182,10 @@ public class SwordEnemyMover : MonoBehaviour
 
         //wait中のじりじり動く方向を決める
         _waitDirection = UnityEngine.Random.Range(-1, 2);
-        _waitDirection *= 0.01f;
+        _animState = _waitDirection == -1 ? AnimationState.Right : _waitDirection == 0 ? AnimationState.Run : AnimationState.Left;
+        _animator.SetInteger("motion", (int)_animState);
+        _waitDirection *= test;
+        
 
         //一定時間止まる
         while (time < waitTime)
@@ -199,10 +213,14 @@ public class SwordEnemyMover : MonoBehaviour
         var index = UnityEngine.Random.Range(0, 101);
         if(index < _data.meanderingPercent)
         {
+            _animState = AnimationState.Run;
+            _animator.SetInteger("motion", (int)_animState);
             return _data.X_MOVE_WIDTH;  
         }
         else
         {
+            _animState = AnimationState.Run;
+            _animator.SetInteger("motion", (int)_animState);
             return 0;
         }
     }
