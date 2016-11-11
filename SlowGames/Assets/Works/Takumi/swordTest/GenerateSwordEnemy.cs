@@ -59,7 +59,7 @@ public class GenerateSwordEnemy : MonoBehaviour {
     [SerializeField]
     float _generateDistance = 10.0f;
 
-    void Generate()
+    void Generate(int generatePosNumber)
     {
 
         var enemy = Instantiate(_swordEnemy.gameObject);
@@ -69,9 +69,9 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
 
         //生成場所を設定、場所を記憶,数を更新
-        int  generatePosNumber =  GetRandomGeneratePos(_genereatePosCount);// Random.Range(0,_generateAngles.Count);
-        float randomAngle = _generateAngles[generatePosNumber];
-        _genereatePosCount[generatePosNumber] += 1;
+//        int  generatePosNumber =  GetRandomGeneratePos(_genereatePosCount);// Random.Range(0,_generateAngles.Count);
+//        
+//        _genereatePosCount[generatePosNumber] += 1;
 
         //生成可能なenemyのTypeからランダムでどれかを生成する
         int randomType = Random.Range(0,_waveDataList[waveCount]._generateTypeList.Count);
@@ -84,8 +84,8 @@ public class GenerateSwordEnemy : MonoBehaviour {
         //エネミーのステータスを更新
         enemy.GetComponent<SwordEnemyMover>().setState(enemyData);
 
-
         //生成位置を計算.//FixMe:生成毎に計算が無駄
+        float randomAngle = _generateAngles[generatePosNumber];
         float x = _generateDistance * Mathf.Cos(ToRadian(randomAngle));
         float z = _generateDistance * Mathf.Sin(ToRadian(randomAngle));
 
@@ -96,17 +96,38 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
 
 
+    IEnumerator DelayGenerate(int count, List<int> generatePosNumbers, float delayCount = 0.5f)
+    {
+        float counter = delayCount;
+
+        for (int i = 0; i < count; ++i)
+        {
+            Generate(generatePosNumbers[i]);
+
+               while(counter > 0)
+               {
+                    counter -= Time.deltaTime;
+                    yield return null;
+
+               }
+
+               counter = delayCount;
+        }
+
+        yield return null;
+        
+    }
+
+
+
     public void UpdateEnemyCount(int generatePosNumber)
     {
         //同じところからは生成しない.
         _genereatePosCount[generatePosNumber] -= 1;
         _killCount += 1;
 
-
-        var waveData = _waveDataList[_waveCount];
-
-        //ウェーブのデータが最大にいったらそれ以上はいかない
-        if (_waveCount  < _waveDataList.Count - 1)
+        //ウェーブの更新チェッ
+        if (_waveCount < _waveDataList.Count - 1)
         {
 
             //敵の死亡数が一定数行っていたらウェーブを更新
@@ -117,17 +138,31 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
         }
 
+        var waveData = _waveDataList[_waveCount];
+
         //エネミーの残り数が一定の数
         int liveEnemysCount = GetLiveEnemyCount();
 
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
-            Generate();
-        }
+            
+            // 生成する前に男体出してるかを更新
+            List<int> randomValues = new List<int>();
+            int generateCount = waveData._generateCount;
+            for (int i = 0; i < generateCount; i++)
+            {
+                randomValues.Add(GetRandomGeneratePos(_genereatePosCount));
+                _genereatePosCount[randomValues[i]] += 1;
+            }
 
+
+            //ウェーブに合わせた、数をだすぞ
+            StartCoroutine(DelayGenerate(generateCount,randomValues));
+        }
 
     }
 
+   
     //ランダムに,生成位置を取得する
     public  int GetRandomGeneratePos(List<int> generateCount)
     {
@@ -181,24 +216,25 @@ public class GenerateSwordEnemy : MonoBehaviour {
             _genereatePosCount.Add(0);
         }
 
-        Generate();
+        //Generate(GetRandomGeneratePos(_genereatePosCount));
+
+        for (int i = 0; i < 2; i++)
+        {
+            int posNumber = (GetRandomGeneratePos(_genereatePosCount));
+            _genereatePosCount[posNumber] += 1;
+            Generate(posNumber);
+        }
+       
 	}
 
 
-    float count = 0;
-	
 	// Update is called once per frame
 	void Update ()
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            
-           Generate();
-
+            Generate(GetRandomGeneratePos(_genereatePosCount));
         }
-
-       
-
 	}
     
 
