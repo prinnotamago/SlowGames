@@ -9,6 +9,7 @@ public class SwordEnemyMover : MonoBehaviour
     {
         Approach,
         Wait,
+        AttackMove,
         Attack
     }
 
@@ -24,7 +25,7 @@ public class SwordEnemyMover : MonoBehaviour
     [System.Serializable]
     public struct SwordEnemyData
     {
-        public SlashSword.SlashPattern _enemyPattern;
+        public SlashSword.SlashPattern enemyPattern;
         public Vector3 minSpeed;
         public Vector3 maxSpeed;
         public float attackMoveSpeed;
@@ -40,7 +41,6 @@ public class SwordEnemyMover : MonoBehaviour
     }
 
     private int _waitCount = 0;
-    private float _width = 0.1f;
     private float _playerDistance = 0.0f; //Playerまでの距離
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
@@ -61,7 +61,9 @@ public class SwordEnemyMover : MonoBehaviour
     {
         Run = 0,
         Right,
-        Left
+        Left,
+        Wait,
+        Attack
     }
 
     private Animator _animator = null;
@@ -75,6 +77,7 @@ public class SwordEnemyMover : MonoBehaviour
         _state = new Dictionary<MoveState, Action>();
         _state.Add(MoveState.Approach, Approach);
         _state.Add(MoveState.Wait, Wait);
+        _state.Add(MoveState.AttackMove, AttackMove);
         _state.Add(MoveState.Attack, Attack);
         _speed.z = UnityEngine.Random.Range(_data.minSpeed.z, _data.maxSpeed.z);
         _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
@@ -84,7 +87,6 @@ public class SwordEnemyMover : MonoBehaviour
         {
             _direction = UnityEngine.Random.Range(-1, 2);
         }
-        _width = RandomMoveWidth();
 
         //プレイヤーとエネミーの距離
         var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
@@ -118,8 +120,8 @@ public class SwordEnemyMover : MonoBehaviour
     void Approach()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
-        var move_pos = new Vector3(_direction * _speed.x, 0, _speed.z);
-        _moveWidth += move_pos.x;
+        var movePos = new Vector3(_direction * _speed.x, 0, _speed.z);
+        _moveWidth += movePos.x;
         if (_moveWidth > _data.X_MOVE_WIDTH)
         {
             _moveWidth = _data.X_MOVE_WIDTH;
@@ -134,7 +136,7 @@ public class SwordEnemyMover : MonoBehaviour
             _animState = AnimationState.Right;
             _animator.SetInteger("motion", (int)_animState);
         }
-        transform.Translate(move_pos * Time.deltaTime);
+        transform.Translate(movePos * Time.deltaTime);
 
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //最後の接近前
@@ -170,19 +172,46 @@ public class SwordEnemyMover : MonoBehaviour
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         var movePos = new Vector3(_waitDirection, 0, 0);
+        _moveWidth += movePos.x;
+        if (_moveWidth > _data.X_MOVE_WIDTH)
+        {
+            _moveWidth = _data.X_MOVE_WIDTH;
+            _direction *= -1;
+            _animState = AnimationState.Left;
+            _animator.SetInteger("motion", (int)_animState);
+        }
+        else if (_moveWidth < -_data.X_MOVE_WIDTH)
+        {
+            _moveWidth = -_data.X_MOVE_WIDTH;
+            _direction *= -1;
+            _animState = AnimationState.Right;
+            _animator.SetInteger("motion", (int)_animState);
+        }
+
         transform.Translate(movePos * Time.deltaTime);
     }
 
     /// <summary>
     /// 攻撃状態
     /// </summary>
-    void Attack()
+    void AttackMove()
     {
         transform.LookAt(new Vector3(Camera.main.transform.localPosition.x, transform.localPosition.y, Camera.main.transform.localPosition.z));
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
-        if (distance < _data.appatchDistance) { return; }
-        var movePos = new Vector3(0, 0, _data.attackMoveSpeed);
-        transform.Translate(movePos * Time.deltaTime);
+        if (distance > _data.appatchDistance)
+        {
+            var movePos = new Vector3(0, 0, _data.attackMoveSpeed);
+            transform.Translate(movePos * Time.deltaTime);
+        }
+        else
+        {
+            _moveState = MoveState.Attack;
+        }
+    }
+
+    void Attack()
+    {
+
     }
 
     private float _moveDirection = 0.5f;
@@ -216,10 +245,10 @@ public class SwordEnemyMover : MonoBehaviour
         _rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         //くねくねするか直線で進むか決める
-        _width = RandomMoveWidth();
+        _direction = RandomMoveWidth();
         //接近モード、もしくはアタックモードに移行
-        _moveState = distance < _data.waitDistance ? MoveState.Attack : MoveState.Approach;
-        if (_moveState != MoveState.Attack) yield break;
+        _moveState = distance < _data.waitDistance ? MoveState.AttackMove : MoveState.Approach;
+        if (_moveState != MoveState.AttackMove) yield break;
         _animState = AnimationState.Run; //後でアタックモーションに変える
         _animator.SetInteger("motion", (int)_animState);
 
@@ -229,14 +258,14 @@ public class SwordEnemyMover : MonoBehaviour
     /// くねくね動くか直線で動くかを決める関数
     /// </summary>
     /// <returns></returns>
-    float RandomMoveWidth()
+    int RandomMoveWidth()
     {
         var index = UnityEngine.Random.Range(0, 101);
         if (index < _data.meanderingPercent)
         {
             _animState = _direction == -1 ? AnimationState.Left : AnimationState.Right;
             _animator.SetInteger("motion", (int)_animState);
-            return _data.X_MOVE_WIDTH;
+            return _direction;
         }
         else
         {
@@ -254,6 +283,7 @@ public class SwordEnemyMover : MonoBehaviour
         {
             if (!isHit) { return; }
             if (!col.GetComponent<SlashSword>().IsAttack) { return; }
+            if(_data.enemyPattern != col.GetComponent<SlashSword>().pattern) { return; }
 
             //var obj = GetComponentInChildren<Rigidbody>();
 
@@ -267,6 +297,9 @@ public class SwordEnemyMover : MonoBehaviour
 
             //自分がどこで生成されていたかを死に際に渡す
             FindObjectOfType<GenerateSwordEnemy>().UpdateEnemyCount(_data.generatePosNumber);
+            //Score加算
+            ScoreManager.instance.AddScore(_data.enemyPattern);
+            ScoreManager.instance.AddHitEnemyCount();
             Destroy(gameObject);
         }
     }

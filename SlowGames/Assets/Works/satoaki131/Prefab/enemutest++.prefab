@@ -1814,19 +1814,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1a335e15a0a1344ad66abaabd76057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generator: {fileID: 0}
+  _generator: {fileID: 114328599489469980, guid: f7d7ba407bc46c44cb9151774a8e83b7,
+    type: 2}
   _data:
     _enemyPattern: 1
-    minSpeed: {x: 0.5, y: 0, z: 1}
-    maxSpeed: {x: 1, y: 0, z: 2}
+    minSpeed: {x: 1, y: 0, z: 1}
+    maxSpeed: {x: 2, y: 0, z: 2}
     attackMoveSpeed: 5
     X_MOVE_WIDTH: 30
     waitDistance: 5
     minWaitTime: 2
     maxWaitTime: 4
     appatchDistance: 1.5
-    maxWaitCount: 3
-    meanderingPercent: 80
+    maxWaitCount: 5
+    meanderingPercent: 0
     generatePosNumber: 0
 --- !u!136 &136392161012687568
 CapsuleCollider:

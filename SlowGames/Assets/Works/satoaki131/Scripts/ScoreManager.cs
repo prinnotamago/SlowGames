@@ -49,6 +49,10 @@ public class ScoreManager : MonoBehaviour
         get { return (_killedEnemyCount / (float)_shotCount) * 100; }
     }
 
+    /// <summary>
+    /// Scoreを所得
+    /// </summary>
+    /// <returns></returns>
     public int getScore()
     {
         return _score;
@@ -62,11 +66,26 @@ public class ScoreManager : MonoBehaviour
         get { return _killedEnemyCount; }
     }
 
+    /// <summary>
+    /// 時間を所得
+    /// </summary>
     public float LifeTime
     {
         get { return _lifeTimeCount; }
     }
 
+    /// <summary>
+    /// Enemyの弾と当たった数の所得
+    /// </summary>
+    public int enemyBulletCount
+    {
+        get { return _flipEnemyBulletCount; }
+    }
+
+    /// <summary>
+    /// Scoreを加算する関数
+    /// </summary>
+    /// <param name="score"></param>
     public void AddScore(int score)
     {
         _score += score;
