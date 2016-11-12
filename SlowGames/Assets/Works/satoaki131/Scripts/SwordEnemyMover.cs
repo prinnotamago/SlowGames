@@ -33,14 +33,16 @@ public class SwordEnemyMover : MonoBehaviour
         public float waitDistance;
         public float minWaitTime;
         public float maxWaitTime;
+        public float lastMinWaitTime;
+        public float lastMaxWaitTime;
         public float appatchDistance;
-        public int maxWaitCount;
         [Range(0, 100), Tooltip("くねくね移動の確立(％)")]
         public int meanderingPercent;
         public int generatePosNumber;
     }
 
     private int _waitCount = 0;
+    private int _maxWaitCount = 0;
     private float _playerDistance = 0.0f; //Playerまでの距離
     private float _stopPosTest = 0.0f;
     private float _waitDirection = 0.0f;
@@ -83,6 +85,7 @@ public class SwordEnemyMover : MonoBehaviour
         _speed.x = UnityEngine.Random.Range(_data.minSpeed.x, _data.maxSpeed.x);
         _rigidBody = GetComponent<Rigidbody>();
         _direction = UnityEngine.Random.Range(-1, 2);
+        _maxWaitCount = UnityEngine.Random.Range(0, 3);
         while (_direction == 0)
         {
             _direction = UnityEngine.Random.Range(-1, 2);
@@ -91,11 +94,11 @@ public class SwordEnemyMover : MonoBehaviour
         //プレイヤーとエネミーの距離
         var totalDistance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
         //プレイヤーとエネミーの距離を止まる回数で割った距離
-        _playerDistance = totalDistance / _data.maxWaitCount;
+        _playerDistance = totalDistance / _maxWaitCount;
         //最初に止まるときの場所を決める
         _stopPosTest = UnityEngine.Random.Range(
-           _playerDistance * (_data.maxWaitCount - (_waitCount + 1)),
-           _playerDistance * (_data.maxWaitCount - _waitCount)
+           _playerDistance * (_maxWaitCount - (_waitCount + 1)),
+           _playerDistance * (_maxWaitCount - _waitCount)
            );
     }
 
@@ -143,11 +146,11 @@ public class SwordEnemyMover : MonoBehaviour
         if (distance < _data.waitDistance)
         {
             _moveState = MoveState.Wait;
-            var waitTime = UnityEngine.Random.Range(_data.minWaitTime, _data.maxWaitTime);
+            var waitTime = UnityEngine.Random.Range(_data.lastMinWaitTime, _data.lastMaxWaitTime);
             StartCoroutine(AttackReserve(waitTime, distance));
         }
         //止まる回数が最大まで行ったら下は通らない
-        if (_waitCount >= _data.maxWaitCount) return;
+        if (_waitCount >= _maxWaitCount) return;
 
         //最後の接近じゃなくて指定した距離まで進んだらWait状態
         if (distance < _stopPosTest)
@@ -158,8 +161,8 @@ public class SwordEnemyMover : MonoBehaviour
             _waitCount++;
 
             _stopPosTest = UnityEngine.Random.Range(
-           _playerDistance * (_data.maxWaitCount - (_waitCount + 1)),
-           _playerDistance * (_data.maxWaitCount - _waitCount)
+           _playerDistance * (_maxWaitCount - (_waitCount + 1)),
+           _playerDistance * (_maxWaitCount - _waitCount)
            );
 
         }
@@ -211,7 +214,7 @@ public class SwordEnemyMover : MonoBehaviour
 
     void Attack()
     {
-
+        Debug.Log("Attack");
     }
 
     private float _moveDirection = 0.5f;
