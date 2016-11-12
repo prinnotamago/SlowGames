@@ -26,10 +26,12 @@ public class GenerateSwordEnemy : MonoBehaviour {
         public int _generateTimingCount;     //シーン内にいるエネミーが残り何体再度出現させるか
         public int _generateCount;           //何体ずつだすか
         public List<SwordEnemyType> _generateTypeList;//どのタイプを出すか
+        public List<SlashSword.SlashPattern> _weekPointList;
 
+            
         public SwordWaveData(int startDieCount,
                              int generateTimingCount,int generateCount,
-                             List<SwordEnemyType> generateTypeList)
+                             List<SwordEnemyType> generateTypeList,List<SlashSword.SlashPattern> weekPointList)
         {
 
            _startDieCount = startDieCount;
@@ -38,7 +40,9 @@ public class GenerateSwordEnemy : MonoBehaviour {
            _generateCount       = generateCount;
 
            _generateTypeList    = new List<SwordEnemyType>();
-           _generateTypeList    =  generateTypeList;
+           _weekPointList       = new List<SlashSword.SlashPattern>();
+           _generateTypeList    = generateTypeList;
+           _weekPointList       = weekPointList; 
 
         }    
     
@@ -75,13 +79,17 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
         //生成可能なenemyのTypeからランダムでどれかを生成する
         int randomType = Random.Range(0,_waveDataList[waveCount]._generateTypeList.Count);
+        int randomWeek = Random.Range(0,_waveDataList[waveCount]._weekPointList.Count);
+
         var type = _waveDataList[waveCount]._generateTypeList[randomType];
+        var week = _waveDataList[waveCount]._weekPointList[randomWeek];
 
         //生成
         SwordEnemyMover.SwordEnemyData enemyData = SwordEnemyInfos.instace.GetEnemyData(type,waveCount);
-        SlashSword.SlashPattern  weekPoint = GetRandomSlashPattern();
-        enemyData.generatePosNumber = generatePosNumber;
-        enemyData.enemyPattern = weekPoint;
+        enemyData.enemyPattern = week;
+//      SlashSword.SlashPattern  weekPoint = GetRandomSlashPattern();
+//      enemyData.generatePosNumber = generatePosNumber;
+//      enemyData.enemyPattern = week;
 
         //エネミーのステータスを更新
         enemy.GetComponent<SwordEnemyMover>().setState(enemyData);
