@@ -75,6 +75,8 @@ public class EnemyActor : MonoBehaviour
         _isShot = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
+        //iTween.RotateTo(gameObject, iTween.Hash("y", 260, "time", 3));
+
 
     }
 
@@ -155,8 +157,9 @@ public class EnemyActor : MonoBehaviour
                                            0,
                                           (Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange)));
 
-          float activeTime = RandomActiveTime(1);
-          iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime));
+          //float activeTime = RandomActiveTime(1);
+          float activeTime = _enemy._activeTimeMax;
+          iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime,"easeType",iTween.EaseType.linear));
 
           ChangeAction(ActionType.Stay,activeTime);
 
@@ -171,7 +174,7 @@ public class EnemyActor : MonoBehaviour
         if (_enemy._activeCounter > 0)
         {
             _enemy._activeCounter -= Time.deltaTime;
-
+          
         }
         else
         {
@@ -290,6 +293,7 @@ public class EnemyActor : MonoBehaviour
             //ランダムでしょっぱなうつ
             if (_stayCount >= _enemy._shotFrequency)
             {
+
                 ChangeAction(ActionType.Shot, RandomActiveTime());
             }
             else

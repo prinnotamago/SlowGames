@@ -15,7 +15,7 @@ public class GenerateSwordEnemy : MonoBehaviour {
     [SerializeField]
     SwordEnemyMover _swordEnemy;
 
-
+   
     //波状攻撃のデータ構造体です
     [System.Serializable]
     struct SwordWaveData
@@ -79,7 +79,9 @@ public class GenerateSwordEnemy : MonoBehaviour {
 
         //生成
         SwordEnemyMover.SwordEnemyData enemyData = SwordEnemyInfos.instace.GetEnemyData(type,waveCount);
+        SlashSword.SlashPattern  weekPoint = GetRandomSlashPattern();
         enemyData.generatePosNumber = generatePosNumber;
+        enemyData.enemyPattern = weekPoint;
 
         //エネミーのステータスを更新
         enemy.GetComponent<SwordEnemyMover>().setState(enemyData);
@@ -227,6 +229,12 @@ public class GenerateSwordEnemy : MonoBehaviour {
        
 	}
 
+    SlashSword.SlashPattern GetRandomSlashPattern()
+    {
+        int randomPattern = Random.Range((int)SlashSword.SlashPattern.UP_DOWN,(int)SlashSword.SlashPattern.ALL_RANGE);    
+
+        return (SlashSword.SlashPattern)randomPattern;
+    }
 
 	// Update is called once per frame
 	void Update ()
