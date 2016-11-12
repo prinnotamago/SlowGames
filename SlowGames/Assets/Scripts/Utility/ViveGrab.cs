@@ -21,7 +21,7 @@ public class ViveGrab : MonoBehaviour {
 	//	
 	//}
 
-    void OnTriggerStay(Collision col)
+    void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == TagName.GameController)
         {
