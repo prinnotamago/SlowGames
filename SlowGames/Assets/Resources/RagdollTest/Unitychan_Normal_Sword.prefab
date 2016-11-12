@@ -5379,7 +5379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _generator: {fileID: 114239219189428962}
   _data:
-    enemyPattern: 3
+    enemyPattern: 0
     minSpeed: {x: 0, y: 0, z: 0}
     maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 1

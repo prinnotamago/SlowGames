@@ -317,7 +317,8 @@ public class SwordEnemyMover : MonoBehaviour
         {
             if (!isHit) { return; }
             if (!col.GetComponent<SlashSword>().IsAttack) { return; }
-            if(_data.enemyPattern != col.GetComponent<SlashSword>().pattern) { return; }
+            if (_data.enemyPattern == SlashSword.SlashPattern.ALL_RANGE) { /*Debug.Log("とおった");*/ }
+            else if (_data.enemyPattern != col.GetComponent<SlashSword>().pattern) { return; }
 
             //var obj = GetComponentInChildren<Rigidbody>();
 
