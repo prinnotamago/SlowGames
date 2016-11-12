@@ -11,6 +11,8 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     GameObject _bullet;
 
+    Recoil _recoil;
+
     //[SerializeField]
     //int _oneShotCount = 3;
 
@@ -64,6 +66,7 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
+        _recoil = GetComponent<Recoil>();
         //_shotType = shotType.autoReload;
         _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
@@ -109,10 +112,6 @@ public class PlayerShot : MonoBehaviour
 
         AudioManager.instance.playSe(AudioName.SeName.gun1);
 
-        //Quaternion a = transform.rotation;
-        //a = Quaternion.Euler(90, 0, 0);
-
-        //effect.transform.eulerAngles += new Vector3(90, 45, 0);
         if (SteamVR.active)
         {
             _device.TriggerHapticPulse(4000);
@@ -130,6 +129,8 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
+        _recoil.RecoilAnimation();
+
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
         var effect = Instantiate(_mazzleFlush);
