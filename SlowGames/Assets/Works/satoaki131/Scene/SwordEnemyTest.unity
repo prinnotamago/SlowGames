@@ -443,6 +443,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.waitDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.maxWaitCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.meanderingPercent
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.lastMaxWaitTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535172964106414, guid: a70d79c0308fcd541ab1af7335bd7b7e,
+        type: 2}
+      propertyPath: _data.lastMinWaitTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a70d79c0308fcd541ab1af7335bd7b7e, type: 2}
   m_IsPrefabParent: 0
