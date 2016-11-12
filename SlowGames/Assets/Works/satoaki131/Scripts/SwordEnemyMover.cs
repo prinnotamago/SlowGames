@@ -195,7 +195,7 @@ public class SwordEnemyMover : MonoBehaviour
     }
 
     /// <summary>
-    /// 攻撃状態
+    /// 攻撃前の移動状態
     /// </summary>
     void AttackMove()
     {
@@ -208,13 +208,40 @@ public class SwordEnemyMover : MonoBehaviour
         }
         else
         {
+            Debug.Log("AttackStart");
             _moveState = MoveState.Attack;
+            StartCoroutine(AttackAnimStart());
         }
+    }
+
+    private IEnumerator AttackAnimStart()
+    {
+        _animState = AnimationState.Attack;
+        _animator.SetTrigger("test");
+
+        while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            yield return null;
+        }
+        var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
+
+        while (distance < _data.waitDistance)
+        {
+            distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
+            var movePos = new Vector3(_direction * _speed.x, 0, -_speed.z);
+            transform.Translate(movePos * Time.deltaTime);
+            yield return null;
+        }
+
+        _moveState = MoveState.Wait;
+        var waitTime = UnityEngine.Random.Range(_data.lastMinWaitTime, _data.lastMaxWaitTime);
+        StartCoroutine(AttackReserve(waitTime, distance));
+
     }
 
     void Attack()
     {
-        Debug.Log("Attack");
+
     }
 
     private float _moveDirection = 0.5f;
