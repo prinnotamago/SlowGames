@@ -50,6 +50,10 @@ public class SwordEnemyMover : MonoBehaviour
 
     [SerializeField]
     private SwordEnemyData _data;
+    public SwordEnemyData data
+    {
+        get { return _data; }
+    }
 
     private bool isHit = false;
 
