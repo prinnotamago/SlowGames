@@ -262,7 +262,7 @@ public class SwordEnemyMover : MonoBehaviour
 
         //wait中のじりじり動く方向を決める
         _waitDirection = UnityEngine.Random.Range(-1, 2);
-        _animState = _waitDirection == -1 ? AnimationState.Right : _waitDirection == 0 ? AnimationState.Run/*Waitに変える*/ : AnimationState.Left;
+        _animState = _waitDirection == -1 ? AnimationState.Right : _waitDirection == 0 ? AnimationState.Wait : AnimationState.Left;
         _animator.SetInteger("motion", (int)_animState);
         _waitDirection *= _moveDirection;
 
