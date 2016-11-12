@@ -129,14 +129,14 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-        _recoil.RecoilAnimation();
+       // _recoil.RecoilAnimation();
 
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
         var effect = Instantiate(_mazzleFlush);
         effect.transform.position = transform.position;
         effect.transform.LookAt(shotBullet.transform);
-        effect.transform.position = transform.position + transform.forward * 0.2f - transform.up * 0.2f;
+        effect.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
 
        //        _time = _burstIntervalTime;
        _burstCount--;
