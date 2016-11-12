@@ -11,6 +11,42 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1692195901699648}
   m_IsPrefabParent: 1
+--- !u!1 &1158256318336938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4301174059560210}
+  - component: {fileID: 33412175110259708}
+  - component: {fileID: 65932908320802412}
+  - component: {fileID: 23524563952433762}
+  m_Layer: 0
+  m_Name: Box
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1332344274705954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4009626529114028}
+  - component: {fileID: 33688267109764238}
+  - component: {fileID: 135728772574748796}
+  - component: {fileID: 23461861676729582}
+  m_Layer: 12
+  m_Name: Sphere
+  m_TagString: Sword
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1692195901699648
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,19 +64,135 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4009626529114028
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332344274705954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 4, z: 10}
+  m_Children: []
+  m_Father: {fileID: 4792036574432870}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4301174059560210
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158256318336938}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4792036574432870}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4792036574432870
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1692195901699648}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6720858, y: -4.154146, z: -17.295265}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -10.53, z: -18.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4301174059560210}
+  - {fileID: 4009626529114028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23461861676729582
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332344274705954}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &23524563952433762
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158256318336938}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &33412175110259708
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158256318336938}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33688267109764238
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332344274705954}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65932908320802412
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158256318336938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114487414622702932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,30 +205,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _easyDates:
-  - speed: {x: 5, y: 0, z: 0.5}
-    xMoveWidth: 0.1
-    attackMoveSpeed: 0.1
-    waitDistance: 4
+  - enemyPattern: 0
+    minSpeed: {x: 0.02, y: 0, z: 1}
+    maxSpeed: {x: 0.05, y: 0, z: 5}
+    attackMoveSpeed: 5
+    X_MOVE_WIDTH: 5
+    waitDistance: 5
     minWaitTime: 2
     maxWaitTime: 4
-    appatchDistance: 1.2
+    appatchDistance: 1.5
     maxWaitCount: 3
     meanderingPercent: 80
     generatePosNumber: 0
-  - speed: {x: 5, y: 0, z: 0.5}
-    xMoveWidth: 0.1
-    attackMoveSpeed: 0.1
-    waitDistance: 4
+  - enemyPattern: 0
+    minSpeed: {x: 0.02, y: 0, z: 1}
+    maxSpeed: {x: 0.05, y: 0, z: 5}
+    attackMoveSpeed: 5
+    X_MOVE_WIDTH: 5
+    waitDistance: 5
     minWaitTime: 2
     maxWaitTime: 4
-    appatchDistance: 1.2
+    appatchDistance: 1.5
     maxWaitCount: 3
     meanderingPercent: 80
     generatePosNumber: 0
   _normalDates:
-  - speed: {x: 0, y: 0, z: 0}
-    xMoveWidth: 0
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0
+    X_MOVE_WIDTH: 0
     waitDistance: 0
     minWaitTime: 0
     maxWaitTime: 0
@@ -84,9 +242,11 @@ MonoBehaviour:
     maxWaitCount: 0
     meanderingPercent: 0
     generatePosNumber: 0
-  - speed: {x: 0, y: 0, z: 0}
-    xMoveWidth: 0
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0
+    X_MOVE_WIDTH: 0
     waitDistance: 0
     minWaitTime: 0
     maxWaitTime: 0
@@ -95,9 +255,11 @@ MonoBehaviour:
     meanderingPercent: 0
     generatePosNumber: 0
   _hardDates:
-  - speed: {x: 0, y: 0, z: 0}
-    xMoveWidth: 0
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0
+    X_MOVE_WIDTH: 0
     waitDistance: 0
     minWaitTime: 0
     maxWaitTime: 0
@@ -105,9 +267,11 @@ MonoBehaviour:
     maxWaitCount: 0
     meanderingPercent: 0
     generatePosNumber: 0
-  - speed: {x: 0, y: 0, z: 0}
-    xMoveWidth: 0
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0
+    X_MOVE_WIDTH: 0
     waitDistance: 0
     minWaitTime: 0
     maxWaitTime: 0
@@ -133,14 +297,18 @@ MonoBehaviour:
     _generateTimingCount: 1
     _generateCount: 2
     _generateTypeList: 00000000
-  - _startDieCount: 10
+    _weekPointList: 01000000040000000300000009000000
+  - _startDieCount: 20
     _generateTimingCount: 1
-    _generateCount: 2
-    _generateTypeList: 0000000001000000
+    _generateCount: 3
+    _generateTypeList: 00000000
+    _weekPointList: 01000000040000000300000009000000
   _enemyData:
-  - speed: {x: 5, y: 0, z: 0.5}
-    xMoveWidth: 0.1
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0.1
+    X_MOVE_WIDTH: 0
     waitDistance: 4
     minWaitTime: 2
     maxWaitTime: 4
@@ -148,9 +316,11 @@ MonoBehaviour:
     maxWaitCount: 3
     meanderingPercent: 80
     generatePosNumber: 0
-  - speed: {x: 5, y: 0, z: 0.5}
-    xMoveWidth: 0.1
+  - enemyPattern: 0
+    minSpeed: {x: 0, y: 0, z: 0}
+    maxSpeed: {x: 0, y: 0, z: 0}
     attackMoveSpeed: 0.1
+    X_MOVE_WIDTH: 0
     waitDistance: 4
     minWaitTime: 2
     maxWaitTime: 4
@@ -167,3 +337,15 @@ MonoBehaviour:
   - 135
   - 180
   _generateDistance: 10
+--- !u!135 &135728772574748796
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332344274705954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
