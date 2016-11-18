@@ -7,17 +7,15 @@ public class SlowGaugeMover : MonoBehaviour {
     [SerializeField]
     private GameObject[] _gaugeVar = null;
 
-    private int _index = 0;
+    private int _gaugeVarLength = 0; //_gaugeVarの配列の長さ
 
-    private float _test = 0;
+    private float _equallyDividedGauge = 0; //Lengthで等分した値
 
 
     void Start()
     {
-        _index = _gaugeVar.Length;
-        _test = SlowMotion._instance.slowTimeMax / _index;
-        Debug.Log(_index);
-        Debug.Log(_test);
+        _gaugeVarLength = _gaugeVar.Length;
+        _equallyDividedGauge = SlowMotion._instance.slowTimeMax / _gaugeVarLength;
     }
 
     void Update()
@@ -25,20 +23,23 @@ public class SlowGaugeMover : MonoBehaviour {
         SetGauge();
     }
 
+    /// <summary>
+    /// ゲージの量を切り替える
+    /// </summary>
     void SetGauge()
     {
-        for(int i = 0; i < _index; i++)
+        for(int i = 0; i < _gaugeVarLength; i++)
         {
             if (_gaugeVar[i].activeSelf) continue;
-            if(SlowMotion._instance.slowTime > _test * i)
+            if(SlowMotion._instance.slowTime > _equallyDividedGauge * i)
             {
                 _gaugeVar[i].SetActive(true);
             }
         }
-        for (int i = 0; i < _index; i++)
+        for (int i = 0; i < _gaugeVarLength; i++)
         {
             if (!_gaugeVar[i].activeSelf) continue;
-            if (SlowMotion._instance.slowTime < _test * i)
+            if (SlowMotion._instance.slowTime < _equallyDividedGauge * i)
             {
                 _gaugeVar[i].SetActive(false);
             }

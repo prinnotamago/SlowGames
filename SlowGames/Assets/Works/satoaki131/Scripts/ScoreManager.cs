@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-
+    //トータルスコア
     private int _score = 0;
-
+    //エネミー撃破数
     private int _killedEnemyCount = 0;
+    //弾を出した数
     private int _shotCount = 0;
-
+    //経過時間
     private float _lifeTimeCount = 0.0f;
-
+    //エネミーの弾を弾いた数
     private int _flipEnemyBulletCount = 0;
-
+    //被弾数
     private int _inpactDamageCount = 0;
 
     //List<CSVData> _data = null;
@@ -25,19 +26,22 @@ public class ScoreManager : MonoBehaviour
         public int score;
     }
 
-    [System.Serializable]//Sword用
-    public struct SwordEnemyData
-    {
-        public SlashSword.SlashPattern _type;
-        public int score;
-    }
+    //[System.Serializable]//Sword用
+    //public struct SwordEnemyData
+    //{
+    //    public SlashSword.SlashPattern _type;
+    //    public int score;
+    //}
 
     public GunEnemyData[] _gunData = null;
-    public SwordEnemyData[] _swordData = null;
+    //public SwordEnemyData[] _swordData = null;
 
-    /// <summary>
-    /// インスタンスを所得
-    /// </summary>
+    [SerializeField]
+    private string[] _trophy = null;
+
+    [SerializeField, Tooltip("目標クリアタイム")]
+    private float _targetClearTime = 0.0f;
+
     public static ScoreManager instance
     {
         get; private set;
@@ -77,6 +81,15 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 目標クリアタイムの達成率
+    /// 100%以上の場合は100％表示する
+    /// </summary>
+    public float TargetClearTimePersent
+    {
+        get { return (_targetClearTime / _lifeTimeCount) * 100 >= 100 ? 100 : (_targetClearTime / _lifeTimeCount) * 100; }
+    }
+
+    /// <summary>
     /// Enemyの弾と当たった数の所得
     /// </summary>
     public int enemyBulletCount
@@ -107,11 +120,11 @@ public class ScoreManager : MonoBehaviour
         return this;
     }
 
-    public ScoreManager AddScore(SlashSword.SlashPattern type)
-    {
-        AddScore(_swordData[(int)type].score);
-        return this;
-    }
+    //public ScoreManager AddScore(SlashSword.SlashPattern type)
+    //{
+    //    AddScore(_swordData[(int)type].score);
+    //    return this;
+    //}
 
     /// <summary>
     /// 弾を撃った数を足していく
