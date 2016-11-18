@@ -63,6 +63,13 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     shotType _shotType = shotType.autoReload;
 
+    bool _isStart = false;
+
+    public bool isStart
+    {
+        get{ return _isStart; }
+        set { _isStart = value; }
+    }
 
     void Start()
     {
@@ -80,6 +87,7 @@ public class PlayerShot : MonoBehaviour
     void Update()
     {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
+        if (!_isStart) return;
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
@@ -129,7 +137,7 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-       // _recoil.RecoilAnimation();
+        _recoil.RecoilAnimation();
 
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
