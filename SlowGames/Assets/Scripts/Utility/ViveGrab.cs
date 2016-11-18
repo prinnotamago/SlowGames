@@ -5,55 +5,66 @@ using UnityEngine;
 public class ViveGrab : MonoBehaviour {
 
     //[SerializeField]
-    Rigidbody _rigidbody;
+    //Rigidbody _rigidbody;
 
-    SteamVR_TrackedObject[] _viveCon;
+    //[SerializeField]
+    //SteamVR_TrackedObject[] _viveCon;
+    [SerializeField]
+    string _tagName = TagName.Weapon;
+
+    GameObject _pickObj = null;
 
     bool _isPick = false;
     public bool isPick { get { return _isPick; } }
 
-	// Use this for initialization
-	void Start () {
-        _rigidbody = GetComponent<Rigidbody>();
+    SteamVR_TrackedObject _viveCon;
 
-        _viveCon = FindObjectsOfType<SteamVR_TrackedObject>();
+    // Use this for initialization
+    void Start () {
+        //_rigidbody = GetComponent<Rigidbody>();
+
+        _viveCon = GetComponent<SteamVR_TrackedObject>();
 	}
-	
-	// Update is called once per frame
-	//void Update () {
-	//	
-	//}
+
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    Debug.Log(_isPick);
+    //}
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == TagName.GameController)
+        if (col.gameObject.tag == _tagName)
         {
-            bool isPick = false;
-            foreach (var viveCon in _viveCon)
+            if (_pickObj == col.gameObject)
             {
-                if (viveCon.gameObject == col.gameObject)
+                var rigidbody = col.GetComponent<Rigidbody>();
+                SteamVR_Controller.Device device = SteamVR_Controller.Input((int)_viveCon.index);
+                if (device.GetPress(SteamVR_Controller.ButtonMask.Trigger))
                 {
-                    SteamVR_Controller.Device device = SteamVR_Controller.Input((int)viveCon.index);
-                    if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+                    rigidbody.velocity = Vector3.zero;
+                    col.gameObject.transform.position = transform.position;
+                    if (rigidbody.useGravity)
                     {
-                        transform.position = col.gameObject.transform.position;
-                        _rigidbody.velocity = Vector3.zero;
-                        if (_rigidbody.useGravity)
-                        {
-                            _rigidbody.useGravity = false;
-                            _isPick = true;
-                        }
-                        isPick = true;
+                        rigidbody.useGravity = false;
+                        //Debug.Log("もってる");
                     }
                 }
-            }
-
-            if (!isPick)
-            {
-                if (!_rigidbody.useGravity)
+                else
                 {
-                    _rigidbody.useGravity = true;
+                    rigidbody.useGravity = true;
                     _isPick = false;
+                    _pickObj = null;
+                    //Debug.Log("離した");
+                }
+            }
+            else if(_pickObj == null)
+            {
+                SteamVR_Controller.Device device = SteamVR_Controller.Input((int)_viveCon.index);
+                if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+                {
+                    _pickObj = col.gameObject;
+                    _isPick = true;
                 }
             }
         }

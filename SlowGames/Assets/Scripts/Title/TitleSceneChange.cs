@@ -29,12 +29,12 @@ public class TitleSceneChange : MonoBehaviour {
     Color _changeColor = Color.white;
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	//void Start () {
+    //    Debug.Log(_fadeInTime);
+    //}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
         // 必要なアイテムを手に持っているか確かめる
         bool isChange = true;
         foreach (var item in _items)
