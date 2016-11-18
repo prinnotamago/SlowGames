@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour
 
     private int _flipEnemyBulletCount = 0;
 
+    private int _inpactDamageCount = 0;
+
     //List<CSVData> _data = null;
 
     [System.Serializable] //Gun用
@@ -83,6 +85,14 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 被弾数の所得
+    /// </summary>
+    public int getInpactDamageCount
+    {
+        get { return _inpactDamageCount; }
+    }
+
+    /// <summary>
     /// Scoreを加算する関数
     /// </summary>
     /// <param name="score"></param>
@@ -130,6 +140,16 @@ public class ScoreManager : MonoBehaviour
     public ScoreManager AddHitEnemyCount()
     {
         _killedEnemyCount++;
+        return this;
+    }
+
+    /// <summary>
+    /// 敵の弾にプレイヤーが当たった数を足していく
+    /// </summary>
+    /// <returns></returns>
+    public ScoreManager AddInpactDamageCount()
+    {
+        _inpactDamageCount++;
         return this;
     }
 

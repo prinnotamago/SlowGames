@@ -212,7 +212,6 @@ public class SwordEnemyMover : MonoBehaviour
         }
         else
         {
-            Debug.Log("AttackStart");
             _moveState = MoveState.Attack;
             StartCoroutine(AttackAnimStart());
         }
@@ -221,14 +220,17 @@ public class SwordEnemyMover : MonoBehaviour
     private IEnumerator AttackAnimStart()
     {
         _animState = AnimationState.Attack;
-        _animator.SetTrigger("test");
+        _animator.SetTrigger("attack");
 
-        while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        //アタックアニメーション中は何もしないように
+        while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1) 
         {
+            Debug.Log("OK0");
             yield return null;
         }
+        // アタックのアニメーションが終わったら距離をみてWaitの場所まで戻る処理をする
         var distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
-
+        
         while (distance < _data.waitDistance)
         {
             distance = Vector3.Distance(transform.localPosition, Camera.main.transform.localPosition);
