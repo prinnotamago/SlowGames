@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,15 @@ public enum GameType
 
 public class GameDirector : MonoBehaviour {
 
+    [SerializeField]
+    private PlayerShot[] _playerShot = null;
+    [SerializeField]
+    private GenerateManager _generateManager = null;
+
     private bool _gamePlay = false;
+
+    [SerializeField]
+    private float _gameStartTime = 0.0f;
 
     /// <summary>
     /// ゲーム中かどうか
@@ -21,6 +30,11 @@ public class GameDirector : MonoBehaviour {
     {
         get{ return _gamePlay; }
         set { _gamePlay = value; }
+    }
+
+    public int displayTime
+    {
+        get; private set;
     }
 
     /// <summary>
@@ -45,11 +59,35 @@ public class GameDirector : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        GameSet();
+        StartCoroutine(GameStartCutIn());
+    }
+
+    private IEnumerator GameStartCutIn()
+    {
+        var time = 0.0f;
+        while(time < _gameStartTime)
+        {
+            time += Time.deltaTime;
+            displayTime = (int)(_gameStartTime - time + 1);
+            yield return null;
+        }
+        _gamePlay = true;
+        GameSet();
     }
 
     void Update()
     {
         PlayTimeCount();
+    }
+
+    void GameSet()
+    {
+        for (int i = 0; i < _playerShot.Length; i++)
+        {
+            _playerShot[i].isStart = _gamePlay;
+        }
+        _generateManager.isTutorial = _gamePlay;
     }
 
 }
