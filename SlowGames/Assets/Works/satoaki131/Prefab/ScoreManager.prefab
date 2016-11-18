@@ -51,10 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f55a41a07dad28428e77ef086d2070f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyData:
-  - type: 0
-    score: 0
-  - type: 1
-    score: 0
-  - type: 2
-    score: 0
+  _gunData: []
+  _swordData: []
+  _trophy:
+  - 
+  - 
+  - 
+  - 
+  - 
+  _targetClearTime: 0
