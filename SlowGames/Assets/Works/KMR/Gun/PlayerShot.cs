@@ -136,7 +136,7 @@ public class PlayerShot : MonoBehaviour
         var effect = Instantiate(_mazzleFlush);
         effect.transform.position = transform.position;
         effect.transform.LookAt(shotBullet.transform);
-        effect.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
+        effect.transform.position = transform.position + transform.forward * 0.2f - transform.up * 0.2f;
 
        //        _time = _burstIntervalTime;
        _burstCount--;
