@@ -26,6 +26,9 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     private Light _directionalLight = null;
 
+    [SerializeField]
+    private Canvas _resultCanvas = null;
+
     private Dictionary<GameState, Action> _update = null;
 
     private GameState _state = GameState.MainGame;
@@ -122,6 +125,7 @@ public class GameDirector : MonoBehaviour {
             yield return null;
         }
         _state = GameState.Result;
+        _resultCanvas.gameObject.SetActive(true);
     }
 
     void GameSet()
