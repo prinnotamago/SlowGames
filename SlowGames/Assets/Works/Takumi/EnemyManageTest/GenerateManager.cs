@@ -70,10 +70,34 @@ public class GenerateManager : MonoBehaviour
 //        var waveData = _waveDate[_currentWaveCount];
 //        SetEnemy(1,waveData._generateTypeList);
 
-        TutorialSet();
+        if (_isTutorial)
+        {
+            TutorialSet();
+        }
     }
 
-    void TutorialSet()
+    [SerializeField]
+    bool _isTutorial = false;
+
+    //チュートリアル
+    public bool isTutorial
+    {
+        set
+        {
+            _isTutorial = value;
+            if (value)
+            {
+                TutorialSet();     
+            }
+                
+        }
+
+        get{ return _isTutorial;}
+
+    }
+
+
+    public void TutorialSet()
     {
 
         List<TargetPosition> genePos = new List<TargetPosition>();
@@ -83,6 +107,22 @@ public class GenerateManager : MonoBehaviour
         genePos.Add(TargetPosition.UpFront);
 
         //チュートリアル用の三体を生成
+        for (int i = 0; i < genePos.Count; i++)
+        {
+            DefaultSetEnemy(EnemyType.Easy,genePos[i]);
+        }
+
+    }
+
+    public void GameStartSet()
+    {
+        List<TargetPosition> genePos = new List<TargetPosition>();
+
+        genePos.Add(TargetPosition.Left);
+        genePos.Add(TargetPosition.Right);
+        genePos.Add(TargetPosition.UpFront);
+
+        //ゲームスタート用の三体を生成
         for (int i = 0; i < genePos.Count; i++)
         {
             DefaultSetEnemy(EnemyType.Easy,genePos[i]);

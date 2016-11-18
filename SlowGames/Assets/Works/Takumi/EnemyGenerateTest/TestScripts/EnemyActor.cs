@@ -75,8 +75,6 @@ public class EnemyActor : MonoBehaviour
         _isShot = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
-        //iTween.RotateTo(gameObject, iTween.Hash("y", 260, "time", 3));
-
 
     }
 
@@ -85,7 +83,7 @@ public class EnemyActor : MonoBehaviour
         //stateに合わせて、関数を実行
         _actionDic[_currentAction]();
         //test:常に、プレイヤーをみるようようにしてる.違和感を感じたら変更
-        transform.LookAt(_playerTransform.transform.position);
+
 
     }
 
@@ -160,12 +158,71 @@ public class EnemyActor : MonoBehaviour
           //float activeTime = RandomActiveTime(1);
           float activeTime = _enemy._activeTimeMax;
           iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime,"easeType",iTween.EaseType.linear));
+          StartCoroutine(RotateEnemy(activeTime,targetPosition));
 
           ChangeAction(ActionType.Stay,activeTime);
 
       }
 
     }
+
+    IEnumerator RotateEnemy(float activeTime, Vector3 targetPosition)
+    {
+
+        //
+        var add = (targetPosition.magnitude - transform.position.magnitude);
+        transform.LookAt(_playerTransform.transform.position);
+
+        //正面のベクトル
+        float z = 2 * Vector3.forward.x;
+        float x = z * 0.5f;
+        float _x = -z * 2;
+        float _z = 0.5f * x;
+
+        Vector3 dir = new Vector3(_x,_z, transform.position.y);
+        float angle = 0.13f;
+
+        //左方向だったら 
+        angle *= dir.magnitude > 0 ? 1 : -1 ;
+        float count = activeTime * 0.5f;
+
+        while (count > 0)
+        {
+           
+            count -= Time.deltaTime;    
+            transform.Rotate(dir,angle);
+            yield return null;
+        }
+
+        count = activeTime * 0.5f;
+        angle *= -1;
+
+        while (count > 0)
+        {
+            count -= Time.deltaTime;
+            transform.Rotate(dir,angle);
+
+            yield return null;
+        }
+
+
+//
+//        if (add > 0)
+//        {
+//            iTween.RotateTo(gameObject, iTween.Hash("z", 10, "time", activeTime));
+//            yield return new WaitForSeconds(activeTime * 0.5f);
+//            iTween.RotateTo(gameObject, iTween.Hash("z",  0, "time", activeTime));
+//        }
+//        else
+//        {
+//            iTween.RotateTo(gameObject, iTween.Hash("z", -10, "time", activeTime));
+//            yield return new WaitForSeconds(activeTime * 0.5f);
+//            iTween.RotateTo(gameObject, iTween.Hash("z", 0, "time", activeTime));
+//        }
+
+        yield return null;
+    }
+
 
     //待機状態,与えられたactiviTime分移動を止める
     void Stay()
@@ -179,7 +236,7 @@ public class EnemyActor : MonoBehaviour
         else
         {
             _stayCount += 1;
-
+            transform.LookAt(_playerTransform.transform.position);
             if (_stayCount > _enemy._shotFrequency)
             {
                 ChangeAction(ActionType.Shot);
@@ -243,14 +300,12 @@ public class EnemyActor : MonoBehaviour
                 yield return null;
             }
 
-            gameObject.GetComponentInChildren<EnemyShot>().Shot();
+            gameObject.GetComponentInChildren<EnemyShot>().DoShot();
           
             //二発以上かつ最後の弾じゃなければ
             if (shotCount > 1 && (shotCount - 1) > i)
             {   
                 //１発目以降は間隔を開けて撃つ
-                //yield return new WaitForSeconds(shotDelayTime);
-                //shotラグ//test; wait for Second がうまく行かない代わり
                 timeCount = _justShotTime;
                 while (timeCount > 0)
                 {

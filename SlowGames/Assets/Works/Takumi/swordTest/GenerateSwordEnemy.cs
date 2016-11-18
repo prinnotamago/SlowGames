@@ -255,7 +255,7 @@ public class GenerateSwordEnemy : MonoBehaviour {
     
 
     //
-    float ToRadian(float value)
+    static float ToRadian(float value)
     {
         return value * 3.14f / 180.0f;
     }

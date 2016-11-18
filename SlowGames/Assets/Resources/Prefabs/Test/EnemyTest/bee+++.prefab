@@ -357,8 +357,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyBullet: {fileID: 114566366637743548, guid: 94bad617761e845f3af6ffad189c6e09,
     type: 2}
+  _doubleBullet: {fileID: 114566366637743548, guid: 94bad617761e845f3af6ffad189c6e09,
+    type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 3
+  _gunType: 1
   _isShotStart: 0
 --- !u!114 &114811729075277106
 MonoBehaviour:
