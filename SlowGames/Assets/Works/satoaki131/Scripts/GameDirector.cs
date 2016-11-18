@@ -68,6 +68,7 @@ public class GameDirector : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        _update = new Dictionary<GameState, Action>();
         _update.Add(GameState.MainGame, MainGameUpdate);
         _update.Add(GameState.Result, ResultUpdate);
         GameSet();
