@@ -44,6 +44,8 @@ public class ViveGrab : MonoBehaviour {
                 {
                     rigidbody.velocity = Vector3.zero;
                     col.gameObject.transform.position = transform.position;
+                    col.gameObject.transform.rotation = transform.rotation;
+                    col.gameObject.transform.Rotate(235, 0, 180);
                     if (rigidbody.useGravity)
                     {
                         rigidbody.useGravity = false;
@@ -66,6 +68,20 @@ public class ViveGrab : MonoBehaviour {
                     _pickObj = col.gameObject;
                     _isPick = true;
                 }
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == _tagName)
+        {
+            if (_pickObj == col.gameObject)
+            {
+                var rigidbody = col.GetComponent<Rigidbody>();
+                rigidbody.useGravity = true;
+                _isPick = false;
+                _pickObj = null;
             }
         }
     }
