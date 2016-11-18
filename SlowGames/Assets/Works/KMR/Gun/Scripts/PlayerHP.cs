@@ -26,7 +26,10 @@ public class PlayerHP : MonoBehaviour {
    
 	void Update ()
     {
-
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            _playerHp = 0;
+        }
       
         if (_playerHp <= 0)
         {
