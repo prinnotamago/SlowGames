@@ -9,6 +9,9 @@ public class ViveGrab : MonoBehaviour {
 
     SteamVR_TrackedObject[] _viveCon;
 
+    bool _isPick = false;
+    public bool isPick { get { return _isPick; } }
+
 	// Use this for initialization
 	void Start () {
         _rigidbody = GetComponent<Rigidbody>();
@@ -38,6 +41,7 @@ public class ViveGrab : MonoBehaviour {
                         if (_rigidbody.useGravity)
                         {
                             _rigidbody.useGravity = false;
+                            _isPick = true;
                         }
                         isPick = true;
                     }
@@ -49,6 +53,7 @@ public class ViveGrab : MonoBehaviour {
                 if (!_rigidbody.useGravity)
                 {
                     _rigidbody.useGravity = true;
+                    _isPick = false;
                 }
             }
         }
