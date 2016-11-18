@@ -19,15 +19,16 @@ public class EnemyBullet : MonoBehaviour {
             return;
         }
         //進行
-        transform.position += _targetDirection * _bulletSpeed * Time.deltaTime;
-        //transform.Translate(_targetDirection * _bulletSpeed * Time.deltaTime,Space.World);
+        //transform.position += _targetDirection * _bulletSpeed * Time.deltaTime;
+        transform.Translate(transform.forward * _bulletSpeed * Time.deltaTime,Space.World);
+
 
 	}
     
     void OnTriggerEnter(Collider other)
     {
         //敵キャラ自信にあたってもスルー Todo : 見栄えが悪かったら調整
-        if (other.gameObject.tag == TagName.Enemy || other.gameObject.tag == TagName.Finish)
+        if (other.gameObject.tag == TagName.Enemy || other.gameObject.tag == TagName.Finish || other.gameObject.tag == TagName.EnemyBullet)
         {
             return;
         }
