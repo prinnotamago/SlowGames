@@ -88,6 +88,7 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
+        _isReload = false;
         _reloadHash = Animator.StringToHash("isReload");
         _reShotHash = Animator.StringToHash("reShot");
         _isStart = true;
@@ -104,17 +105,19 @@ public class PlayerShot : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(_isShot);
+        Debug.Log(_isReload);
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
 
         if (!_isStart) return;
         //Debug.Log(_reShot);
+        ReloadAnim();
         if (_reShot)
         {
             _reShot = false;
             _gunAnim.SetBool(_reShotHash, _reShot);
         }
         //if (_isShot) { _isShot = false; }
+        
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
@@ -204,26 +207,22 @@ public class PlayerShot : MonoBehaviour
     void ResetShotMove()
     {
         _gunAnim.Play(0, 0, 0);
-
-        //if (_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <1.0f )
-        //{
-        //   _reShot = true;
-        //    _gunAnim.SetBool(_reShotHash,_reShot);
-        //}
-        //else
-        //if(_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        //{
-        //    _reShot = false;
-        //    _gunAnim.SetBool(_reShotHash, _reShot);
-        //}
     }
 
     void ReloadAnim()
     {
         if(_reload.isReload)
         {
+            _isReload = true;
+
+        }else
+        if(!_reload.isReload)
+        {
+            _isReload = false;
 
         }
+        _gunAnim.SetBool(_reloadHash, _isReload);
+
     }
 
     
