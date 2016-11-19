@@ -104,6 +104,7 @@ public class PlayerShot : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(_isShot);
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
 
         if (!_isStart) return;
@@ -113,7 +114,7 @@ public class PlayerShot : MonoBehaviour
             _reShot = false;
             _gunAnim.SetBool(_reShotHash, _reShot);
         }
-        if (_isShot) { _isShot = false; }
+        //if (_isShot) { _isShot = false; }
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
@@ -186,7 +187,7 @@ public class PlayerShot : MonoBehaviour
         //if (_burstCount < 1)
         //{
         //    _burstCount = _oneShotCount;
-            
+        _isShot = false;
         //}
     }
 
