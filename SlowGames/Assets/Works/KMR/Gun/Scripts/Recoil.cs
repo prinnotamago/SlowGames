@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Recoil : MonoBehaviour
 {
-    Animator _animator;
+
+    [SerializeField]
+    Animator _animator = null;
     int _animHash;
     bool _isShot;
-    bool _isshot;
     Reload _reload;
 
 
     void Start()
     {
-        _isShot = false;
-        _animator = GetComponent<Animator>();
-        _animHash = Animator.StringToHash("_isShot");
+        //_animHash = 
+        //_isShot = false;
+        //_animator = GetComponent<Animator>();
+        //_animHash = Animator.StringToHash("_isShot");
         _reload = GetComponent<Reload>();
     }
 

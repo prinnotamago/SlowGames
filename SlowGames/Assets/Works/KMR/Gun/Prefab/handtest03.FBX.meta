@@ -36,7 +36,9 @@ ModelImporter:
     4300000: top
     4300002: under
     4300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    7400000: Take 001
+    7400000: Trigger
+    7400002: Shot
+    7400004: Reload
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -58,7 +60,157 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Trigger
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 5
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Dummy002
+        weight: 1
+      - path: Dummy002/Bone001
+        weight: 1
+      - path: Dummy002/Bone001/Bone002
+        weight: 1
+      - path: Dummy002/Bone001/Bone002/Bone003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003/top
+        weight: 1
+      - path: Dummy002/Bone001/pCube1
+        weight: 1
+      - path: Dummy002/Bone001/pCube1/under
+        weight: 1
+      - path: "Dummy002/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
+        weight: 1
+      - path: gun
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Shot
+      takeName: Take 001
+      firstFrame: 6
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Dummy002
+        weight: 1
+      - path: Dummy002/Bone001
+        weight: 1
+      - path: Dummy002/Bone001/Bone002
+        weight: 1
+      - path: Dummy002/Bone001/Bone002/Bone003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003/top
+        weight: 1
+      - path: Dummy002/Bone001/pCube1
+        weight: 1
+      - path: Dummy002/Bone001/pCube1/under
+        weight: 1
+      - path: "Dummy002/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
+        weight: 1
+      - path: gun
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Reload
+      takeName: Take 001
+      firstFrame: 8
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Dummy002
+        weight: 1
+      - path: Dummy002/Bone001
+        weight: 1
+      - path: Dummy002/Bone001/Bone002
+        weight: 1
+      - path: Dummy002/Bone001/Bone002/Bone003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003
+        weight: 1
+      - path: Dummy002/Bone001/Dummy003/top
+        weight: 1
+      - path: Dummy002/Bone001/pCube1
+        weight: 1
+      - path: Dummy002/Bone001/pCube1/under
+        weight: 1
+      - path: "Dummy002/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
+        weight: 1
+      - path: gun
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

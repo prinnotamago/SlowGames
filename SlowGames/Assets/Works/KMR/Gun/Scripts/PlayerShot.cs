@@ -63,6 +63,9 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     shotType _shotType = shotType.autoReload;
 
+    [SerializeField]
+    Animator _gunAnim = null; 
+
     bool _isStart = false;
 
     public bool isStart
@@ -71,8 +74,12 @@ public class PlayerShot : MonoBehaviour
         set { _isStart = value; }
     }
 
+    int _reShotHash;
+    bool _reShot = false;
+
     void Start()
     {
+        _reShotHash = Animator.StringToHash("reShot");
         _isStart = true;
         _recoil = GetComponent<Recoil>();
         //_shotType = shotType.autoReload;
@@ -89,6 +96,12 @@ public class PlayerShot : MonoBehaviour
     {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
         if (!_isStart) return;
+        //Debug.Log(_reShot);
+        if (_reShot)
+        {
+            _reShot = false;
+            _gunAnim.SetBool(_reShotHash, _reShot);
+        }
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
@@ -106,6 +119,7 @@ public class PlayerShot : MonoBehaviour
         _aimAssist.OrientationCorrection();
         _isShot = true;
         //_burstCount = _oneShotCount;
+        
     }
 
     void ThreeBurst()
@@ -121,7 +135,7 @@ public class PlayerShot : MonoBehaviour
 
         AudioManager.instance.playSe(AudioName.SeName.gun1);
 
-        _recoil.RecoilAnimation();
+        //_recoil.RecoilAnimation();
 
         if (SteamVR.active)
         {
@@ -140,7 +154,9 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-
+        
+        _gunAnim.SetTrigger("isShot");
+        ResetShotMove();
 
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
@@ -171,6 +187,24 @@ public class PlayerShot : MonoBehaviour
         var animationHash = _triggerAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
         _triggerAnim.Play(animationHash, 0, frame);
     }
+
+    void ResetShotMove()
+    {
+        if(_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <1.0f )
+        {
+            _reShot = true;
+            _gunAnim.SetBool(_reShotHash,_reShot);
+            _gunAnim.Play(_reShotHash, 0, 0);
+        }
+        //else
+        //if(_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        //{
+        //    _reShot = false;
+        //    _gunAnim.SetBool(_reShotHash, _reShot);
+        //}
+    }
+
+    
 
 
 }
