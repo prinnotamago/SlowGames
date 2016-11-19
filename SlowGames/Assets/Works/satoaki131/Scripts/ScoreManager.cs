@@ -142,7 +142,7 @@ public class ScoreManager : MonoBehaviour
     /// <returns></returns>
     public ScoreManager GameTimeCount()
     {
-        _lifeTimeCount += Time.unscaledTime;
+        _lifeTimeCount += Time.unscaledDeltaTime;
         return this;
     }
 
