@@ -40,6 +40,7 @@ public class PlayerHP : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+        if (_playerHp <= 0) return;
         if (other.tag == TagName.EnemyBullet)
         {
             Damage();
@@ -47,6 +48,7 @@ public class PlayerHP : MonoBehaviour {
     }
    public void Damage()
     {
+        ScoreManager.instance.AddInpactDamageCount();
         _playerHp--;
     }
 }
