@@ -28,6 +28,10 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     private Animator _triggerAnim = null;
 
+    int _reloadHash;
+
+    bool _isReload;
+
     int _bulletsNumber;
 
     public int maxBulletsNumbers
@@ -49,6 +53,11 @@ public class PlayerShot : MonoBehaviour
     }
 
     bool _isShot = false;
+
+    public bool isShot
+    {
+        get { return _isShot; }
+    }
 
     //float _time;
 
@@ -79,6 +88,7 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
+        _reloadHash = Animator.StringToHash("isReload");
         _reShotHash = Animator.StringToHash("reShot");
         _isStart = true;
         _recoil = GetComponent<Recoil>();
@@ -95,6 +105,7 @@ public class PlayerShot : MonoBehaviour
     void Update()
     {
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
+
         if (!_isStart) return;
         //Debug.Log(_reShot);
         if (_reShot)
@@ -102,6 +113,7 @@ public class PlayerShot : MonoBehaviour
             _reShot = false;
             _gunAnim.SetBool(_reShotHash, _reShot);
         }
+        if (_isShot) { _isShot = false; }
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
@@ -174,7 +186,7 @@ public class PlayerShot : MonoBehaviour
         //if (_burstCount < 1)
         //{
         //    _burstCount = _oneShotCount;
-            _isShot = false;
+            
         //}
     }
 
@@ -190,18 +202,27 @@ public class PlayerShot : MonoBehaviour
 
     void ResetShotMove()
     {
-        if(_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <1.0f )
-        {
-            _reShot = true;
-            _gunAnim.SetBool(_reShotHash,_reShot);
-            _gunAnim.Play(_reShotHash, 0, 0);
-        }
+        _gunAnim.Play(0, 0, 0);
+
+        //if (_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <1.0f )
+        //{
+        //   _reShot = true;
+        //    _gunAnim.SetBool(_reShotHash,_reShot);
+        //}
         //else
         //if(_gunAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         //{
         //    _reShot = false;
         //    _gunAnim.SetBool(_reShotHash, _reShot);
         //}
+    }
+
+    void ReloadAnim()
+    {
+        if(_reload.isReload)
+        {
+
+        }
     }
 
     
