@@ -97,17 +97,21 @@ public class EnemyShot : MonoBehaviour
             //打つ方向の基準を設定
             Vector3 targetDirection = (playerPos - transform.position).normalized;
             //玉を生成
-            GameObject bullet = Instantiate(_enemyBullet.gameObject);
+            //GameObject bullet = Instantiate(_enemyBullet);
+            var bullet = Instantiate(_enemyBullet);
 
-
-            bullet.GetComponent<EnemyBullet>()._targetDirection = targetDirection;
+            bullet._targetDirection = targetDirection;
             bullet.transform.position = transform.position;
 
-            //bullet.transform.LookAt(targetDirection);
-            bullet.transform.LookAt(playerPos);
-
-            //Vector3 cross = Vector3.Cross(targetDirection,transform.right);
-            //bullet.transform.Rotate(cross,90);
+            if (i % 2 == 0)
+            {
+                bullet.transform.LookAt(-transform.forward + transform.position);
+            }
+            else
+            {
+                bullet.transform.LookAt(transform.forward + transform.position);
+            }
+           // bullet.transform.Rotate(bullet.transform.up,90);
 
         
         }
