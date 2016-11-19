@@ -73,6 +73,7 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
+        _isStart = true;
         _recoil = GetComponent<Recoil>();
         //_shotType = shotType.autoReload;
         _aimAssist = GetComponentInChildren<AimAssist>();
@@ -120,6 +121,8 @@ public class PlayerShot : MonoBehaviour
 
         AudioManager.instance.playSe(AudioName.SeName.gun1);
 
+        _recoil.RecoilAnimation();
+
         if (SteamVR.active)
         {
             _device.TriggerHapticPulse(4000);
@@ -137,7 +140,7 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-        _recoil.RecoilAnimation();
+
 
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
