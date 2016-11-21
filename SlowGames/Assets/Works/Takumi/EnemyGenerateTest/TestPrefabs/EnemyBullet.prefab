@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 23000010317409452}
   - component: {fileID: 114000011230568322}
   - component: {fileID: 54000011646260072}
-  - component: {fileID: 114091048891015400}
   m_Layer: 9
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -1216,23 +1215,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 10
+  _rotateSpeed: 100
   _deathEffect: {fileID: 1000012314537836, guid: 151c96ccaca5e3746812ae8b43871188,
     type: 2}
   _targetDirection: {x: 2, y: 2, z: 2}
---- !u!114 &114091048891015400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012707122360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dbe2cbcd1164ecd8aff2286a080854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletSpeed: 10
-  _deathEffect: {fileID: 159750, guid: 275af1ff6b976c540a9dd478a5c473ee, type: 2}
-  _targetDirection: {x: 0, y: 0, z: 0}
+  _doChaseToPlayer: 0
 --- !u!114 &114419280057729808
 MonoBehaviour:
   m_ObjectHideFlags: 1

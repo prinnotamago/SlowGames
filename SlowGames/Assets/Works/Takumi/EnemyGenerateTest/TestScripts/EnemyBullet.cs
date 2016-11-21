@@ -4,27 +4,65 @@ using System.Collections;
 public class EnemyBullet : MonoBehaviour {
 
     [SerializeField]
-    float _bulletSpeed = 10;
+    float _bulletSpeed = 5;
+    [SerializeField]
+    float _rotateSpeed = 100;
+
     [SerializeField]
     GameObject _deathEffect;
 
     public Vector3 _targetDirection;
     bool _isBlow  = false;
 
-	// Update is called once per frame
+    [SerializeField]
+    bool _doChaseToPlayer = false;
+
+
 	void Update()
     {   
         if (_isBlow)
         {
             return;
         }
-        //進行
-        //transform.position += _targetDirection * _bulletSpeed * Time.deltaTime;
-        transform.Translate(transform.forward * _bulletSpeed * Time.deltaTime,Space.World);
+
+        //チェイス
+        if (_doChaseToPlayer)
+        {
+            HormingToTarget();
+        }
+        // 前進
+        transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
+
 
 
 	}
-    
+
+    void HormingToTarget()
+    {
+
+        //FixMe:毎回みないこと
+        Vector3 player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+
+        // ターゲットまでの角度を取得
+        Vector3    vecTarget  = player - transform.position; // ターゲットへのベクトル
+        Vector3    vecForward = transform.TransformDirection(Vector3.forward);   // 弾の正面ベクトル
+        float      angleDiff  = Vector3.Angle(vecForward, vecTarget);            // ターゲットまでの角度
+        float      angleAdd   = (_rotateSpeed * Time.deltaTime);                              // 回転角
+        Quaternion rotTarget  = Quaternion.LookRotation(vecTarget);              // ターゲットへ向けるクォータニオン
+        if (angleDiff <= angleAdd)
+        {
+            // ターゲットが回転角以内なら完全にターゲットの方を向く
+            transform.rotation = rotTarget;
+        }
+        else
+        {
+            // ターゲットが回転角の外なら、指定角度だけターゲットに向ける
+            float t = (angleAdd / angleDiff);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, t);
+        }
+    }
+
+
     void OnTriggerEnter(Collider other)
     {
         //敵キャラ自信にあたってもスルー Todo : 見栄えが悪かったら調整
@@ -59,6 +97,8 @@ public class EnemyBullet : MonoBehaviour {
         Destroy(gameObject);
     }
 
+
+
     //ランダムに弾けます
     IEnumerator RandomBlow()
     {
@@ -90,7 +130,6 @@ public class EnemyBullet : MonoBehaviour {
         //Todo :消す時にパッと消えるのいくないかも
         //消す
         Destroy(this.gameObject);
-
 
     }
 
