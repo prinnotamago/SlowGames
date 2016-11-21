@@ -105,7 +105,7 @@ public class PlayerShot : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_isReload);
+        //Debug.Log(_isReload);
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
 
         if (!_isStart) return;
