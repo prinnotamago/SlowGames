@@ -17,10 +17,15 @@ public class PlayerHP : MonoBehaviour {
     [SerializeField]
     Image _gameOverImage;
 
+    public Image gameOverImage
+    {
+        get { return _gameOverImage; }
+    }
+
     void Start ()
     {
         _playerHp = HP;
-        _gameOverImage.enabled = false;
+        _gameOverImage.gameObject.SetActive(false);
     }
 
    
@@ -31,11 +36,6 @@ public class PlayerHP : MonoBehaviour {
             _playerHp = 0;
         }
       
-        if (_playerHp <= 0)
-        {
-            _gameOverImage.enabled = true;
-        }
-
 	}
 
     void OnTriggerEnter(Collider other)

@@ -117,6 +117,7 @@ public class GameDirector : MonoBehaviour {
     private IEnumerator ResultChangeStage()
     {
         var time = 0.0f;
+        _hp.gameOverImage.gameObject.SetActive(true);
         while(_directionalLight.intensity > 0)
         {
             time += Time.unscaledDeltaTime;
@@ -125,6 +126,7 @@ public class GameDirector : MonoBehaviour {
             yield return null;
         }
         _state = GameState.Result;
+        _hp.gameOverImage.gameObject.SetActive(false);
         _resultCanvas.gameObject.SetActive(true);
     }
 
