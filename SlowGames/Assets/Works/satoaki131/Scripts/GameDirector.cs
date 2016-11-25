@@ -72,8 +72,8 @@ public class GameDirector : MonoBehaviour {
     {
         instance = this;
         _update = new Dictionary<GameState, Action>();
-        _update.Add(GameState.MainGame, MainGameUpdate);
-        _update.Add(GameState.Result, ResultUpdate);
+        _update.Add(GameState.MainGame,MainGameUpdate);
+        _update.Add(GameState.Result,ResultUpdate);
         GameSet();
         StartCoroutine(GameStartCutIn());
         _hp = FindObjectOfType<PlayerHP>();
@@ -84,15 +84,21 @@ public class GameDirector : MonoBehaviour {
 
     }
 
+    [SerializeField]
+    int _clearDeathCount = 30;
+
     private void MainGameUpdate()
     {
         PlayTimeCount();
-        if (_hp.PlayerHp <= 0 && _gamePlay)
+
+        if (_hp.PlayerHp <= 0 && _gamePlay ||
+            _generateManager._deathCount == _clearDeathCount && _gamePlay)
         {
             _gamePlay = false;
             GameSet();
             StartCoroutine(ResultChangeStage());
         }
+
     }
 
     private IEnumerator GameStartCutIn()
