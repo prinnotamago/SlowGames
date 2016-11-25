@@ -7,6 +7,11 @@ public class Shot : MonoBehaviour
     [SerializeField]
     float _bulletSpeed = 100.0f;
 
+    [SerializeField]
+    float destroytime = 5.0f;
+
+    float time;
+
     Rigidbody _rigidbody;
     Vector3 _direction = Vector3.zero;
 
@@ -19,11 +24,13 @@ public class Shot : MonoBehaviour
 
     public void Start()
     {
+        time = destroytime;
         _rigidbody = GetComponent<Rigidbody>();
     }
 
     public void FixedUpdate()
     {
+        TimeOutdestroy();
         ShotTest();
     }
 
@@ -38,5 +45,14 @@ public class Shot : MonoBehaviour
         
         if (col.gameObject.tag == "Weapon" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Player") return;
         Destroy(gameObject);
+    }
+
+    void TimeOutdestroy()
+    {
+        time -= Time.unscaledDeltaTime;
+        if(time<= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
