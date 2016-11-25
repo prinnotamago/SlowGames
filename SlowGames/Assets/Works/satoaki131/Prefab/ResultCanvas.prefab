@@ -364,19 +364,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21efe2dbe465d354ea689ef062619e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lastScore: 0
   _text: {fileID: 114772342491152696}
   _data:
   - score: 0
-    rankName: C
+    rankName: D
+    textColor: {r: 0.784, g: 0, b: 0.884, a: 1}
   - score: 1000
-    rankName: B
+    rankName: C
+    textColor: {r: 1, g: 0, b: 0, a: 1}
   - score: 10000
+    rankName: B
+    textColor: {r: 1, g: 0.541, b: 0, a: 1}
+  - score: 30000
     rankName: A
-  - score: 100000
-    rankName: AA
-  - score: 1000000
+    textColor: {r: 0, g: 1, b: 0.291, a: 1}
+  - score: 50000
     rankName: S
+    textColor: {r: 0, g: 1, b: 0.884, a: 1}
 --- !u!114 &114286467877274612
 MonoBehaviour:
   m_ObjectHideFlags: 1
