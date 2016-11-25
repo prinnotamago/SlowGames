@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4729544501795066}
   - component: {fileID: 198876243569526386}
   - component: {fileID: 199111532907489622}
+  - component: {fileID: 114604368644718726}
   m_Layer: 0
   m_Name: Explosion2
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114604368644718726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141469176545486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03fcdbdf6e352a42abeaa9824f515be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198876243569526386
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -96,7 +108,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1636819900
+  randomSeed: 1697716973
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -140,7 +152,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 8
+      scalar: 9
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -158,7 +170,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.875
+          value: 0.8888889
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -260,7 +272,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 2
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -278,7 +290,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.5
+          value: 0.6
           inSlope: 0
           outSlope: 0
           tangentMode: 0

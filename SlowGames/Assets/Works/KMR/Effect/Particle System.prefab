@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047583255678872}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.52, y: 1.94, z: 4.19}
+  m_LocalPosition: {x: 0, y: 0, z: 3.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,7 +96,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2116768980
+  randomSeed: -587457677
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -260,7 +260,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 3
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -278,7 +278,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.6666667
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -873,10 +873,10 @@ ParticleSystem:
           rgba: 3791708668
         key1:
           serializedVersion: 2
-          rgba: 3389007359
+          rgba: 2214592767
         key2:
           serializedVersion: 2
-          rgba: 1862270976
+          rgba: 1442843727
         key3:
           serializedVersion: 2
           rgba: 0
@@ -892,16 +892,16 @@ ParticleSystem:
         key7:
           serializedVersion: 2
           rgba: 0
-        ctime0: 6554
-        ctime1: 37586
-        ctime2: 60524
+        ctime0: 771
+        ctime1: 21781
+        ctime2: 46453
         ctime3: 60524
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 11951
+        atime1: 21974
         atime2: 45104
         atime3: 64957
         atime4: 0
@@ -914,13 +914,13 @@ ParticleSystem:
       minGradient:
         key0:
           serializedVersion: 2
-          rgba: 4278190335
+          rgba: 3925926911
         key1:
           serializedVersion: 2
-          rgba: 4278199807
+          rgba: 3238002943
         key2:
           serializedVersion: 2
-          rgba: 905969664
+          rgba: 704643072
         key3:
           serializedVersion: 2
           rgba: 0
@@ -937,16 +937,16 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 193
-        ctime1: 28527
-        ctime2: 65535
-        ctime3: 0
+        ctime1: 31611
+        ctime2: 42405
+        ctime3: 42405
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 11951
-        atime2: 47031
+        atime1: 26600
+        atime2: 44525
         atime3: 64957
         atime4: 0
         atime5: 0
