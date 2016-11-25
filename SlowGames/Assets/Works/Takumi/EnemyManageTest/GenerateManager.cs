@@ -14,7 +14,7 @@ public struct WaveData
     public int _enemyLimit;                  //同時出現数の限界値
     public List<EnemyType> _generateTypeList;//どのタイプを出すか
     public List<RareEnemy> _rareEnemyInfo;
-    public int _rareEnemyCount;     //Fixme: publicだめだろ.
+   
 
     public WaveData(int startDieCount,
                     int generateTimingCount,int generateCount,
@@ -29,10 +29,12 @@ public struct WaveData
        _generateTypeList    =  new List<EnemyType>();
        _enemyLimit          =  enemyLimit;
        _generateTypeList    =  generateTypeList;
-       _rareEnemyInfo       = new List<RareEnemy>();
+       _rareEnemyInfo       =  new List<RareEnemy>();
        _rareEnemyInfo       =  rareEnemy;
-       _rareEnemyCount = 0;
+       
     }
+
+ 
 }
 
 [System.Serializable]
@@ -57,7 +59,7 @@ public class GenerateManager : MonoBehaviour
 
     [SerializeField]
     List<WaveData> _waveDate = new List<WaveData>();
-
+    List<int> _rareEnemyCount = new List<int>();
     static int _currentWaveCount = 0;
     public static int GetCurrentWave()
     {
@@ -71,6 +73,11 @@ public class GenerateManager : MonoBehaviour
     {
         //初期化
         _enemyGenerator = this.gameObject.GetComponent<EnemyGenerator>();
+        for (int i = 0; i < _waveDate.Count; i++)
+        {
+            _rareEnemyCount.Add(0);
+        }
+
         _deathCount = 0;
 
         //開幕３体配置.
@@ -212,17 +219,22 @@ public class GenerateManager : MonoBehaviour
 
         }
 
-        //タイミングに合わせて、ホーミングタイプのキャラを出す
-        if (_deathCount >= waveData._rareEnemyInfo[waveData._rareEnemyCount].generateTiming)
-        {
+        //現在出ているレアタイプの数
+        int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
 
-            //最大数でてなかったら
-            if (waveData._rareEnemyInfo.Count > waveData._rareEnemyCount)
+        //最大数でてたら通らない
+        if (waveData._rareEnemyInfo.Count > rareEnemyCount)
+        {
+            //タイミングに合わせて、ホーミングタイプのキャラを出す
+            if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
-                SetEnemy(1, waveData._rareEnemyInfo[waveData._rareEnemyCount].type);
-                waveData._rareEnemyCount += 1;
+
+                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
+                _rareEnemyCount[_currentWaveCount] += 1;
+
+
             }
-        } 
+        }
 
         //死ぬごとに、敵キャラを生成
         int liveEnemysCount = GetLiveEnemyCount();
