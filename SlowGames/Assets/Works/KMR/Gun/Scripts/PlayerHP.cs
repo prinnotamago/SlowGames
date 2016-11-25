@@ -14,6 +14,8 @@ public class PlayerHP : MonoBehaviour {
         get { return _playerHp; }
     }
 
+    bool _isHit;
+
     [SerializeField]
     Image _gameOverImage;
 
@@ -22,8 +24,15 @@ public class PlayerHP : MonoBehaviour {
         get { return _gameOverImage; }
     }
 
+    [SerializeField]
+    float _timeRecovery = 5.0f;
+
+    float time;
+
     void Start ()
     {
+        time = _timeRecovery;
+        _isHit = false;
         _playerHp = HP;
         _gameOverImage.gameObject.SetActive(false);
     }
@@ -31,12 +40,14 @@ public class PlayerHP : MonoBehaviour {
    
 	void Update ()
     {
+        if (_isHit) { _isHit = false; }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             _playerHp = 0;
         }
-      
-	}
+        TimeOutRecovery();
+        Debug.Log(_isHit);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -50,5 +61,28 @@ public class PlayerHP : MonoBehaviour {
     {
         ScoreManager.instance.AddInpactDamageCount();
         _playerHp--;
+        _isHit = true;
     }
+
+    void TimeOutRecovery()
+    {
+        if (_isHit || _playerHp == HP)
+        {
+            time = _timeRecovery;
+            return;
+        }
+
+        time -= Time.unscaledDeltaTime;
+
+        if(time <= 0)
+        {
+            _playerHp++;
+            if(_playerHp >= HP)
+            {
+                _playerHp = HP;
+            }
+        }
+
+    }
+
 }
