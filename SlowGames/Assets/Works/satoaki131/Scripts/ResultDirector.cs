@@ -5,14 +5,6 @@ using UnityEngine.UI;
 
 public class ResultDirector : MonoBehaviour {
 
-    [SerializeField]
-    private Text _score = null;
-
-    void Start()
-    {
-        _score.text = "スコア： " + ScoreManager.instance.getScore();
-    }
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
