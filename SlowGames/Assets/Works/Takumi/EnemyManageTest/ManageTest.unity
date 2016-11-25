@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 860264887}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,7 +719,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1133867846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.02, y: 2.16, z: -10.2}
+  m_LocalPosition: {x: 14.02, y: 9.49, z: -10.2}
   m_LocalScale: {x: 2, y: 2, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1167,15 +1167,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+    - target: {fileID: 114000011818661132, guid: f57dcbc6ba4f04d23a3f356147013b21,
         type: 2}
-      propertyPath: _waveDate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
-        type: 2}
-      propertyPath: _waveDate.Array.data[0]._generateTypeList.Array.size
-      value: 1
+      propertyPath: _generateList.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010612609758, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1211,23 +1206,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
         type: 2}
-      propertyPath: _waveDate.Array.data[0]._startDieCount
+      propertyPath: _waveDate.Array.data[0]._rareEnemyCount
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
-        type: 2}
-      propertyPath: _waveDate.Array.data[0]._generateTimingCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
-        type: 2}
-      propertyPath: _waveDate.Array.data[0]._generateCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
-        type: 2}
-      propertyPath: _waveDate.Array.data[0]._enemyLimit
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}

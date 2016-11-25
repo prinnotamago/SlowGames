@@ -13,12 +13,13 @@ public struct WaveData
     public int _generateCount;           //何体ずつだすか
     public int _enemyLimit;                  //同時出現数の限界値
     public List<EnemyType> _generateTypeList;//どのタイプを出すか
-    public RareEnemy _rareEnemyInfo;
+    public List<RareEnemy> _rareEnemyInfo;
+    public int _rareEnemyCount;     //Fixme: publicだめだろ.
 
     public WaveData(int startDieCount,
                     int generateTimingCount,int generateCount,
                     int enemyLimit,List<EnemyType> generateTypeList,
-                    RareEnemy rareEnemy)
+                    List<RareEnemy> rareEnemy)
     {
 
        _startDieCount = startDieCount;
@@ -28,28 +29,19 @@ public struct WaveData
        _generateTypeList    =  new List<EnemyType>();
        _enemyLimit          =  enemyLimit;
        _generateTypeList    =  generateTypeList;
+       _rareEnemyInfo       = new List<RareEnemy>();
        _rareEnemyInfo       =  rareEnemy;
-        
+       _rareEnemyCount = 0;
     }
 }
 
+[System.Serializable]
 public struct RareEnemy
 {
     public EnemyType type;
-    public float     generateRate;
-    public int       generateMaxCount;
+    public int       generateTiming;
 }
 
-//static public class ProbabilityRatio<T>
-//{
-//    static public T GetResult(Dictionary<T,int> eventes)
-//    {
-//        int sum = 0;
-////        foreach()
-////        {}
-//    }
-// }
-//
 
 public class GenerateManager : MonoBehaviour
 {
@@ -154,20 +146,17 @@ public class GenerateManager : MonoBehaviour
             _currentEnemysCount[(int)targetPosition] += 1;
             //生成
             _enemyGenerator.GenerateEnemy(EnemyType.Easy, targetPosition);    
-
-
-                                        
+                         
     }
 
     void Update()
     {
 
-        
         //test: ”G”Keyで生成
         if (Input.GetKeyDown(KeyCode.G))
         {
             //SetEnemy();
-
+     
             string debugCount = "";
             foreach (var count in _currentEnemysCount)
             {
@@ -212,7 +201,7 @@ public class GenerateManager : MonoBehaviour
         var waveData = _waveDate[_currentWaveCount];
 
         //ウェーブのデータが最大にいったらそれ以上はいかない
-        if (_currentWaveCount  < _waveDate.Count - 1)
+        if (_currentWaveCount < _waveDate.Count - 1)
         {
 
             //敵の死亡数が一定数行っていたらウェーブを更新
@@ -223,14 +212,18 @@ public class GenerateManager : MonoBehaviour
 
         }
 
+        //タイミングに合わせて、ホーミングタイプのキャラを出す
+        if (_deathCount > waveData._rareEnemyInfo[waveData._rareEnemyCount].generateTiming)
+        {
+            SetEnemy(1,waveData._rareEnemyInfo[waveData._rareEnemyCount].type);
+            waveData._rareEnemyCount += 1;
+        } 
+
         //死ぬごとに、敵キャラを生成
         int liveEnemysCount = GetLiveEnemyCount();
 
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
-           //レアキャラを出すか判定.
-           // if(waveData._rareEnemyInfo.generateRate == )
-
             SetEnemy(waveData._generateCount,waveData._generateTypeList);
         }
 
@@ -323,6 +316,60 @@ public class GenerateManager : MonoBehaviour
 
         StartCoroutine(DelayGenerate(enemyTypes,count,0.5f));
     }
+    void SetEnemy(int count,EnemyType enemyType)
+    {
+
+        StartCoroutine(DelayGenerate(enemyType,count,0.5f));
+    }
+
+
+    //一気に生成させない
+    IEnumerator DelayGenerate(EnemyType enemyType, int count = 1, float delayTime = 0.5f)
+    {
+
+        float counter = 0;
+        
+        for (int i = 0; i < count; i++)
+        {
+
+            //地上の出現位置をランダムに取得 ,//そこに敵キャラが一定以上いたら、再取得
+            TargetPosition generatePosition = _enemyGenerator.GetRandomGeneratePos(_currentEnemysCount, _enemyLimit);
+
+            //位置を示さないものが帰ってきたら処理しない
+            //なおこれはよくない処理です
+            if (generatePosition == TargetPosition.Last)
+            {
+                Debug.Log("生成できませんでした。");
+
+                break;
+            }
+
+            //生成した場所のカウントを覚えておく
+            _currentEnemysCount[(int)generatePosition] += 1;
+
+            //生成
+            _enemyGenerator.GenerateEnemy(enemyType, generatePosition);
+
+            counter = delayTime;
+
+            yield return null;
+
+            while (true)
+            {
+                counter -= Time.deltaTime;
+
+                if (counter < 0)
+                {
+                  break;
+                }
+
+                yield return null;
+            }
+
+            yield return null;
+        }
+
+    }
 
     //一気に生成させない
     IEnumerator DelayGenerate(List<EnemyType> enemyTypes, int count = 1, float delayTime = 0.5f)
@@ -385,6 +432,5 @@ public class GenerateManager : MonoBehaviour
     }
 
 
-  
 }
 
