@@ -126,6 +126,7 @@ public class GameDirector : MonoBehaviour {
             yield return null;
         }
         _state = GameState.Result;
+        _generateManager.DestroyAllEnemy();
         _hp.gameOverImage.gameObject.SetActive(false);
         _resultCanvas.gameObject.SetActive(true);
     }
