@@ -40,13 +40,16 @@ public class PlayerHP : MonoBehaviour {
    
 	void Update ()
     {
+        //Debug.Log(_isHit);
+        TimeOutRecovery();
+
         if (_isHit) { _isHit = false; }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             _playerHp = 0;
         }
-        TimeOutRecovery();
-        Debug.Log(_isHit);
+        
+       // Debug.Log(_playerHp);
     }
 
     void OnTriggerEnter(Collider other)
