@@ -213,10 +213,15 @@ public class GenerateManager : MonoBehaviour
         }
 
         //タイミングに合わせて、ホーミングタイプのキャラを出す
-        if (_deathCount > waveData._rareEnemyInfo[waveData._rareEnemyCount].generateTiming)
+        if (_deathCount >= waveData._rareEnemyInfo[waveData._rareEnemyCount].generateTiming)
         {
-            SetEnemy(1,waveData._rareEnemyInfo[waveData._rareEnemyCount].type);
-            waveData._rareEnemyCount += 1;
+
+            //最大数でてなかったら
+            if (waveData._rareEnemyInfo.Count > waveData._rareEnemyCount)
+            {
+                SetEnemy(1, waveData._rareEnemyInfo[waveData._rareEnemyCount].type);
+                waveData._rareEnemyCount += 1;
+            }
         } 
 
         //死ぬごとに、敵キャラを生成
