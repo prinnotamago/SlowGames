@@ -25,7 +25,8 @@ public class Enemy : MonoBehaviour
         public int   shotFrequency;      //何回にどのくらい撃つかの頻度.
         public int   chamberValue;       //何発連続で撃つか
         public float shotDelay;     ////連続で撃つ時の遅延時間
-          
+
+        public float generateRate; //出現率
     }
 
     [SerializeField]
@@ -58,7 +59,8 @@ public class Enemy : MonoBehaviour
     {
        
         if (other.gameObject.tag == TagName.Bullet)
-        {
+        {  
+             //2
             if (death)
             {
                 return;

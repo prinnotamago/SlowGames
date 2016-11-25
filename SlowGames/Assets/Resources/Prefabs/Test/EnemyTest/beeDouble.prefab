@@ -362,6 +362,7 @@ MonoBehaviour:
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
+    generateRate: 0
   - moveSpeed: 3
     stayTimeMax: 1
     sideMoveRange: 2
@@ -370,6 +371,7 @@ MonoBehaviour:
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
+    generateRate: 0
   _generatePostion: 4
   _moveSpeed: 3
   _stayTimeMax: 1

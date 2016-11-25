@@ -13,25 +13,44 @@ public struct WaveData
     public int _generateCount;           //何体ずつだすか
     public int _enemyLimit;                  //同時出現数の限界値
     public List<EnemyType> _generateTypeList;//どのタイプを出すか
+    public RareEnemy _rareEnemyInfo;
 
     public WaveData(int startDieCount,
                     int generateTimingCount,int generateCount,
-                    int enemyLimit,List<EnemyType> generateTypeList)
+                    int enemyLimit,List<EnemyType> generateTypeList,
+                    RareEnemy rareEnemy)
     {
 
        _startDieCount = startDieCount;
        
        _generateTimingCount =  generateTimingCount;
-       _generateCount       = generateCount;
-       _generateTypeList    = new List<EnemyType>();
-       _enemyLimit          = enemyLimit;
+       _generateCount       =  generateCount;
+       _generateTypeList    =  new List<EnemyType>();
+       _enemyLimit          =  enemyLimit;
        _generateTypeList    =  generateTypeList;
+       _rareEnemyInfo       =  rareEnemy;
         
     }
-
 }
 
+public struct RareEnemy
+{
+    public EnemyType type;
+    public float     generateRate;
+    public int       generateMaxCount;
+}
+
+//static public class ProbabilityRatio<T>
+//{
+//    static public T GetResult(Dictionary<T,int> eventes)
+//    {
+//        int sum = 0;
+////        foreach()
+////        {}
+//    }
+// }
 //
+
 public class GenerateManager : MonoBehaviour
 {
 
@@ -52,9 +71,6 @@ public class GenerateManager : MonoBehaviour
     {
          return _currentWaveCount;
     }
-
-
-
 
     //死亡数をカウントします
     int _deathCount = 0;
@@ -160,7 +176,7 @@ public class GenerateManager : MonoBehaviour
             Debug.Log(debugCount);
 
         }
-
+       
     }
 
     //死んだ回数を記憶
@@ -189,7 +205,7 @@ public class GenerateManager : MonoBehaviour
     }
 
 
-    //FixMe://２体死ぬごとに、敵キャラを生成
+    //敵キャラを生成
     void UpdateEnemyCount()
     {
 
@@ -206,11 +222,15 @@ public class GenerateManager : MonoBehaviour
             }
 
         }
+
         //死ぬごとに、敵キャラを生成
         int liveEnemysCount = GetLiveEnemyCount();
 
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
+           //レアキャラを出すか判定.
+           // if(waveData._rareEnemyInfo.generateRate == )
+
             SetEnemy(waveData._generateCount,waveData._generateTypeList);
         }
 
@@ -350,7 +370,23 @@ public class GenerateManager : MonoBehaviour
             yield return null;
         }
 
-
     }
+
+    void DestroyAllEnemy()
+    {
+
+        //List<Enemy> enemys = new List<Enemy>();
+        var enemys = GameObject.FindObjectsOfType<Enemy>();
+
+        foreach (var enemy in enemys)
+        {
+            //
+            Debug.Log("kill");
+            Destroy(enemy.gameObject);
+        }
+    }
+
+
   
 }
+
