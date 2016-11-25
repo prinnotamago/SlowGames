@@ -29,11 +29,44 @@ public class SlowMotion : MonoBehaviour {
     /// </summary>
     public bool isSlow { get { return _isSlow; } }
 
+    /// <summary>
+    /// スローに制限をつけるかどうか
+    /// </summary>
     [SerializeField]
     bool _isLimit = false;
+    /// <summary>
+    /// スローの最大時間
+    /// </summary>
     [SerializeField]
-    float _slowTimeMax = 5.0f;
+    float _slowTimeMax = 10.0f;
     public float slowTimeMax { get { return _slowTimeMax; } }
+
+    /// <summary>
+    /// スローがだんだん切れていく時間
+    /// </summary>
+    [SerializeField]
+    float _slowDownLimitTime = 5.0f;
+
+    /// <summary>
+    /// スローがだんだん切れていく時間になったらどのくらいの速さで戻るのかを計算で求める
+    /// </summary>
+    float _slowDownSpeed = 0.0f;
+
+    /// <summary>
+    /// スローの速さ
+    /// </summary>
+    float _slowSpeed = 0.0f;
+
+    /// <summary>
+    ///  スローがだんだん切れていく時間になったらエフェクトの範囲を狭める速さを計算で求める
+    /// </summary>
+    float _effectownSpeed = 0.0f;
+
+    float _effectRangeMax = 0.8f;
+    float _effectRangeSize = 0.8f;
+
+    bool _isEffectStart = false;
+
     //[SerializeField]
     float _slowTime = 0.0f;
     public float slowTime {
@@ -77,9 +110,25 @@ public class SlowMotion : MonoBehaviour {
         if (!_isLimit) { return; }
         if (SlowMotion._instance.isSlow)
         {
-            if (slowTime > 0.0f)
+            if (slowTime > _slowDownLimitTime)
             {
                 _slowTime -= Time.unscaledDeltaTime;
+            }
+            else if (slowTime > 0.0f)
+            {
+                _slowTime -= Time.unscaledDeltaTime;
+                Time.timeScale += Time.unscaledDeltaTime * _slowDownSpeed;
+
+                _effectRangeSize = (slowTime / _slowDownLimitTime) * _effectRangeMax;
+
+                //float size = (_effectRangeSize - _v.intensity) / _slowDownLimitTime;
+
+                //_v.intensity -= Time.unscaledDeltaTime * size;
+
+                if (!_isEffectStart)
+                {
+                    _v.intensity = _effectRangeSize;
+                }
             }
             else
             {
@@ -132,6 +181,7 @@ public class SlowMotion : MonoBehaviour {
     {
 
         Time.timeScale = 1.0f;
+        _slowSpeed = 1.0f;
 
         AudioManager.instance.changeSourceAllPitch(1.0f);
 
@@ -154,6 +204,8 @@ public class SlowMotion : MonoBehaviour {
     {
 
         Time.timeScale = speed;
+        _slowSpeed = speed;
+        _slowDownSpeed = (1.0f - speed) / _slowDownLimitTime;
 
         AudioManager.instance.changeSourceAllPitch(speed);
 
@@ -188,12 +240,18 @@ public class SlowMotion : MonoBehaviour {
 
     IEnumerator SlowStart()
     {
-        while (_v.intensity < 0.8f)
+        _isEffectStart = true;
+        if (slowTime > _slowDownLimitTime)
+        {
+            _effectRangeSize = _effectRangeMax;
+        }
+        while (_v.intensity < _effectRangeSize)
         {
             if (!SlowMotion._instance.isSlow) { break; }
             _v.intensity += 0.1f;
             yield return 0;
         }
+        _isEffectStart = false;
     }
 
     IEnumerator SlowEnd()
