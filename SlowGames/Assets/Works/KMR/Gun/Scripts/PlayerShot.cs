@@ -91,7 +91,7 @@ public class PlayerShot : MonoBehaviour
         _isReload = false;
         _reloadHash = Animator.StringToHash("isReload");
         _reShotHash = Animator.StringToHash("reShot");
-        _isStart = true;
+        //_isStart = true;
         _recoil = GetComponent<Recoil>();
         //_shotType = shotType.autoReload;
         _aimAssist = GetComponentInChildren<AimAssist>();
