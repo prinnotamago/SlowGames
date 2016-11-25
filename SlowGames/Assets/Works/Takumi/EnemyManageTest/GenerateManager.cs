@@ -34,7 +34,6 @@ public struct WaveData
        
     }
 
- 
 }
 
 [System.Serializable]
@@ -67,7 +66,7 @@ public class GenerateManager : MonoBehaviour
     }
 
     //死亡数をカウントします
-    int _deathCount = 0;
+    public int _deathCount = 0;
 
     void Start()
     {
