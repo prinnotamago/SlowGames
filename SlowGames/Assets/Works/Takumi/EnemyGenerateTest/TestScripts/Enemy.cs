@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             //Test:スコア
             ScoreManager.instance.AddHitEnemyCount();
-            //ScoreManager.instance.AddScore(_type);
+            ScoreManager.instance.AddScore(_type);
             Destroy(this.gameObject);
         }
     }
