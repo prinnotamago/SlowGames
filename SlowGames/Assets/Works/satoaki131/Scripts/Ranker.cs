@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Ranker : MonoBehaviour {
 
-    [SerializeField] //Debug用、シリアライズはあ後で消します
     private int _lastScore = 0; //最終スコア
 
     [SerializeField]
@@ -16,6 +15,7 @@ public class Ranker : MonoBehaviour {
     {
         public int score;
         public string rankName;
+        public Color textColor;
     }
 
     [SerializeField, Tooltip("ランクに合わせたスコアを入れる")]
@@ -23,12 +23,19 @@ public class Ranker : MonoBehaviour {
 
     void Start()
     {
-        //_lastScore = ScoreManager.instance.getScore(); //最後はコメント外す
+        _lastScore = ScoreManager.instance.getScore(); //最後はコメント外す
         for(int i = 0; i < _data.Length; i++)
         {
             if(_lastScore > _data[i].score) { continue; }
             _text.text =  _data[i].rankName;
+            _text.color = _data[i].textColor;
             break;
+        }
+        //最高スコアより大きかった時の処理
+        if(_lastScore > _data[_data.Length - 1].score)
+        {
+            _text.text = _data[_data.Length - 1].rankName;
+            _text.color = _data[_data.Length - 1].textColor;
         }
     }
 
