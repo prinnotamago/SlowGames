@@ -100,8 +100,6 @@ public class EnemyGenerator : MonoBehaviour
         _generatePositionDic.Add(TargetPosition.UpFront,_generateUpFront);
     }
 
-    [SerializeField]
-    EnemyType _testGenerateType;
 
     //ランダムに,生成位置を取得する
     public  TargetPosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
