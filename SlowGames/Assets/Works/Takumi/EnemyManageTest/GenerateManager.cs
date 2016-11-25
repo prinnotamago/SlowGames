@@ -372,7 +372,7 @@ public class GenerateManager : MonoBehaviour
 
     }
 
-    void DestroyAllEnemy()
+    public void DestroyAllEnemy()
     {
 
         //List<Enemy> enemys = new List<Enemy>();
@@ -380,8 +380,6 @@ public class GenerateManager : MonoBehaviour
 
         foreach (var enemy in enemys)
         {
-            //
-            Debug.Log("kill");
             Destroy(enemy.gameObject);
         }
     }
