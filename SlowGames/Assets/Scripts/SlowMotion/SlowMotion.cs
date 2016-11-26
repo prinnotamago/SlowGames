@@ -117,8 +117,7 @@ public class SlowMotion : MonoBehaviour {
             else if (slowTime > 0.0f)
             {
                 _slowTime -= Time.unscaledDeltaTime;
-                float speed = Time.timeScale + (Time.unscaledDeltaTime * _slowDownSpeed);
-                GameSpeed(speed);
+                Time.timeScale += Time.unscaledDeltaTime * _slowDownSpeed;
 
                 _effectRangeSize = (slowTime / _slowDownLimitTime) * _effectRangeMax;
 
