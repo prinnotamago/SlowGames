@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -28,6 +29,9 @@ public class GameDirector : MonoBehaviour {
 
     [SerializeField]
     private Canvas _resultCanvas = null;
+
+    [SerializeField]
+    private Image _gameClearImage = null;
 
     private Dictionary<GameState, Action> _update = null;
 
@@ -96,7 +100,7 @@ public class GameDirector : MonoBehaviour {
         {
             _gamePlay = false;
             GameSet();
-            StartCoroutine(ResultChangeStage());
+            StartCoroutine(ResultChangeStage(_hp.PlayerHp <= 0 ? _hp.gameOverImage : _gameClearImage));
         }
 
     }
@@ -120,10 +124,10 @@ public class GameDirector : MonoBehaviour {
         _update[_state]();
     }
 
-    private IEnumerator ResultChangeStage()
+    private IEnumerator ResultChangeStage(Image activeImage)
     {
         var time = 0.0f;
-        _hp.gameOverImage.gameObject.SetActive(true);
+        activeImage.gameObject.SetActive(true);
         while(_directionalLight.intensity > 0)
         {
             time += Time.unscaledDeltaTime;
@@ -133,7 +137,7 @@ public class GameDirector : MonoBehaviour {
         }
         _state = GameState.Result;
         _generateManager.DestroyAllEnemy();
-        _hp.gameOverImage.gameObject.SetActive(false);
+        activeImage.gameObject.SetActive(false);
         _resultCanvas.gameObject.SetActive(true);
     }
 

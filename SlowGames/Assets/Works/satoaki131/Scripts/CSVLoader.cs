@@ -21,13 +21,6 @@ public class CSVData
     public float _test;
 }
 
-public class TrophyData
-{
-    public TrophyData()
-    {
-
-    }
-}
 
 /// <summary>
 /// CSV読み込み用

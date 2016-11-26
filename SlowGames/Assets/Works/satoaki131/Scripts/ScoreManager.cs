@@ -26,18 +26,15 @@ public class ScoreManager : MonoBehaviour
         public int score;
     }
 
-    [System.Serializable]//Sword用
-    public struct SwordEnemyData
-    {
-        public SlashSword.SlashPattern _type;
-        public int score;
-    }
+    //[System.Serializable]//Sword用
+    //public struct SwordEnemyData
+    //{
+    //    public SlashSword.SlashPattern _type;
+    //    public int score;
+    //}
 
     public GunEnemyData[] _gunData = null;
-    public SwordEnemyData[] _swordData = null;
-
-    [SerializeField]
-    private string[] _trophy = null;
+    //public SwordEnemyData[] _swordData = null;
 
     [SerializeField, Tooltip("目標クリアタイム")]
     private float _targetClearTime = 0.0f;
@@ -120,11 +117,11 @@ public class ScoreManager : MonoBehaviour
         return this;
     }
 
-    public ScoreManager AddScore(SlashSword.SlashPattern type)
-    {
-        AddScore(_swordData[(int)type].score);
-        return this;
-    }
+    //public ScoreManager AddScore(SlashSword.SlashPattern type)
+    //{
+    //    AddScore(_swordData[(int)type].score);
+    //    return this;
+    //}
 
     /// <summary>
     /// 弾を撃った数を足していく
@@ -202,10 +199,4 @@ public class ScoreManager : MonoBehaviour
 
         //_data = CSVLoader.ScoreDataLoad("/Resources/CSV/test.csv");
     }
-
-
-    void Update()
-    {
-    }
-
 }
