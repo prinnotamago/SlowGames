@@ -27,11 +27,11 @@ public class PlayerHP : MonoBehaviour {
     [SerializeField]
     float _timeRecovery = 5.0f;
 
-    float time;
+    float _time;
 
     void Start ()
     {
-        time = _timeRecovery;
+        _time = _timeRecovery;
         _isHit = false;
         _playerHp = HP;
         _gameOverImage.gameObject.SetActive(false);
@@ -71,13 +71,13 @@ public class PlayerHP : MonoBehaviour {
     {
         if (_isHit || _playerHp == HP)
         {
-            time = _timeRecovery;
+            _time = _timeRecovery;
             return;
         }
 
-        time -= Time.unscaledDeltaTime;
+        _time -= Time.unscaledDeltaTime;
 
-        if(time <= 0)
+        if(_time <= 0)
         {
             _playerHp++;
             if(_playerHp >= HP)
