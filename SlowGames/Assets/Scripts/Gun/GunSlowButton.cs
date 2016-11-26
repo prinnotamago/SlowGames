@@ -17,6 +17,9 @@ public class GunSlowButton : MonoBehaviour {
     bool _isPushButtonLeft = false;
     int _countLeft = 0;
 
+    [SerializeField]
+    float _speed = 0.05f;
+
     //[SerializeField]
     //UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration _v;
 
@@ -67,7 +70,7 @@ public class GunSlowButton : MonoBehaviour {
             }
             else
             {
-                SlowMotion._instance.GameSpeed(0.1f);
+                SlowMotion._instance.GameSpeed(_speed);
                 //StartCoroutine(SlowStart());
             }
 
