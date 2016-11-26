@@ -335,8 +335,8 @@ public class SwordEnemyMover : MonoBehaviour
             //自分がどこで生成されていたかを死に際に渡す
             FindObjectOfType<GenerateSwordEnemy>().UpdateEnemyCount(_data.generatePosNumber);
             //Score加算
-            ScoreManager.instance.AddScore(_data.enemyPattern);
-            ScoreManager.instance.AddHitEnemyCount();
+            //ScoreManager.instance.AddScore(_data.enemyPattern);
+            //ScoreManager.instance.AddHitEnemyCount();
             Destroy(gameObject);
         }
     }
