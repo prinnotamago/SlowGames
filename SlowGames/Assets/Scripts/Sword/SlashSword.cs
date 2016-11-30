@@ -21,8 +21,8 @@ public class SlashSword : MonoBehaviour {
     public bool IsAttack { get { return isAttack; } }
 
     // テスト用
-    [SerializeField]
-    MeshRenderer mat;
+    //[SerializeField]
+    //MeshRenderer mat;
 
     // 斬る種類
     public enum SlashPattern
@@ -39,6 +39,8 @@ public class SlashSword : MonoBehaviour {
 
         DOWNRIGHT_UPLEFT,   // 右下から左上に斬る
         DOWNLEFT_UPRIGHT,   // 左下から右上に斬る
+
+        ALL_RANGE,          // 全方向
     }
     SlashPattern _pattern = SlashPattern.NONE;
     public SlashPattern pattern { get { return _pattern; } }
@@ -91,13 +93,13 @@ public class SlashSword : MonoBehaviour {
         // 移動距離が加速度を超えているか
         if (length > acceleration)
         {
-            mat.material.color = Color.red;
+            //mat.material.color = Color.red;
 
             _pattern = UpdatePattern(c);
         }
         else
         {
-            mat.material.color = Color.white;
+            //mat.material.color = Color.white;
         }
 
         // 判定があるかないか

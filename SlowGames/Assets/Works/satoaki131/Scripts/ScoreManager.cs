@@ -2,29 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour {
-
+public class ScoreManager : MonoBehaviour
+{
+    //トータルスコア
     private int _score = 0;
-
-    private int _hitEnemyCount = 0;
+    //エネミー撃破数
+    private int _killedEnemyCount = 0;
+    //弾を出した数
     private int _shotCount = 0;
-
+    //経過時間
     private float _lifeTimeCount = 0.0f;
-
+    //エネミーの弾を弾いた数
     private int _flipEnemyBulletCount = 0;
+    //被弾数
+    private int _inpactDamageCount = 0;
 
-    [System.Serializable]
-    public struct EnemyData
+    //List<CSVData> _data = null;
+
+    [System.Serializable] //Gun用
+    public struct GunEnemyData
     {
         public EnemyType type;
         public int score;
     }
 
-    public EnemyData[] _enemyData = null;
+    //[System.Serializable]//Sword用
+    //public struct SwordEnemyData
+    //{
+    //    public SlashSword.SlashPattern _type;
+    //    public int score;
+    //}
 
-    /// <summary>
-    /// インスタンスを所得
-    /// </summary>
+    public GunEnemyData[] _gunData = null;
+    //public SwordEnemyData[] _swordData = null;
+
+    [SerializeField, Tooltip("目標クリアタイム")]
+    private float _targetClearTime = 0.0f;
+
     public static ScoreManager instance
     {
         get; private set;
@@ -35,7 +49,16 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     public float getHitParsent
     {
-        get{ return (_hitEnemyCount / (float)_shotCount) * 100; }
+        get { return (_killedEnemyCount / (float)_shotCount) * 100; }
+    }
+
+    /// <summary>
+    /// Scoreを所得
+    /// </summary>
+    /// <returns></returns>
+    public int getScore()
+    {
+        return _score;
     }
 
     /// <summary>
@@ -43,19 +66,62 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     public int HitEnemyCount
     {
-        get { return _hitEnemyCount; }
+        get { return _killedEnemyCount; }
     }
 
+    /// <summary>
+    /// 時間を所得
+    /// </summary>
     public float LifeTime
     {
-        get{ return _lifeTimeCount; }
+        get { return _lifeTimeCount; }
     }
 
+    /// <summary>
+    /// 目標クリアタイムの達成率
+    /// 100%以上の場合は100％表示する
+    /// </summary>
+    public float TargetClearTimePersent
+    {
+        get { return (_targetClearTime / _lifeTimeCount) * 100 >= 100 ? 100 : (_targetClearTime / _lifeTimeCount) * 100; }
+    }
+
+    /// <summary>
+    /// Enemyの弾と当たった数の所得
+    /// </summary>
+    public int enemyBulletCount
+    {
+        get { return _flipEnemyBulletCount; }
+    }
+
+    /// <summary>
+    /// 被弾数の所得
+    /// </summary>
+    public int getInpactDamageCount
+    {
+        get { return _inpactDamageCount; }
+    }
+
+    /// <summary>
+    /// Scoreを加算する関数
+    /// </summary>
+    /// <param name="score"></param>
+    public void AddScore(int score)
+    {
+        _score += score;
+    }
+    
     public ScoreManager AddScore(EnemyType type)
     {
-        _score += _enemyData[(int)type].score;
+        AddScore(_gunData[(int)type].score);
         return this;
     }
+
+    //public ScoreManager AddScore(SlashSword.SlashPattern type)
+    //{
+    //    AddScore(_swordData[(int)type].score);
+    //    return this;
+    //}
 
     /// <summary>
     /// 弾を撃った数を足していく
@@ -73,7 +139,7 @@ public class ScoreManager : MonoBehaviour {
     /// <returns></returns>
     public ScoreManager GameTimeCount()
     {
-        _lifeTimeCount += Time.unscaledTime;
+        _lifeTimeCount += Time.unscaledDeltaTime;
         return this;
     }
 
@@ -83,7 +149,17 @@ public class ScoreManager : MonoBehaviour {
     /// <returns></returns>
     public ScoreManager AddHitEnemyCount()
     {
-        _hitEnemyCount++;
+        _killedEnemyCount++;
+        return this;
+    }
+
+    /// <summary>
+    /// 敵の弾にプレイヤーが当たった数を足していく
+    /// </summary>
+    /// <returns></returns>
+    public ScoreManager AddInpactDamageCount()
+    {
+        _inpactDamageCount++;
         return this;
     }
 
@@ -104,14 +180,14 @@ public class ScoreManager : MonoBehaviour {
     {
         _lifeTimeCount = 0.0f;
         _shotCount = 0;
-        _hitEnemyCount = 0;
+        _killedEnemyCount = 0;
         _flipEnemyBulletCount = 0;
         _score = 0;
     }
 
     void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -120,11 +196,7 @@ public class ScoreManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        //_data = CSVLoader.ScoreDataLoad("/Resources/CSV/test.csv");
     }
-
-
-    void Update()
-    {
-    }
-
 }

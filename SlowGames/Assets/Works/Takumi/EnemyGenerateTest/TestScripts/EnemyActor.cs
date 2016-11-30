@@ -6,41 +6,32 @@ using System.Collections.Generic;
 //test: えねみーの動きを管理.
 public class EnemyActor : MonoBehaviour
 {
-    //
-//    //移動速度,移動時間,
-//    [SerializeField,Range(0,100)]
-//    float _moveSpeed   = 3.0f;
-//    float _sideMoveSpeed = 3.0f;
-//    [SerializeField,Range(0,100)]
-//    float _sideMoveSpeedMax = 1.0f;
-//
-//    [SerializeField,Range(0,5)]
-//    float _moveTimeMax = 1.0f;
-//
-//    //待機時間
-//    [SerializeField,Range(0,5)]
-//    float _stayTimeMax = 1.0f;
-//
-//    //横移動の幅
-//    [SerializeField,Range(0,10)]
-//    float _sideMoveRange = 8.0f;
-//
-//    //行動中のカウントをする際にしようします
-//    float _activeCounter = 0;
-//    [SerializeField,Range(0,5)]
-//    float _activeTimeMax = 2;
-
+ 
     //速度,攻撃頻度等を参照する
     Enemy _enemy;
+    [SerializeField]
+    Animator _enemyAnimator;
+
+    enum AnimationState
+    {
+        instruition = 0,
+        Fighting = 1,
+        JustBeforeShot = 2,
+        Shot = 3,
+        Shoted = 4,
+
+    }
 
     enum ActionType
     {
 
         //MoveToGeneratePos,
-        TargetRun,
-        ProvocationMove,
-        Stay,
-        Shot,
+        FisrtAction = 0,
+        TargetRun = 1,
+        ProvocationMove = 2,
+        Stay = 3,
+        Shot = 4,
+   
     }
 
     [SerializeField]
@@ -57,7 +48,7 @@ public class EnemyActor : MonoBehaviour
 
     //
     bool _isShot = false;
-
+    int _stayCount = 0;
     //実行関数
     Dictionary<ActionType,System.Action> _actionDic = new Dictionary<ActionType, System.Action>();
 
@@ -66,6 +57,14 @@ public class EnemyActor : MonoBehaviour
         _enemy = this.gameObject.GetComponent<Enemy>();
         _navimesh = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
+        _actionDic = new Dictionary<ActionType, System.Action>();
+
+        _actionDic.Add(ActionType.FisrtAction,FirstAction);
+        _actionDic.Add(ActionType.TargetRun,TargetRun);
+        _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
+        _actionDic.Add(ActionType.Stay,Stay);
+        _actionDic.Add(ActionType.Shot,Shot);
+       
     }
 
 
@@ -74,40 +73,36 @@ public class EnemyActor : MonoBehaviour
 
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _isShot = false;
-
-        _actionDic = new Dictionary<ActionType, System.Action>();
-
-        _actionDic.Add(ActionType.TargetRun,TargetRun);
-        _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
-        _actionDic.Add(ActionType.Stay,Stay);
-        _actionDic.Add(ActionType.Shot,Shot);
-
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
+        _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
 
     }
 
     void Update()
     {
-
-//        if (_activeCounter <= 0)
-//        {
-//
-//            //位置が一定以上はなれてたら追いかける
-//            if (CheckPlayerToDistance(_playerToMaxDistance))
-//            {
-//                _currentAction = ActionType.TargetRun;
-//            }
-//            else
-//            {
-//                _currentAction = ActionType.ProvocationMove;
-//            }
-//
-//        }
-
         //stateに合わせて、関数を実行
         _actionDic[_currentAction]();
         //test:常に、プレイヤーをみるようようにしてる.違和感を感じたら変更
-        transform.LookAt(_playerTransform.transform.position);
+
+
+    }
+
+    //生成
+    void FirstAction()
+    {
+
+        if (_currentTarget == null)
+        {
+            //うまくいってなかったら生成仕直し
+            this.gameObject.GetComponent<Enemy>().SilentDestroy();
+            return;
+        }
+        else
+        {
+            //しっかりターゲットがきまってたら移動開始
+            _currentAction = ActionType.TargetRun;
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        } 
 
     }
 
@@ -115,7 +110,6 @@ public class EnemyActor : MonoBehaviour
     {
         _currentAction = action;
         _enemy._activeCounter = activeTime;
-
     }
 
 
@@ -138,19 +132,9 @@ public class EnemyActor : MonoBehaviour
     //ターゲットにむかって走り続けます
     void TargetRun()
     {
-
-        //ターゲットに向かって走る
+         //ターゲットに向かって走る
         _navimesh.SetDestination(_currentTarget.position);
-
         transform.LookAt(_playerTransform.transform.position);
-
-        //移動方向を計算,取得
-//       Vector3 movedirection = (_currentTarget.position - transform.position).normalized;
-//        if (CheckPlayerToDistance(_playerToMaxDistance))
-//        {
-//            _currentAction = ActionType.ProvocationMove;
-//        }
-//        transform.Translate(movedirection * _moveSpeed * Time.deltaTime);
 
     }
 
@@ -162,22 +146,19 @@ public class EnemyActor : MonoBehaviour
         if (_enemy._activeCounter > 0)
       {
           _enemy._activeCounter -= Time.deltaTime;
-          //transform.Translate(Vector3.left * _sideMoveSpeed * Time.deltaTime);
       }
       //リセット
       else
       {
-          //移動時間,移動速度をランダムに生成
-          //_sideMoveSpeed = _sideMoveSpeedMax - Random.Range(0,(_sideMoveSpeedMax * 2));
-          //_activeCounter = Random.Range(0.0f, _moveTimeMax);
-
           var targetPosition = _currentTarget.position 
-                + new Vector3(Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange),
-                             0,
-                             (Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange)));
+                             + new Vector3(Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange),
+                                           0,
+                                          (Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange)));
 
-          float activeTime = RandomActiveTime(1);
-          iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime));
+          //float activeTime = RandomActiveTime(1);
+          float activeTime = _enemy._activeTimeMax;
+          iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime,"easeType",iTween.EaseType.linear));
+          StartCoroutine(RotateEnemy(activeTime,targetPosition));
 
           ChangeAction(ActionType.Stay,activeTime);
 
@@ -185,22 +166,77 @@ public class EnemyActor : MonoBehaviour
 
     }
 
+    IEnumerator RotateEnemy(float activeTime, Vector3 targetPosition)
+    {
+
+        //
+        var add = (targetPosition.magnitude - transform.position.magnitude);
+        transform.LookAt(_playerTransform.transform.position);
+
+        //正面のベクトル
+        float z = 2 * Vector3.forward.x;
+        float x = z * 0.5f;
+        float _x = -z * 2;
+        float _z = 0.5f * x;
+
+        Vector3 dir = new Vector3(_x,_z, transform.position.y);
+        float angle = 0.13f;
+
+        //左方向だったら 
+        angle *= dir.magnitude > 0 ? 1 : -1 ;
+        float count = activeTime * 0.5f;
+
+        while (count > 0)
+        {
+           
+            count -= Time.deltaTime;    
+            transform.Rotate(dir,angle);
+            yield return null;
+        }
+
+        count = activeTime * 0.5f;
+        angle *= -1;
+
+        while (count > 0)
+        {
+            count -= Time.deltaTime;
+            transform.Rotate(dir,angle);
+
+            yield return null;
+        }
+
+
+//
+//        if (add > 0)
+//        {
+//            iTween.RotateTo(gameObject, iTween.Hash("z", 10, "time", activeTime));
+//            yield return new WaitForSeconds(activeTime * 0.5f);
+//            iTween.RotateTo(gameObject, iTween.Hash("z",  0, "time", activeTime));
+//        }
+//        else
+//        {
+//            iTween.RotateTo(gameObject, iTween.Hash("z", -10, "time", activeTime));
+//            yield return new WaitForSeconds(activeTime * 0.5f);
+//            iTween.RotateTo(gameObject, iTween.Hash("z", 0, "time", activeTime));
+//        }
+
+        yield return null;
+    }
+
+
     //待機状態,与えられたactiviTime分移動を止める
-
-    int _stayCount = 0;
-
     void Stay()
     {
 
         if (_enemy._activeCounter > 0)
         {
             _enemy._activeCounter -= Time.deltaTime;
-
+          
         }
         else
         {
             _stayCount += 1;
-
+            transform.LookAt(_playerTransform.transform.position);
             if (_stayCount > _enemy._shotFrequency)
             {
                 ChangeAction(ActionType.Shot);
@@ -212,9 +248,7 @@ public class EnemyActor : MonoBehaviour
                 ChangeAction(ActionType.ProvocationMove);
             }
 
-           
         }
-
 
     }
 
@@ -229,32 +263,65 @@ public class EnemyActor : MonoBehaviour
 
     }
 
-
-    float _justShotTime = 0.4f;
+    [SerializeField]
+    float _justShotTime = 0.0f;
 
     IEnumerator ShotMotion()
     {
+
+        float timeCount = 0;
+
         //撃つ数
         int shotCount = _enemy._chamberValue;
         //連弾する時の遅延時間
         float shotDelayTime = _enemy._shotDelay;
 
         //アニメーションを撃つかまえに
-        //
-        //   未実装
-        //
-        ////////////////////////
-        yield return new WaitForSeconds(_justShotTime);
+        _enemyAnimator.SetInteger("ActionType", (int)AnimationState.JustBeforeShot);
+
+        //test; wait for Second がうまく行かない代わり
+        timeCount = _justShotTime;
+        while (timeCount > 0)
+        {
+            timeCount -= Time.deltaTime; 
+            yield return null;
+        }
 
         for (int i = 0; i < shotCount; i++)
         {
             //撃つ
-            gameObject.GetComponentInChildren<EnemyShot>().Shot();
+            _enemyAnimator.SetInteger("ActionType", (int)AnimationState.Shot);
+            //shotラグ//test; wait for Second がうまく行かない代わり
+            timeCount = 0.15f;
 
-            if (shotCount > 1)
+            while (timeCount > 0)
+            {
+                timeCount -= Time.deltaTime; 
+                yield return null;
+            }
+
+            gameObject.GetComponentInChildren<EnemyShot>().DoShot();
+          
+            //二発以上かつ最後の弾じゃなければ
+            if (shotCount > 1 && (shotCount - 1) > i)
             {   
                 //１発目以降は間隔を開けて撃つ
-                yield return new WaitForSeconds(shotDelayTime);
+                timeCount = _justShotTime;
+                while (timeCount > 0)
+                {
+                    timeCount -= Time.deltaTime; 
+                    yield return null;
+                }
+                _enemyAnimator.SetInteger("ActionType", (int)AnimationState.JustBeforeShot);
+
+                //shotラグ//test; wait for Second がうまく行かない代わり
+                timeCount = _justShotTime;
+                while (timeCount > 0)
+                {
+                    timeCount -= Time.deltaTime; 
+                    yield return null;
+                }
+
             }
 
         }
@@ -262,6 +329,8 @@ public class EnemyActor : MonoBehaviour
         _isShot = false;
         //stayに遷移
         ChangeAction(ActionType.Stay);
+        _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
+
     }
    
 
@@ -273,10 +342,23 @@ public class EnemyActor : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        ChangeAction(ActionType.ProvocationMove,RandomActiveTime());
-        //目的位置に達したら攻撃を開始する.
-        gameObject.GetComponentInChildren<EnemyShot>()._isShotStart = true;
-        _navimesh.enabled = false;
+        if (_navimesh.enabled == true)
+        {
+            _stayCount = Random.Range(0, (_enemy._shotFrequency + 1)); //撃つ頻度は最初のみランダムに
+            //ランダムでしょっぱなうつ
+            if (_stayCount >= _enemy._shotFrequency)
+            {
+
+                ChangeAction(ActionType.Shot, RandomActiveTime());
+            }
+            else
+            {
+                ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+            }
+            _navimesh.enabled = false;
+
+            _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
+        }
 
     }
 }

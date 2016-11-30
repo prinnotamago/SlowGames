@@ -11,6 +11,7 @@ public enum EnemyType
     Last,
 }
 
+
 public enum TargetPosition
 {
 
@@ -99,8 +100,6 @@ public class EnemyGenerator : MonoBehaviour
         _generatePositionDic.Add(TargetPosition.UpFront,_generateUpFront);
     }
 
-    [SerializeField]
-    EnemyType _testGenerateType;
 
     //ランダムに,生成位置を取得する
     public  TargetPosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
@@ -196,5 +195,7 @@ public class EnemyGenerator : MonoBehaviour
         enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition];
 
     }
+
+    // 
 
 }
