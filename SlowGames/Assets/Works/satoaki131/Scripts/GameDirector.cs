@@ -25,7 +25,7 @@ public class GameDirector : MonoBehaviour {
     private PlayerHP _hp = null;
 
     [SerializeField]
-    private Light _directionalLight = null;
+    private Light _pointLight = null;
 
     [SerializeField]
     private Canvas _resultCanvas = null;
@@ -128,11 +128,11 @@ public class GameDirector : MonoBehaviour {
     {
         var time = 0.0f;
         activeImage.gameObject.SetActive(true);
-        while(_directionalLight.intensity > 0)
+        while(_pointLight.intensity > 0)
         {
             time += Time.unscaledDeltaTime;
             RenderSettings.ambientIntensity = Mathf.Lerp(1, 0, time / 2.0f);
-            _directionalLight.intensity = Mathf.Lerp(1, 0, time / 2.0f);
+            _pointLight.intensity = Mathf.Lerp(1, 0, time / 2.0f);
             yield return null;
         }
         _state = GameState.Result;

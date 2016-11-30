@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 0}
   _generateManager: {fileID: 0}
   _gameStartTime: 2
-  _directionalLight: {fileID: 0}
+  _pointLight: {fileID: 0}
   _resultCanvas: {fileID: 0}
   _gameClearImage: {fileID: 0}
   _clearDeathCount: 30
