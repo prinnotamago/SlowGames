@@ -19,8 +19,17 @@ public class TitleManager : MonoBehaviour {
     ViveGrab[] _items;
 
     [SerializeField]
-    private Light[] _spotLights = null; 
+    private Light[] _spotLights = null;
 
+    [SerializeField]
+    private GameObject[] _gunStand = null;
+
+    [SerializeField]
+    private GameObject[] _gun = null;
+
+    [SerializeField]
+    private GameObject[] _cameraRig = null;
+     
     private Dictionary<State, Action> _stateUpdate = null;
     private State _state = State.Title;
 
@@ -67,7 +76,15 @@ public class TitleManager : MonoBehaviour {
     {
         var time = 0.0f;
         var endTime = 2.0f; 
-        while(_spotLights[0].intensity != 0)
+        for(int i = 0; i < _gun.Length; i++)
+        {
+            Destroy(_gun[i]);
+        }
+
+        _cameraRig[0].SetActive(false);
+        _cameraRig[1].SetActive(true);
+
+        while (_spotLights[0].intensity != 0)
         {
             time += Time.unscaledDeltaTime;
             for(int i = 0; i < _spotLights.Length; i++)
@@ -76,6 +93,12 @@ public class TitleManager : MonoBehaviour {
             }
             yield return null;
         }
+        for(int i = 0; i < _gunStand.Length; i++)
+        {
+            Destroy(_gunStand[i]);
+        }
+        //_color.EnableKeyword("_EMISSION");
+        //_color.SetColor("_EmissionColor", _currentColor);
     }
 
 }
