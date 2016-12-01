@@ -29,6 +29,8 @@ public class TitleManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] _cameraRig = null;
+
+    private PlayerShot[] _playerShot = null;
      
     private Dictionary<State, Action> _stateUpdate = null;
     private State _state = State.Title;
@@ -83,6 +85,10 @@ public class TitleManager : MonoBehaviour {
 
         _cameraRig[0].SetActive(false);
         _cameraRig[1].SetActive(true);
+        foreach(var shot in FindObjectsOfType<PlayerShot>())
+        {
+            shot.isStart = true;
+        }
 
         while (_spotLights[0].intensity != 0)
         {
