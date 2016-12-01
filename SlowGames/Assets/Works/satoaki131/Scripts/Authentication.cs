@@ -43,6 +43,7 @@ public class Authentication : MonoBehaviour {
             _randomNumber = UnityEngine.Random.Range(0, 10);
             _text[i].text = _randomNumber.ToString();
 
+            //Timeが一定越えたら配列の一番後ろから止めていく
             if (_time > _stopTime)
             {
                 _stopTime += 0.6f;
