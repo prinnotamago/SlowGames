@@ -130,8 +130,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 0.734, a: 1}
+  m_Intensity: 4.32
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -149,7 +149,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294965247
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -218,35 +218,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!21 &91628813
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &132695121
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +310,7 @@ GameObject:
   - component: {fileID: 163449256}
   - component: {fileID: 163449258}
   - component: {fileID: 163449257}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +378,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 179958617}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +517,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 211373936}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +621,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!43 &315989418
+--- !u!43 &414818998
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -890,7 +861,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 551144288}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +890,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 602460495}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1059,7 +1030,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 740485120}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1059,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 774193727}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1199,7 +1170,7 @@ GameObject:
   - component: {fileID: 834717846}
   - component: {fileID: 834717848}
   - component: {fileID: 834717847}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: under
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,6 +1230,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 834717845}
   m_Mesh: {fileID: 4300002, guid: 944969cfa250701439d9c2f1bbac32d4, type: 3}
+--- !u!21 &876410379
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &911815310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 1036704475}
   - component: {fileID: 1036704472}
   - component: {fileID: 1036704476}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -1532,7 +1532,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1135097265}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dummy003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1742,7 +1742,7 @@ GameObject:
   - component: {fileID: 1373454350}
   - component: {fileID: 1373454349}
   - component: {fileID: 1373454353}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gun (1)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tagName: Weapon
+  _isDrop: 0
 --- !u!1 &1442483865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1917,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1442483866}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,7 +1950,7 @@ GameObject:
   - component: {fileID: 1460198772}
   - component: {fileID: 1460198776}
   m_Layer: 5
-  m_Name: GunStand
+  m_Name: Gun1Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2044,7 +2045,7 @@ GameObject:
   - component: {fileID: 1460559827}
   - component: {fileID: 1460559829}
   - component: {fileID: 1460559828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: under
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2268,6 +2269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tagName: Weapon
+  _isDrop: 0
 --- !u!1 &1516374164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,7 +2278,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1516374165}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2310,7 +2312,7 @@ GameObject:
   - component: {fileID: 1575699904}
   - component: {fileID: 1575699908}
   m_Layer: 5
-  m_Name: SwordStand
+  m_Name: Gun2Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2403,7 +2405,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1648977446}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dummy003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2432,7 +2434,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1727857369}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2490,8 +2492,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 0.734, a: 1}
+  m_Intensity: 4.32
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2509,7 +2511,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294965247
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2693,7 +2695,7 @@ GameObject:
   - component: {fileID: 2026821510}
   - component: {fileID: 2026821512}
   - component: {fileID: 2026821511}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2761,7 +2763,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2039403306}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2824,11 +2826,11 @@ Prefab:
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 315989418}
+      objectReference: {fileID: 414818998}
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 91628813}
+      objectReference: {fileID: 876410379}
     - target: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -180
@@ -2856,6 +2858,22 @@ Prefab:
     - target: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_TagString
       value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 147176, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11420968, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
