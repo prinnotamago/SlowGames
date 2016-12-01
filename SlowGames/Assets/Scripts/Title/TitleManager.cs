@@ -28,6 +28,8 @@ public class TitleManager : MonoBehaviour {
     {
         _stateUpdate = new Dictionary<State, Action>();
         _stateUpdate.Add(State.Title, TitleUpdate);
+        _stateUpdate.Add(State.Turtreal, TurtrealUpdate);
+        _stateUpdate.Add(State.Wait, () => { });
     }
 
     void Update()
@@ -56,19 +58,24 @@ public class TitleManager : MonoBehaviour {
         }
     }
 
+    void TurtrealUpdate()
+    {
+
+    }
+
     IEnumerator TurtrealProduction()
     {
         var time = 0.0f;
-        while(_spotLights[0].intensity == 0)
+        var endTime = 2.0f; 
+        while(_spotLights[0].intensity != 0)
         {
             time += Time.unscaledDeltaTime;
             for(int i = 0; i < _spotLights.Length; i++)
             {
-                _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time);
+                _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
             }
             yield return null;
         }
-        Debug.Log("OK");
     }
 
 }
