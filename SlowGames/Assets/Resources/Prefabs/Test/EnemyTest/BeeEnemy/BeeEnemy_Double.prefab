@@ -219,8 +219,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680381767156560}
-  m_LocalRotation: {x: 0.024060896, y: -0.99352056, z: 0.02984707, w: 0.10699194}
-  m_LocalPosition: {x: 1.0987165, y: 1.9992831, z: -6.846006}
+  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
+  m_LocalPosition: {x: 0.842, y: 15.79, z: 11.378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996058707982224}
@@ -444,8 +444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTutorial: 1
-  _deathEffect: {fileID: 1141469176545486, guid: 660e695c7202fa444aa5eaaff9ece947,
+  _isTutorial: 0
+  _deathEffect: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
   _type: 1
   _enemyAttackInfos:

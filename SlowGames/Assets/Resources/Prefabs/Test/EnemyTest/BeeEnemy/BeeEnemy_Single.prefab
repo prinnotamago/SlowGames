@@ -219,8 +219,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960405656031998}
-  m_LocalRotation: {x: 0.024060896, y: -0.99352056, z: 0.02984707, w: 0.10699194}
-  m_LocalPosition: {x: 1.0987165, y: 1.9992831, z: -6.846006}
+  m_LocalRotation: {x: -3.0800276e-12, y: -0.32839024, z: 8.859021e-12, w: 0.94454217}
+  m_LocalPosition: {x: -18.73, y: 2.73, z: 1.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4743915867261770}
@@ -444,8 +444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTutorial: 1
-  _deathEffect: {fileID: 1141469176545486, guid: 660e695c7202fa444aa5eaaff9ece947,
+  _isTutorial: 0
+  _deathEffect: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
   _type: 0
   _enemyAttackInfos:
@@ -466,7 +466,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 5
+  _generatePostion: 0
 --- !u!137 &137332522207314690
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
