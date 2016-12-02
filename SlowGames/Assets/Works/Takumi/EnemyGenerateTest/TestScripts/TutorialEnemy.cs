@@ -9,9 +9,9 @@ public class TutorialEnemy : MonoBehaviour
 
     enum TutorialState
     {
-      stay = 0,
-      JustBeforeShot = 1,
-      Shot = 2,
+        stay = 0,
+        JustBeforeShot = 1,
+        Shot = 2,
     }
 
     //速度,攻撃頻度等を参照する
@@ -23,8 +23,8 @@ public class TutorialEnemy : MonoBehaviour
     //これよぶと打ちます
     public bool isShot
     {
-        set{ _isShot = value; }
-        get{ return _isShot;}
+        set { _isShot = value; }
+        get { return _isShot; }
     }
 
     [SerializeField]
@@ -32,26 +32,31 @@ public class TutorialEnemy : MonoBehaviour
     [SerializeField]
     float _justShotTime = 0.0f;
 
+    private float _shotCountTime = 0.0f; //打つまでのインターバルの時間
+    [SerializeField]
+    private float _intervalTime = 0.0f;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         _enemy = _enemy = this.gameObject.GetComponent<Enemy>();
         _isShot = false;
 
         var player = GameObject.FindGameObjectWithTag(TagName.Player);
         transform.LookAt(player.transform.position);
-        _enemyAnimator.SetInteger("TutorialState",(int)TutorialState.stay);
-      
-	}
-	
-    void Update()
-    {   
-        //コルーチンで管理
-        if (_isShot)
-        {
-            _isShot = false;
+        _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.stay);
 
+        StartCoroutine(ShotMotion()); //最初に一発撃つ
+    }
+
+    void Update()
+    {
+        //コルーチンで管理
+        if (!_isShot) return; //falseだったらTimeを図らない
+        _shotCountTime += Time.deltaTime;
+        if(_shotCountTime > _intervalTime)
+        {
+            _shotCountTime = 0;
             StartCoroutine(ShotMotion());
         }
 
@@ -69,39 +74,39 @@ public class TutorialEnemy : MonoBehaviour
         float shotDelayTime = _enemy.info.shotDelay;
 
         //アニメーションを撃つかまえに
-        _enemyAnimator.SetInteger("TutorialState",(int)TutorialState.JustBeforeShot);
+        _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.JustBeforeShot);
 
         //Test; wait for Secondのd代わり
         timeCount = _justShotTime;
         while (timeCount > 0)
         {
-            timeCount -= Time.deltaTime; 
+            timeCount -= Time.deltaTime;
             yield return null;
         }
 
         for (int i = 0; i < shotCount; i++)
         {
             //撃つ
-            _enemyAnimator.SetInteger("TutorialState",(int)TutorialState.Shot);
+            _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.Shot);
             //shotラグ//test; wait for Second がうまく行かない代わり
             timeCount = 0.15f;
 
             while (timeCount > 0)
             {
-                timeCount -= Time.deltaTime; 
+                timeCount -= Time.deltaTime;
                 yield return null;
             }
 
             gameObject.GetComponentInChildren<EnemyShot>().DoShot();
-          
+
             //二発以上かつ最後の弾じゃなければ
             if (shotCount > 1 && (shotCount - 1) > i)
-            {   
+            {
                 //１発目以降は間隔を開けて撃つ
                 timeCount = _justShotTime;
                 while (timeCount > 0)
                 {
-                    timeCount -= Time.deltaTime; 
+                    timeCount -= Time.deltaTime;
                     yield return null;
                 }
                 _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.JustBeforeShot);
@@ -110,7 +115,7 @@ public class TutorialEnemy : MonoBehaviour
                 timeCount = _justShotTime;
                 while (timeCount > 0)
                 {
-                    timeCount -= Time.deltaTime; 
+                    timeCount -= Time.deltaTime;
                     yield return null;
                 }
 
@@ -120,7 +125,7 @@ public class TutorialEnemy : MonoBehaviour
 
         //stayに遷移
         Debug.Log("a");
-        _enemyAnimator.SetInteger("TutorialState",(int)TutorialState.stay);
+        _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.stay);
 
         yield return null;
 
