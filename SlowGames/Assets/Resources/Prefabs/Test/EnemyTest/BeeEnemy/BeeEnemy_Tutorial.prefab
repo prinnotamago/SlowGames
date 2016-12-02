@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4254564611822244}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,9 +53,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4311470068733956}
   - component: {fileID: 137086847224965510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface10
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 195009512431539676}
   - component: {fileID: 114219032029906614}
   - component: {fileID: 114329841492908496}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeeEnemy_Tutorial
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,9 +90,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4127714988334750}
   - component: {fileID: 108755170936427810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point light
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4323208384568982}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4540376050554450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,9 +135,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4315549125455182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy002
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4825986490938778}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
