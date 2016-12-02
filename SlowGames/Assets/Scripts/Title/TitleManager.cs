@@ -30,7 +30,21 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private GameObject[] _cameraRig = null;
 
+    [SerializeField]
+    private Canvas _idCanvas = null;
+
+    private TurtrealEnemyManager _enemyManager = null;
+
     private PlayerShot[] _playerShot = null;
+
+    /// <summary>
+    /// trueになる前にEnemyが死んだら復活させるためのbool
+    /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
+    /// </summary>
+    public static bool isTurtreal
+    {
+        get; private set;
+    }
      
     private Dictionary<State, Action> _stateUpdate = null;
     private State _state = State.Title;
@@ -41,6 +55,9 @@ public class TitleManager : MonoBehaviour {
         _stateUpdate.Add(State.Title, TitleUpdate);
         _stateUpdate.Add(State.Turtreal, TurtrealUpdate);
         _stateUpdate.Add(State.Wait, () => { });
+
+        _enemyManager = FindObjectOfType<TurtrealEnemyManager>();
+        isTurtreal = false;
     }
 
     void Update()
@@ -48,6 +65,9 @@ public class TitleManager : MonoBehaviour {
         _stateUpdate[_state]();
     }
 
+    /// <summary>
+    /// TitleのUpdate(銃を台座からとるまで)
+    /// </summary>
     void TitleUpdate()
     {
         // 必要なアイテムを手に持っているか確かめる
@@ -64,8 +84,8 @@ public class TitleManager : MonoBehaviour {
         // 持っていたらシーンを変える
         if (isChange)
         {
-            _state = State.Turtreal;
-            StartCoroutine(TurtrealProduction());
+            _state = State.Wait;
+            StartCoroutine(Authentication());
         }
     }
 
@@ -74,22 +94,57 @@ public class TitleManager : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// ID演出のコルーチン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Authentication()
+    {
+        //IDのキャンバスを表示
+        _idCanvas.gameObject.SetActive(true);
+        //アニメーションが終わるまで待つ
+        while(_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            yield return null;
+        }
+
+        //Animationを待った後、UIの演出が終わるまで待つ
+        yield return new WaitForSeconds(0.6f * 5 + 2.0f);
+        //消えるアニメーションに変更
+        _idCanvas.GetComponentInChildren<Animator>().SetBool("End", true);
+        //ちょっとだけ待つ
+        yield return new WaitForSeconds(0.5f);
+        //CanvasのAnimationが消えたら表示を消す
+        _idCanvas.gameObject.SetActive(false);
+        //チュートリアルに入るコルーチンを起動
+        StartCoroutine(TurtrealProduction());
+    }
+
+    /// <summary>
+    /// チュートリアルまでの演出
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TurtrealProduction()
     {
         var time = 0.0f;
         var endTime = 2.0f; 
+        //銃のObjectを消す
         for(int i = 0; i < _gun.Length; i++)
         {
             Destroy(_gun[i]);
         }
 
+        //Cameraをの切り替え
         _cameraRig[0].SetActive(false);
         _cameraRig[1].SetActive(true);
+
+        //弾を撃てるようにする
         foreach(var shot in FindObjectsOfType<PlayerShot>())
         {
             shot.isStart = true;
         }
 
+        //ライトを少しずつ暗くしていく
         while (_spotLights[0].intensity != 0)
         {
             time += Time.unscaledDeltaTime;
@@ -99,12 +154,49 @@ public class TitleManager : MonoBehaviour {
             }
             yield return null;
         }
+        //銃のスタンドを消す
         for(int i = 0; i < _gunStand.Length; i++)
         {
             Destroy(_gunStand[i]);
         }
-        //_color.EnableKeyword("_EMISSION");
-        //_color.SetColor("_EmissionColor", _currentColor);
+
+        //Enemyくん起動
+        _enemyManager.SetActive(true);
+        _enemyManager.SetTurtrealBulletActive(true);
+
+        /////////ここから下あとから分離する
+
+        //スローを使うまでループ抜けない
+        while(!SlowMotion._instance.isSlow)
+        {
+            yield return null;
+        }
+
+        //スローゲージがなくなったらループ抜ける
+        while(SlowMotion._instance.slowTime != 0)
+        {
+            yield return null;
+        }
+
+        //スローゲージが回復したらぬける
+        while(SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        {
+            yield return null;
+        }
+
+        //Enemyを殺させる
+        TitleManager.isTurtreal = true;
+        var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
+        while(!enemyManager.isSceneChange)
+        {
+            yield return null;
+        }
+
+        //扉の演出
+
+        //シーン遷移
+        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+
     }
 
 }

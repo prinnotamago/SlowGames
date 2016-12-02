@@ -1,24 +1,16 @@
 fileFormatVersion: 2
-guid: ae87eebac5a14f0409498c38e853c8f2
-timeCreated: 1477123161
+guid: 11255dc50873148c5ad3932fb4ed14bc
+timeCreated: 1480062624
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Dummy001
-    100002: Dummy002
-    100004: Dummy003
-    100006: //RootNode
-    100008: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    400000: Dummy001
-    400002: Dummy002
-    400004: Dummy003
-    400006: //RootNode
-    400008: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    4300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    7400000: Take 001
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: polySurface10
     9500000: //RootNode
-    13700000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
   materials:
     importMaterials: 1
     materialName: 0
@@ -65,6 +57,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -75,7 +68,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1

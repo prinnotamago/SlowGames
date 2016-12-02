@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isTutorial: 0
   _deathEffect: {fileID: 1141469176545486, guid: 660e695c7202fa444aa5eaaff9ece947,
     type: 2}
   _type: 1
@@ -358,7 +359,6 @@ MonoBehaviour:
   - moveSpeed: 3
     stayTimeMax: 1
     sideMoveRange: 2
-    activeCounter: 0
     activeTimeMax: 2
     shotFrequency: 2
     chamberValue: 2
@@ -367,21 +367,13 @@ MonoBehaviour:
   - moveSpeed: 3
     stayTimeMax: 1
     sideMoveRange: 2
-    activeCounter: 0
     activeTimeMax: 2
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
     generateRate: 0
-  _generatePostion: 1
-  _moveSpeed: 3
-  _stayTimeMax: 1
-  _sideMoveRange: 2
   _activeCounter: 0
-  _activeTimeMax: 2
-  _shotFrequency: 2
-  _chamberValue: 2
-  _shotDelay: 1
+  _generatePostion: 1
 --- !u!137 &137393184583254982
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
