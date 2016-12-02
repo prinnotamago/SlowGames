@@ -318,6 +318,7 @@ MonoBehaviour:
   _isShot: 0
   _enemyAnimator: {fileID: 95492758687877566}
   _justShotTime: 0.5
+  _intervalTime: 0
 --- !u!114 &114730413514879142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTutorial: 0
+  _isTutorial: 1
   _deathEffect: {fileID: 1141469176545486, guid: 660e695c7202fa444aa5eaaff9ece947,
     type: 2}
   _type: 0

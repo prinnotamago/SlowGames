@@ -33,6 +33,8 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private Canvas _idCanvas = null;
 
+    private TurtrealEnemyManager _enemyManager = null;
+
     private PlayerShot[] _playerShot = null;
      
     private Dictionary<State, Action> _stateUpdate = null;
@@ -44,6 +46,8 @@ public class TitleManager : MonoBehaviour {
         _stateUpdate.Add(State.Title, TitleUpdate);
         _stateUpdate.Add(State.Turtreal, TurtrealUpdate);
         _stateUpdate.Add(State.Wait, () => { });
+
+        _enemyManager = FindObjectOfType<TurtrealEnemyManager>();
     }
 
     void Update()
@@ -145,6 +149,10 @@ public class TitleManager : MonoBehaviour {
         {
             Destroy(_gunStand[i]);
         }
+
+        //Enemyくん起動
+        _enemyManager.SetActive(true);
+        _enemyManager.SetTurtrealBulletActive(true);
     }
 
 }
