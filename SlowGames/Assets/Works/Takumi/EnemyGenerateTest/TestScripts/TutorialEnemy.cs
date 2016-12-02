@@ -34,17 +34,23 @@ public class TutorialEnemy : MonoBehaviour
 
     private float _shotCountTime = 0.0f; //打つまでのインターバルの時間
     [SerializeField]
+    private float _minIntervalTime = 0.0f;
+    [SerializeField]
+    private float _maxIntervalTime = 0.0f;
+
     private float _intervalTime = 0.0f;
 
     // Use this for initialization
     void Start()
     {
         _enemy = _enemy = this.gameObject.GetComponent<Enemy>();
-        _isShot = false;
+        //_isShot = false;
 
         var player = GameObject.FindGameObjectWithTag(TagName.Player);
         transform.LookAt(player.transform.position);
         _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.stay);
+
+        _intervalTime = UnityEngine.Random.Range(_minIntervalTime, _maxIntervalTime);
 
         StartCoroutine(ShotMotion()); //最初に一発撃つ
     }
@@ -57,6 +63,7 @@ public class TutorialEnemy : MonoBehaviour
         if(_shotCountTime > _intervalTime)
         {
             _shotCountTime = 0;
+            _intervalTime = UnityEngine.Random.Range(_minIntervalTime, _maxIntervalTime);
             StartCoroutine(ShotMotion());
         }
 
