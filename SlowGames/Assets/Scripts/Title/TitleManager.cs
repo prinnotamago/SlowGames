@@ -30,6 +30,9 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private GameObject[] _cameraRig = null;
 
+    [SerializeField]
+    private Canvas _idCanvas = null;
+
     private PlayerShot[] _playerShot = null;
      
     private Dictionary<State, Action> _stateUpdate = null;
@@ -64,8 +67,8 @@ public class TitleManager : MonoBehaviour {
         // 持っていたらシーンを変える
         if (isChange)
         {
-            _state = State.Turtreal;
-            StartCoroutine(TurtrealProduction());
+            _state = State.Wait;
+            StartCoroutine(Authentication());
         }
     }
 
@@ -74,22 +77,44 @@ public class TitleManager : MonoBehaviour {
 
     }
 
+    IEnumerator Authentication()
+    {
+        _idCanvas.gameObject.SetActive(true);
+        //アニメーションが終わるまで待つ
+        while(_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime != 1)
+        {
+            Debug.Log("AnimNow");
+            yield return null;
+        }
+        Debug.Log("終了");
+        StartCoroutine(TurtrealProduction());
+    }
+
+    /// <summary>
+    /// チュートリアルまでの演出
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TurtrealProduction()
     {
         var time = 0.0f;
         var endTime = 2.0f; 
+        //銃のObjectを消す
         for(int i = 0; i < _gun.Length; i++)
         {
             Destroy(_gun[i]);
         }
 
+        //Cameraをの切り替え
         _cameraRig[0].SetActive(false);
         _cameraRig[1].SetActive(true);
+
+        //弾を撃てるようにする
         foreach(var shot in FindObjectsOfType<PlayerShot>())
         {
             shot.isStart = true;
         }
 
+        //ライトを少しずつ暗くしていく
         while (_spotLights[0].intensity != 0)
         {
             time += Time.unscaledDeltaTime;
@@ -99,12 +124,11 @@ public class TitleManager : MonoBehaviour {
             }
             yield return null;
         }
+        //銃のスタンドを消す
         for(int i = 0; i < _gunStand.Length; i++)
         {
             Destroy(_gunStand[i]);
         }
-        //_color.EnableKeyword("_EMISSION");
-        //_color.SetColor("_EmissionColor", _currentColor);
     }
 
 }
