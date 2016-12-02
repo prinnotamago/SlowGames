@@ -163,6 +163,40 @@ public class TitleManager : MonoBehaviour {
         //Enemyくん起動
         _enemyManager.SetActive(true);
         _enemyManager.SetTurtrealBulletActive(true);
+
+        /////////ここから下あとから分離する
+
+        //スローを使うまでループ抜けない
+        while(!SlowMotion._instance.isSlow)
+        {
+            yield return null;
+        }
+
+        //スローゲージがなくなったらループ抜ける
+        while(SlowMotion._instance.slowTime != 0)
+        {
+            yield return null;
+        }
+
+        //スローゲージが回復したらぬける
+        while(SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        {
+            yield return null;
+        }
+
+        //Enemyを殺させる
+        TitleManager.isTurtreal = true;
+        var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
+        while(!enemyManager.isSceneChange)
+        {
+            yield return null;
+        }
+
+        //扉の演出
+
+        //シーン遷移
+        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+
     }
 
 }

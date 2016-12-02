@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,11 @@ public class TurtrealEnemyManager : MonoBehaviour {
     private GameObject _enemyPrefab = null;
 
     private Vector3[] _enemyPos = null;
+
+    public bool isSceneChange
+    {
+        get; private set;
+    }
 
     /// <summary>
     /// Enemyが弾を発射するかどうかの管理
@@ -42,19 +48,19 @@ public class TurtrealEnemyManager : MonoBehaviour {
         {
             _enemyPos[i] = _enemy[i].transform.position;
         }
+        isSceneChange = false;
     }
 
     void Update()
     {
+        if (_enemy[0] == null && _enemy[1] == null) { isSceneChange = true; }
         if (TitleManager.isTurtreal) return;
         for(int i = 0; i < _enemy.Length; i++)
         {
-            if(_enemy[i].gameObject == null)
-            {
-                var enemy = Instantiate(_enemyPrefab);
-                _enemy[i] = enemy.GetComponent<TutorialEnemy>();
-                _enemy[i].transform.position = _enemyPos[i];
-            }
+            if (_enemy[i] != null) continue;
+            var enemy = Instantiate(_enemyPrefab);
+            _enemy[i] = enemy.GetComponent<TutorialEnemy>();
+            _enemy[i].transform.position = _enemyPos[i];
         }
     }
 
