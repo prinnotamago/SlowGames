@@ -972,10 +972,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _easyEnemys:
-  - {fileID: 1104136010662886, guid: 8055aa93659874fc88c15ab7c15a389e, type: 2}
+  - {fileID: 1960405656031998, guid: 141f6428c04764d7f9db04f88c2cd292, type: 2}
   _normalEnemys:
-  - {fileID: 1483749978888572, guid: b3e28f81b65474a04b0bf5acef440b9c, type: 2}
-  - {fileID: 1104136010662886, guid: 8055aa93659874fc88c15ab7c15a389e, type: 2}
+  - {fileID: 1680381767156560, guid: 35eaa732d5b1c4b7e999a82d638a4037, type: 2}
+  - {fileID: 1960405656031998, guid: 141f6428c04764d7f9db04f88c2cd292, type: 2}
   _hardEnemys: []
   _generateList: []
   _left: {fileID: 4000010448756442}
