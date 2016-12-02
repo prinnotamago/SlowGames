@@ -18,10 +18,10 @@ ModelImporter:
     400008: Dummy003
     400010: Dummy004
     4300000: Box001
-    7400000: Instrusion
-    7400002: Arrival
-    7400004: JustBeforeShot
-    7400006: Shot
+    7400000: EnemyInstrusion
+    7400002: EnemyArrival
+    7400004: EnemyJustBeforeShot
+    7400006: EnemyShot
     9500000: //RootNode
     13700000: Box001
   materials:
@@ -46,7 +46,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Instrusion
+      name: EnemyInstrusion
       takeName: Take 001
       firstFrame: 0
       lastFrame: 8
@@ -86,7 +86,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arrival
+      name: EnemyArrival
       takeName: Take 001
       firstFrame: 9
       lastFrame: 15
@@ -126,7 +126,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: JustBeforeShot
+      name: EnemyJustBeforeShot
       takeName: Take 001
       firstFrame: 21
       lastFrame: 24
@@ -191,7 +191,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Shot
+      name: EnemyShot
       takeName: Take 001
       firstFrame: 25
       lastFrame: 30
