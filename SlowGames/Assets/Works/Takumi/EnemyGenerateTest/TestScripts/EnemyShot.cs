@@ -18,7 +18,6 @@ public class EnemyShot : MonoBehaviour
     EnemyBullet _enemyBullet;
     [SerializeField]
     EnemyBullet _doubleBullet;
-
    
     [SerializeField]
     Vector3 _randomShotRange = new Vector3(2,2,2);
@@ -28,6 +27,9 @@ public class EnemyShot : MonoBehaviour
 
     [SerializeField]
     GunType _gunType;
+
+    [SerializeField]
+    GameObject _muzzleFlush;
 
     public bool _isShotStart;
 
@@ -46,8 +48,6 @@ public class EnemyShot : MonoBehaviour
         _shotTypeList.Add(GunType.Single,Shot);
         _shotTypeList.Add(GunType.Double,DoubleShot);
         _shotTypeList.Add(GunType.Tutorial,TutorialShot);
-
-        
 
     }
 
@@ -75,15 +75,21 @@ public class EnemyShot : MonoBehaviour
 
         //打つ方向の基準を設定
         Vector3 targetDirection = (playerPos - transform.position).normalized;
+
         //玉を生成
         GameObject bullet = Instantiate(_enemyBullet.gameObject);
-
         bullet.GetComponent<EnemyBullet>()._targetDirection = targetDirection;
         bullet.transform.position = transform.position;
 
-        //bullet.transform.LookAt(targetDirection);
-        bullet.transform.LookAt(playerPos);
+        //マズルフラッシュエフェクト
+        var flashEffect = Instantiate(_muzzleFlush);
+        flashEffect.transform.position = transform.position;
 
+
+        //bullet.transform.LookAt(targetDirection);
+        //向きを調整
+        bullet.transform.LookAt(playerPos);
+        flashEffect.transform.LookAt(playerPos);
     }
 
     public void DoubleShot()
