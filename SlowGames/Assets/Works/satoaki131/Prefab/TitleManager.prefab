@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1406572381438526}
+  m_RootGameObject: {fileID: 1568329000603482}
   m_IsPrefabParent: 1
---- !u!1 &1406572381438526
+--- !u!1 &1568329000603482
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4869228400250040}
-  - component: {fileID: 114599284998527570}
-  m_Layer: 8
-  m_Name: GameManager
+  - component: {fileID: 4182368866064156}
+  - component: {fileID: 114804753021433264}
+  m_Layer: 0
+  m_Name: TitleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4869228400250040
+--- !u!4 &4182368866064156
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406572381438526}
+  m_GameObject: {fileID: 1568329000603482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,23 +40,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114599284998527570
+--- !u!114 &114804753021433264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406572381438526}
+  m_GameObject: {fileID: 1568329000603482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80494f5d958c6b54fb9b0705178a5010, type: 3}
+  m_Script: {fileID: 11500000, guid: 46c8054a5cd94c84a961917b1cc95399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerShot:
+  _items:
   - {fileID: 0}
   - {fileID: 0}
-  _generateManager: {fileID: 0}
-  _gameStartTime: 2
-  _pointLight: {fileID: 0}
-  _resultCanvas: {fileID: 0}
-  _gameClearImage: {fileID: 0}
-  _clearDeathCount: 30
+  _spotLights:
+  - {fileID: 0}
+  - {fileID: 0}
+  _gunStand:
+  - {fileID: 0}
+  - {fileID: 0}
+  _gun:
+  - {fileID: 0}
+  - {fileID: 0}
+  _cameraRig:
+  - {fileID: 0}
+  - {fileID: 0}

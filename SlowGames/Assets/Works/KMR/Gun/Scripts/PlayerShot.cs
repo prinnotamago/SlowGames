@@ -158,7 +158,7 @@ public class PlayerShot : MonoBehaviour
             _device.TriggerHapticPulse(4000);
         }
         GameObject shotBullet = Instantiate(_bullet);
-        ScoreManager.instance.AddShotCount();
+        //ScoreManager.instance.AddShotCount();
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
