@@ -36,6 +36,15 @@ public class TitleManager : MonoBehaviour {
     private TurtrealEnemyManager _enemyManager = null;
 
     private PlayerShot[] _playerShot = null;
+
+    /// <summary>
+    /// trueになる前にEnemyが死んだら復活させるためのbool
+    /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
+    /// </summary>
+    public static bool isTurtreal
+    {
+        get; private set;
+    }
      
     private Dictionary<State, Action> _stateUpdate = null;
     private State _state = State.Title;
@@ -48,6 +57,7 @@ public class TitleManager : MonoBehaviour {
         _stateUpdate.Add(State.Wait, () => { });
 
         _enemyManager = FindObjectOfType<TurtrealEnemyManager>();
+        isTurtreal = false;
     }
 
     void Update()
