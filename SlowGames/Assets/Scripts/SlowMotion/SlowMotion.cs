@@ -34,6 +34,18 @@ public class SlowMotion : MonoBehaviour {
     /// </summary>
     [SerializeField]
     bool _isLimit = false;
+    public bool isLimit
+    {
+        get { return _isLimit; }
+        set {
+            _isLimit = value;
+            if (!_isLimit)
+            {
+                slowTime = _slowTimeMax;
+            }
+        }
+    }
+
     /// <summary>
     /// スローの最大時間
     /// </summary>
@@ -127,7 +139,7 @@ public class SlowMotion : MonoBehaviour {
 
                 //_v.intensity -= Time.unscaledDeltaTime * size;
 
-                if (!_isEffectStart)
+                if (_isEffectStart)
                 {
                     _v.intensity = _effectRangeSize;
                 }
