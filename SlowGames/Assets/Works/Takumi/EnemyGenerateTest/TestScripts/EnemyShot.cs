@@ -7,7 +7,7 @@ enum GunType
 {
     Single,
     Double,
-    Triple,
+    Tutorial,
 
 }
 
@@ -45,6 +45,7 @@ public class EnemyShot : MonoBehaviour
 
         _shotTypeList.Add(GunType.Single,Shot);
         _shotTypeList.Add(GunType.Double,DoubleShot);
+        _shotTypeList.Add(GunType.Tutorial,TutorialShot);
 
         
 
@@ -66,9 +67,9 @@ public class EnemyShot : MonoBehaviour
         Vector3 playerPos = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
 
         //playerの位置を意志的にずらす
-        float randomXPos = _randomShotRange.x - UnityEngine.Random.Range(0.0f,(_randomShotRange.x * 2.0f));
-        float randomYPos = _randomShotRange.y - UnityEngine.Random.Range(0.0f,(_randomShotRange.y * 2.0f));
-        float randomZPos = _randomShotRange.z - UnityEngine.Random.Range(0.0f,(_randomShotRange.z * 2.0f));
+        float randomXPos = _randomShotRange.x - _randomShotRange.x;
+        float randomYPos = _randomShotRange.y - _randomShotRange.y;
+        float randomZPos = _randomShotRange.z - _randomShotRange.z;
 
         playerPos +=  new Vector3(randomXPos,randomYPos,randomZPos);
 
@@ -116,6 +117,30 @@ public class EnemyShot : MonoBehaviour
         
         }
 
+    }
+
+
+    //指定方向にうつ
+    void TutorialShot()
+    {
+        Vector3 playerPos = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+
+        //playerの位置を意志的にずらす
+        float randomXPos = _randomShotRange.x - UnityEngine.Random.Range(0.0f,(_randomShotRange.x * 2.0f));
+        float randomYPos = _randomShotRange.y - UnityEngine.Random.Range(0.0f,(_randomShotRange.y * 2.0f));
+        float randomZPos = _randomShotRange.z - UnityEngine.Random.Range(0.0f,(_randomShotRange.z * 2.0f));
+
+        playerPos +=  new Vector3(randomXPos,randomYPos,randomZPos);
+
+        //打つ方向の基準を設定
+        Vector3 targetDirection = (playerPos - transform.position).normalized;
+        //玉を生成
+        GameObject bullet = Instantiate(_enemyBullet.gameObject);
+
+        bullet.GetComponent<EnemyBullet>()._targetDirection = targetDirection;
+        bullet.transform.position = transform.position;
+
+        bullet.transform.LookAt(playerPos);
     }
 
     float ToRadian(float value)

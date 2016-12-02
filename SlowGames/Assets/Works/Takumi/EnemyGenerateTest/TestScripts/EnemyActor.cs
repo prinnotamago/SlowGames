@@ -9,16 +9,17 @@ public class EnemyActor : MonoBehaviour
  
     //速度,攻撃頻度等を参照する
     Enemy _enemy;
+
     [SerializeField]
     Animator _enemyAnimator;
 
     enum AnimationState
     {
-        instruition = 0,
-        Fighting = 1,
+        instruition    = 0,
+        Fighting       = 1,
         JustBeforeShot = 2,
-        Shot = 3,
-        Shoted = 4,
+        Shot           = 3,
+        Shoted         = 4,
 
     }
 
@@ -26,11 +27,11 @@ public class EnemyActor : MonoBehaviour
     {
 
         //MoveToGeneratePos,
-        FisrtAction = 0,
-        TargetRun = 1,
+        FisrtAction     = 0,
+        TargetRun       = 1,
         ProvocationMove = 2,
-        Stay = 3,
-        Shot = 4,
+        Stay            = 3,
+        Shot            = 4,
    
     }
 
@@ -151,12 +152,12 @@ public class EnemyActor : MonoBehaviour
       else
       {
           var targetPosition = _currentTarget.position 
-                             + new Vector3(Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange),
+                             + new Vector3(Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange),
                                            0,
-                                          (Random.Range(-_enemy._sideMoveRange,_enemy._sideMoveRange)));
+                                          (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
 
           //float activeTime = RandomActiveTime(1);
-          float activeTime = _enemy._activeTimeMax;
+          float activeTime = _enemy.info.activeTimeMax;
           iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime,"easeType",iTween.EaseType.linear));
           StartCoroutine(RotateEnemy(activeTime,targetPosition));
 
@@ -237,7 +238,7 @@ public class EnemyActor : MonoBehaviour
         {
             _stayCount += 1;
             transform.LookAt(_playerTransform.transform.position);
-            if (_stayCount > _enemy._shotFrequency)
+            if (_stayCount > _enemy.info.shotFrequency)
             {
                 ChangeAction(ActionType.Shot);
                 _stayCount = 0;
@@ -272,9 +273,9 @@ public class EnemyActor : MonoBehaviour
         float timeCount = 0;
 
         //撃つ数
-        int shotCount = _enemy._chamberValue;
+        int shotCount = _enemy.info.chamberValue;
         //連弾する時の遅延時間
-        float shotDelayTime = _enemy._shotDelay;
+        float shotDelayTime = _enemy.info.shotDelay;
 
         //アニメーションを撃つかまえに
         _enemyAnimator.SetInteger("ActionType", (int)AnimationState.JustBeforeShot);
@@ -336,7 +337,7 @@ public class EnemyActor : MonoBehaviour
 
     float  RandomActiveTime(float min = 0.0f)
     {
-        return Random.Range(min,_enemy._activeTimeMax);
+        return Random.Range(min,_enemy.info.activeTimeMax);
     }
 
     void OnTriggerEnter(Collider other)
@@ -344,9 +345,9 @@ public class EnemyActor : MonoBehaviour
 
         if (_navimesh.enabled == true)
         {
-            _stayCount = Random.Range(0, (_enemy._shotFrequency + 1)); //撃つ頻度は最初のみランダムに
+            _stayCount = Random.Range(0, (_enemy.info.shotFrequency + 1)); //撃つ頻度は最初のみランダムに
             //ランダムでしょっぱなうつ
-            if (_stayCount >= _enemy._shotFrequency)
+            if (_stayCount >= _enemy.info.shotFrequency)
             {
 
                 ChangeAction(ActionType.Shot, RandomActiveTime());
