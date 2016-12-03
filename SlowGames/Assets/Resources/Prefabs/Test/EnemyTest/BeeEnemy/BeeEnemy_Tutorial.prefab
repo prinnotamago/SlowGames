@@ -462,9 +462,9 @@ MonoBehaviour:
     type: 2}
   _doubleBullet: {fileID: 114156336177292556, guid: 94bad617761e845f3af6ffad189c6e09,
     type: 2}
-  _randomShotRange: {x: 1, y: 1, z: 1}
+  _randomShotRange: {x: 5, y: 2, z: 1}
   _shotDelay: 3
-  _gunType: 0
+  _gunType: 2
   _muzzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
     type: 2}
   _isShotStart: 0
