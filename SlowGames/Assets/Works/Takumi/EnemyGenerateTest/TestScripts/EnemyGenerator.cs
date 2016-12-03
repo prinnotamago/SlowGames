@@ -16,12 +16,12 @@ public enum TargetPosition
 {
 
    Left = 0,
-   Front,
-   Right,
+   Front = 1,
+   Right = 2,
 
-   UpLeft,
-   UpFront,
-   UpRight,
+   UpLeft  = 3,
+   UpFront = 4,
+   UpRight = 5,
 
    Last,
   

@@ -219,8 +219,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680381767156560}
-  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: 0.64199996, y: 15.77, z: 11.238}
+  m_LocalRotation: {x: 2.3032878e-12, y: 0.24557482, z: 9.0919616e-12, w: 0.9693777}
+  m_LocalPosition: {x: 23.250002, y: 2.23, z: 2.332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996058707982224}
@@ -432,6 +432,7 @@ MonoBehaviour:
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 3
   _gunType: 1
+  _muzzleFlush: {fileID: 0}
   _isShotStart: 0
 --- !u!114 &114909228965058068
 MonoBehaviour:
@@ -466,7 +467,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 4
+  _generatePostion: 2
 --- !u!137 &137930972761708854
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

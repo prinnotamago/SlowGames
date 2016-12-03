@@ -32,6 +32,7 @@ public class EnemyActor : MonoBehaviour
         ProvocationMove = 2,
         Stay            = 3,
         Shot            = 4,
+        Fall            = 5,
    
     }
 
@@ -50,6 +51,7 @@ public class EnemyActor : MonoBehaviour
     //
     bool _isShot = false;
     int _stayCount = 0;
+
     //実行関数
     Dictionary<ActionType,System.Action> _actionDic = new Dictionary<ActionType, System.Action>();
 
@@ -65,6 +67,7 @@ public class EnemyActor : MonoBehaviour
         _actionDic.Add(ActionType.ProvocationMove,ProvocationMove);
         _actionDic.Add(ActionType.Stay,Stay);
         _actionDic.Add(ActionType.Shot,Shot);
+        _actionDic.Add(ActionType.Fall,DownRespawn);
        
     }
 
@@ -107,6 +110,7 @@ public class EnemyActor : MonoBehaviour
 
     }
 
+    //
     void ChangeAction(ActionType action,float activeTime = 1)
     {
         _currentAction = action;
@@ -167,6 +171,7 @@ public class EnemyActor : MonoBehaviour
 
     }
 
+    //FixMe : 動く方向に傾ける
     IEnumerator RotateEnemy(float activeTime, Vector3 targetPosition)
     {
 
@@ -220,6 +225,7 @@ public class EnemyActor : MonoBehaviour
 //            yield return new WaitForSeconds(activeTime * 0.5f);
 //            iTween.RotateTo(gameObject, iTween.Hash("z", 0, "time", activeTime));
 //        }
+//
 
         yield return null;
     }
@@ -332,8 +338,10 @@ public class EnemyActor : MonoBehaviour
         ChangeAction(ActionType.Stay);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
+
     }
-   
+
+
 
     float  RandomActiveTime(float min = 0.0f)
     {
@@ -345,21 +353,81 @@ public class EnemyActor : MonoBehaviour
 
         if (_navimesh.enabled == true)
         {
-            _stayCount = Random.Range(0, (_enemy.info.shotFrequency + 1)); //撃つ頻度は最初のみランダムに
-            //ランダムでしょっぱなうつ
-            if (_stayCount >= _enemy.info.shotFrequency)
-            {
+//            _stayCount = Random.Range(0, (_enemy.info.shotFrequency + 1)); //撃つ頻度は最初のみランダムに
+//            //ランダムでしょっぱなうつ
+//            if (_stayCount >= _enemy.info.shotFrequency)
+//            {
+//
+//                ChangeAction(ActionType.Shot, RandomActiveTime());
+//            }
+//          else
 
-                ChangeAction(ActionType.Shot, RandomActiveTime());
+            if(_enemy.doFall)// こっちにするぞ
+            {
+                ChangeAction(ActionType.Fall,0);
+
             }
             else
             {
                 ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
             }
-            _navimesh.enabled = false;
 
+            _navimesh.enabled = false;
             _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
+
         }
+
+    }
+
+    //落ちるリスポーン
+    bool _isFalling = true;
+    void DownRespawn()
+    {
+        if (_isFalling)
+        {
+            _isFalling = false;
+            StartCoroutine(Fall());
+        }
+        else
+        {
+            transform.LookAt(_playerTransform.transform.position);
+        }
+    }
+
+
+    [SerializeField]
+    float _downLengthMax = 30;//30
+    [SerializeField]
+    Vector2 _upRangeMinMax = new Vector2(5,13);//30
+
+
+    //落ちて登場
+    IEnumerator Fall()
+    {
+        //落ちまーす
+        var target = transform.position;
+        var sita =  Vector3.down * _downLengthMax;
+        target += sita;
+
+        iTween.MoveTo(gameObject, iTween.Hash ("position", target, "time",1.0f,"easeType",iTween.EaseType.easeOutCirc));
+
+        yield return new WaitForSeconds(1.0f);
+
+
+        //あがりまぁーす
+        target = transform.position;
+        int random = Random.Range((int)_upRangeMinMax.x,(int)_upRangeMinMax.y);
+        sita =  Vector3.up * random;
+        target += sita;
+
+        iTween.MoveTo(gameObject, iTween.Hash ("position", target, "time",1.0f,"easeType",iTween.EaseType.easeOutBack));
+
+        yield return new WaitForSeconds(1.0f);
+
+        _currentTarget.position = transform.position;
+        ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+
+        yield return null;
 
     }
 }
