@@ -1002,6 +1002,11 @@ Prefab:
       propertyPath: _level_1_moveHp.Array.data[2]
       value: 85
       objectReference: {fileID: 0}
+    - target: {fileID: 114700038475548854, guid: 30235a3f043378b48bb8a247ea87ea6d,
+        type: 2}
+      propertyPath: _level_1_speed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95624207517235204, guid: 30235a3f043378b48bb8a247ea87ea6d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 30235a3f043378b48bb8a247ea87ea6d, type: 2}
