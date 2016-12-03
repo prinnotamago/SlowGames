@@ -85,14 +85,16 @@ public class BossAI : MonoBehaviour {
 
     // LEVEL_1 の情報 ////////////////////////////////////////////////////////////
     [SerializeField]
-    Vector3[] _level_1_pos;
-    int _level_1_posIndex = 1;
-    int _level_1_posIndexBefore = 1;
+    Vector3[] _level_1_pos;          // 各移動場所  
+    int _level_1_posIndex = 1;       // 今いる場所のインデックス
+    int _level_1_posIndexBefore = 1; // 前いた場所のインデックス
     [SerializeField]
-    int[] _level_1_moveHp;
-    int _level_1_moveHpIndex = 0;
+    int[] _level_1_moveHp;        // 各移動場所に動くための HP
+    int _level_1_moveHpIndex = 0; // moveHp のインデックス、こいつを変えて移動場所を帰る
     [SerializeField]
-    float _level_1_speed = 5.0f;
+    float _level_1_speed = 5.0f;  // 移動の速さ
+    float _level_1_moveAngle = 0; // 移動するのに Sin を使ってるのに 角度 で調節している
+    bool _isLevel_1_shot = false; // 移動してるときは撃たないようにする
 
     // Use this for initialization
     void Start () {
@@ -215,6 +217,9 @@ public class BossAI : MonoBehaviour {
     {
         if (_state != BossState.LAST && _state != BossState.START)
         {
+            // LEVEL_1 で移動中は弾を撃たないようにするので抜ける
+            if (_state == BossState.LEVEL_1 && !_isLevel_1_shot) { return; }
+
             if (_speedBulletIndex < _speedBulletHP.Length && _speedBulletHP[_speedBulletIndex] >= _hp)
             {
                 if (!_speedBulletFlag)
@@ -263,26 +268,74 @@ public class BossAI : MonoBehaviour {
                 var rand = Random.Range(0, 2);
                 _level_1_posIndex = (rand == 0) ? 0 : 2;
             }
+
+            if (_level_1_posIndexBefore == 1 && _level_1_posIndex == 0)
+            {
+                _level_1_moveAngle = 0;
+            }
+            else if (_level_1_posIndexBefore == 2 && _level_1_posIndex == 1)
+            {
+                _level_1_moveAngle = Mathf.PI;
+            }
+            else if (_level_1_posIndexBefore == 0 && _level_1_posIndex == 1)
+            {
+                _level_1_moveAngle = Mathf.PI / 4;
+            }
+            else if (_level_1_posIndexBefore == 1 && _level_1_posIndex == 2)
+            {
+                _level_1_moveAngle = (-Mathf.PI / 4) * 2;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _level_1_posIndexBefore = 1;
+            _level_1_posIndex = 0;
+            _level_1_moveAngle = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _level_1_posIndexBefore = 2;
+            _level_1_posIndex = 1;
+            _level_1_moveAngle = Mathf.PI;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _level_1_posIndexBefore = 0;
+            _level_1_posIndex = 1;
+            _level_1_moveAngle = Mathf.PI / 4;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _level_1_posIndexBefore = 1;
+            _level_1_posIndex = 2;
+            _level_1_moveAngle = (-Mathf.PI / 4) * 2;
         }
 
         var vector = _level_1_pos[_level_1_posIndex] - transform.position;
-        if(vector.magnitude > 0.01f)
+
+        Vector3 length = _level_1_pos[_level_1_posIndex] - _level_1_pos[_level_1_posIndexBefore];
+        var nomarize = (vector.magnitude / length.magnitude);
+
+        // 0.4f は微調整の数値
+        _level_1_moveAngle += _level_1_speed * Time.deltaTime * 0.4f;
+
+        transform.position += new Vector3(
+               vector.normalized.x * _level_1_speed * Time.deltaTime + Mathf.Cos(_level_1_moveAngle) * _level_1_speed * Time.deltaTime,
+               vector.normalized.y * _level_1_speed * Time.deltaTime + Mathf.Sin(_level_1_moveAngle) * _level_1_speed * Time.deltaTime,
+               vector.normalized.z * _level_1_speed * Time.deltaTime
+               );
+
+        Debug.Log(vector.magnitude);
+        if (vector.magnitude < 0.5f)
         {
-            Vector3 length = _level_1_pos[_level_1_posIndex] - _level_1_pos[_level_1_posIndexBefore];
-            var nomarize = (vector.magnitude / length.magnitude);
-
-            if(_level_1_posIndex == 1 && _level_1_posIndexBefore == 0)
-            {
-                nomarize *= -1;
-            }
-            else if(_level_1_posIndex == 2 && _level_1_posIndexBefore == 1)
-            {
-                nomarize *= -1;
-            }
-
-            transform.position += vector.normalized * _level_1_speed * Time.deltaTime
-                + Vector3.up * _level_1_speed * Time.deltaTime * Mathf.Sin(nomarize * Mathf.PI)
-                 + Vector3.right * _level_1_speed * Time.deltaTime * Mathf.Sin(nomarize * Mathf.PI);
+            _isLevel_1_shot = true;
+        }
+        else
+        {
+            _isLevel_1_shot = false;
         }
     }
 
