@@ -10,10 +10,12 @@ public enum Name
 	FistGame,
 	SwordGame,
 	Select,
+	Result,
 }
 	public const string Title = "Title";
 	public const string MainGame = "MainGame";
 	public const string FistGame = "FistGame";
 	public const string SwordGame = "SwordGame";
 	public const string Select = "Select";
+	public const string Result = "Result";
 }
