@@ -83,11 +83,16 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     BossState _state = BossState.START;
 
+    // LEVEL_1 の情報 ////////////////////////////////////////////////////////////
     [SerializeField]
-    Animator _anim = null;
-    bool _stateChangeFlag = false;
-
-    bool _lastAnimIdle = false;
+    Vector3[] _level_1_pos;
+    int _level_1_posIndex = 1;
+    int _level_1_posIndexBefore = 1;
+    [SerializeField]
+    int[] _level_1_moveHp;
+    int _level_1_moveHpIndex = 0;
+    [SerializeField]
+    float _level_1_speed = 5.0f;
 
     // Use this for initialization
     void Start () {
@@ -101,8 +106,6 @@ public class BossAI : MonoBehaviour {
         {
             Damage();
         }
-        AnimatorStateInfo animInfo = _anim.GetCurrentAnimatorStateInfo(0);
-        Debug.Log(animInfo.normalizedTime);
 
         // 弾を撃つの制御
         BulletShotManage();
@@ -110,7 +113,7 @@ public class BossAI : MonoBehaviour {
         DamageCheck();
 
         // 速い弾を撃つときは各形態の動作をしないようにする
-        //if (_speedBulletFlag) { return; }
+        if (_speedBulletFlag) { return; }
 
         // 各形態の動作
         switch (_state)
@@ -180,12 +183,8 @@ public class BossAI : MonoBehaviour {
 
         if (_changeStateIndex < _changeStateHP.Length && _changeStateHP[_changeStateIndex] >= _hp)
         {
-            if (!_stateChangeFlag)
-            {
-                _stateChangeFlag = true;
-                //_state++;
-                ++_changeStateIndex;
-            }
+            _state++;
+            ++_changeStateIndex;
         }
 
         if (_hp == 0)
@@ -209,8 +208,6 @@ public class BossAI : MonoBehaviour {
             _speedBulletChargeTime = 0.0f;
             _speedBulletFlag = false;
             _attackTime = 0.0f;
-
-            _anim.speed = 1.0f;
         }
     }
 
@@ -224,8 +221,6 @@ public class BossAI : MonoBehaviour {
                 {
                     _speedBulletFlag = true;
                     ++_speedBulletIndex;
-
-                    _anim.speed = 0.0f;
                 }
             }
 
@@ -242,77 +237,63 @@ public class BossAI : MonoBehaviour {
 
     void StartUpdate()
     {
-        AnimatorStateInfo animInfo = _anim.GetCurrentAnimatorStateInfo(0);
-        if (animInfo.normalizedTime >= 1.0f)
+        if(transform.position.y < 3.5f)
         {
             _state++;
-            _anim.SetInteger("State", (int)_state);
-            //_stateChangeFlag = false;
+        }
+        else
+        {
+            transform.position += Vector3.down * Time.deltaTime;
         }
     }
 
     void Level_1_Update()
     {
-        AnimatorStateInfo animInfo = _anim.GetCurrentAnimatorStateInfo(0);
-        if (animInfo.normalizedTime >= 1.0f)
+        if (_level_1_moveHpIndex < _level_1_moveHp.Length && _level_1_moveHp[_level_1_moveHpIndex] >= _hp)
         {
-            if (_stateChangeFlag)
+            ++_level_1_moveHpIndex;
+
+            _level_1_posIndexBefore = _level_1_posIndex;
+            if (_level_1_posIndex == 0 || _level_1_posIndex == 2)
             {
-                _state++;
-                _anim.SetInteger("State", (int)_state);
-                _stateChangeFlag = false;
+                _level_1_posIndex = 1;
             }
-            else
+            else if (_level_1_posIndex == 1)
             {
-                _anim.Play(Animator.StringToHash("Boss1st"), 0, 0.0f);
+                var rand = Random.Range(0, 2);
+                _level_1_posIndex = (rand == 0) ? 0 : 2;
             }
+        }
+
+        var vector = _level_1_pos[_level_1_posIndex] - transform.position;
+        if(vector.magnitude > 0.01f)
+        {
+            Vector3 length = _level_1_pos[_level_1_posIndex] - _level_1_pos[_level_1_posIndexBefore];
+            var nomarize = (vector.magnitude / length.magnitude);
+
+            if(_level_1_posIndex == 1 && _level_1_posIndexBefore == 0)
+            {
+                nomarize *= -1;
+            }
+            else if(_level_1_posIndex == 2 && _level_1_posIndexBefore == 1)
+            {
+                nomarize *= -1;
+            }
+
+            transform.position += vector.normalized * _level_1_speed * Time.deltaTime
+                + Vector3.up * _level_1_speed * Time.deltaTime * Mathf.Sin(nomarize * Mathf.PI)
+                 + Vector3.right * _level_1_speed * Time.deltaTime * Mathf.Sin(nomarize * Mathf.PI);
         }
     }
 
     void Level_2_Update()
     {
-        AnimatorStateInfo animInfo = _anim.GetCurrentAnimatorStateInfo(0);
-        if (animInfo.normalizedTime >= 1.0f)
-        {
-            if (_stateChangeFlag)
-            {
-                _state++;
-                _anim.SetInteger("State", (int)_state);
-                _stateChangeFlag = false;
-            }
-            else
-            {
-                _anim.Play(Animator.StringToHash("Boss2nd"), 0, 0.0f);
-            }
-        }
+
     }
 
     void LastUpdate()
     {
-        AnimatorStateInfo animInfo = _anim.GetCurrentAnimatorStateInfo(0);
-        if (!_lastAnimIdle)
-        {         
-            if (0.4f < animInfo.normalizedTime && animInfo.normalizedTime < 0.7f)
-            {
-                SlowMotion._instance.isLimit = false;
-                SlowMotion._instance.GameSpeed(0.1f);
-            }
-            else if (animInfo.normalizedTime >= 0.7f && SlowMotion._instance.isSlow)
-            {
-                SlowMotion._instance.ResetSpeed();
-                _lastAnimIdle = true;
-            }           
-        }
 
-        if (animInfo.normalizedTime >= 1.0f)
-        {
-            if (_stateChangeFlag)
-            {
-                _state++;
-                _anim.SetInteger("State", (int)_state);
-                _stateChangeFlag = false;
-            }
-        }
     }
 
     void OnTriggerEnter(Collider col)
