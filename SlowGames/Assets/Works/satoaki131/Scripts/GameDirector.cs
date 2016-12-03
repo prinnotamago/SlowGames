@@ -116,7 +116,7 @@ public class GameDirector : MonoBehaviour {
         }
         else if(_generateManager._deathCount == _clearDeathCount)
         {
-            _clearDeathCount++;
+            _clearDeathCount--;
             Instantiate(_boss);
         }
         else if(_isBossDestroy && _gamePlay)
