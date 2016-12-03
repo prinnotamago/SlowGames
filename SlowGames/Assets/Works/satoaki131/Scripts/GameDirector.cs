@@ -33,9 +33,22 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     private Image _gameClearImage = null;
 
+    [SerializeField]
+    private GameObject _boss = null;
+
     private Dictionary<GameState, Action> _update = null;
 
     private GameState _state = GameState.MainGame;
+
+    private bool _isBossDestroy = false;
+
+    /// <summary>
+    /// ボスが死んだときに呼ぶ関数
+    /// </summary>
+    public void isBossDestroy()
+    {
+        _isBossDestroy = true;
+    }
 
     /// <summary>
     /// ゲーム中かどうか
@@ -95,12 +108,22 @@ public class GameDirector : MonoBehaviour {
     {
         PlayTimeCount();
 
-        if (_hp.PlayerHp <= 0 && _gamePlay ||
-            _generateManager._deathCount == _clearDeathCount && _gamePlay)
+        if (_hp.PlayerHp <= 0 && _gamePlay)
         {
             _gamePlay = false;
             GameSet();
-            StartCoroutine(ResultChangeStage(_hp.PlayerHp <= 0 ? _hp.gameOverImage : _gameClearImage));
+            StartCoroutine(ResultChangeStage(_hp.gameOverImage));
+        }
+        else if(_generateManager._deathCount == _clearDeathCount)
+        {
+            _clearDeathCount++;
+            Instantiate(_boss);
+        }
+        else if(_isBossDestroy && _gamePlay)
+        {
+            _gamePlay = false;
+            GameSet();
+            StartCoroutine(ResultChangeStage(_gameClearImage));
         }
 
     }
