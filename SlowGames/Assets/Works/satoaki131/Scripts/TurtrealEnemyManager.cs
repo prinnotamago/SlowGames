@@ -53,7 +53,7 @@ public class TurtrealEnemyManager : MonoBehaviour {
 
     void Update()
     {
-        if (_enemy[0] == null && _enemy[1] == null) { isSceneChange = true; }
+        if (_enemy[0] == null && _enemy[1] == null && TitleManager.isTurtreal) { isSceneChange = true; }
         if (TitleManager.isTurtreal) return;
         for(int i = 0; i < _enemy.Length; i++)
         {

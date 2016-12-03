@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour {
 
@@ -33,6 +34,10 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private Canvas _idCanvas = null;
 
+    [SerializeField]
+    private Canvas _descriptionPanel = null;
+    private Text _descriptionText = null;
+
     private TurtrealEnemyManager _enemyManager = null;
 
     private PlayerShot[] _playerShot = null;
@@ -58,6 +63,8 @@ public class TitleManager : MonoBehaviour {
 
         _enemyManager = FindObjectOfType<TurtrealEnemyManager>();
         isTurtreal = false;
+
+        _descriptionText = _descriptionPanel.GetComponentInChildren<Text>();
     }
 
     void Update()
@@ -166,28 +173,44 @@ public class TitleManager : MonoBehaviour {
 
         /////////ここから下あとから分離する
 
+        StartCoroutine(SlowDescription());
+    }
+
+    IEnumerator SlowDescription()
+    {
+        _descriptionPanel.gameObject.SetActive(true);
+        _descriptionText.text = "スローを使ってみよう！";
         //スローを使うまでループ抜けない
-        while(!SlowMotion._instance.isSlow)
+        while (!SlowMotion._instance.isSlow)
         {
             yield return null;
         }
 
+        _descriptionText.text = "スロー中";
         //スローゲージがなくなったらループ抜ける
-        while(SlowMotion._instance.slowTime != 0)
+        while (SlowMotion._instance.slowTime != 0)
         {
             yield return null;
         }
 
+
+        _descriptionText.text = "スローを回復しよう！";
         //スローゲージが回復したらぬける
-        while(SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
             yield return null;
         }
 
+        StartCoroutine(TurtrealEnd());
+    }
+
+    IEnumerator TurtrealEnd()
+    {
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
-        while(!enemyManager.isSceneChange)
+        _descriptionText.text = "敵を倒そう！";
+        while (!enemyManager.isSceneChange)
         {
             yield return null;
         }
@@ -195,8 +218,8 @@ public class TitleManager : MonoBehaviour {
         //扉の演出
 
         //シーン遷移
+        TitleManager.isTurtreal = false;
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
-
     }
 
 }
