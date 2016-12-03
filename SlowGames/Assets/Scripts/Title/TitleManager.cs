@@ -198,6 +198,7 @@ public class TitleManager : MonoBehaviour {
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
+            Debug.Log("OK");
             yield return null;
         }
 

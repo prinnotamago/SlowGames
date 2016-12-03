@@ -408,10 +408,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730ed03b405064d36aa6de378dde547c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isShot: 0
+  _isShot: 1
   _enemyAnimator: {fileID: 95400481978720788}
   _justShotTime: 0.5
-  _intervalTime: 0
+  _minIntervalTime: 5
+  _maxIntervalTime: 10
 --- !u!114 &114329841492908496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,6 +465,8 @@ MonoBehaviour:
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 3
   _gunType: 0
+  _muzzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
+    type: 2}
   _isShotStart: 0
 --- !u!137 &137086847224965510
 SkinnedMeshRenderer:
