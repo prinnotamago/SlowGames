@@ -22,7 +22,7 @@ public class UserAuthenticationText : MonoBehaviour {
 
     void Start()
     {
-        GetComponent<Text>();
+        _text = GetComponent<Text>();
         if(_type == TextType.Descript)
         {
             _text.text = "ユーザー認証中";
@@ -33,7 +33,7 @@ public class UserAuthenticationText : MonoBehaviour {
         }
         else if(_type == TextType.point)
         {
-            _text.text = "";
+            _text.text = ".";
         }
     }
 
@@ -46,10 +46,11 @@ public class UserAuthenticationText : MonoBehaviour {
             _testTime += 0.5f;
             _text.text += ".";
         }
-        if(_testTime > 2.0f)
+        if(_testTime > 2.5f)
         {
-            _testTime = 1.0f;
-            _text.text = "";
+            _testTime = 0.5f;
+            _text.text = ".";
+            _time = 0.0f;
 
         }
     }
