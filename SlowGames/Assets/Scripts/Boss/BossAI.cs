@@ -190,6 +190,7 @@ public class BossAI : MonoBehaviour {
 
         if (_hp == 0)
         {
+            GameDirector.instance.isBossDestroy();
             Destroy(gameObject);
         }
     }
