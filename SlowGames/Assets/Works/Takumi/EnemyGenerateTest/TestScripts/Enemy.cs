@@ -44,6 +44,14 @@ public class Enemy : MonoBehaviour
 
     public TargetPosition  _generatePostion;
 
+    bool _doFall = false;
+
+    public bool doFall
+    {
+        set{ _doFall = value; }
+        get{ return _doFall;}
+    }
+
     void Start()
     {
         death = false;
@@ -56,7 +64,13 @@ public class Enemy : MonoBehaviour
             waveCount = _enemyAttackInfos.Count - 1;
         }
 
-       _enemyInfo = _enemyAttackInfos[waveCount];
+        _enemyInfo = _enemyAttackInfos[waveCount];
+
+        //空中から落とすタイプは落ちる処理をする
+        if ((int)_generatePostion > (int)TargetPosition.Right)
+        {
+            _doFall = true;
+        }
 
     }
 
