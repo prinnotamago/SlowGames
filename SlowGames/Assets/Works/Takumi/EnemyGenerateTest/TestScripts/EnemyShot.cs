@@ -132,11 +132,14 @@ public class EnemyShot : MonoBehaviour
         Vector3 playerPos = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
 
         //playerの位置を意志的にずらす
-        float randomXPos = _randomShotRange.x - UnityEngine.Random.Range(0.0f,(_randomShotRange.x * 2.0f));
-        float randomYPos = _randomShotRange.y - UnityEngine.Random.Range(0.0f,(_randomShotRange.y * 2.0f));
-        float randomZPos = _randomShotRange.z - UnityEngine.Random.Range(0.0f,(_randomShotRange.z * 2.0f));
+        float randomXPos = _randomShotRange.x - _randomShotRange.x;
+        float randomYPos = _randomShotRange.y - _randomShotRange.y;
+        float randomZPos = _randomShotRange.z - _randomShotRange.z;
 
-        playerPos +=  new Vector3(randomXPos,randomYPos,randomZPos);
+        int pluss = UnityEngine.Random.Range(0,2) == 1 ? -1 : 1;
+
+        //設定したプラスか
+        playerPos +=  new Vector3(randomXPos * pluss,randomYPos,randomZPos);
 
         //打つ方向の基準を設定
         Vector3 targetDirection = (playerPos - transform.position).normalized;
