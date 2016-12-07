@@ -33,6 +33,8 @@ public class EnemyActor : MonoBehaviour
         Stay            = 3,
         Shot            = 4,
         Fall            = 5,
+        SinMove         = 6,
+        Takkle          = 7
    
     }
 
@@ -68,6 +70,8 @@ public class EnemyActor : MonoBehaviour
         _actionDic.Add(ActionType.Stay,Stay);
         _actionDic.Add(ActionType.Shot,Shot);
         _actionDic.Add(ActionType.Fall,DownRespawn);
+        _actionDic.Add(ActionType.SinMove,SinMove);
+        _actionDic.Add(ActionType.Takkle,Tackle);
        
     }
 
@@ -111,7 +115,7 @@ public class EnemyActor : MonoBehaviour
     }
 
     //
-    void ChangeAction(ActionType action,float activeTime = 1)
+    void ChangeAction(ActionType action,float activeTime = 0)
     {
         _currentAction = action;
         _enemy._activeCounter = activeTime;
@@ -122,7 +126,7 @@ public class EnemyActor : MonoBehaviour
     bool CheckPlayerToDistance(float maxDistance)
     {
 
-        Vector3 distance = _currentTarget.position - transform.position;
+        Vector3 distance = _playerTransform.transform.position - transform.position;
 
         //一定距離離れてたら
         if (Mathf.Abs(distance.magnitude) > maxDistance)
@@ -210,22 +214,6 @@ public class EnemyActor : MonoBehaviour
 
             yield return null;
         }
-
-
-//
-//        if (add > 0)
-//        {
-//            iTween.RotateTo(gameObject, iTween.Hash("z", 10, "time", activeTime));
-//            yield return new WaitForSeconds(activeTime * 0.5f);
-//            iTween.RotateTo(gameObject, iTween.Hash("z",  0, "time", activeTime));
-//        }
-//        else
-//        {
-//            iTween.RotateTo(gameObject, iTween.Hash("z", -10, "time", activeTime));
-//            yield return new WaitForSeconds(activeTime * 0.5f);
-//            iTween.RotateTo(gameObject, iTween.Hash("z", 0, "time", activeTime));
-//        }
-//
 
         yield return null;
     }
@@ -342,11 +330,11 @@ public class EnemyActor : MonoBehaviour
     }
 
 
-
     float  RandomActiveTime(float min = 0.0f)
     {
         return Random.Range(min,_enemy.info.activeTimeMax);
     }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -362,7 +350,7 @@ public class EnemyActor : MonoBehaviour
 //            }
 //          else
 
-            if(_enemy.doFall)// こっちにするぞ
+            if(!_enemy.doFall)// こっちにするぞ
             {
                 ChangeAction(ActionType.Fall,0);
 
@@ -407,15 +395,15 @@ public class EnemyActor : MonoBehaviour
 
         ///落とす
         //落ちる角度を調整
-        int randomAngle = UnityEngine.Random.Range(265,275);
+        int randomAngle = UnityEngine.Random.Range(265, 275);
         float x = Mathf.Cos(ToRadian(randomAngle));
         float y = Mathf.Sin(ToRadian(randomAngle));
-        Vector3 randomDirec = new Vector3(x,y,0);
+        Vector3 randomDirec = new Vector3(x, y, 0);
 
         var direction = randomDirec * _downLengthMax;
         var target = (direction + transform.position);
 
-        iTween.MoveTo(gameObject, iTween.Hash ("position", target,"time",1.0f,"easeType",iTween.EaseType.easeOutCirc));
+        iTween.MoveTo(gameObject, iTween.Hash("position", target, "time", 1.0f, "easeType", iTween.EaseType.easeOutCirc));
 
         yield return new WaitForSeconds(1.0f);
 
@@ -424,21 +412,76 @@ public class EnemyActor : MonoBehaviour
 
         ///あげる
         //あげる距離をランダムで調整
-        int randomUpRange = Random.Range((int)_upRangeMinMax.x,(int)_upRangeMinMax.y);
-        target +=  Vector3.up * randomUpRange;
+        int randomUpRange = Random.Range((int)_upRangeMinMax.x, (int)_upRangeMinMax.y);
+        target += Vector3.up * randomUpRange;
 
 //        //エネミーの位置を調整
 //        enemy.transform.position = transform.position + new Vector3(x,0,z);
 
-        iTween.MoveTo(gameObject, iTween.Hash ("position", target, "time",1.0f,"easeType",iTween.EaseType.easeOutBack));
+        iTween.MoveTo(gameObject, iTween.Hash("position", target, "time", 1.0f, "easeType", iTween.EaseType.easeOutBack));
 
         yield return new WaitForSeconds(1.0f);
 
         _currentTarget.position = transform.position;
-        ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
 
+        //
+        if (_enemy.Type == EnemyType.Tackle)
+        {
+            ChangeAction(ActionType.SinMove,0);
+
+            Debug.Log("タックル");
+        }
+        else
+        {
+            ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+        }
         yield return null;
 
+    }
+
+    [SerializeField]
+    float _sideMoveSpeed = 200;
+    [SerializeField]
+    float _sideMoveLenfth = 10;
+
+    [SerializeField,Range(1,20)]
+    float _tackleRange = 7;
+    [SerializeField]
+    float _tackleSpeed = 10;
+    [SerializeField,Range(0,5)]
+    float _tackleChargeTime = 1;
+
+
+    //Test:横移動しながら前に進み
+    void SinMove()
+    {
+        _enemy._activeCounter += Time.deltaTime * _sideMoveSpeed;
+        Vector3 side = transform.right * (Mathf.Cos(ToRadian(_enemy._activeCounter)) * _sideMoveLenfth);
+        transform.position += (transform.forward + side) * Time.deltaTime;
+        transform.LookAt(_playerTransform.transform.position);
+        //プレイヤーと
+        if (!CheckPlayerToDistance(_tackleRange))
+        {
+            ChangeAction(ActionType.Takkle,_tackleChargeTime);
+
+        }
+
+    }
+
+    void Tackle()
+    {
+        //チャージ
+        if (_enemy._activeCounter > 0)
+        {
+           _enemy._activeCounter -= Time.deltaTime;
+           transform.LookAt(_playerTransform.transform.position);
+        }
+        else
+        {   
+           // タックル
+           transform.position += (transform.forward) * Time.deltaTime * _tackleSpeed;
+        }
+         
     }
 
     static float ToRadian(float value)
