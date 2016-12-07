@@ -90,15 +90,10 @@ public class GameDirector : MonoBehaviour {
         instance = this;
         _update = new Dictionary<GameState, Action>();
         _update.Add(GameState.MainGame,MainGameUpdate);
-        _update.Add(GameState.Result,ResultUpdate);
+        _update.Add(GameState.Result,() => { });
         GameSet();
         StartCoroutine(GameStartCutIn());
         _hp = FindObjectOfType<PlayerHP>();
-    }
-
-    private void ResultUpdate()
-    {
-
     }
 
     [SerializeField]
@@ -121,9 +116,10 @@ public class GameDirector : MonoBehaviour {
         }
         else if(_isBossDestroy && _gamePlay)
         {
-            _gamePlay = false;
-            GameSet();
-            StartCoroutine(ResultChangeStage(_gameClearImage));
+            SceneChange.ChangeScene(SceneName.Name.Result, Color.white);
+            //_gamePlay = false;
+            //GameSet();
+            //StartCoroutine(ResultChangeStage(_gameClearImage));
         }
 
     }
@@ -158,6 +154,7 @@ public class GameDirector : MonoBehaviour {
             _pointLight.intensity = Mathf.Lerp(1, 0, time / 2.0f);
             yield return null;
         }
+
         _state = GameState.Result;
         _generateManager.DestroyAllEnemy();
         activeImage.gameObject.SetActive(false);
