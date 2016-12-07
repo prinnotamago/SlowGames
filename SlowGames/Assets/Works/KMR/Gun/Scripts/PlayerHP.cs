@@ -57,13 +57,13 @@ public class PlayerHP : MonoBehaviour {
         if (_playerHp <= 0) return;
         if (other.tag == TagName.EnemyBullet)
         {
-            Damage();
+            Damage(1);
         }
     }
-   public void Damage()
+   public void Damage(int damageValue)
     {
         ScoreManager.instance.AddInpactDamageCount();
-        _playerHp--;
+        _playerHp -= damageValue;
         _isHit = true;
     }
 
