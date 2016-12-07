@@ -17,12 +17,11 @@ public class Authentication : MonoBehaviour {
     //表示するID
     private int _passward = 0;
 
-    [SerializeField]
     private Text[] _text = null;
 
     private char[] _displayPassNumber = null; //IDの数字列を１つずつ分解
     private int _randomNumber = 0; //ランダム演出の数字
-    private int END_INDEX = 6; //配列の最後尾から止めていく
+    private int END_INDEX = 0; //配列の最後尾から止めていく
     private float _time = 0.0f; //タイムをカウントしていく
     [SerializeField]
     private float _stopTime = 2.0f; //一つ目の数字の止めるボタン
@@ -44,7 +43,7 @@ public class Authentication : MonoBehaviour {
         _time += Time.unscaledDeltaTime; 
         for (int i = 0; i < _text.Length; i++)
         {
-            if (i >= END_INDEX) break;
+            if (i < END_INDEX) continue;
             _randomNumber = UnityEngine.Random.Range(0, 10);
             _text[i].text = _randomNumber.ToString();
 
@@ -52,8 +51,8 @@ public class Authentication : MonoBehaviour {
             if (_time > _stopTime)
             {
                 _stopTime += 0.6f;
-                END_INDEX--;
-                if(END_INDEX == 0 && !_authenticationEnd) { _authenticationEnd = true; }
+                END_INDEX++;
+                if(END_INDEX == _text.Length && !_authenticationEnd) { _authenticationEnd = true; break; }
                 _text[END_INDEX].text = _displayPassNumber[END_INDEX].ToString();
             }
         }
