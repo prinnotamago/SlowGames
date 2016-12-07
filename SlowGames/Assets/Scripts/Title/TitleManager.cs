@@ -194,11 +194,10 @@ public class TitleManager : MonoBehaviour {
         }
 
 
-        _descriptionText.text = "スローを回復しよう！";
+        _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
-            Debug.Log("OK");
             yield return null;
         }
 

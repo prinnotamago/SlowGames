@@ -9,6 +9,11 @@ public class PutGunStand : MonoBehaviour {
 
     private bool _isPut = false;
 
+    public bool isPutGun
+    {
+        get { return _isPut; }
+    }
+
     void Start()
     {
         _gunObj.transform.parent = transform; //自分の子供にする
