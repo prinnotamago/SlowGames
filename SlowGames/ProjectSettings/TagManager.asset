@@ -13,6 +13,7 @@ TagManager:
   - Floor
   - Float
   - SlowCheck
+  - Stand
   layers:
   - Default
   - TransparentFX

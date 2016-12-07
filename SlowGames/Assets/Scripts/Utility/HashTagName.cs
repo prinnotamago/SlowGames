@@ -18,4 +18,6 @@ public static class HashTagName
 	public static readonly int Sword = "Sword".GetHashCode();
 	public static readonly int Floor = "Floor".GetHashCode();
 	public static readonly int Float = "Float".GetHashCode();
+	public static readonly int SlowCheck = "SlowCheck".GetHashCode();
+	public static readonly int Stand = "Stand".GetHashCode();
 }

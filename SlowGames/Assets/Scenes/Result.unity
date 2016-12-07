@@ -186,6 +186,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4619313}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!21 &25549988
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &40524555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,35 +1397,6 @@ Transform:
   m_Father: {fileID: 913794455}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1090479744
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1098977797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,9 +1644,10 @@ GameObject:
   - component: {fileID: 1201033182}
   - component: {fileID: 1201033181}
   - component: {fileID: 1201033180}
+  - component: {fileID: 1201033185}
   m_Layer: 5
   m_Name: Gun2Stand
-  m_TagString: Untagged
+  m_TagString: Stand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1730,6 +1731,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1201033185
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201033179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1.07, z: 0}
 --- !u!1 &1291826968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,11 +1978,11 @@ Prefab:
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1822827981}
+      objectReference: {fileID: 1815039222}
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1090479744}
+      objectReference: {fileID: 25549988}
     - target: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -180
@@ -2026,19 +2039,6 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   m_PrefabInternal: {fileID: 1466760523}
---- !u!114 &1466760526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1466760524}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 919851cc0bdca5a47a88697e336351b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tagName: Weapon
-  _isDrop: 0
 --- !u!65 &1466760527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2066,19 +2066,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1466760529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1466760525}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 919851cc0bdca5a47a88697e336351b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tagName: Weapon
-  _isDrop: 0
 --- !u!65 &1466760530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2118,7 +2105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunObj: {fileID: 1944553208}
-  _putPos: {x: 0, y: 0, z: 0}
+  _putPos: {x: -0.4370001, y: 0.37, z: -0.12}
+  _rotation: {x: 0, y: 0, z: 72.89301}
 --- !u!114 &1466760537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunObj: {fileID: 1190967919}
   _putPos: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: -89.953}
 --- !u!1 &1490383400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,9 +2133,10 @@ GameObject:
   - component: {fileID: 1490383403}
   - component: {fileID: 1490383402}
   - component: {fileID: 1490383401}
+  - component: {fileID: 1490383406}
   m_Layer: 5
   m_Name: Gun1Stand
-  m_TagString: Untagged
+  m_TagString: Stand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2230,6 +2220,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1490383406
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490383400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1.06, z: 0}
 --- !u!1 &1494642032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2340,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!43 &1822827981
+--- !u!43 &1815039222
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

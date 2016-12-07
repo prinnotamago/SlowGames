@@ -18,4 +18,6 @@ public static class TagName
 	public const string Sword = "Sword";
 	public const string Floor = "Floor";
 	public const string Float = "Float";
+	public const string SlowCheck = "SlowCheck";
+	public const string Stand = "Stand";
 }

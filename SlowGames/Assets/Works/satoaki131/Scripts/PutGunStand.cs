@@ -7,34 +7,43 @@ public class PutGunStand : MonoBehaviour {
     [SerializeField]
     private GameObject _gunObj = null;
 
-    [SerializeField]
-    private Vector3 _putPos = Vector3.zero;
-
-    private Quaternion _rotation;
+    private bool _isPut = false;
 
     void Start()
     {
-        _rotation = _gunObj.transform.rotation;
         _gunObj.transform.parent = transform; //自分の子供にする
         _gunObj.gameObject.transform.position = transform.position;
         _gunObj.gameObject.transform.rotation = transform.rotation;
         _gunObj.gameObject.transform.Rotate(235, 0, 180);
-
-        Debug.Log(_rotation);
     }
 
     void Update()
     {
-
+        if(!_isPut)
+        {
+            _gunObj.transform.parent = transform; //自分の子供にする
+            _gunObj.gameObject.transform.position = transform.position;
+            _gunObj.gameObject.transform.rotation = transform.rotation;
+            _gunObj.gameObject.transform.Rotate(235, 0, 180);
+        }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == TagName.Weapon)
+        if(col.gameObject.tag == TagName.Stand)
         {
             _gunObj.transform.parent = null; //子供解除
-            _gunObj.transform.position = _putPos;
-            _gunObj.transform.rotation = _rotation;
+            var localPosition = col.transform.position;
+            localPosition.y += 0.27f;
+            Debug.Log(col.transform.position);
+            _gunObj.transform.localPosition = localPosition;
+            _gunObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            col.GetComponent<SphereCollider>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+            var localRotation = col.transform.eulerAngles;
+            localRotation.z = col.transform.position.x < 0 ? 72.89301f : -89.953f;
+            _gunObj.transform.eulerAngles = localRotation; 
+            _isPut = true;
         }
     }
 
