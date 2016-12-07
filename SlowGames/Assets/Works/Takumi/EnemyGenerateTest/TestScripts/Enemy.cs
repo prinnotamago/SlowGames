@@ -101,12 +101,13 @@ public class Enemy : MonoBehaviour
 
             if (_isTutorial)
             {
+
             }
             else
             {
                 AjustDeath();
             }
-
+            Destroy(this.gameObject); 
            
         }
         else if( other.gameObject.tag == TagName.Player)
