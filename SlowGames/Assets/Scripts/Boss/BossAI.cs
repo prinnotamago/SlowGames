@@ -95,6 +95,23 @@ public class BossAI : MonoBehaviour {
     float _level_1_speed = 5.0f;  // 移動の速さ
     float _level_1_moveAngle = 0; // 移動するのに Sin を使ってるのに 角度 で調節している
     bool _isLevel_1_shot = false; // 移動してるときは撃たないようにする
+    //////////////////////////////////////////////////////////////////////////////
+
+    // LEVEL_2 の情報/////////////////////////////////////////////////////////////
+    [SerializeField]
+    float _level_2_maxHeight = 100.0f;    // ハチの字の高さ
+    [SerializeField]
+    float _level_2_maxWidth = 1.0f;     // ハチの字の横の最大距離
+    [SerializeField]
+    float _level_2_minWidth = 5.0f;     // ハチの字の横の最小距離
+    float _level_2_width = 10.0f;        // 今の八の字での横の長さ
+    [SerializeField]
+    float _level_2_speed = 5.0f;        // 移動速度
+    float _level_2_moveAngle = 0.0f;       // 移動するのに Sin を使ってるのに 角度 で調節している
+    [SerializeField]
+    Vector3 _level_2_centerPos;                 // 中心距離
+    int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
+    //////////////////////////////////////////////////////////////////////////////
 
     // Use this for initialization
     void Start () {
@@ -252,6 +269,7 @@ public class BossAI : MonoBehaviour {
         }
     }
 
+    // 第一形態
     void Level_1_Update()
     {
         if (_level_1_moveHpIndex < _level_1_moveHp.Length && _level_1_moveHp[_level_1_moveHpIndex] >= _hp)
@@ -287,32 +305,32 @@ public class BossAI : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _level_1_posIndexBefore = 1;
-            _level_1_posIndex = 0;
-            _level_1_moveAngle = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _level_1_posIndexBefore = 2;
-            _level_1_posIndex = 1;
-            _level_1_moveAngle = Mathf.PI;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    _level_1_posIndexBefore = 1;
+        //    _level_1_posIndex = 0;
+        //    _level_1_moveAngle = 0;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    _level_1_posIndexBefore = 2;
+        //    _level_1_posIndex = 1;
+        //    _level_1_moveAngle = Mathf.PI;
+        //}
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _level_1_posIndexBefore = 0;
-            _level_1_posIndex = 1;
-            _level_1_moveAngle = Mathf.PI / 4;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            _level_1_posIndexBefore = 1;
-            _level_1_posIndex = 2;
-            _level_1_moveAngle = (-Mathf.PI / 4) * 2;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    _level_1_posIndexBefore = 0;
+        //    _level_1_posIndex = 1;
+        //    _level_1_moveAngle = Mathf.PI / 4;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    _level_1_posIndexBefore = 1;
+        //    _level_1_posIndex = 2;
+        //    _level_1_moveAngle = (-Mathf.PI / 4) * 2;
+        //}
 
         var vector = _level_1_pos[_level_1_posIndex] - transform.position;
 
@@ -328,7 +346,7 @@ public class BossAI : MonoBehaviour {
                vector.normalized.z * _level_1_speed * Time.deltaTime
                );
 
-        Debug.Log(vector.magnitude);
+        //Debug.Log(vector.magnitude);
         if (vector.magnitude < 0.5f)
         {
             _isLevel_1_shot = true;
@@ -339,11 +357,39 @@ public class BossAI : MonoBehaviour {
         }
     }
 
+    // 第二形態
     void Level_2_Update()
     {
+        _level_2_moveAngle += Time.deltaTime * _level_2_speed;
 
+        if (_level_2_changeCount == 0 && _level_2_moveAngle > (Mathf.PI / 2))
+        {
+            _level_2_changeCount++;
+            _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+        }
+        else if (_level_2_changeCount == 1 && _level_2_moveAngle > (Mathf.PI / 2) * 3)
+        {
+            _level_2_changeCount++;
+            _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+        }
+        else if (_level_2_changeCount == 2 && _level_2_moveAngle > Mathf.PI * 2)
+        {
+            _level_2_moveAngle = 0.0f;
+            _level_2_changeCount = 0;
+        }
+        Debug.Log(_level_2_moveAngle);
+
+        var nextPos = _level_2_centerPos + new Vector3(
+            Mathf.Cos(_level_2_moveAngle) * _level_2_width,
+            Mathf.Sin(_level_2_moveAngle * 2) *  _level_2_maxHeight,
+            0);
+
+        var vector = nextPos - transform.position;
+
+        transform.position += vector / 20.0f;
     }
 
+    // クライマックス
     void LastUpdate()
     {
 
