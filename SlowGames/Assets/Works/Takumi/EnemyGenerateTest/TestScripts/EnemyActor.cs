@@ -404,21 +404,31 @@ public class EnemyActor : MonoBehaviour
     //落ちて登場
     IEnumerator Fall()
     {
-        //落ちまーす
-        var target = transform.position;
-        var sita =  Vector3.down * _downLengthMax;
-        target += sita;
 
-        iTween.MoveTo(gameObject, iTween.Hash ("position", target, "time",1.0f,"easeType",iTween.EaseType.easeOutCirc));
+        ///落とす
+        //落ちる角度を調整
+        int randomAngle = UnityEngine.Random.Range(265,275);
+        float x = Mathf.Cos(ToRadian(randomAngle));
+        float y = Mathf.Sin(ToRadian(randomAngle));
+        Vector3 randomDirec = new Vector3(x,y,0);
+
+        var direction = randomDirec * _downLengthMax;
+        var target = (direction + transform.position);
+
+        iTween.MoveTo(gameObject, iTween.Hash ("position", target,"time",1.0f,"easeType",iTween.EaseType.easeOutCirc));
 
         yield return new WaitForSeconds(1.0f);
 
-
-        //あがりまぁーす
+        //ターゲットを更新
         target = transform.position;
-        int random = Random.Range((int)_upRangeMinMax.x,(int)_upRangeMinMax.y);
-        sita =  Vector3.up * random;
-        target += sita;
+
+        ///あげる
+        //あげる距離をランダムで調整
+        int randomUpRange = Random.Range((int)_upRangeMinMax.x,(int)_upRangeMinMax.y);
+        target +=  Vector3.up * randomUpRange;
+
+//        //エネミーの位置を調整
+//        enemy.transform.position = transform.position + new Vector3(x,0,z);
 
         iTween.MoveTo(gameObject, iTween.Hash ("position", target, "time",1.0f,"easeType",iTween.EaseType.easeOutBack));
 
@@ -429,5 +439,10 @@ public class EnemyActor : MonoBehaviour
 
         yield return null;
 
+    }
+
+    static float ToRadian(float value)
+    {
+        return value * 3.14f / 180.0f;
     }
 }
