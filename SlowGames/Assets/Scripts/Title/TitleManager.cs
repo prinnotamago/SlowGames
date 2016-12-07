@@ -42,6 +42,12 @@ public class TitleManager : MonoBehaviour {
 
     private PlayerShot[] _playerShot = null;
 
+    [SerializeField]
+    private GameObject _door = null; //ドア用のオブジェクト
+
+    [SerializeField]
+    private Light _afterShade = null; //後光用のライト
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -55,7 +61,7 @@ public class TitleManager : MonoBehaviour {
     private State _state = State.Title;
 
     void Start()
-    {
+    { 
         _stateUpdate = new Dictionary<State, Action>();
         _stateUpdate.Add(State.Title, TitleUpdate);
         _stateUpdate.Add(State.Turtreal, TurtrealUpdate);
@@ -70,6 +76,12 @@ public class TitleManager : MonoBehaviour {
     void Update()
     {
         _stateUpdate[_state]();
+
+        //デバック用
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneChange.ChangeScene(SceneName.Name.MainGame, Color.white);
+        }
     }
 
     /// <summary>
@@ -216,10 +228,26 @@ public class TitleManager : MonoBehaviour {
         }
 
         //扉の演出
+        StartCoroutine(LightShine());
 
         //シーン遷移
         TitleManager.isTurtreal = false;
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
     }
 
+    private IEnumerator LightShine()
+    {
+        var time = 0.0f;
+        var mat = _door.GetComponent<Renderer>().material;
+        var color = new Color(1, 1, 1, 0);
+
+        while(true)
+        {
+            time += Time.unscaledDeltaTime;
+            _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time);
+            color.a = Mathf.Lerp(color.a, 1, time);
+            mat.color = color;
+            yield return null;
+        }
+    }
 }
