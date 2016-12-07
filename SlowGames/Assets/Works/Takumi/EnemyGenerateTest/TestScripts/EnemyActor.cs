@@ -83,6 +83,7 @@ public class EnemyActor : MonoBehaviour
         _isShot = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
+       
 
     }
 
@@ -350,17 +351,27 @@ public class EnemyActor : MonoBehaviour
 //            }
 //          else
 
-            if(!_enemy.doFall)// こっちにするぞ
+            if (_enemy.doFall)
             {
-                ChangeAction(ActionType.Fall,0);
+                ChangeAction(ActionType.Fall, 0);
 
             }
             else
-            {
-                ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+            {   
+                if (_enemy.Type == EnemyType.Tackle)
+                {
+                    ChangeAction(ActionType.SinMove, 0);
+                    Debug.Log("タックル");
+                }
+                else
+                {
+                    ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+                }
             }
 
             _navimesh.enabled = false;
+
+           
             _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
         }
