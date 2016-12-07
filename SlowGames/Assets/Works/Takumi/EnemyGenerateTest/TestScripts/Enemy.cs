@@ -107,13 +107,17 @@ public class Enemy : MonoBehaviour
                 AjustDeath();
             }
 
-            if (_type == EnemyType.Tackle)
+           
+        }
+        else if( other.gameObject.tag == TagName.Player)
+        {
+            if(_type == EnemyType.Tackle)
             {
                 //test:
                 FindObjectOfType<PlayerHP>().Damage(_attackDamege);
             }
 
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); 
         }
     }
 
