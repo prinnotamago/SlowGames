@@ -976,7 +976,8 @@ MonoBehaviour:
   _normalEnemys:
   - {fileID: 1680381767156560, guid: 35eaa732d5b1c4b7e999a82d638a4037, type: 2}
   - {fileID: 1960405656031998, guid: 141f6428c04764d7f9db04f88c2cd292, type: 2}
-  _hardEnemys: []
+  _hardEnemys:
+  - {fileID: 1272229952121936, guid: caa0dd708ec7f4673a52174c71e74bb2, type: 2}
   _generateList: []
   _left: {fileID: 4000010448756442}
   _front: {fileID: 4000011029644534}
@@ -1013,6 +1014,8 @@ MonoBehaviour:
       generateTiming: 5
     - type: 1
       generateTiming: 6
+    - type: 2
+      generateTiming: 7
   - _startDieCount: 10
     _generateTimingCount: 2
     _generateCount: 4
@@ -1030,6 +1033,8 @@ MonoBehaviour:
     _generateCount: 4
     _enemyLimit: 8
     _generateTypeList: 0000000001000000
-    _rareEnemyInfo: []
+    _rareEnemyInfo:
+    - type: 2
+      generateTiming: 14
   _deathCount: 0
-  _isTutorial: 1
+  _isTutorial: 0

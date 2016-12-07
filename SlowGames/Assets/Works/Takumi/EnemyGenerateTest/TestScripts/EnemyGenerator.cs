@@ -6,7 +6,7 @@ public enum EnemyType
 {
     Easy,
     Normal,
-    Hard,
+    Tackle,
 
     Last,
 }
@@ -83,7 +83,7 @@ public class EnemyGenerator : MonoBehaviour
         
         _enemysDic.Add(EnemyType.Easy, _easyEnemys);
         _enemysDic.Add(EnemyType.Normal, _normalEnemys);
-        _enemysDic.Add(EnemyType.Hard, _hardEnemys);
+        _enemysDic.Add(EnemyType.Tackle, _hardEnemys);
 
         _targetPositionDic.Add(TargetPosition.Left,_left);
         _targetPositionDic.Add(TargetPosition.Right,_right);

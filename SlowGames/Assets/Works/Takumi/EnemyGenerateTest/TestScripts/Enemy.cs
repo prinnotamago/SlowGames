@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private EnemyType _type = EnemyType.Easy;
+    public EnemyType Type { get {return _type;}}
 
     //Transform _targetPostion;
     //多重Hitを避ける
@@ -46,6 +47,10 @@ public class Enemy : MonoBehaviour
 
     bool _doFall = false;
 
+    [SerializeField]
+    int _attackDamege = 2;
+
+
     public bool doFall
     {
         set{ _doFall = value; }
@@ -74,6 +79,8 @@ public class Enemy : MonoBehaviour
 
     }
 
+
+
     //たまにあたったら死にます
     void OnCollisionEnter(Collision other)
     {
@@ -100,6 +107,12 @@ public class Enemy : MonoBehaviour
                 AjustDeath();
             }
 
+            if (_type == EnemyType.Tackle)
+            {
+                //test:
+                FindObjectOfType<PlayerHP>().Damage(_attackDamege);
+            }
+
             Destroy(this.gameObject);
         }
     }
@@ -116,8 +129,8 @@ public class Enemy : MonoBehaviour
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             //Test:スコア
-            ScoreManager.instance.AddHitEnemyCount();
-            ScoreManager.instance.AddScore(_type);
+//            ScoreManager.instance.AddHitEnemyCount();
+//            ScoreManager.instance.AddScore(_type);
     }
 
 
