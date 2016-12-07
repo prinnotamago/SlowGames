@@ -395,7 +395,7 @@ public class EnemyActor : MonoBehaviour
 
 
     [SerializeField]
-    float _downLengthMax = 30;//30
+    float _downLengthMax = 20;//30
     [SerializeField]
     Vector2 _upRangeMinMax = new Vector2(5,13);//30
 
