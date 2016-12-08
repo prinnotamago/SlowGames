@@ -48,6 +48,9 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private Light _afterShade = null; //後光用のライト
 
+    [SerializeField, Range(1.0f, 3.0f)]
+    private float END_TIME = 2.0f;
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -235,17 +238,22 @@ public class TitleManager : MonoBehaviour {
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
     }
 
+    /// <summary>
+    /// ライトをシーン遷移と同時に強くしていくコルーチン
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator LightShine()
     {
         var time = 0.0f;
         var mat = _door.GetComponent<Renderer>().material;
         var color = new Color(1, 1, 1, 0);
 
+        //光の強さとDoorのα値をを上げていく
         while(true)
         {
             time += Time.unscaledDeltaTime;
-            _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time);
-            color.a = Mathf.Lerp(color.a, 1, time);
+            _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
+            color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
             mat.color = color;
             yield return null;
         }
