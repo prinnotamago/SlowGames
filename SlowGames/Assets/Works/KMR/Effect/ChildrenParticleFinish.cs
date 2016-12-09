@@ -33,7 +33,7 @@ public class ChildrenParticleFinish : MonoBehaviour
 
         if(count == _particleSystem.Length)
         {
-            Debug.Log("homo");
+          //  Debug.Log("homo");
             Destroy(gameObject);
         }
 
