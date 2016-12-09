@@ -79,6 +79,7 @@ public class BossAI : MonoBehaviour {
         LEVEL_1,
         LEVEL_2,
         LAST,
+        CLIMAX,
     }
     [SerializeField]
     BossState _state = BossState.START;
@@ -113,8 +114,12 @@ public class BossAI : MonoBehaviour {
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
     //////////////////////////////////////////////////////////////////////////////
 
+    [SerializeField]
+    GameObject _hitParticle = null;
+
     // Use this for initialization
     void Start () {
+        // 狙うためのプレイヤーを探していれる
         _player = GameObject.FindGameObjectWithTag(TagName.Player);
     }
 	
@@ -149,11 +154,15 @@ public class BossAI : MonoBehaviour {
             case BossState.LAST:
                 LastUpdate();
                 break;
+            case BossState.CLIMAX:
+                ClimaxUpdate();
+                break;
         }
         //Debug.Log(_hp);
         //Debug.Log(_state);
 	}
 
+    // 一定時間ごとに普通の弾を撃つ
     void NormalShot()
     {
         _attackTime += Time.deltaTime;
@@ -188,31 +197,37 @@ public class BossAI : MonoBehaviour {
         }
     }
 
+    // ダメージを受ける
     void Damage()
     {
         _hp--;
     }
+    // ダメージが一定受けたらの処理たち
     void DamageCheck()
     {
+        // 一定 HP きったらパーツをパージさせる
         if (_purgeIndex < _parts.Length && _purgeHP[_purgeIndex] == _hp)
         {
             PartsPurge();
             ++_purgeIndex;
         }
 
+        // 一定 HP きったら形態を変える
         if (_changeStateIndex < _changeStateHP.Length && _changeStateHP[_changeStateIndex] >= _hp)
         {
             _state++;
             ++_changeStateIndex;
         }
 
+        // HP が 0 になったら死ぬ
         if (_hp == 0)
         {
-            GameDirector.instance.isBossDestroy();
             Destroy(gameObject);
+            GameDirector.instance.isBossDestroy();
         }
     }
 
+    // 速い球を撃つ
     void SpeedBulletShot()
     {
         _speedBulletChargeTime += Time.deltaTime;
@@ -230,8 +245,10 @@ public class BossAI : MonoBehaviour {
         }
     }
 
+    // 撃つ弾を管理する
     void BulletShotManage()
     {
+        // 登場とクライマックスでも弾を撃たない
         if (_state != BossState.LAST && _state != BossState.START)
         {
             // LEVEL_1 で移動中は弾を撃たないようにするので抜ける
@@ -257,6 +274,7 @@ public class BossAI : MonoBehaviour {
         }
     }
 
+    // 登場形態
     void StartUpdate()
     {
         if(transform.position.y < 3.5f)
@@ -389,8 +407,15 @@ public class BossAI : MonoBehaviour {
         transform.position += vector / 20.0f;
     }
 
-    // クライマックス
+    // ラスト(突撃)
     void LastUpdate()
+    {
+        var test = transform.position - (_level_1_pos[1] + Vector3.one * Random.Range(-1, 1));
+        transform.position += test / 10.0f;
+    }
+
+    // クライマックス
+    void ClimaxUpdate()
     {
 
     }
@@ -403,10 +428,13 @@ public class BossAI : MonoBehaviour {
         // 弾が当たったら体力を減らす
         if (col.gameObject.tag == TagName.Bullet)
         {
+            var particle = Instantiate(_hitParticle);
+            particle.transform.position = col.transform.position;
             Damage();
         }
     }
 
+    // パーツをランダムでパージする
     void PartsPurge()
     {
         List<BossPurgeParts> parts = new List<BossPurgeParts>();
