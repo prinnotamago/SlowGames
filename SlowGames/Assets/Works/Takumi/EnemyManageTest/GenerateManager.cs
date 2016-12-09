@@ -61,7 +61,6 @@ public class GenerateManager : MonoBehaviour
     List<int> _rareEnemyCount = new List<int>();
     static int _currentWaveCount = 0;
 
-    [SerializeField,Range(0,100)]
     int _MAX_ENEMY = 30;
 
     public static int GetCurrentWave()
@@ -82,7 +81,7 @@ public class GenerateManager : MonoBehaviour
         }
 
         _deathCount = 0;
-
+        _MAX_ENEMY = FindObjectOfType<GameDirector>().clearEnemyKillCount;
         //開幕３体配置.
         _currentWaveCount = 0;
 //        var waveData = _waveDate[_currentWaveCount];
