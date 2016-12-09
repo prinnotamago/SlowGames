@@ -219,8 +219,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680381767156560}
-  m_LocalRotation: {x: 2.3032878e-12, y: 0.24557482, z: 9.0919616e-12, w: 0.9693777}
-  m_LocalPosition: {x: 23.250002, y: 2.23, z: 2.332}
+  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
+  m_LocalPosition: {x: -0.01000005, y: 2.5500002, z: 23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996058707982224}
@@ -414,6 +414,13 @@ MonoBehaviour:
   _playerToMaxDistance: 0.4
   _currentTarget: {fileID: 0}
   _justShotTime: 0.2
+  _downLengthMax: 30
+  _upRangeMinMax: {x: 5, y: 13}
+  _sideMoveSpeed: 200
+  _sideMoveLenfth: 10
+  _tackleRange: 7
+  _tackleSpeed: 10
+  _tackleChargeTime: 1
 --- !u!114 &114377888507270568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,7 +437,7 @@ MonoBehaviour:
   _doubleBullet: {fileID: 114351836775223038, guid: 1fbbcfaac0b2147b48be0000e3893fbb,
     type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
-  _shotDelay: 3
+  _shotDelay: 1
   _gunType: 1
   _muzzleFlush: {fileID: 0}
   _isShotStart: 0
@@ -450,24 +457,25 @@ MonoBehaviour:
     type: 2}
   _type: 1
   _enemyAttackInfos:
-  - moveSpeed: 3
+  - moveSpeed: 7
     stayTimeMax: 1
     sideMoveRange: 2
-    activeTimeMax: 2
+    activeTimeMax: 1
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
     generateRate: 0
-  - moveSpeed: 3
+  - moveSpeed: 7
     stayTimeMax: 1
     sideMoveRange: 2
-    activeTimeMax: 2
+    activeTimeMax: 1
     shotFrequency: 2
     chamberValue: 2
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 2
+  _generatePostion: 1
+  _attackDamege: 2
 --- !u!137 &137930972761708854
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
