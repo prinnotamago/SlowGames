@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 65212362722296514}
   - component: {fileID: 23727707881199650}
   - component: {fileID: 114700038475548854}
-  - component: {fileID: 114460983976801930}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -758,19 +757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114460983976801930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1510459827905888}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec432a1bd9a30345a67a62d3c5f6065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 3
-  length: 0.01
 --- !u!114 &114616235365252052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -794,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  _changeStateHP: 5000000014000000
+  _changeStateHP: 500000001400000001000000
   _parts:
   - {fileID: 114265860944830838}
   - {fileID: 114753581827855704}
@@ -824,9 +810,11 @@ MonoBehaviour:
   _level_1_speed: 5
   _level_2_maxHeight: 3
   _level_2_maxWidth: 10
-  _level_2_minWidth: 1
+  _level_2_minWidth: 5
   _level_2_speed: 2
   _level_2_centerPos: {x: 0, y: 4.5, z: 1.65}
+  _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
+    type: 2}
 --- !u!114 &114753581827855704
 MonoBehaviour:
   m_ObjectHideFlags: 1
