@@ -47,6 +47,8 @@ public class EnemyActor : MonoBehaviour
 
     //エネミーが向かう方向
     public Transform _currentTarget;
+    Vector3 _basePosition;
+
     //player情報
     GameObject _playerTransform;
 
@@ -80,6 +82,7 @@ public class EnemyActor : MonoBehaviour
     {
 
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        _basePosition = _currentTarget.position;
         _isShot = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
@@ -143,7 +146,7 @@ public class EnemyActor : MonoBehaviour
     void TargetRun()
     {
          //ターゲットに向かって走る
-        _navimesh.SetDestination(_currentTarget.position);
+        _navimesh.SetDestination(_basePosition);
         transform.LookAt(_playerTransform.transform.position);
 
     }
@@ -160,10 +163,10 @@ public class EnemyActor : MonoBehaviour
       //リセット
       else
       {
-          var targetPosition = _currentTarget.position 
-                             + new Vector3(Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange),
-                                           0,
-                                          (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
+            var targetPosition = _basePosition
+                               + new Vector3(Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange),
+                                             0,
+                                            (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
 
           //float activeTime = RandomActiveTime(1);
           float activeTime = _enemy.info.activeTimeMax;
@@ -365,7 +368,7 @@ public class EnemyActor : MonoBehaviour
                 }
                 else
                 {
-                    ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+                    ChangeAction(ActionType.Shot, RandomActiveTime());
                 }
             }
 
@@ -433,7 +436,7 @@ public class EnemyActor : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        _currentTarget.position = transform.position;
+        _basePosition = transform.position;
 
         //
         if (_enemy.Type == EnemyType.Tackle)
@@ -444,7 +447,7 @@ public class EnemyActor : MonoBehaviour
         }
         else
         {
-            ChangeAction(ActionType.ProvocationMove, RandomActiveTime());
+            ChangeAction(ActionType.Shot, RandomActiveTime());
         }
         yield return null;
 
