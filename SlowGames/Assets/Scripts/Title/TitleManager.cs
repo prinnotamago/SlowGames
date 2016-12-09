@@ -232,6 +232,7 @@ public class TitleManager : MonoBehaviour {
         {
             yield return null;
         }
+        _descriptionPanel.gameObject.SetActive(false);
 
         //扉の演出
         StartCoroutine(LightShine());
