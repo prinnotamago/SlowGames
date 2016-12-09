@@ -410,7 +410,7 @@ public class BossAI : MonoBehaviour {
     // ラスト(突撃)
     void LastUpdate()
     {
-        var test = transform.position - (_level_1_pos[1] + Vector3.one * Random.Range(-1, 1));
+        var test = (_level_1_pos[1] + Vector3.one * Random.Range(-1, 1)) - transform.position;
         transform.position += test / 10.0f;
     }
 
