@@ -99,6 +99,11 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     int _clearDeathCount = 30;
 
+    public int clearEnemyKillCount
+    {
+        get { return _clearDeathCount; }
+    }
+
     private void MainGameUpdate()
     {
         PlayTimeCount();
