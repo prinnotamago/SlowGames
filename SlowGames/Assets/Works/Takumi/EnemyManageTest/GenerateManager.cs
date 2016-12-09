@@ -60,6 +60,10 @@ public class GenerateManager : MonoBehaviour
     List<WaveData> _waveDate = new List<WaveData>();
     List<int> _rareEnemyCount = new List<int>();
     static int _currentWaveCount = 0;
+
+    [SerializeField,Range(0,100)]
+    int _MAX_ENEMY = 30;
+
     public static int GetCurrentWave()
     {
          return _currentWaveCount;
@@ -240,7 +244,18 @@ public class GenerateManager : MonoBehaviour
 
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
-            SetEnemy(waveData._generateCount,waveData._generateTypeList);
+
+            //限界値以上出さない
+            if (_MAX_ENEMY < _deathCount + waveData._generateCount)
+            {
+                int lastCount = _MAX_ENEMY - _deathCount;
+                SetEnemy(lastCount, waveData._generateTypeList);
+
+            }
+            else
+            {
+                SetEnemy(waveData._generateCount, waveData._generateTypeList);
+            }
         }
 
     }
