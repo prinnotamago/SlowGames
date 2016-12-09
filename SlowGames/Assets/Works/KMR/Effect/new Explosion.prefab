@@ -242,7 +242,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 553715820
+  randomSeed: 842730504
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -274,13 +274,13 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 3
     startSpeed:
-      scalar: 3
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 1
+          value: 0.75
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -292,7 +292,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.33333334
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -968,10 +968,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 3657437439
+          rgba: 4278194431
         key1:
           serializedVersion: 2
-          rgba: 3657444285
+          rgba: 4278190080
         key2:
           serializedVersion: 2
           rgba: 704654269
@@ -991,7 +991,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 10794
-        ctime1: 42405
+        ctime1: 46260
         ctime2: 36623
         ctime3: 65150
         ctime4: 65150
@@ -999,8 +999,8 @@ ParticleSystem:
         ctime6: 63222
         ctime7: 0
         atime0: 0
-        atime1: 26600
-        atime2: 50501
+        atime1: 39128
+        atime2: 47417
         atime3: 64957
         atime4: 64957
         atime5: 0
@@ -2789,7 +2789,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 118841929
+  randomSeed: 616412276
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10598,7 +10598,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
