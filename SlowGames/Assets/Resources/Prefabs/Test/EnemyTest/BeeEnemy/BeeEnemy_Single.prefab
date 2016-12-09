@@ -219,8 +219,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960405656031998}
-  m_LocalRotation: {x: 4.9795354e-12, y: 0.53091407, z: 7.948157e-12, w: 0.8474257}
-  m_LocalPosition: {x: 24.34, y: 2.276, z: 1.5940695}
+  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
+  m_LocalPosition: {x: 0.08199996, y: 35.590004, z: -11.800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4743915867261770}
@@ -437,7 +437,7 @@ MonoBehaviour:
   _doubleBullet: {fileID: 114156336177292556, guid: 94bad617761e845f3af6ffad189c6e09,
     type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
-  _shotDelay: 3
+  _shotDelay: 0.5
   _gunType: 0
   _muzzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
     type: 2}
@@ -458,24 +458,24 @@ MonoBehaviour:
     type: 2}
   _type: 0
   _enemyAttackInfos:
-  - moveSpeed: 3
-    stayTimeMax: 1
+  - moveSpeed: 6
+    stayTimeMax: 0.5
     sideMoveRange: 2
-    activeTimeMax: 2
+    activeTimeMax: 1.5
     shotFrequency: 2
     chamberValue: 2
-    shotDelay: 1
+    shotDelay: 0.5
     generateRate: 0
-  - moveSpeed: 3
-    stayTimeMax: 1
+  - moveSpeed: 6
+    stayTimeMax: 0.5
     sideMoveRange: 2
-    activeTimeMax: 2
+    activeTimeMax: 1.5
     shotFrequency: 2
-    chamberValue: 2
-    shotDelay: 1
+    chamberValue: 3
+    shotDelay: 0.5
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 2
+  _generatePostion: 4
   _attackDamege: 2
 --- !u!137 &137332522207314690
 SkinnedMeshRenderer:

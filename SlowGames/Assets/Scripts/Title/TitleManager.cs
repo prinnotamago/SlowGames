@@ -51,6 +51,9 @@ public class TitleManager : MonoBehaviour {
     [SerializeField, Range(1.0f, 3.0f)]
     private float END_TIME = 2.0f;
 
+    [SerializeField]
+    private float _moveSpeed = 1.0f;
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -229,13 +232,14 @@ public class TitleManager : MonoBehaviour {
         {
             yield return null;
         }
+        _descriptionPanel.gameObject.SetActive(false);
 
         //扉の演出
         StartCoroutine(LightShine());
 
-        //シーン遷移
-        TitleManager.isTurtreal = false;
-        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+        ////シーン遷移
+        //TitleManager.isTurtreal = false;
+        //SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
     }
 
     /// <summary>
@@ -249,12 +253,28 @@ public class TitleManager : MonoBehaviour {
         var color = new Color(1, 1, 1, 0);
 
         //光の強さとDoorのα値をを上げていく
-        while(true)
+        while(time < END_TIME)
         {
             time += Time.unscaledDeltaTime;
             _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
             color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
             mat.color = color;
+            _door.transform.Translate(0, _moveSpeed, 0);
+            yield return null;
+        }
+
+        StartCoroutine(DoorMove());
+        //シーン遷移
+        TitleManager.isTurtreal = false;
+        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+
+    }
+
+    private IEnumerator DoorMove()
+    {
+        while(true)
+        {
+            _door.transform.Translate(0, _moveSpeed, 0);
             yield return null;
         }
     }
