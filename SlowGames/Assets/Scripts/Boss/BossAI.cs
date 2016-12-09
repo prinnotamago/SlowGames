@@ -395,7 +395,7 @@ public class BossAI : MonoBehaviour {
             _level_2_moveAngle = 0.0f;
             _level_2_changeCount = 0;
         }
-        Debug.Log(_level_2_moveAngle);
+        //Debug.Log(_level_2_moveAngle);
 
         var nextPos = _level_2_centerPos + new Vector3(
             Mathf.Cos(_level_2_moveAngle) * _level_2_width,
