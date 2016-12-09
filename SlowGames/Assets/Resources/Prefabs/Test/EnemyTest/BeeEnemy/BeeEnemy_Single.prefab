@@ -439,7 +439,7 @@ MonoBehaviour:
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 0.5
   _gunType: 0
-  _muzzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
+  _muzzleFlush: {fileID: 1706786483571582, guid: dff7704d5bbe539458904ae36e030ec9,
     type: 2}
   _isShotStart: 0
 --- !u!114 &114932392202072578
