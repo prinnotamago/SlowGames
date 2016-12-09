@@ -253,19 +253,29 @@ public class TitleManager : MonoBehaviour {
         var color = new Color(1, 1, 1, 0);
 
         //光の強さとDoorのα値をを上げていく
-        while(time > END_TIME)
+        while(time < END_TIME)
         {
             time += Time.unscaledDeltaTime;
             _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
             color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
             mat.color = color;
-            _door.transform.Translate(0, 0, _moveSpeed);
+            _door.transform.Translate(0, _moveSpeed, 0);
             yield return null;
         }
 
+        StartCoroutine(DoorMove());
         //シーン遷移
         TitleManager.isTurtreal = false;
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
 
+    }
+
+    private IEnumerator DoorMove()
+    {
+        while(true)
+        {
+            _door.transform.Translate(0, _moveSpeed, 0);
+            yield return null;
+        }
     }
 }
