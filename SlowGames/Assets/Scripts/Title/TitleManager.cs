@@ -54,6 +54,10 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private float _moveSpeed = 1.0f;
 
+    [SerializeField]
+    private GameObject _viveControllerModel = null;
+    private Material[] _viveMaterial = null; //0:body, 1:slowButton 2:trigger, 3:grip
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -77,6 +81,12 @@ public class TitleManager : MonoBehaviour {
         isTurtreal = false;
 
         _descriptionText = _descriptionPanel.GetComponentInChildren<Text>();
+
+        _viveMaterial = new Material[4];
+        for(int i = 0; i < _viveControllerModel.GetComponentInChildren<Renderer>().materials.Length; i++)
+        {
+            _viveMaterial[i] = _viveControllerModel.GetComponentInChildren<Renderer>().materials[i];
+        }
     }
 
     void Update()
@@ -198,9 +208,26 @@ public class TitleManager : MonoBehaviour {
     {
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "スローを使ってみよう！";
+
+        var time = 0.0f;
+
+        _viveMaterial[1].EnableKeyword("_EMISSION");
+        _viveMaterial[1].SetColor("_EmissionColor", Color.black);
         //スローを使うまでループ抜けない
         while (!SlowMotion._instance.isSlow)
         {
+            time += Time.deltaTime;
+            if(time > 1.0f)
+            {
+                _viveMaterial[1].EnableKeyword("_EMISSION");
+                _viveMaterial[1].SetColor("_EmissionColor", Color.black);
+                time = 0.0f;
+            }
+            else if(time > 0.5f)
+            {
+                _viveMaterial[1].EnableKeyword("_EMISSION");
+                _viveMaterial[1].SetColor("_EmissionColor", Color.white);
+            }
             yield return null;
         }
 
