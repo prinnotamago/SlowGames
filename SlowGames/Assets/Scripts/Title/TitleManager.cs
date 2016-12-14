@@ -55,8 +55,9 @@ public class TitleManager : MonoBehaviour {
     private float _moveSpeed = 1.0f;
 
     [SerializeField]
-    private GameObject _viveControllerModel = null;
+    private GameObject[] _viveControllerModel = null;
     private Material[] _viveMaterial = null; //0:body, 1:slowButton 2:trigger, 3:grip
+    private Material[] _viveMaterial2 = null; //0:body, 1:slowButton 2:trigger, 3:grip
 
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
@@ -83,10 +84,15 @@ public class TitleManager : MonoBehaviour {
         _descriptionText = _descriptionPanel.GetComponentInChildren<Text>();
 
         _viveMaterial = new Material[4];
-        for(int i = 0; i < _viveControllerModel.GetComponentInChildren<Renderer>().materials.Length; i++)
+        _viveMaterial2 = new Material[4];
+        for(int i = 0; i < _viveControllerModel[0].GetComponentInChildren<Renderer>().materials.Length; i++)
         {
-            _viveMaterial[i] = _viveControllerModel.GetComponentInChildren<Renderer>().materials[i];
+            _viveMaterial[i] = _viveControllerModel[0].GetComponentInChildren<Renderer>().materials[i];
+            _viveMaterial2[i] = _viveControllerModel[1].GetComponentInChildren<Renderer>().materials[i];
         }
+
+        _viveControllerModel[0].SetActive(false);
+        _viveControllerModel[1].SetActive(false);
     }
 
     void Update()
@@ -199,11 +205,17 @@ public class TitleManager : MonoBehaviour {
         _enemyManager.SetActive(true);
         _enemyManager.SetTurtrealBulletActive(true);
 
-        /////////ここから下あとから分離する
+        _viveControllerModel[0].SetActive(true);
+        _viveControllerModel[1].SetActive(true);
+
 
         StartCoroutine(SlowDescription());
     }
 
+    /// <summary>
+    /// スローのチュートリアル
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SlowDescription()
     {
         _descriptionPanel.gameObject.SetActive(true);
@@ -213,6 +225,9 @@ public class TitleManager : MonoBehaviour {
 
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
+        _viveMaterial2[1].EnableKeyword("_EMISSION");
+        _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
+
         //スローを使うまでループ抜けない
         while (!SlowMotion._instance.isSlow)
         {
@@ -221,15 +236,25 @@ public class TitleManager : MonoBehaviour {
             {
                 _viveMaterial[1].EnableKeyword("_EMISSION");
                 _viveMaterial[1].SetColor("_EmissionColor", Color.black);
+                _viveMaterial2[1].EnableKeyword("_EMISSION");
+                _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
+
                 time = 0.0f;
             }
             else if(time > 0.5f)
             {
                 _viveMaterial[1].EnableKeyword("_EMISSION");
                 _viveMaterial[1].SetColor("_EmissionColor", Color.white);
+                _viveMaterial2[1].EnableKeyword("_EMISSION");
+                _viveMaterial2[1].SetColor("_EmissionColor", Color.white);
             }
             yield return null;
         }
+
+        _viveMaterial[1].EnableKeyword("_EMISSION");
+        _viveMaterial[1].SetColor("_EmissionColor", Color.black);
+        _viveMaterial2[1].EnableKeyword("_EMISSION");
+        _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
 
         _descriptionText.text = "スロー中";
         //スローゲージがなくなったらループ抜ける
@@ -249,24 +274,55 @@ public class TitleManager : MonoBehaviour {
         StartCoroutine(TurtrealEnd());
     }
 
+    /// <summary>
+    /// Enemyを倒してチュートリアルを終える
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TurtrealEnd()
     {
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
         _descriptionText.text = "敵を倒そう！";
+
+        _viveMaterial[2].EnableKeyword("_EMISSION");
+        _viveMaterial[2].SetColor("_EmissionColor", Color.black);
+        _viveMaterial2[2].EnableKeyword("_EMISSION");
+        _viveMaterial2[2].SetColor("_EmissionColor", Color.black);
+
+        var time = 0.0f;
+        _viveControllerModel[0].transform.Rotate(0, 90, 0);
+        _viveControllerModel[1].transform.Rotate(0, -90, 0);
+
         while (!enemyManager.isSceneChange)
         {
+            time += Time.deltaTime;
+            if (time > 1.0f)
+            {
+                _viveMaterial[2].EnableKeyword("_EMISSION");
+                _viveMaterial[2].SetColor("_EmissionColor", Color.black);
+                _viveMaterial2[2].EnableKeyword("_EMISSION");
+                _viveMaterial2[2].SetColor("_EmissionColor", Color.black);
+
+                time = 0.0f;
+            }
+            else if (time > 0.5f)
+            {
+                _viveMaterial[2].EnableKeyword("_EMISSION");
+                _viveMaterial[2].SetColor("_EmissionColor", Color.white);
+                _viveMaterial2[2].EnableKeyword("_EMISSION");
+                _viveMaterial2[2].SetColor("_EmissionColor", Color.white);
+            }
+
             yield return null;
         }
         _descriptionPanel.gameObject.SetActive(false);
 
+        _viveControllerModel[0].SetActive(false);
+        _viveControllerModel[1].SetActive(false);
+
         //扉の演出
         StartCoroutine(LightShine());
-
-        ////シーン遷移
-        //TitleManager.isTurtreal = false;
-        //SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
     }
 
     /// <summary>
@@ -297,6 +353,10 @@ public class TitleManager : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// ドアを動かし続ける
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DoorMove()
     {
         while(true)
