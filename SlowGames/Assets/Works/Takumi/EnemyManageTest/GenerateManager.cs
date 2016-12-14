@@ -71,6 +71,10 @@ public class GenerateManager : MonoBehaviour
     //死亡数をカウントします
     public int _deathCount = 0;
 
+    [SerializeField]
+    bool _isDebug;
+
+
     void Start()
     {
         //初期化
@@ -81,11 +85,22 @@ public class GenerateManager : MonoBehaviour
         }
 
         _deathCount = 0;
-        _MAX_ENEMY = FindObjectOfType<GameDirector>().clearEnemyKillCount;
+
+//        #if _isDebug == false
+//
+//        //シリアライズで決めたエネミーの数をマックスにする
+//
+//
+//        #else
+
+        //_MAX_ENEMY = FindObjectOfType<GameDirector>().clearEnemyKillCount;
+
+//        #endif
+
         //開幕３体配置.
         _currentWaveCount = 0;
-//        var waveData = _waveDate[_currentWaveCount];
-//        SetEnemy(1,waveData._generateTypeList);
+//      var waveData = _waveDate[_currentWaveCount];
+//      SetEnemy(1,waveData._generateTypeList);
 
         if (_isTutorial)
         {
@@ -207,6 +222,7 @@ public class GenerateManager : MonoBehaviour
     void UpdateEnemyCount()
     {
 
+        //ウェーブデータを感じた.
         var waveData = _waveDate[_currentWaveCount];
 
         //ウェーブのデータが最大にいったらそれ以上はいかない
@@ -221,7 +237,7 @@ public class GenerateManager : MonoBehaviour
 
         }
 
-        //現在出ているレアタイプの数
+        //
         int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
 
         //最大数でてたら通らない
@@ -230,29 +246,31 @@ public class GenerateManager : MonoBehaviour
             //タイミングに合わせて、ホーミングタイプのキャラを出す
             if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
-
+                //
                 SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
                 _rareEnemyCount[_currentWaveCount] += 1;
-
-
             }
         }
+
+
 
         //死ぬごとに、敵キャラを生成
         int liveEnemysCount = GetLiveEnemyCount();
 
+        //
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
 
             //限界値以上出さない
             if (_MAX_ENEMY < _deathCount + waveData._generateCount)
             {
+                //
                 int lastCount = _MAX_ENEMY - _deathCount;
                 SetEnemy(lastCount, waveData._generateTypeList);
-
             }
             else
             {
+                //設定した分のエネミーを出す
                 SetEnemy(waveData._generateCount, waveData._generateTypeList);
             }
         }
@@ -343,7 +361,6 @@ public class GenerateManager : MonoBehaviour
     //*敵キャラがいる場合は生成させない
     void SetEnemy(int count,List<EnemyType> enemyTypes)
     {
-
         StartCoroutine(DelayGenerate(enemyTypes,count,0.5f));
     }
     void SetEnemy(int count,EnemyType enemyType)
@@ -384,6 +401,7 @@ public class GenerateManager : MonoBehaviour
 
             yield return null;
 
+            //
             while (true)
             {
                 counter -= Time.deltaTime;
