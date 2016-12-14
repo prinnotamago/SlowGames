@@ -4,12 +4,12 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-public class TitleManager : MonoBehaviour {
+public class TitleManager : MonoBehaviour
+{
 
     enum State
     {
         Title,
-        Turtreal,
         Wait
     }
 
@@ -67,15 +67,14 @@ public class TitleManager : MonoBehaviour {
     {
         get; private set;
     }
-     
+
     private Dictionary<State, Action> _stateUpdate = null;
     private State _state = State.Title;
 
     void Start()
-    { 
+    {
         _stateUpdate = new Dictionary<State, Action>();
         _stateUpdate.Add(State.Title, TitleUpdate);
-        _stateUpdate.Add(State.Turtreal, TurtrealUpdate);
         _stateUpdate.Add(State.Wait, () => { });
 
         _enemyManager = FindObjectOfType<TurtrealEnemyManager>();
@@ -85,7 +84,7 @@ public class TitleManager : MonoBehaviour {
 
         _viveMaterial = new Material[4];
         _viveMaterial2 = new Material[4];
-        for(int i = 0; i < _viveControllerModel[0].GetComponentInChildren<Renderer>().materials.Length; i++)
+        for (int i = 0; i < _viveControllerModel[0].GetComponentInChildren<Renderer>().materials.Length; i++)
         {
             _viveMaterial[i] = _viveControllerModel[0].GetComponentInChildren<Renderer>().materials[i];
             _viveMaterial2[i] = _viveControllerModel[1].GetComponentInChildren<Renderer>().materials[i];
@@ -100,7 +99,7 @@ public class TitleManager : MonoBehaviour {
         _stateUpdate[_state]();
 
         //デバック用
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneChange.ChangeScene(SceneName.Name.MainGame, Color.white);
         }
@@ -130,11 +129,6 @@ public class TitleManager : MonoBehaviour {
         }
     }
 
-    void TurtrealUpdate()
-    {
-
-    }
-
     /// <summary>
     /// ID演出のコルーチン
     /// </summary>
@@ -144,7 +138,7 @@ public class TitleManager : MonoBehaviour {
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
         //アニメーションが終わるまで待つ
-        while(_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             yield return null;
         }
@@ -168,9 +162,9 @@ public class TitleManager : MonoBehaviour {
     IEnumerator TurtrealProduction()
     {
         var time = 0.0f;
-        var endTime = 2.0f; 
+        var endTime = 2.0f;
         //銃のObjectを消す
-        for(int i = 0; i < _gun.Length; i++)
+        for (int i = 0; i < _gun.Length; i++)
         {
             Destroy(_gun[i]);
         }
@@ -180,7 +174,7 @@ public class TitleManager : MonoBehaviour {
         _cameraRig[1].SetActive(true);
 
         //弾を撃てるようにする
-        foreach(var shot in FindObjectsOfType<PlayerShot>())
+        foreach (var shot in FindObjectsOfType<PlayerShot>())
         {
             shot.isStart = true;
         }
@@ -189,14 +183,14 @@ public class TitleManager : MonoBehaviour {
         while (_spotLights[0].intensity != 0)
         {
             time += Time.unscaledDeltaTime;
-            for(int i = 0; i < _spotLights.Length; i++)
+            for (int i = 0; i < _spotLights.Length; i++)
             {
                 _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
             }
             yield return null;
         }
         //銃のスタンドを消す
-        for(int i = 0; i < _gunStand.Length; i++)
+        for (int i = 0; i < _gunStand.Length; i++)
         {
             Destroy(_gunStand[i]);
         }
@@ -232,7 +226,7 @@ public class TitleManager : MonoBehaviour {
         while (!SlowMotion._instance.isSlow)
         {
             time += Time.deltaTime;
-            if(time > 1.0f)
+            if (time > 1.0f)
             {
                 _viveMaterial[1].EnableKeyword("_EMISSION");
                 _viveMaterial[1].SetColor("_EmissionColor", Color.black);
@@ -241,7 +235,7 @@ public class TitleManager : MonoBehaviour {
 
                 time = 0.0f;
             }
-            else if(time > 0.5f)
+            else if (time > 0.5f)
             {
                 _viveMaterial[1].EnableKeyword("_EMISSION");
                 _viveMaterial[1].SetColor("_EmissionColor", Color.white);
@@ -257,19 +251,41 @@ public class TitleManager : MonoBehaviour {
         _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
 
         _descriptionText.text = "スロー中";
+
         //スローゲージがなくなったらループ抜ける
-        while (SlowMotion._instance.slowTime != 0)
+        while (SlowMotion._instance.isSlow)
         {
             yield return null;
         }
-
-
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
+
+        time = 0.0f;
+        var normalPos = _viveControllerModel[0].transform.position;
+        var normalPos2 = _viveControllerModel[1].transform.position;
+
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
+            for (int i = 0; i < _viveControllerModel.Length; i++)
+            {
+                _viveControllerModel[i].transform.Translate(new Vector3(0, 0.1f, 0) * Time.unscaledDeltaTime);
+                if (_viveControllerModel[i].transform.position.y < 0.2f)
+                {
+                    time += Time.unscaledDeltaTime;
+                    if (time > 1.0f)
+                    {
+                        time = 0.0f;
+                        var pos = _viveControllerModel[i].transform.position;
+                        pos.y = 0.4f;
+                        _viveControllerModel[i].transform.position = pos;
+                    }
+                }
+            }
             yield return null;
         }
+
+        _viveControllerModel[0].transform.position = normalPos;
+        _viveControllerModel[1].transform.position = normalPos2;
 
         StartCoroutine(TurtrealEnd());
     }
@@ -285,12 +301,16 @@ public class TitleManager : MonoBehaviour {
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
         _descriptionText.text = "敵を倒そう！";
 
+        //光らせるマテリアルのEmissionを設定
         _viveMaterial[2].EnableKeyword("_EMISSION");
         _viveMaterial[2].SetColor("_EmissionColor", Color.black);
         _viveMaterial2[2].EnableKeyword("_EMISSION");
         _viveMaterial2[2].SetColor("_EmissionColor", Color.black);
 
+        //光ってるか光ってないかの時間
         var time = 0.0f;
+
+        //コントローラーの向きを変える
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
@@ -336,7 +356,7 @@ public class TitleManager : MonoBehaviour {
         var color = new Color(1, 1, 1, 0);
 
         //光の強さとDoorのα値をを上げていく
-        while(time < END_TIME)
+        while (time < END_TIME)
         {
             time += Time.unscaledDeltaTime;
             _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
@@ -359,7 +379,7 @@ public class TitleManager : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator DoorMove()
     {
-        while(true)
+        while (true)
         {
             _door.transform.Translate(0, _moveSpeed, 0);
             yield return null;
