@@ -7,6 +7,15 @@ public class PlayerHP : MonoBehaviour {
     [SerializeField]
     int HP = 10;
 
+    [SerializeField]
+    Image _gameOverImage;
+
+    [SerializeField]
+    float _timeRecovery = 5.0f;
+
+    [SerializeField]
+    GameObject BarrierEffect;
+
     int _playerHp;
 
     public int PlayerHp
@@ -16,16 +25,12 @@ public class PlayerHP : MonoBehaviour {
 
     bool _isHit;
 
-    [SerializeField]
-    Image _gameOverImage;
 
     public Image gameOverImage
     {
         get { return _gameOverImage; }
     }
 
-    [SerializeField]
-    float _timeRecovery = 5.0f;
 
     float _time;
 
@@ -57,6 +62,7 @@ public class PlayerHP : MonoBehaviour {
         if (_playerHp <= 0) return;
         if (other.tag == TagName.EnemyBullet)
         {
+            BarrierEffectCreate(other.transform.position);
             Damage(1);
         }
     }
@@ -86,6 +92,12 @@ public class PlayerHP : MonoBehaviour {
             }
         }
 
+    }
+
+    public void BarrierEffectCreate(Vector3 enemyPosition)
+    {
+        var effect =  Instantiate(BarrierEffect);
+        effect.transform.position = enemyPosition;
     }
 
 }
