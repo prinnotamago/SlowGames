@@ -268,10 +268,10 @@ public class GenerateManager : MonoBehaviour
         {
 
             //限界値以上出さない
-            if (_MAX_ENEMY < _deathCount + waveData._generateCount)
+            if (_MAX_ENEMY < _deathCount + liveEnemysCount)
             { 
                 //
-                int lastCount = _MAX_ENEMY - _deathCount;
+                int lastCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
                 SetEnemy(lastCount, waveData._generateTypeList);
             }
             else
