@@ -263,38 +263,35 @@ public class TitleManager : MonoBehaviour
         }
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
-        time = 0.0f;
         var normalPos = _viveControllerModel[0].transform.position;
         var normalPos2 = _viveControllerModel[1].transform.position;
         _arrowAnim.gameObject.SetActive(true);
+        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.40f, "time", 2.0f, "easeType", iTween.EaseType.easeOutCubic));
+        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.40f, "time", 2.0f, "easeType", iTween.EaseType.easeOutCubic));
 
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
-            iTween.MoveTo(_viveControllerModel[0], iTween.Hash("position", 0.45f, iTween.EaseType.easeOutCubic));
-            iTween.MoveTo(_viveControllerModel[0], iTween.Hash("position", 0.45f, iTween.EaseType.easeOutCubic));
             //_viveControllerModel[0].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
             //_viveControllerModel[1].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
-            if (_viveControllerModel[0].transform.position.y < 0.45f)
+            if (_viveControllerModel[0].transform.position.y == 0.4f)
             {
-                time += Time.unscaledDeltaTime;
-                if (time > 1.0f)
-                {
-                    time = 0.0f;
-                    var pos = _viveControllerModel[0].transform.position;
-                    var pos2 = _viveControllerModel[1].transform.position;
-                    pos.y = normalPos.y;
-                    pos2.y = normalPos2.y;
-                    _viveControllerModel[0].transform.position = pos;
-                    _viveControllerModel[1].transform.position = pos2;
+                var pos = _viveControllerModel[0].transform.position;
+                var pos2 = _viveControllerModel[1].transform.position;
+                pos.y = normalPos.y;
+                pos2.y = normalPos2.y;
+                _viveControllerModel[0].transform.position = pos;
+                _viveControllerModel[1].transform.position = pos2;
 
-                    var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-                    _arrowAnim.Play(animationHash, 0, 0);
+                var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+                _arrowAnim.Play(animationHash, 0, 0);
+                iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.40f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+                iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.40f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
 
-                }
             }
             yield return null;
         }
+
         _arrowAnim.gameObject.SetActive(false);
 
         _viveControllerModel[0].transform.position = normalPos;
@@ -375,7 +372,7 @@ public class TitleManager : MonoBehaviour
             _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
             color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
             mat.color = color;
-            _door.transform.Translate(0, _moveSpeed, 0);
+            _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
             yield return null;
         }
 
@@ -394,7 +391,7 @@ public class TitleManager : MonoBehaviour
     {
         while (true)
         {
-            _door.transform.Translate(0, _moveSpeed, 0);
+            _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
             yield return null;
         }
     }

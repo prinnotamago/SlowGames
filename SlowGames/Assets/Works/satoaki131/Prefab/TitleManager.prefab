@@ -66,3 +66,13 @@ MonoBehaviour:
   _cameraRig:
   - {fileID: 0}
   - {fileID: 0}
+  _idCanvas: {fileID: 0}
+  _descriptionPanel: {fileID: 0}
+  _door: {fileID: 0}
+  _afterShade: {fileID: 0}
+  END_TIME: 2
+  _moveSpeed: 10
+  _viveControllerModel:
+  - {fileID: 0}
+  - {fileID: 0}
+  _arrowAnim: {fileID: 0}
