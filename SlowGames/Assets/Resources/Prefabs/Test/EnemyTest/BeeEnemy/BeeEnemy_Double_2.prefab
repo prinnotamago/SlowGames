@@ -69,6 +69,8 @@ GameObject:
   - component: {fileID: 65270553337371544}
   - component: {fileID: 114729796079496350}
   - component: {fileID: 114526009694148942}
+  - component: {fileID: 195964938155038926}
+  - component: {fileID: 114325819448394758}
   m_Layer: 9
   m_Name: BeeEnemy_Double_2
   m_TagString: Enemy
@@ -231,8 +233,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123511972681742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.54, z: 2.53}
+  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
+  m_LocalPosition: {x: 0.08199996, y: 35.430004, z: -11.800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4313142771291910}
@@ -362,6 +364,41 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114325819448394758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123511972681742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605a64d29ead5439489202253ca3851a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTutorial: 0
+  _deathEffect: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
+    type: 2}
+  _type: 1
+  _enemyAttackInfos:
+  - moveSpeed: 7
+    stayTimeMax: 1
+    sideMoveRange: 2
+    activeTimeMax: 1
+    shotFrequency: 2
+    chamberValue: 2
+    shotDelay: 1
+    generateRate: 0
+  - moveSpeed: 7
+    stayTimeMax: 1
+    sideMoveRange: 2
+    activeTimeMax: 1
+    shotFrequency: 2
+    chamberValue: 2
+    shotDelay: 1
+    generateRate: 0
+  _activeCounter: 0
+  _generatePostion: 4
+  _attackDamege: 2
 --- !u!114 &114526009694148942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -468,3 +505,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.042224705, y: 0.24216925, z: -0.09766185}
     m_Extent: {x: 1.4303324, y: 0.62034506, z: 0.6732483}
   m_DirtyAABB: 0
+--- !u!195 &195964938155038926
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123511972681742}
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Speed: 10
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.31
+  m_BaseOffset: 0.33
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

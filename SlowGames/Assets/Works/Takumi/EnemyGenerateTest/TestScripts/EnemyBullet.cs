@@ -85,15 +85,16 @@ public class EnemyBullet : MonoBehaviour {
                 //判定消す
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
+                StartCoroutine(RandomBlow());
                 //プレイヤーのたまを消す
                 Destroy(other.gameObject);
             }
 
-            StartCoroutine(RandomBlow());
+
 
             return;
         }
-        ScoreManager.instance.AddFlipEnemyBulletCount();
+        //ScoreManager.instance.AddFlipEnemyBulletCount();
         Destroy(gameObject);
     }
 
