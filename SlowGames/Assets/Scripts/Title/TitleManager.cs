@@ -59,6 +59,9 @@ public class TitleManager : MonoBehaviour
     private Material[] _viveMaterial = null; //0:body, 1:slowButton 2:trigger, 3:grip
     private Material[] _viveMaterial2 = null; //0:body, 1:slowButton 2:trigger, 3:grip
 
+    [SerializeField]
+    private Animator _arrowAnim = null;
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -92,6 +95,7 @@ public class TitleManager : MonoBehaviour
 
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
+        _arrowAnim.gameObject.SetActive(false);
     }
 
     void Update()
@@ -262,27 +266,34 @@ public class TitleManager : MonoBehaviour
         time = 0.0f;
         var normalPos = _viveControllerModel[0].transform.position;
         var normalPos2 = _viveControllerModel[1].transform.position;
+        _arrowAnim.gameObject.SetActive(true);
 
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
-            for (int i = 0; i < _viveControllerModel.Length; i++)
+            _viveControllerModel[0].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
+            _viveControllerModel[1].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
+            if (_viveControllerModel[0].transform.position.y < 0.45f)
             {
-                _viveControllerModel[i].transform.Translate(new Vector3(0, 0.1f, 0) * Time.unscaledDeltaTime);
-                if (_viveControllerModel[i].transform.position.y < 0.2f)
+                time += Time.unscaledDeltaTime;
+                if (time > 1.0f)
                 {
-                    time += Time.unscaledDeltaTime;
-                    if (time > 1.0f)
-                    {
-                        time = 0.0f;
-                        var pos = _viveControllerModel[i].transform.position;
-                        pos.y = 0.4f;
-                        _viveControllerModel[i].transform.position = pos;
-                    }
+                    time = 0.0f;
+                    var pos = _viveControllerModel[0].transform.position;
+                    var pos2 = _viveControllerModel[1].transform.position;
+                    pos.y = normalPos.y;
+                    pos2.y = normalPos2.y;
+                    _viveControllerModel[0].transform.position = pos;
+                    _viveControllerModel[1].transform.position = pos2;
+
+                    var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+                    _arrowAnim.Play(animationHash, 0, 0);
+
                 }
             }
             yield return null;
         }
+        _arrowAnim.gameObject.SetActive(false);
 
         _viveControllerModel[0].transform.position = normalPos;
         _viveControllerModel[1].transform.position = normalPos2;
