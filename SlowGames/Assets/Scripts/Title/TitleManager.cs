@@ -271,8 +271,10 @@ public class TitleManager : MonoBehaviour
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
-            _viveControllerModel[0].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
-            _viveControllerModel[1].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
+            iTween.MoveTo(_viveControllerModel[0], iTween.Hash("position", 0.45f, iTween.EaseType.easeOutCubic));
+            iTween.MoveTo(_viveControllerModel[0], iTween.Hash("position", 0.45f, iTween.EaseType.easeOutCubic));
+            //_viveControllerModel[0].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
+            //_viveControllerModel[1].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
             if (_viveControllerModel[0].transform.position.y < 0.45f)
             {
                 time += Time.unscaledDeltaTime;
