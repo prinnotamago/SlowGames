@@ -208,11 +208,12 @@ public class GenerateManager : MonoBehaviour
     {
         int currentEnemyCount = 0;
         string sousu = "";
+
         foreach (var count in _currentEnemysCount)
-         {
+        {
                  currentEnemyCount += count;
                  sousu += count.ToString();
-         }
+        }
        //  Debug.Log(sousu);
          return currentEnemyCount;
     }
@@ -237,7 +238,12 @@ public class GenerateManager : MonoBehaviour
 
         }
 
-        //
+        //生成しようとする数
+        int GenerateCount = waveData._generateCount;
+
+
+
+        //指定した的キャラの出現
         int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
 
         //最大数でてたら通らない
@@ -246,24 +252,24 @@ public class GenerateManager : MonoBehaviour
             //タイミングに合わせて、ホーミングタイプのキャラを出す
             if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
-                //
+                 //指定したエネミータイプを生成
                 SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
+
+                //更新
                 _rareEnemyCount[_currentWaveCount] += 1;
             }
         }
 
-
-
         //死ぬごとに、敵キャラを生成
-        int liveEnemysCount = GetLiveEnemyCount();
+        int liveEnemysCount = GetLiveEnemyCount(); 
 
-        //
+        //現在生き残ってる数が新たに敵を出現させるタイミングかをチェック.
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
 
             //限界値以上出さない
             if (_MAX_ENEMY < _deathCount + waveData._generateCount)
-            {
+            { 
                 //
                 int lastCount = _MAX_ENEMY - _deathCount;
                 SetEnemy(lastCount, waveData._generateTypeList);
@@ -276,6 +282,8 @@ public class GenerateManager : MonoBehaviour
         }
 
     }
+
+
 
 //    //敵を生成する場所の数、　またそこから出す敵のカウントを設定、敵キャラを配置]
 //    //*敵キャラがいる場合は生成させない
