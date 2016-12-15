@@ -294,6 +294,11 @@ public class TitleManager : MonoBehaviour
 
         _arrowAnim.gameObject.SetActive(false);
 
+        iTween.Stop(_viveControllerModel[0], "move");
+        iTween.Stop(_viveControllerModel[1], "move");
+
+        yield return null;
+
         _viveControllerModel[0].transform.position = normalPos;
         _viveControllerModel[1].transform.position = normalPos2;
 
