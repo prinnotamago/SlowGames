@@ -31,6 +31,12 @@ public class PlayerHP : MonoBehaviour {
         get { return _gameOverImage; }
     }
 
+    Vector3 _enemyPos;
+
+    public Vector3 EnemyPos
+    {
+        get { return _enemyPos; }
+    }
 
     float _time;
 
@@ -62,6 +68,7 @@ public class PlayerHP : MonoBehaviour {
         if (_playerHp <= 0) return;
         if (other.tag == TagName.EnemyBullet)
         {
+            _enemyPos = other.transform.position;
             BarrierEffectCreate(other.transform.position);
             Damage(1);
         }
