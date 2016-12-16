@@ -115,7 +115,10 @@ public class Enemy : MonoBehaviour
             if(_type == EnemyType.Tackle)
             {
                 //test:
-                FindObjectOfType<PlayerHP>().Damage(_attackDamege);
+                var playerHp =  FindObjectOfType<PlayerHP>();
+                playerHp.Damage(_attackDamege);
+                playerHp.BarrierEffectCreate(transform.position);
+
             }
 
             Destroy(this.gameObject); 
@@ -131,11 +134,12 @@ public class Enemy : MonoBehaviour
     {
              //音
             //AudioManager.instance.play3DSe(effect,AudioName.SeName.Thunder);
+
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             //Test:スコア
-//            ScoreManager.instance.AddHitEnemyCount();
-//            ScoreManager.instance.AddScore(_type);
+//          ScoreManager.instance.AddHitEnemyCount();
+//          ScoreManager.instance.AddScore(_type);
     }
 
 

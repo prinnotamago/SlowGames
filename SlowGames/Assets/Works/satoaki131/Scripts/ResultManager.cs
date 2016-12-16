@@ -23,6 +23,8 @@ public class ResultManager : MonoBehaviour
 
         if (!_put[0].isPutGun) return;
         if (!_put[1].isPutGun) return;
+        
+        //演出入れるならここに追加する
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -815,7 +815,7 @@ MonoBehaviour:
     type: 2}
   _speedBulletHP: 5a0000004600000032000000280000001e000000
   _speedBulletChargeMax: 2
-  _attackInterval: 10
+  _attackInterval: 0.5
   _patternRatio: 0.5
   _state: 0
   _startPos: {x: 0, y: 3.5, z: 0}

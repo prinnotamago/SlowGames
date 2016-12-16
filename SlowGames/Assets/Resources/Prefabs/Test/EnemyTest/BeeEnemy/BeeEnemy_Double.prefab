@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 195086636814061284}
   - component: {fileID: 114909228965058068}
   - component: {fileID: 114006168096800378}
+  - component: {fileID: 114139878784517412}
   m_Layer: 9
   m_Name: BeeEnemy_Double
   m_TagString: Enemy
@@ -220,7 +221,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680381767156560}
   m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: -0.01000005, y: 2.5500002, z: 23}
+  m_LocalPosition: {x: 0.08199996, y: 35.430004, z: -11.800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996058707982224}
@@ -421,6 +422,19 @@ MonoBehaviour:
   _tackleRange: 7
   _tackleSpeed: 10
   _tackleChargeTime: 1
+--- !u!114 &114139878784517412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680381767156560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec432a1bd9a30345a67a62d3c5f6065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  length: 0.01
 --- !u!114 &114377888507270568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,7 +489,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 1
+  _generatePostion: 4
   _attackDamege: 2
 --- !u!137 &137930972761708854
 SkinnedMeshRenderer:
