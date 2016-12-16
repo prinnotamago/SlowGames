@@ -268,12 +268,12 @@ public class TitleManager : MonoBehaviour
         _arrowAnim.gameObject.SetActive(true);
         iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.40f, "time", 2.0f, "easeType", iTween.EaseType.easeOutCubic));
         iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.40f, "time", 2.0f, "easeType", iTween.EaseType.easeOutCubic));
+        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", 90, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", 90, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
-            //_viveControllerModel[0].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
-            //_viveControllerModel[1].transform.Translate(new Vector3(0, -0.2f, 0) * Time.unscaledDeltaTime);
             if (_viveControllerModel[0].transform.position.y == 0.4f)
             {
                 var pos = _viveControllerModel[0].transform.position;
@@ -286,6 +286,8 @@ public class TitleManager : MonoBehaviour
                 var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
                 _arrowAnim.Play(animationHash, 0, 0);
                 iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.40f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+                iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", 90, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+                iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", 90, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
                 iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.40f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
 
             }
@@ -296,6 +298,8 @@ public class TitleManager : MonoBehaviour
 
         iTween.Stop(_viveControllerModel[0], "move");
         iTween.Stop(_viveControllerModel[1], "move");
+        iTween.Stop(_viveControllerModel[0], "rotate");
+        iTween.Stop(_viveControllerModel[1], "rotate");
 
         yield return null;
 
