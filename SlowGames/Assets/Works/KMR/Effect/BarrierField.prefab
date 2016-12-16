@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 4541538580936462}
   - component: {fileID: 198362413129476248}
   - component: {fileID: 199988159054333966}
+  - component: {fileID: 114529514277393560}
   m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
@@ -82,7 +83,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640443089903594}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -111,6 +112,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: febdc95e5bda1ab4fa19ad81dbbc0589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114529514277393560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640443089903594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bca82ce09d81f42b33c9f6ca629564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198101738372416676
@@ -2805,7 +2817,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1492726582
+  randomSeed: -98968259
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2978,7 +2990,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.6392157}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.007843138}
       minMaxState: 0
     startSize:
       scalar: 1
@@ -3137,7 +3149,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startRotationY:
-      scalar: 0
+      scalar: -1.5707963
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3217,7 +3229,7 @@ ParticleSystem:
     randomizeRotationDirection: 0
     maxNumParticles: 1000
     size3D: 0
-    rotation3D: 0
+    rotation3D: 1
     gravityModifier:
       scalar: 0
       maxCurve:

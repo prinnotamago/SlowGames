@@ -446,9 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490db166179db4ecb9fd05b1ce10a168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyBullet: {fileID: 114351836775223038, guid: 1fbbcfaac0b2147b48be0000e3893fbb,
+  _enemyBullet: {fileID: 114111481603753538, guid: 3f55ac385e1e84ff6bfe7f2b1825b2f2,
     type: 2}
-  _doubleBullet: {fileID: 114351836775223038, guid: 1fbbcfaac0b2147b48be0000e3893fbb,
+  _doubleBullet: {fileID: 114111481603753538, guid: 3f55ac385e1e84ff6bfe7f2b1825b2f2,
     type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 1

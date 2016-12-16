@@ -234,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123511972681742}
   m_LocalRotation: {x: 0.31899756, y: -2.9919307e-12, z: 8.889163e-12, w: 0.9477556}
-  m_LocalPosition: {x: 0.08199996, y: 33.35, z: -6.82}
+  m_LocalPosition: {x: -0.038000047, y: 33.43, z: -6.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4313142771291910}
@@ -397,7 +397,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 4
+  _generatePostion: 3
   _attackDamege: 2
 --- !u!114 &114526009694148942
 MonoBehaviour:
@@ -428,7 +428,7 @@ MonoBehaviour:
   _playerToMaxDistance: 0.4
   _currentTarget: {fileID: 0}
   _justShotTime: 0.2
-  _downLengthMax: 25
+  _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
   _sideMoveSpeed: 200
   _sideMoveLenfth: 10
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490db166179db4ecb9fd05b1ce10a168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyBullet: {fileID: 114351836775223038, guid: 1fbbcfaac0b2147b48be0000e3893fbb,
+  _enemyBullet: {fileID: 114586575297573618, guid: 0e127638222394c8cad3c8d04e55b579,
     type: 2}
-  _doubleBullet: {fileID: 114351836775223038, guid: 1fbbcfaac0b2147b48be0000e3893fbb,
+  _doubleBullet: {fileID: 114586575297573618, guid: 0e127638222394c8cad3c8d04e55b579,
     type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 1

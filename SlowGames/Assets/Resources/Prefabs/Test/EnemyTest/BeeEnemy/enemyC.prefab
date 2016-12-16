@@ -257,7 +257,7 @@ MonoBehaviour:
   _playerToMaxDistance: 0.4
   _currentTarget: {fileID: 0}
   _justShotTime: 0.2
-  _downLengthMax: 25
+  _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
   _sideMoveSpeed: 200
   _sideMoveLenfth: 18

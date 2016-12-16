@@ -195,7 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272229952121936}
   m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: -0.056000054, y: 35.548, z: 11.378}
+  m_LocalPosition: {x: -0.01000005, y: 2.5500002, z: 23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4597072673218414}
@@ -445,7 +445,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 5
+  _generatePostion: 1
   _attackDamege: 2
 --- !u!114 &114937676406357076
 MonoBehaviour:
@@ -463,7 +463,7 @@ MonoBehaviour:
   _playerToMaxDistance: 0.4
   _currentTarget: {fileID: 0}
   _justShotTime: 0.2
-  _downLengthMax: 25
+  _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
   _sideMoveSpeed: 200
   _sideMoveLenfth: 18

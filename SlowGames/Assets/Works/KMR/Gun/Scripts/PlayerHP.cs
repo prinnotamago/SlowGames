@@ -69,6 +69,7 @@ public class PlayerHP : MonoBehaviour {
         if (other.tag == TagName.EnemyBullet)
         {
             _enemyPos = other.transform.position;
+           // Debug.Log(_enemyPos);
             BarrierEffectCreate(other.transform.position);
             Damage(1);
         }
@@ -104,7 +105,7 @@ public class PlayerHP : MonoBehaviour {
     public void BarrierEffectCreate(Vector3 enemyPosition)
     {
         var effect =  Instantiate(BarrierEffect);
-        effect.transform.position = enemyPosition;
+        effect.transform.position = gameObject.transform.position;
     }
 
 }
