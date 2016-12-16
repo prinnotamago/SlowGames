@@ -28,7 +28,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: extend
-  m_Speed: 0.14
+  m_Speed: 0.17
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

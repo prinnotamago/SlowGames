@@ -269,6 +269,7 @@ public class TitleManager : MonoBehaviour
         var normalRotate = _viveControllerModel[0].transform.eulerAngles;
 
         _arrowAnim.gameObject.SetActive(true);
+
         iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
         iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
         iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
@@ -277,6 +278,7 @@ public class TitleManager : MonoBehaviour
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
+            _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
             if (_viveControllerModel[0].transform.position.y == 0.3f)
             {
                 var pos = _viveControllerModel[0].transform.position;
@@ -290,8 +292,8 @@ public class TitleManager : MonoBehaviour
                 _viveControllerModel[0].transform.position = pos;
                 _viveControllerModel[1].transform.position = pos2;
 
-                var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-                _arrowAnim.Play(animationHash, 0, 0);
+                //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+                //_arrowAnim.Play(animationHash, 0, 0);
 
                 iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
                 iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
