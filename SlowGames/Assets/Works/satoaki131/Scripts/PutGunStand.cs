@@ -39,7 +39,7 @@ public class PutGunStand : MonoBehaviour {
         {
             _gunObj.transform.parent = null; //子供解除
             var localPosition = col.transform.position;
-            localPosition.y += 0.27f;
+            localPosition.y = 0.7f;
             _gunObj.transform.localPosition = localPosition;
             _gunObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             col.GetComponent<SphereCollider>().enabled = false;

@@ -8,10 +8,10 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private PutGunStand[] _put = null;
 
-    void Start()
-    {
-        _put = GetComponentsInChildren<PutGunStand>();
-    }
+    //void Start()
+    //{
+    //    _put = GetComponentsInChildren<PutGunStand>();
+    //}
 
     void Update()
     {
