@@ -84,6 +84,13 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     BossState _state = BossState.START;
 
+    // START の情報 //////////////////////////////////////////////////////////////
+    [SerializeField]
+    Vector3 _startPos;  // 登場するときに向かう場所
+    [SerializeField]
+    float _startSpeed;  // 落とす速さ
+    //////////////////////////////////////////////////////////////////////////////
+
     // LEVEL_1 の情報 ////////////////////////////////////////////////////////////
     [SerializeField]
     Vector3[] _level_1_pos;          // 各移動場所  
@@ -114,6 +121,27 @@ public class BossAI : MonoBehaviour {
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
     //////////////////////////////////////////////////////////////////////////////
 
+    // LAST の情報////////////////////////////////////////////////////////////////
+    [SerializeField]
+    Vector3 _lastTacklePos;       // タックルをする座標
+    [SerializeField]
+    float _lastTackleSpeed;     // タックルするときの速さ
+    List<Vector3> _lastMovePos = new List<Vector3>();   // タックルをする前に移動する場所
+    [SerializeField]
+    float _lastMoveSpeed;       // 移動するときの速さ
+    [SerializeField]
+    int _lastMoveNum = 3;         // 移動する回数
+    int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
+    [SerializeField]
+    Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
+                                  //////////////////////////////////////////////////////////////////////////////
+
+    // CLIMAX の情報//////////////////////////////////////////////////////////////
+    Rigidbody _rigidbody;
+    [SerializeField]
+    float _climaxVelocity = 5.0f;
+    //////////////////////////////////////////////////////////////////////////////
+
     [SerializeField]
     GameObject _hitParticle = null;
 
@@ -121,10 +149,24 @@ public class BossAI : MonoBehaviour {
     void Start () {
         // 狙うためのプレイヤーを探していれる
         _player = GameObject.FindGameObjectWithTag(TagName.Player);
+
+        // ラストで使うタックルをする前に移動する場所を決める
+        Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z;
+        for (int i = 0; i < _lastMoveNum; ++i)
+        {
+            Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+                                             Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+                                             Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+            Vector3 pos = lastRandPos + randLength;
+            _lastMovePos.Add(pos);
+        }
+        _lastMovePos.Add(_lastTacklePos);
+
+        _rigidbody = GetComponent<Rigidbody>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         // デバック用damage
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -134,6 +176,7 @@ public class BossAI : MonoBehaviour {
         // 弾を撃つの制御
         BulletShotManage();
 
+        // ダメージ判定で起こる処理
         DamageCheck();
 
         // 速い弾を撃つときは各形態の動作をしないようにする
@@ -249,7 +292,7 @@ public class BossAI : MonoBehaviour {
     void BulletShotManage()
     {
         // 登場とクライマックスでも弾を撃たない
-        if (_state != BossState.LAST && _state != BossState.START)
+        if (_speedBulletFlag || (_state != BossState.LAST && _state != BossState.START && _state != BossState.CLIMAX))
         {
             // LEVEL_1 で移動中は弾を撃たないようにするので抜ける
             if (_state == BossState.LEVEL_1 && !_isLevel_1_shot) { return; }
@@ -277,13 +320,20 @@ public class BossAI : MonoBehaviour {
     // 登場形態
     void StartUpdate()
     {
-        if(transform.position.y < 3.5f)
+        //if(transform.position.y < 3.5f)
+        //{
+        //    _state++;
+        //}
+        //else
+        //{
+        //    transform.position += Vector3.down * Time.deltaTime;
+        //}
+
+        var vector = _startPos - transform.position;
+        transform.position += vector / _startSpeed;
+        if(vector.magnitude <= 0.5f)
         {
             _state++;
-        }
-        else
-        {
-            transform.position += Vector3.down * Time.deltaTime;
         }
     }
 
@@ -404,20 +454,55 @@ public class BossAI : MonoBehaviour {
 
         var vector = nextPos - transform.position;
 
-        transform.position += vector / 20.0f;
+        transform.position += vector * 3.0f * Time.deltaTime;
     }
 
     // ラスト(突撃)
     void LastUpdate()
     {
-        var test = (_level_1_pos[1] + Vector3.one * Random.Range(-1, 1)) - transform.position;
-        transform.position += test / 10.0f;
+        //var test = (_level_1_pos[1] + Vector3.one * Random.Range(-1, 1)) - transform.position;
+        //transform.position += test / 10.0f;
+
+        // 移動する場所に動く処理
+        if(_lastMoveIndex < _lastMovePos.Count)
+        {
+            var length = _lastMovePos[_lastMoveIndex] - transform.position;
+            transform.position += length * _lastMoveSpeed * Time.deltaTime;
+            if(length.magnitude < 1.5f)
+            {
+                ++_lastMoveIndex;
+            }
+        }
+        // プレイヤーへのタックル
+        else
+        {
+            // スローじゃなかったらスローにする
+            if (!SlowMotion._instance.isSlow)
+            {
+                SlowMotion._instance.GameSpeed(0.1f);
+                SlowMotion._instance.isLimit = false;
+            }
+            var length = _player.transform.position - transform.position;
+            transform.position += length * _lastTackleSpeed * Time.deltaTime;
+        }
     }
 
     // クライマックス
     void ClimaxUpdate()
     {
+        // スローだったら解除
+        if (SlowMotion._instance.isSlow)
+        {
+            SlowMotion._instance.ResetSpeed();
+            SlowMotion._instance.isLimit = true;
+        }
 
+        if (!_rigidbody.useGravity)
+        {
+            _rigidbody.useGravity = true;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            _rigidbody.velocity = Vector3.forward * _climaxVelocity;
+        }
     }
 
     void OnTriggerEnter(Collider col)
