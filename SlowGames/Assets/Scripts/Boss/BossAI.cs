@@ -134,12 +134,15 @@ public class BossAI : MonoBehaviour {
     int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
     [SerializeField]
     Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
-                                  //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     // CLIMAX の情報//////////////////////////////////////////////////////////////
     Rigidbody _rigidbody;
     [SerializeField]
     float _climaxVelocity = 5.0f;
+    [SerializeField]
+    float _climaxDestroyTime = 5.0f;
+    float _climaxTime = 0.0f;
     //////////////////////////////////////////////////////////////////////////////
 
     [SerializeField]
@@ -503,12 +506,18 @@ public class BossAI : MonoBehaviour {
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _rigidbody.velocity = Vector3.forward * _climaxVelocity;
         }
+
+        _climaxTime += Time.deltaTime;
+        if(_climaxDestroyTime < _climaxTime)
+        {
+            Damage();
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
         // 出現時は当たらないようにする
-        if (_state == BossState.START) { return; }
+        if (_state == BossState.START || _state == BossState.CLIMAX) { return; }
 
         // 弾が当たったら体力を減らす
         if (col.gameObject.tag == TagName.Bullet)
