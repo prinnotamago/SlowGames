@@ -17,9 +17,18 @@ public class EnemyBullet : MonoBehaviour {
     [SerializeField]
     bool _doChaseToPlayer = false;
 
+    GameObject _player;
+
+
     void Start()
     {
         Destroy(this.gameObject,5);
+
+        if(_doChaseToPlayer)
+        {
+            _player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+
+        }
     }
 
 	void Update()
@@ -45,10 +54,10 @@ public class EnemyBullet : MonoBehaviour {
     {
 
         //FixMe:毎回みないこと
-        Vector3 player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+        //Vector3 player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
 
         // ターゲットまでの角度を取得
-        Vector3    vecTarget  = player - transform.position; // ターゲットへのベクトル
+        Vector3    vecTarget  = _player - transform.position; // ターゲットへのベクトル
         Vector3    vecForward = transform.TransformDirection(Vector3.forward);   // 弾の正面ベクトル
         float      angleDiff  = Vector3.Angle(vecForward, vecTarget);            // ターゲットまでの角度
         float      angleAdd   = (_rotateSpeed * Time.deltaTime);                              // 回転角
@@ -75,9 +84,10 @@ public class EnemyBullet : MonoBehaviour {
             return;
         }
         
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == TagName.Player || other.gameObject.tag == TagName.Bullet)
         {
-            if (other.gameObject.tag == "Bullet")
+            //FixMe:後で直す
+            if (other.gameObject.tag == TagName.Bullet)
             {
                 //エフェクト
                 var effect = Instantiate(_deathEffect);
