@@ -100,11 +100,11 @@ public class EnemyBullet : MonoBehaviour {
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
                 StartCoroutine(RandomBlow());
-                //プレイヤーのたまを消す
-                Destroy(other.gameObject);
+               
             }
 
-
+            //プレイヤーのたまを消す
+            Destroy(other.gameObject);
 
             return;
         }
