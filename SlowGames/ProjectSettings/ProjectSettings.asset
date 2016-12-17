@@ -518,9 +518,9 @@ PlayerSettings:
     Game_Performance: 0
     Hub: 0
     Purchasing: 0
-    UNet: 0
+    UNet: 1
     Unity_Ads: 0
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 1e946cf8-bc82-4266-a832-2556a7455aea
+  projectName: SlowGames
+  organizationId: prinnotamago
   cloudEnabled: 0

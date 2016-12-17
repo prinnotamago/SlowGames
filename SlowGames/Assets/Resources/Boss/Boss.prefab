@@ -795,14 +795,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d33a308d46e0e43959651d9e944d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  _changeStateHP: 500000001400000001000000
+  _hp: 50
+  _changeStateHP: 280000001400000001000000
   _parts:
   - {fileID: 114265860944830838}
   - {fileID: 114753581827855704}
   - {fileID: 114105869916034088}
   - {fileID: 114616235365252052}
-  _purgeHP: 500000003c000000280000001e000000
+  _purgeHP: 280000001e000000140000000a000000
   _frontGunObjPos: {fileID: 4943080859781676}
   _sideGunObjPos:
   - {fileID: 4189202841074578}
@@ -813,7 +813,7 @@ MonoBehaviour:
     type: 2}
   _speedBullet: {fileID: 1356666004370112, guid: b6cc354eef876ff4e966c274a4fbe1b3,
     type: 2}
-  _speedBulletHP: 5a0000004600000032000000280000001e000000
+  _speedBulletHP: 2d00000019000000
   _speedBulletChargeMax: 2
   _attackInterval: 0.5
   _patternRatio: 0.5
@@ -837,6 +837,7 @@ MonoBehaviour:
   _lastMoveNum: 5
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
   _climaxVelocity: 5
+  _climaxDestroyTime: 5
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
 --- !u!114 &114753581827855704

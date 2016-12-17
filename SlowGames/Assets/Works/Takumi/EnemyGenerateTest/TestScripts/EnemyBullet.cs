@@ -17,6 +17,10 @@ public class EnemyBullet : MonoBehaviour {
     [SerializeField]
     bool _doChaseToPlayer = false;
 
+    void Start()
+    {
+        Destroy(this.gameObject,5);
+    }
 
 	void Update()
     {   
