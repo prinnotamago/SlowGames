@@ -79,16 +79,15 @@ public class EnemyBullet : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         //敵キャラ自信にあたってもスルー Todo : 見栄えが悪かったら調整
-        if (other.gameObject.tag == TagName.Enemy || other.gameObject.tag == TagName.Finish || other.gameObject.tag == TagName.EnemyBullet)
-        {
-            return;
-        }
+      //  if (other.gameObject.tag == TagName.Enemy || other.gameObject.tag == TagName.Finish || other.gameObject.tag == TagName.EnemyBullet)
+      //  {
+      //      return;
+      //  }
         
-        if (other.gameObject.tag == TagName.Player || other.gameObject.tag == TagName.Bullet)
+        //玉にあった時は弾かせて消す
+        
+        if(other.gameObject.tag == TagName.Bullet)
         {
-            //FixMe:後で直す
-            if (other.gameObject.tag == TagName.Bullet)
-            {
                 //エフェクト
                 var effect = Instantiate(_deathEffect);
                 effect.transform.position = transform.position;
@@ -100,16 +99,18 @@ public class EnemyBullet : MonoBehaviour {
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
                 StartCoroutine(RandomBlow());
+
+                return;
                
-            }
-
-            //プレイヤーのたまを消す
-            Destroy(other.gameObject);
-
-            return;
         }
+        else if(other.gameObject.tag == TagName.Player)
+        {
+            Destroy(gameObject);
+        }
+
         //ScoreManager.instance.AddFlipEnemyBulletCount();
-        Destroy(gameObject);
+        //プレイヤーに当たった時は、そのまま消す
+        //Destroy(gameObject);
     }
 
 
