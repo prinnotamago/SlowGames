@@ -42,11 +42,11 @@ public class TitleManager : MonoBehaviour
 
     private PlayerShot[] _playerShot = null;
 
-    [SerializeField]
-    private GameObject _door = null; //ドア用のオブジェクト
+    //[SerializeField]
+    //private GameObject _door = null; //ドア用のオブジェクト
 
-    [SerializeField]
-    private Light _afterShade = null; //後光用のライト
+    //[SerializeField]
+    //private Light _afterShade = null; //後光用のライト
 
     [SerializeField, Range(1.0f, 3.0f)]
     private float END_TIME = 2.0f;
@@ -374,48 +374,53 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
 
+        //シーン遷移
+        TitleManager.isTurtreal = false;
+        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+
+
         //扉の演出
-        StartCoroutine(LightShine());
+        //StartCoroutine(LightShine());
     }
 
     /// <summary>
     /// ライトをシーン遷移と同時に強くしていくコルーチン
     /// </summary>
     /// <returns></returns>
-    private IEnumerator LightShine()
-    {
-        var time = 0.0f;
-        var mat = _door.GetComponent<Renderer>().material;
-        var color = new Color(1, 1, 1, 0);
+    //private IEnumerator LightShine()
+    //{
+    //    var time = 0.0f;
+    //    var mat = _door.GetComponent<Renderer>().material;
+    //    var color = new Color(1, 1, 1, 0);
 
-        //光の強さとDoorのα値をを上げていく
-        while (time < END_TIME)
-        {
-            time += Time.unscaledDeltaTime;
-            _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
-            color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
-            mat.color = color;
-            _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
-            yield return null;
-        }
+    //    //光の強さとDoorのα値をを上げていく
+    //    while (time < END_TIME)
+    //    {
+    //        time += Time.unscaledDeltaTime;
+    //        _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
+    //        color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
+    //        mat.color = color;
+    //        _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
+    //        yield return null;
+    //    }
 
-        StartCoroutine(DoorMove());
-        //シーン遷移
-        TitleManager.isTurtreal = false;
-        SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
+    //    //StartCoroutine(DoorMove());
+    //    ////シーン遷移
+    //    //TitleManager.isTurtreal = false;
+    //    //SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
 
-    }
+    //}
 
     /// <summary>
     /// ドアを動かし続ける
     /// </summary>
     /// <returns></returns>
-    private IEnumerator DoorMove()
-    {
-        while (true)
-        {
-            _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
-            yield return null;
-        }
-    }
+    //private IEnumerator DoorMove()
+    //{
+    //    while (true)
+    //    {
+    //        _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
+    //        yield return null;
+    //    }
+    //}
 }
