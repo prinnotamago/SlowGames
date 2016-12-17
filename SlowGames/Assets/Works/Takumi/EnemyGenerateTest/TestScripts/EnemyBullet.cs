@@ -26,7 +26,7 @@ public class EnemyBullet : MonoBehaviour {
 
         if(_doChaseToPlayer)
         {
-            _player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+            _player = GameObject.FindGameObjectWithTag(TagName.Player);
 
         }
     }
@@ -57,7 +57,7 @@ public class EnemyBullet : MonoBehaviour {
         //Vector3 player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
 
         // ターゲットまでの角度を取得
-        Vector3    vecTarget  = _player - transform.position; // ターゲットへのベクトル
+        Vector3    vecTarget  = _player.transform.position - transform.position; // ターゲットへのベクトル
         Vector3    vecForward = transform.TransformDirection(Vector3.forward);   // 弾の正面ベクトル
         float      angleDiff  = Vector3.Angle(vecForward, vecTarget);            // ターゲットまでの角度
         float      angleAdd   = (_rotateSpeed * Time.deltaTime);                              // 回転角
