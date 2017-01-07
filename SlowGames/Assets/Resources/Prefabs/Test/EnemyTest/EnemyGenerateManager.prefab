@@ -1146,7 +1146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _easyEnemys:
-  - {fileID: 1960405656031998, guid: 141f6428c04764d7f9db04f88c2cd292, type: 2}
+  - {fileID: 1601191394965124, guid: bf386dd71ae004f5082dfbcc8a9c43b6, type: 2}
   _normalEnemys:
   - {fileID: 1960405656031998, guid: 141f6428c04764d7f9db04f88c2cd292, type: 2}
   - {fileID: 1123511972681742, guid: b9350fe8dca91414eacb6a14afa6346c, type: 2}
@@ -1185,7 +1185,7 @@ MonoBehaviour:
     _generateTypeList: 00000000
     _rareEnemyInfo:
     - type: 1
-      generateTiming: 5
+      generateTiming: 2
     - type: 1
       generateTiming: 6
     - type: 2
@@ -1217,7 +1217,6 @@ MonoBehaviour:
     - type: 2
       generateTiming: 26
   _deathCount: 0
-  _isDebug: 0
   _isTutorial: 1
 --- !u!114 &114092702494977140
 MonoBehaviour:

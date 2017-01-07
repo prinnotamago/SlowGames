@@ -81,13 +81,13 @@ public class Enemy : MonoBehaviour
 
 
 
-    //たまにあたったら死にます
+    //弾にあたったら死
     void OnCollisionEnter(Collision other)
     {
-       
+        
         if (other.gameObject.tag == TagName.Bullet)
         {  
-            //2
+            //意図せず二回たまにあたってしまった場合を避ける
             if (death)
             {
                 return;
@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
                 var playerHp =  FindObjectOfType<PlayerHP>();
                 playerHp.Damage(_attackDamege);
                 playerHp.BarrierEffectCreate(transform.position);
-
+                AjustDeath();
             }
 
             Destroy(this.gameObject); 
@@ -130,11 +130,9 @@ public class Enemy : MonoBehaviour
         //チュートリアル
     }
 
+    //死ぬ直前処理
     void AjustDeath()
     {
-             //音
-            //AudioManager.instance.play3DSe(effect,AudioName.SeName.Thunder);
-
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             //Test:スコア

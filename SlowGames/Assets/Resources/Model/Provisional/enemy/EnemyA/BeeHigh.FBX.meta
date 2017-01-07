@@ -1,29 +1,31 @@
 fileFormatVersion: 2
-guid: 4feebaa4c153b4203b121a1493e0c016
-timeCreated: 1478682823
+guid: b7688bc7284be47b1aea41c922f8a17e
+timeCreated: 1481095172
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Box001
-    100004: Dummy001
-    100006: Dummy002
-    100008: Dummy003
-    100010: Dummy004
-    400000: //RootNode
-    400002: Box001
-    400004: Dummy001
-    400006: Dummy002
-    400008: Dummy003
-    400010: Dummy004
-    4300000: Box001
-    7400000: EnemyInstrusion
-    7400002: EnemyArrival
-    7400004: EnemyJustBeforeShot
-    7400006: EnemyShot
+    100000: bee
+    100002: //RootNode
+    100004: Dummy006
+    100006: Dummy007
+    100008: Dummy008
+    100010: Dummy009
+    100012: Dummy010
+    400000: bee
+    400002: //RootNode
+    400004: Dummy006
+    400006: Dummy007
+    400008: Dummy008
+    400010: Dummy009
+    400012: Dummy010
+    4300000: bee
+    7400000: _EnemyJustBeforeShot
+    7400002: _EnemyArival
+    7400004: _EnemyInsturusionStart
+    7400006: _EnemyShot
     9500000: //RootNode
-    13700000: Box001
+    13700000: bee
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,49 +48,9 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: EnemyInstrusion
+      name: _EnemyInsturusionStart
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Box001
-        weight: 1
-      - path: Dummy003
-        weight: 1
-      - path: Dummy003/Dummy001
-        weight: 1
-      - path: Dummy003/Dummy002
-        weight: 1
-      - path: Dummy003/Dummy004
-        weight: 1
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: EnemyArrival
-      takeName: Take 001
-      firstFrame: 9
       lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
@@ -112,24 +74,26 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Box001
+      - path: bee
         weight: 1
-      - path: Dummy003
+      - path: Dummy006
         weight: 1
-      - path: Dummy003/Dummy001
+      - path: Dummy006/Dummy007
         weight: 1
-      - path: Dummy003/Dummy002
+      - path: Dummy006/Dummy008
         weight: 1
-      - path: Dummy003/Dummy004
+      - path: Dummy006/Dummy009
+        weight: 1
+      - path: Dummy006/Dummy010
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: EnemyJustBeforeShot
+      name: _EnemyJustBeforeShot
       takeName: Take 001
-      firstFrame: 21
-      lastFrame: 24
+      firstFrame: 31
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -147,53 +111,72 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves:
-      - name: Curve
-        curve:
-          serializedVersion: 2
-          curve:
-          - serializedVersion: 2
-            time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-          - serializedVersion: 2
-            time: 0.7808964
-            value: 0.32068232
-            inSlope: 1.0286272
-            outSlope: 1.0286272
-            tangentMode: 0
-          - serializedVersion: 2
-            time: 1
-            value: 1
-            inSlope: 2
-            outSlope: 2
-            tangentMode: 0
-          preInfinity: 2
-          postInfinity: 2
-          rotationOrder: 0
+      curves: []
       events: []
       transformMask:
       - path: 
         weight: 1
-      - path: Box001
+      - path: bee
         weight: 1
-      - path: Dummy003
+      - path: Dummy006
         weight: 1
-      - path: Dummy003/Dummy001
+      - path: Dummy006/Dummy007
         weight: 1
-      - path: Dummy003/Dummy002
+      - path: Dummy006/Dummy008
         weight: 1
-      - path: Dummy003/Dummy004
+      - path: Dummy006/Dummy009
+        weight: 1
+      - path: Dummy006/Dummy010
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: EnemyShot
+      name: _EnemyShot
       takeName: Take 001
-      firstFrame: 25
+      firstFrame: 38
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bee
+        weight: 1
+      - path: Dummy006
+        weight: 1
+      - path: Dummy006/Dummy007
+        weight: 1
+      - path: Dummy006/Dummy008
+        weight: 1
+      - path: Dummy006/Dummy009
+        weight: 1
+      - path: Dummy006/Dummy010
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: _EnemyArival
+      takeName: Take 001
+      firstFrame: 16
       lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
@@ -212,39 +195,22 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves:
-      - name: Curve
-        curve:
-          serializedVersion: 2
-          curve:
-          - serializedVersion: 2
-            time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-          - serializedVersion: 2
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-          preInfinity: 3
-          postInfinity: 3
-          rotationOrder: 0
+      curves: []
       events: []
       transformMask:
       - path: 
         weight: 1
-      - path: Box001
+      - path: bee
         weight: 1
-      - path: Dummy003
+      - path: Dummy006
         weight: 1
-      - path: Dummy003/Dummy001
+      - path: Dummy006/Dummy007
         weight: 1
-      - path: Dummy003/Dummy002
+      - path: Dummy006/Dummy008
         weight: 1
-      - path: Dummy003/Dummy004
+      - path: Dummy006/Dummy009
+        weight: 1
+      - path: Dummy006/Dummy010
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}

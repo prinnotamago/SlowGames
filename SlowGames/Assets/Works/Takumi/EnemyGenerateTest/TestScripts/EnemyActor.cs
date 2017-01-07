@@ -48,6 +48,8 @@ public class EnemyActor : MonoBehaviour
     //エネミーが向かう方向
     public Transform _currentTarget;
     Vector3 _basePosition;
+    bool    _isHitToEnemy;
+    Vector3 _provMoveTarget;
 
     //player情報
     GameObject _playerTransform;
@@ -84,6 +86,7 @@ public class EnemyActor : MonoBehaviour
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _basePosition = _currentTarget.position;
         _isShot = false;
+        _isHitToEnemy = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
        
@@ -163,14 +166,17 @@ public class EnemyActor : MonoBehaviour
       //リセット
       else
       {
-            var targetPosition = _basePosition
-                               + new Vector3(Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange),
-                                             0,
-                                            (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
+            
+          _provMoveTarget = new Vector3(Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange),
+                                        0,
+                                       (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
+          var targetPosition = _basePosition + _provMoveTarget;
 
-          //float activeTime = RandomActiveTime(1);
+                //float activeTime = RandomActiveTime(1);
           float activeTime = _enemy.info.activeTimeMax;
-          iTween.MoveTo (gameObject, iTween.Hash ("position", targetPosition, "time",activeTime,"easeType",iTween.EaseType.linear));
+          iTween.MoveTo (gameObject, iTween.Hash ("x", targetPosition.x,"z", targetPosition.z,
+                                                  "time",activeTime,"easeType",iTween.EaseType.linear));
+
           StartCoroutine(RotateEnemy(activeTime,targetPosition));
 
           ChangeAction(ActionType.Stay,activeTime);
@@ -179,48 +185,65 @@ public class EnemyActor : MonoBehaviour
 
     }
 
+    //本来行くはずの逆の方向に煽り移動をします（エネミー同士がぶつかった際
+    void ReProvocationMove(float activeTime)
+    {
+        //
+        iTween.Stop(this.gameObject,"move");
+
+        _provMoveTarget *= -1;
+        var targetposition = _basePosition + _provMoveTarget * (activeTime / _enemy.info.activeTimeMax);
+    
+        iTween.MoveTo (gameObject, iTween.Hash ("x", targetposition.x,"z", targetposition.z,
+                                                "time",activeTime,"easeType",iTween.EaseType.linear));
+    }
+
+
     //FixMe : 動く方向に傾ける
     IEnumerator RotateEnemy(float activeTime, Vector3 targetPosition)
     {
-
-        //
-        var add = (targetPosition.magnitude - transform.position.magnitude);
-        transform.LookAt(_playerTransform.transform.position);
-
-        //正面のベクトル
-        float z = 2 * Vector3.forward.x;
-        float x = z * 0.5f;
-        float _x = -z * 2;
-        float _z = 0.5f * x;
-
-        Vector3 dir = new Vector3(_x,_z, transform.position.y);
-        float angle = 0.13f;
-
-        //左方向だったら 
-        angle *= dir.magnitude > 0 ? 1 : -1 ;
-        float count = activeTime * 0.5f;
-
-        while (count > 0)
-        {
-           
-            count -= Time.deltaTime;    
-            transform.Rotate(dir,angle);
-            yield return null;
-        }
-
-        count = activeTime * 0.5f;
-        angle *= -1;
-
-        while (count > 0)
-        {
-            count -= Time.deltaTime;
-            transform.Rotate(dir,angle);
-
-            yield return null;
-        }
-
+        
+//
+//        //
+//        var add = (targetPosition.magnitude - transform.position.magnitude);
+//        transform.LookAt(_playerTransform.transform.position);
+//
+//        //正面のベクトル
+//        float z = 2 * Vector3.forward.x;
+//        float x = z * 0.5f;
+//        float _x = -z * 2;
+//        float _z = 0.5f * x;
+//
+//        Vector3 dir = new Vector3(_x,_z, transform.position.y);
+//        float angle = 0.13f;
+//
+//        //左方向だったら 
+//        angle *= dir.magnitude > 0 ? 1 : -1 ;
+//        float count = activeTime * 0.5f;
+//
+//        while (count > 0)
+//        {
+//            count -= Time.deltaTime;    
+//            transform.Rotate(dir,angle);
+//            yield return null;
+//        }
+//
+//        count = activeTime * 0.5f;
+//        angle *= -1;
+//
+//        while (count > 0)
+//        {
+//            count -= Time.deltaTime;
+//            transform.Rotate(dir,angle);
+//
+//            yield return null;
+//        }
+//
         yield return null;
     }
+
+
+  
 
 
     //待機状態,与えられたactiviTime分移動を止める
@@ -228,14 +251,23 @@ public class EnemyActor : MonoBehaviour
     {
 
         if (_enemy._activeCounter > 0)
-        {
+        {   
+            //Stay中にエネミー同士があたったら
+//            if (_isHitToEnemy)
+//            {
+//                //移動する方向を変える
+//                ReProvocationMove(_enemy._activeCounter);
+//                _isHitToEnemy = false;
+//            }
             _enemy._activeCounter -= Time.deltaTime;
+           
           
         }
         else
         {
             _stayCount += 1;
             transform.LookAt(_playerTransform.transform.position);
+
             if (_stayCount > _enemy.info.shotFrequency)
             {
                 ChangeAction(ActionType.Shot);
@@ -243,7 +275,7 @@ public class EnemyActor : MonoBehaviour
             }
             else
             {
-                //stay前に決めておいた動きをします
+                //射撃をしない場合煽り行動をもう一度を行います
                 ChangeAction(ActionType.ProvocationMove);
             }
 
@@ -257,6 +289,8 @@ public class EnemyActor : MonoBehaviour
         if (!_isShot)
         {
             _isShot = true;
+            //移動中に敵同士がぶつかって蓄積された重力加速を０にしておく（射撃時に意図しない方向に移動してしまうため）
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             StartCoroutine(ShotMotion());
         }
 
@@ -288,19 +322,21 @@ public class EnemyActor : MonoBehaviour
 
         for (int i = 0; i < shotCount; i++)
         {
-            //撃つ
+            //撃つアニメーション
+            //shotラグ//test: アニメーションとのズレを緩和
             _enemyAnimator.SetInteger("ActionType", (int)AnimationState.Shot);
-            //shotラグ//test; wait for Second がうまく行かない代わり
             timeCount = 0.15f;
-
             while (timeCount > 0)
             {
                 timeCount -= Time.deltaTime; 
                 yield return null;
             }
 
+            //実際に射撃
+            //:test サウンド 
             gameObject.GetComponentInChildren<EnemyShot>().DoShot();
-          
+            AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Thunder);
+
             //二発以上かつ最後の弾じゃなければ
             if (shotCount > 1 && (shotCount - 1) > i)
             {   
@@ -333,7 +369,7 @@ public class EnemyActor : MonoBehaviour
 
     }
 
-
+    //アニメーションする時間をあらかじめ指定した範囲のランダムで決める
     float  RandomActiveTime(float min = 0.0f)
     {
         return Random.Range(min,_enemy.info.activeTimeMax);
@@ -342,24 +378,16 @@ public class EnemyActor : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
+        //ナビメッシュの効果がある際に判定
         if (_navimesh.enabled == true)
         {
-//            _stayCount = Random.Range(0, (_enemy.info.shotFrequency + 1)); //撃つ頻度は最初のみランダムに
-//            //ランダムでしょっぱなうつ
-//            if (_stayCount >= _enemy.info.shotFrequency)
-//            {
-//
-//                ChangeAction(ActionType.Shot, RandomActiveTime());
-//            }
-//          else
 
-            if (_enemy.doFall)
+            if (_enemy.doFall)//上から出現するなら
             {
                 ChangeAction(ActionType.Fall, 0);
 
             }
-            else
+            else//した階からの出現なら
             {   
                 if (_enemy.Type == EnemyType.Tackle)
                 {
@@ -368,17 +396,25 @@ public class EnemyActor : MonoBehaviour
                 }
                 else
                 {
+                    //玉のうつひんどを上げるためでてきたらまず撃つ
                     ChangeAction(ActionType.Shot, RandomActiveTime());
                 }
             }
 
+            //ナビメッシュの移動をやめる
             _navimesh.enabled = false;
-
-           
             _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
         }
 
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == TagName.Enemy)
+        {
+            _isHitToEnemy = true;
+        }
     }
 
     //落ちるリスポーン
@@ -438,12 +474,10 @@ public class EnemyActor : MonoBehaviour
 
         _basePosition = transform.position;
 
-        //
+        //タックルタイプはタックル
         if (_enemy.Type == EnemyType.Tackle)
         {
             ChangeAction(ActionType.SinMove,0);
-
-            Debug.Log("タックル");
         }
         else
         {
