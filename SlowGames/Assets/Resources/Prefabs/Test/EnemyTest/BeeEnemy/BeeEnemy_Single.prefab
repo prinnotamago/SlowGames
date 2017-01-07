@@ -428,7 +428,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960405656031998}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ec432a1bd9a30345a67a62d3c5f6065, type: 3}
   m_Name: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490db166179db4ecb9fd05b1ce10a168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyBullet: {fileID: 114270243685738700, guid: 34e23c3e61076564d8fa5a026cc48853,
+  _enemyBullet: {fileID: 114774792040031088, guid: e5d0f3ae728c642d1bd7c4fa1a280fb9,
     type: 2}
-  _doubleBullet: {fileID: 114270243685738700, guid: 34e23c3e61076564d8fa5a026cc48853,
+  _doubleBullet: {fileID: 114774792040031088, guid: e5d0f3ae728c642d1bd7c4fa1a280fb9,
     type: 2}
   _randomShotRange: {x: 0.8, y: 0.8, z: 0.8}
   _shotDelay: 0.5

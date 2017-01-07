@@ -71,10 +71,6 @@ public class GenerateManager : MonoBehaviour
     //死亡数をカウントします
     public int _deathCount = 0;
 
-    [SerializeField]
-    bool _isDebug;
-
-
     void Start()
     {
         //初期化
@@ -85,17 +81,6 @@ public class GenerateManager : MonoBehaviour
         }
 
         _deathCount = 0;
-
-//        #if _isDebug == false
-//
-//        //シリアライズで決めたエネミーの数をマックスにする
-//
-//
-//        #else
-
-        //_MAX_ENEMY = FindObjectOfType<GameDirector>().clearEnemyKillCount;
-
-//        #endif
 
         //開幕３体配置.
         _currentWaveCount = 0;
@@ -179,14 +164,19 @@ public class GenerateManager : MonoBehaviour
         //test: ”G”Keyで生成
         if (Input.GetKeyDown(KeyCode.G))
         {
-            //SetEnemy();
-     
-            string debugCount = "";
-            foreach (var count in _currentEnemysCount)
+
+            for (int i = 0; i < 3; i++)
             {
-                debugCount += count;
+                DefaultSetEnemy(EnemyType.Easy,TargetPosition.Front);
             }
-            Debug.Log(debugCount);
+            //SetEnemy();
+//     
+//            string debugCount = "";
+//            foreach (var count in _currentEnemysCount)
+//            {
+//                debugCount += count;
+//            }
+//            Debug.Log(debugCount);
 
         }
        
