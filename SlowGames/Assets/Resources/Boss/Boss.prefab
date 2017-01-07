@@ -813,7 +813,7 @@ MonoBehaviour:
     type: 2}
   _speedBullet: {fileID: 1356666004370112, guid: b6cc354eef876ff4e966c274a4fbe1b3,
     type: 2}
-  _speedBulletHP: 2d00000019000000
+  _speedBulletHP: 2d0000001e00000014000000
   _speedBulletChargeMax: 2
   _attackInterval: 0.5
   _patternRatio: 0.5
@@ -829,8 +829,16 @@ MonoBehaviour:
   _level_2_maxHeight: 3
   _level_2_maxWidth: 10
   _level_2_minWidth: 5
-  _level_2_speed: 2
+  _level_2_eightSpeed: 2
   _level_2_centerPos: {x: 0, y: 4.5, z: 1.65}
+  _level_2_moveObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _level_2_modeChangeHP: 2300000019000000
+  _level_2_randomMoveSpeed: 5
+  _level_2_randomStopTimeMax: 0
   _lastTacklePos: {x: 0, y: 3.5, z: 0}
   _lastTackleSpeed: 3
   _lastMoveSpeed: 3

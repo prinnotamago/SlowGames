@@ -114,11 +114,29 @@ public class BossAI : MonoBehaviour {
     float _level_2_minWidth = 5.0f;     // ハチの字の横の最小距離
     float _level_2_width = 10.0f;        // 今の八の字での横の長さ
     [SerializeField]
-    float _level_2_speed = 5.0f;        // 移動速度
+    float _level_2_eightSpeed = 5.0f;        // 移動速度
     float _level_2_moveAngle = 0.0f;       // 移動するのに Sin を使ってるのに 角度 で調節している
     [SerializeField]
     Vector3 _level_2_centerPos;                 // 中心距離
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
+    [SerializeField]
+    GameObject[] _level_2_moveObj;  // ランダムに移動する場所を決めるのに使う
+    enum Level_2_Mode               // 第２形態のモードを決める
+    {
+        RANDOM,         // ランダムに動く
+        EIGHT_MOVE,     // 8の字に動く
+    }
+    Level_2_Mode _level_2_mode = Level_2_Mode.RANDOM;
+    [SerializeField]
+    int[] _level_2_modeChangeHP;    // 第２形態の動きを変えるのに使う
+    int _level_2_modeIndex = 0;    // 第２形態の動きを変えるのに使うインデックス
+    [SerializeField]
+    float _level_2_randomMoveSpeed = 5.0f;  // ランダムの動きの速さ
+    [SerializeField]
+    float _level_2_randomStopTimeMax = 1.0f;  // ランダムの動きで目的地に着いたらどのくらい止まるか最大値
+    float _level_2_randomStopTime = 0.0f;     // ランダムの動きで目的地に着いたらどのくらい止まるか数える
+    int _level_2_randomIndex = 0;       // ランダムに移動する場所を入れる
+    Vector3 _level_2_movePos;       // ランダム移動で実際に向かう場所
     //////////////////////////////////////////////////////////////////////////////
 
     // LAST の情報////////////////////////////////////////////////////////////////
@@ -166,6 +184,20 @@ public class BossAI : MonoBehaviour {
         _lastMovePos.Add(_lastTacklePos);
 
         _rigidbody = GetComponent<Rigidbody>();
+
+        // 第２形態の移動場所をあらかじめ決める
+        _level_2_randomIndex = Random.Range(0, _level_2_moveObj.Length);
+        var moveObj = _level_2_moveObj[_level_2_randomIndex];
+        float x = moveObj.transform.localScale.x / 2.0f;
+        float y = moveObj.transform.localScale.y / 2.0f;
+        float z = moveObj.transform.localScale.z / 2.0f;
+        _level_2_movePos = new Vector3
+            (
+                moveObj.transform.position.x + Random.Range(-x, x),
+                moveObj.transform.position.y + Random.Range(-y, y),
+                moveObj.transform.position.z + Random.Range(-z, z)
+            );
+        _level_2_randomStopTime = _level_2_randomStopTimeMax;
     }
 
     // Update is called once per frame
@@ -258,6 +290,17 @@ public class BossAI : MonoBehaviour {
             ++_purgeIndex;
         }
 
+        // 第２形態ならモードチェンジの判定
+        if(_state == BossState.LEVEL_2)
+        {
+            // 一定ダメージを受けたらハチの字モードに変える
+            if (_level_2_modeIndex < _level_2_modeChangeHP.Length && _level_2_modeChangeHP[_level_2_modeIndex] >= _hp)
+            {
+                _level_2_mode = Level_2_Mode.EIGHT_MOVE;
+                ++_level_2_modeIndex;
+            }
+        }
+
         // 一定 HP きったら形態を変える
         if (_changeStateIndex < _changeStateHP.Length && _changeStateHP[_changeStateIndex] >= _hp)
         {
@@ -288,6 +331,12 @@ public class BossAI : MonoBehaviour {
             _speedBulletChargeTime = 0.0f;
             _speedBulletFlag = false;
             _attackTime = 0.0f;
+
+            // 第２形態ならランダム移動に戻す
+            if(_level_2_mode == Level_2_Mode.EIGHT_MOVE)
+            {
+                _level_2_mode = Level_2_Mode.RANDOM;
+            }
         }
     }
 
@@ -431,33 +480,82 @@ public class BossAI : MonoBehaviour {
     // 第二形態
     void Level_2_Update()
     {
-        _level_2_moveAngle += Time.deltaTime * _level_2_speed;
-
-        if (_level_2_changeCount == 0 && _level_2_moveAngle > (Mathf.PI / 2))
+        // ハチの字の動き
+        if (_level_2_mode == Level_2_Mode.EIGHT_MOVE)
         {
-            _level_2_changeCount++;
-            _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+            _level_2_moveAngle += Time.deltaTime * _level_2_eightSpeed;
+
+            if (_level_2_changeCount == 0 && _level_2_moveAngle > (Mathf.PI / 2))
+            {
+                _level_2_changeCount++;
+                _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+            }
+            else if (_level_2_changeCount == 1 && _level_2_moveAngle > (Mathf.PI / 2) * 3)
+            {
+                _level_2_changeCount++;
+                _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+            }
+            else if (_level_2_changeCount == 2 && _level_2_moveAngle > Mathf.PI * 2)
+            {
+                _level_2_moveAngle = 0.0f;
+                _level_2_changeCount = 0;
+            }
+            //Debug.Log(_level_2_moveAngle);
+
+            var nextPos = _level_2_centerPos + new Vector3(
+                Mathf.Cos(_level_2_moveAngle) * _level_2_width,
+                Mathf.Sin(_level_2_moveAngle * 2) * _level_2_maxHeight,
+                0);
+
+            var vector = nextPos - transform.position;
+
+            transform.position += vector * 3.0f * Time.deltaTime;
         }
-        else if (_level_2_changeCount == 1 && _level_2_moveAngle > (Mathf.PI / 2) * 3)
+        // ランダムに動く動き
+        else if(_level_2_mode == Level_2_Mode.RANDOM)
         {
-            _level_2_changeCount++;
-            _level_2_width = Random.Range(_level_2_minWidth, _level_2_maxWidth);
+            var vector = _level_2_movePos - transform.position;
+
+            // 向かう場所に近づいたら
+            if (vector.magnitude < 0.1f)
+            {
+                // 止まる時間を減らす
+                _level_2_randomStopTime -= Time.deltaTime;
+
+                // 止まる時間を過ぎたら向かう場所を再設定
+                if (_level_2_randomStopTime <= 0.0f)
+                {
+                    while (true)
+                    {
+                        int beforeIndex = _level_2_randomIndex;
+                        _level_2_randomIndex = Random.Range(0, _level_2_moveObj.Length);
+                        if(beforeIndex != _level_2_randomIndex) { break; }
+                    }
+                    
+                    var moveObj = _level_2_moveObj[_level_2_randomIndex];
+                    float x = moveObj.transform.localScale.x / 2.0f;
+                    float y = moveObj.transform.localScale.y / 2.0f;
+                    float z = moveObj.transform.localScale.z / 2.0f;
+                    _level_2_movePos = new Vector3
+                        (
+                            moveObj.transform.position.x + Random.Range(-x, x),
+                            moveObj.transform.position.y + Random.Range(-y, y),
+                            moveObj.transform.position.z + Random.Range(-z, z)
+                        );
+                    _level_2_randomStopTime = _level_2_randomStopTimeMax;
+                }
+            }
+            // 向かう場所についてなかったらそこに移動する
+            else
+            {
+                // こっちの動きだせぇ
+                //Debug.Log(_level_2_randomIndex);
+                //transform.position += vector.normalized * _level_2_randomMoveSpeed * Time.deltaTime;
+
+                transform.position += vector * _level_2_randomMoveSpeed * Time.deltaTime;
+            }
         }
-        else if (_level_2_changeCount == 2 && _level_2_moveAngle > Mathf.PI * 2)
-        {
-            _level_2_moveAngle = 0.0f;
-            _level_2_changeCount = 0;
-        }
-        //Debug.Log(_level_2_moveAngle);
 
-        var nextPos = _level_2_centerPos + new Vector3(
-            Mathf.Cos(_level_2_moveAngle) * _level_2_width,
-            Mathf.Sin(_level_2_moveAngle * 2) *  _level_2_maxHeight,
-            0);
-
-        var vector = nextPos - transform.position;
-
-        transform.position += vector * 3.0f * Time.deltaTime;
     }
 
     // ラスト(突撃)
@@ -524,7 +622,12 @@ public class BossAI : MonoBehaviour {
         {
             var particle = Instantiate(_hitParticle);
             particle.transform.position = col.transform.position;
-            Damage();
+
+            // 高速弾を撃つときはエフェクトだけを出す
+            if (!_speedBulletFlag)
+            {
+                Damage();
+            }
         }
     }
 
