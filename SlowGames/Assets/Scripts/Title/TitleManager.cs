@@ -141,6 +141,8 @@ public class TitleManager : MonoBehaviour
     {
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
+
+        NoiseSwitch.instance.OnGlitch(); //test
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
@@ -149,6 +151,9 @@ public class TitleManager : MonoBehaviour
 
         //Animationを待った後、UIの演出が終わるまで待つ
         yield return new WaitForSeconds(0.6f * 5 + 2.0f);
+
+        NoiseSwitch.instance.OffGlitch();
+
         //消えるアニメーションに変更
         _idCanvas.GetComponentInChildren<Animator>().SetBool("End", true);
         //ちょっとだけ待つ
