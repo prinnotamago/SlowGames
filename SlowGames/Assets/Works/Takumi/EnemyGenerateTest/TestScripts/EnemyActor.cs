@@ -84,7 +84,6 @@ public class EnemyActor : MonoBehaviour
     {
 
         //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
-        _basePosition = _currentTarget.position;
         _isShot = false;
         _isHitToEnemy = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
@@ -114,7 +113,9 @@ public class EnemyActor : MonoBehaviour
         }
         else
         {
+
             //しっかりターゲットがきまってたら移動開始
+            _basePosition = _currentTarget.position;
             _currentAction = ActionType.TargetRun;
             this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         } 
