@@ -392,7 +392,6 @@ public class EnemyActor : MonoBehaviour
                 if (_enemy.Type == EnemyType.Tackle)
                 {
                     ChangeAction(ActionType.SinMove, 0);
-                    Debug.Log("タックル");
                 }
                 else
                 {
@@ -490,7 +489,7 @@ public class EnemyActor : MonoBehaviour
     [SerializeField]
     float _sideMoveSpeed = 200;
     [SerializeField]
-    float _sideMoveLenfth = 10;
+    float _sideMoveLength = 10;
 
     [SerializeField,Range(1,20)]
     float _tackleRange = 7;
@@ -499,22 +498,82 @@ public class EnemyActor : MonoBehaviour
     [SerializeField,Range(0,5)]
     float _tackleChargeTime = 1;
 
+    //タックルする前の移動場所のターゲットをとる
+    List<Vector3> _tackleBeforeTarget = new List<Vector3>();
+    float _sideMoveRange = 4;
+    float _updownMoveRange = 4;
+    bool _isBeforeTackle = false;
 
     //Test:横移動しながら前に進み
     void SinMove()
     {
-        _enemy._activeCounter += Time.deltaTime * _sideMoveSpeed;
-        Vector3 side = transform.right * (Mathf.Cos(ToRadian(_enemy._activeCounter)) * _sideMoveLenfth);
-        transform.position += (transform.forward + side) * Time.deltaTime;
-        transform.LookAt(_playerTransform.transform.position);
-        //プレイヤーと
-        if (!CheckPlayerToDistance(_tackleRange))
+//        _enemy._activeCounter += Time.deltaTime * _sideMoveSpeed;
+//        Vector3 side = transform.right * (Mathf.Cos(ToRadian(_enemy._activeCounter)) * _sideMoveLength);
+//        transform.position += (transform.forward + side) * Time.deltaTime;
+//        transform.LookAt(_playerTransform.transform.position);
+//        //プレイヤーと
+//   if (!CheckPlayerToDistance(_tackleRange))
+//        {
+//            ChangeAction(ActionType.Takkle, _tackleChargeTime);
+//
+//        }
+        if (!_isBeforeTackle)
         {
-            ChangeAction(ActionType.Takkle,_tackleChargeTime);
-
+            _isBeforeTackle = true;
+            StartCoroutine(BeforeTackle());
         }
 
     }
+
+    IEnumerator BeforeTackle()
+    {
+        //プレイヤーとの距離を計算
+        Vector3 targetLength = _playerTransform.transform.position - transform.position;
+        Vector3 basePosition = transform.position;
+        //エネミーの横方向、縦方向を取得.
+        Vector3 right = transform.right;
+        Vector3 up = transform.up;
+        int moveNumberOfTime = 5;
+        int direcNumber = -1;
+        float time = 1.0f;
+        //４分の１の長さにする
+        targetLength /= moveNumberOfTime;
+
+        Vector3[] targets = new Vector3[3];
+        targets[0] = right * _sideMoveRange;
+        targets[1] = -right * _sideMoveRange;
+        targets[2] = up * _updownMoveRange;
+        //targets[3] = -up;
+
+        yield return null;
+
+
+        for (int i = 0; i < (moveNumberOfTime - 1); i++)
+        {   
+            
+            int random;
+            do
+            {
+               random = Random.Range(0,targets.Length);
+            }
+            while(random == direcNumber);
+            direcNumber = random;
+
+            //ムーブSE
+            //AudioManager.instance.play3DSe(gameObject,AudioName.SeName.gun1);
+
+            //プレイヤーから4/1,4/2,4/3ずつの距離を設定
+            Vector3 target = (targetLength * (i + 1))  + basePosition + targets[random];
+            iTween.MoveTo(gameObject,iTween.Hash("position",target,"time",time,"easeType",iTween.EaseType.easeOutCubic));
+            yield return new WaitForSeconds(time);
+
+        }
+
+        ChangeAction(ActionType.Takkle, _tackleChargeTime);
+
+        yield return null;
+    }
+
 
     void Tackle()
     {
@@ -529,7 +588,10 @@ public class EnemyActor : MonoBehaviour
            // タックル
            transform.position += (transform.forward) * Time.deltaTime * _tackleSpeed;
         }
-         
+
+
+      
+      
     }
 
     static float ToRadian(float value)
