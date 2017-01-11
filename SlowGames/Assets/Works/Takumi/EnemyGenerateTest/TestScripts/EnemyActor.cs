@@ -89,7 +89,6 @@ public class EnemyActor : MonoBehaviour
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
        
-
     }
 
     void Update()
@@ -101,14 +100,22 @@ public class EnemyActor : MonoBehaviour
 
     }
 
+    int waitFrameCount = 0;
+    int waitFrameCountMax = 2;
+
     //生成
     void FirstAction()
     {
 
         if (_currentTarget == null)
         {
-            //うまくいってなかったら生成仕直し
-            this.gameObject.GetComponent<Enemy>().SilentDestroy();
+      
+            waitFrameCount++;
+            if (waitFrameCount == waitFrameCountMax)
+            {
+                //うまくいってなかったら生成仕直し
+                this.gameObject.GetComponent<Enemy>().SilentDestroy();
+            }
             return;
         }
         else
@@ -254,20 +261,21 @@ public class EnemyActor : MonoBehaviour
         if (_enemy._activeCounter > 0)
         {   
             //Stay中にエネミー同士があたったら
-//            if (_isHitToEnemy)
-//            {
-//                //移動する方向を変える
-//                ReProvocationMove(_enemy._activeCounter);
-//                _isHitToEnemy = false;
-//            }
+//          if (_isHitToEnemy)
+//          {
+//              //移動する方向を変える
+//              ReProvocationMove(_enemy._activeCounter);
+//              _isHitToEnemy = false;
+//          }
             _enemy._activeCounter -= Time.deltaTime;
-           
+            HormingToTarget();
           
         }
         else
         {
+
             _stayCount += 1;
-            transform.LookAt(_playerTransform.transform.position);
+            //transform.LookAt(_playerTransform.transform.position);
 
             if (_stayCount > _enemy.info.shotFrequency)
             {
@@ -582,7 +590,8 @@ public class EnemyActor : MonoBehaviour
         if (_enemy._activeCounter > 0)
         {
            _enemy._activeCounter -= Time.deltaTime;
-           transform.LookAt(_playerTransform.transform.position);
+           HormingToTarget();
+           //transform.LookAt(_playerTransform.transform.position);
         }
         else
         {   
@@ -590,9 +599,33 @@ public class EnemyActor : MonoBehaviour
            transform.position += (transform.forward) * Time.deltaTime * _tackleSpeed;
         }
 
+    }
 
-      
-      
+    void HormingToTarget()
+    {
+
+        //FixMe:毎回みないこと
+        //Vector3 player = GameObject.FindGameObjectWithTag(TagName.Player).transform.position;
+
+        // ターゲットまでの角度を取得
+        Vector3    vecTarget  = _playerTransform.transform.position - transform.position; //プレイヤーへのベクトル
+        Vector3    vecForward = transform.TransformDirection(Vector3.forward);            //エネミーの正面ベクトル
+        float      angleDiff  = Vector3.Angle(vecForward, vecTarget);                     //プレイヤーまでの角度
+        float      angleAdd   = (10.0f * Time.deltaTime);                                 //回転角
+        Quaternion rotTarget  = Quaternion.LookRotation(vecTarget);                       //ターゲットへ向けるクォータニオン
+
+        if (angleDiff <= angleAdd)
+        {
+            // ターゲットが回転角以内なら完全にターゲットの方を向く
+            transform.rotation = rotTarget;
+        }
+        else
+        {
+            // ターゲットが回転角の外なら、指定角度だけターゲットに向ける
+            float t = (angleAdd / angleDiff);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, t);
+        }
+
     }
 
     static float ToRadian(float value)
