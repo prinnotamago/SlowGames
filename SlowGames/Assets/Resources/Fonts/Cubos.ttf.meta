@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: f2df5fad017204eb49e27c3926e6da34
+timeCreated: 1484120482
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cubos
+  fontNames:
+  - Cubos
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
