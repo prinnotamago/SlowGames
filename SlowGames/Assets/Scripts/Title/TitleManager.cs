@@ -65,6 +65,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private Animator _arrowAnim = null;
 
+    private float _time = 0.0f;
+
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -96,6 +98,12 @@ public class TitleManager : MonoBehaviour
             _viveMaterial2[i] = _viveControllerModel[1].GetComponentInChildren<Renderer>().materials[i];
         }
 
+        //コントローラーの向きを変える
+        _viveControllerModel[0].transform.Rotate(0, 90, 0);
+        _viveControllerModel[1].transform.Rotate(0, -90, 0);
+
+
+
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
         _arrowAnim.gameObject.SetActive(false);
@@ -117,6 +125,27 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     void TitleUpdate()
     {
+        _time += Time.deltaTime;
+        if (_time > 1.0f)
+        {
+            _viveMaterial[2].EnableKeyword("_EMISSION");
+            _viveMaterial[2].SetColor("_EmissionColor", Color.black);
+            _viveMaterial2[2].EnableKeyword("_EMISSION");
+            _viveMaterial2[2].SetColor("_EmissionColor", Color.black);
+
+            _time = 0.0f;
+        }
+        else if (_time > 0.5f)
+        {
+            _viveMaterial[2].EnableKeyword("_EMISSION");
+            _viveMaterial[2].SetColor("_EmissionColor", Color.white);
+            _viveMaterial2[2].EnableKeyword("_EMISSION");
+            _viveMaterial2[2].SetColor("_EmissionColor", Color.white);
+        }
+
+
+
+
         // 必要なアイテムを手に持っているか確かめる
         bool isChange = true;
         foreach (var item in _items)
@@ -227,6 +256,10 @@ public class TitleManager : MonoBehaviour
 
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
+
+        //コントローラーの向きを変える
+        _viveControllerModel[0].transform.Rotate(0, -90, 0);
+        _viveControllerModel[1].transform.Rotate(0, 90, 0);
 
 
         StartCoroutine(SlowDescription());

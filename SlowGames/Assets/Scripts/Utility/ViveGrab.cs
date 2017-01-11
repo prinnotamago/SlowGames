@@ -9,6 +9,7 @@ public class ViveGrab : MonoBehaviour {
 
     //[SerializeField]
     //SteamVR_TrackedObject[] _viveCon;
+    
     [SerializeField]
     string _tagName = TagName.Weapon;
 
@@ -26,6 +27,7 @@ public class ViveGrab : MonoBehaviour {
 
     [SerializeField]
     bool _isDrop = false;
+
 
     // Use this for initialization
     void Start () {
@@ -45,6 +47,8 @@ public class ViveGrab : MonoBehaviour {
             _pickObj.gameObject.transform.rotation = transform.rotation;
             _pickObj.gameObject.transform.Rotate(235, 0, 180);
         }
+        
+        
     }
 
     void OnTriggerEnter(Collider col)
@@ -99,6 +103,18 @@ public class ViveGrab : MonoBehaviour {
                     _pickObj = col.gameObject;
                     _pickObjRigidbody = col.GetComponent<Rigidbody>();
                     _isPick = true;
+                    if (col.gameObject.transform.position.x > 0.0f)
+                    {
+                        _viveConObj[0].SetActive(false);
+                    }
+                    else if (col.gameObject.transform.position.x < 0.0f)
+                    {
+                        _viveConObj[1].SetActive(false);
+                    }
+                    foreach(var i in col.gameObject.GetComponents<BoxCollider>())
+                    {
+                        i.enabled = false;
+                    }
                 }
             }
         }
