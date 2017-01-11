@@ -99,7 +99,8 @@ public class EnemyBullet : MonoBehaviour {
                 _isBlow = true;
                 this.GetComponent<Collider>().enabled = false;
                 StartCoroutine(RandomBlow());
-
+            //プレイヤーの弾を消す
+            Destroy(other.gameObject);
                 return;
                
         }
