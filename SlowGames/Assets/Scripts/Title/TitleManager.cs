@@ -65,6 +65,14 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private Animator _arrowAnim = null;
 
+
+    [SerializeField]
+    private Vector3[] START_POS;
+
+    [SerializeField]
+    private Vector3[] TURTREAL_POS;
+
+
     private float _time = 0.0f;
 
     /// <summary>
@@ -97,6 +105,9 @@ public class TitleManager : MonoBehaviour
             _viveMaterial[i] = _viveControllerModel[0].GetComponentInChildren<Renderer>().materials[i];
             _viveMaterial2[i] = _viveControllerModel[1].GetComponentInChildren<Renderer>().materials[i];
         }
+
+        _viveControllerModel[0].transform.position = START_POS[0];
+        _viveControllerModel[1].transform.position = START_POS[1];
 
         //コントローラーの向きを変える
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
@@ -257,9 +268,12 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
 
+        _viveControllerModel[0].transform.position = TURTREAL_POS[0];
+        _viveControllerModel[1].transform.position = TURTREAL_POS[1];
+
         //コントローラーの向きを変える
-        _viveControllerModel[0].transform.Rotate(0, -90, 0);
-        _viveControllerModel[1].transform.Rotate(0, 90, 0);
+        _viveControllerModel[0].transform.eulerAngles = Vector3.zero;
+        _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
 
         StartCoroutine(SlowDescription());

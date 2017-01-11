@@ -14,7 +14,7 @@ public class ViveGrab : MonoBehaviour {
     string _tagName = TagName.Weapon;
 
     [SerializeField]
-    private GameObject[] _viveConObj = null; 
+    private GameObject _viveConObj = null;
 
     GameObject _pickObj = null;
 
@@ -27,7 +27,6 @@ public class ViveGrab : MonoBehaviour {
 
     [SerializeField]
     bool _isDrop = false;
-
 
     // Use this for initialization
     void Start () {
@@ -55,14 +54,7 @@ public class ViveGrab : MonoBehaviour {
     {
         if(col.gameObject.tag == _tagName)
         {
-            if(col.gameObject.transform.position.x > 0.0f)
-            {
-                _viveConObj[0].SetActive(true);
-            }
-            else if(col.gameObject.transform.position.x < 0.0f)
-            {
-                _viveConObj[1].SetActive(true);
-            }
+            _viveConObj.SetActive(true);
         }
     }
 
@@ -103,18 +95,15 @@ public class ViveGrab : MonoBehaviour {
                     _pickObj = col.gameObject;
                     _pickObjRigidbody = col.GetComponent<Rigidbody>();
                     _isPick = true;
-                    if (col.gameObject.transform.position.x > 0.0f)
-                    {
-                        _viveConObj[0].SetActive(false);
-                    }
-                    else if (col.gameObject.transform.position.x < 0.0f)
-                    {
-                        _viveConObj[1].SetActive(false);
-                    }
-                    foreach(var i in col.gameObject.GetComponents<BoxCollider>())
+                    _viveConObj.GetComponent<ViveConPosMover>().enabled = false;
+                    _viveConObj.SetActive(false);
+
+                    foreach (var i in col.gameObject.GetComponents<BoxCollider>())
                     {
                         i.enabled = false;
                     }
+                    GetComponent<BoxCollider>().enabled = false;
+
                 }
             }
         }
@@ -124,14 +113,7 @@ public class ViveGrab : MonoBehaviour {
     {
         if (col.gameObject.tag == _tagName)
         {
-            if (col.gameObject.transform.position.x > 0.0f)
-            {
-                _viveConObj[0].SetActive(false);
-            }
-            else if (col.gameObject.transform.position.x < 0.0f)
-            {
-                _viveConObj[1].SetActive(false);
-            }
+            _viveConObj.SetActive(false);
         }
 
         if (!_isDrop) { return; }
