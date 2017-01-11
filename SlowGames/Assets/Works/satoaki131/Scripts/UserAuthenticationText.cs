@@ -25,11 +25,11 @@ public class UserAuthenticationText : MonoBehaviour {
         _text = GetComponent<Text>();
         if(_type == TextType.Descript)
         {
-            _text.text = "ユーザー認証中";
+            _text.text = "id access";
         }
         else if(_type == TextType.Clear)
         {
-            _text.text = "確認しました。";
+            _text.text = "complete";
         }
         else if(_type == TextType.point)
         {
