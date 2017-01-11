@@ -255,16 +255,17 @@ public class GenerateManager : MonoBehaviour
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
             //限界値以上はださない
-            if (_MAX_ENEMY < _deathCount + liveEnemysCount)
+            if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
             {
                 return;
             }
            
             //限界値以上出さない
-            if (_MAX_ENEMY < (_deathCount + liveEnemysCount + waveData._generateCount))
+            if (_MAX_ENEMY < _deathCount + liveEnemysCount + waveData._generateCount)
             { 
                 
                 int lastCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
+                //Debug.Log("max_enmy:" + _MAX_ENEMY + " _deathocount:" +_deathCount +" liveEnemyCount :"+ liveEnemysCount);
                 SetEnemy(lastCount, waveData._generateTypeList);
             }
             else 
