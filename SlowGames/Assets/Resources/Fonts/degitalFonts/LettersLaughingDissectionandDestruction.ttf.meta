@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3fa15ef3c7c734ef6bc3b73b56056441
+timeCreated: 1484115639
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Letters Laughing
+  fontNames:
+  - Letters Laughing
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
