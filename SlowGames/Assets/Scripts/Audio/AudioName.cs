@@ -9,6 +9,9 @@ public enum BgmName
 }
 public enum SeName
 {
+	Diying,
+	Flying,
+	Genrtate,
 	gunreload1,
 	gunreload2,
 	Thunder,
