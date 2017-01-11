@@ -234,18 +234,16 @@ public class GenerateManager : MonoBehaviour
 
 
         //指定した的キャラの出現
-        int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
-
         //最大数でてたら通らない
+        int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
         if (waveData._rareEnemyInfo.Count > rareEnemyCount)
         {
             //タイミングに合わせて、ホーミングタイプのキャラを出す
             if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
-                 //指定したエネミータイプを生成
-                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
-
+                //指定したエネミータイプを生成 
                 //更新
+                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
                 _rareEnemyCount[_currentWaveCount] += 1;
             }
         }

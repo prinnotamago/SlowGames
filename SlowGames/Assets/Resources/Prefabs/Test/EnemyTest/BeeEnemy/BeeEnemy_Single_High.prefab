@@ -418,7 +418,7 @@ MonoBehaviour:
   _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
   _sideMoveSpeed: 200
-  _sideMoveLenfth: 5
+  _sideMoveLength: 10
   _tackleRange: 7
   _tackleSpeed: 10
   _tackleChargeTime: 1
