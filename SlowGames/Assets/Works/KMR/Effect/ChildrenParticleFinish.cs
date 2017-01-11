@@ -9,7 +9,7 @@ public class ChildrenParticleFinish : MonoBehaviour
     void Start()
     {
         _particleSystem = GetComponentsInChildren<ParticleSystem>();
-        Debug.Log(_particleSystem.Length);
+        //Debug.Log(_particleSystem.Length);
     }
 
     void Update()
