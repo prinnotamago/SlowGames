@@ -564,7 +564,7 @@ public class EnemyActor : MonoBehaviour
             int random;
             do
             {
-               random = Random.Range(0,targets.Length);
+                random = Random.Range(0, targets.Length);
             }
             while(random == direcNumber);
             direcNumber = random;
@@ -573,9 +573,18 @@ public class EnemyActor : MonoBehaviour
             //AudioManager.instance.play3DSe(gameObject,AudioName.SeName.gun1);
 
             //プレイヤーから4/1,4/2,4/3ずつの距離を設定
-            Vector3 target = (targetLength * (i + 1))  + basePosition + targets[random];
-            iTween.MoveTo(gameObject,iTween.Hash("position",target,"time",time,"easeType",iTween.EaseType.easeOutCubic));
-            yield return new WaitForSeconds(time);
+            Vector3 target = (targetLength * (i + 1)) + basePosition + targets[random];
+            iTween.MoveTo(gameObject, iTween.Hash("position", target, "time", time, "easeType", iTween.EaseType.easeOutCubic));
+
+            //yield return new WaitForSeconds(time);
+            float waitTime = time;
+            while (waitTime > 0)
+            {
+                waitTime -= Time.deltaTime;
+                HormingToTarget();
+
+                yield return null;
+            }
 
         }
 
@@ -591,7 +600,6 @@ public class EnemyActor : MonoBehaviour
         if (_enemy._activeCounter > 0)
         {
            _enemy._activeCounter -= Time.deltaTime;
-           HormingToTarget();
            //transform.LookAt(_playerTransform.transform.position);
         }
         else
@@ -612,7 +620,7 @@ public class EnemyActor : MonoBehaviour
         Vector3    vecTarget  = _playerTransform.transform.position - transform.position; //プレイヤーへのベクトル
         Vector3    vecForward = transform.TransformDirection(Vector3.forward);            //エネミーの正面ベクトル
         float      angleDiff  = Vector3.Angle(vecForward, vecTarget);                     //プレイヤーまでの角度
-        float      angleAdd   = (10.0f * Time.deltaTime);                                 //回転角
+        float      angleAdd   = (100.0f * Time.deltaTime);                                 //回転角
         Quaternion rotTarget  = Quaternion.LookRotation(vecTarget);                       //ターゲットへ向けるクォータニオン
 
         if (angleDiff <= angleAdd)
