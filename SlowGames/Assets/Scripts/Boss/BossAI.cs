@@ -121,7 +121,7 @@ public class BossAI : MonoBehaviour {
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
     [SerializeField]
     GameObject _level_2_moveObjPrefab;  // ランダムに移動する場所を決めるやつのプレハブ
-    GameObject[] _level_2_moveObjs;  // ランダムに移動する場所を決めるのに使う
+    List<GameObject> _level_2_moveObjs = new List<GameObject>();  // ランダムに移動する場所を決めるのに使う
     enum Level_2_Mode               // 第２形態のモードを決める
     {
         RANDOM,         // ランダムに動く
@@ -188,10 +188,14 @@ public class BossAI : MonoBehaviour {
 
         // 第２形態で使う MoveObj を生成する
         var moveObjParent = Instantiate(_level_2_moveObjPrefab);
-        _level_2_moveObjs = moveObjParent.GetComponentsInChildren<GameObject>();
+        var objs = moveObjParent.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < objs.Length; ++i)
+        {
+            _level_2_moveObjs.Add(objs[i].gameObject);
+        }
 
         // 第２形態の移動場所をあらかじめ決める
-        _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Length);
+        _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
         var moveObj = _level_2_moveObjs[_level_2_randomIndex];
         float x = moveObj.transform.localScale.x / 2.0f;
         float y = moveObj.transform.localScale.y / 2.0f;
@@ -536,7 +540,7 @@ public class BossAI : MonoBehaviour {
                     while (true)
                     {
                         int beforeIndex = _level_2_randomIndex;
-                        _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Length);
+                        _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
                         if(beforeIndex != _level_2_randomIndex) { break; }
                     }
                     
