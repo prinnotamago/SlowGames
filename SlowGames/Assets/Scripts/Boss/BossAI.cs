@@ -214,6 +214,9 @@ public class BossAI : MonoBehaviour {
         // ダメージ判定で起こる処理
         DamageCheck();
 
+        // クライマックス以外プレイヤーに向かせる
+        if (_state != BossState.CLIMAX) { transform.LookAt(_player.transform); }
+
         // 速い弾を撃つときは各形態の動作をしないようにする
         if (_speedBulletFlag) { return; }
 
