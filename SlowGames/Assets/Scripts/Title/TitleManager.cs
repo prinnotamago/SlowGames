@@ -129,8 +129,18 @@ public class TitleManager : MonoBehaviour
         if (isChange)
         {
             _state = State.Wait;
-            StartCoroutine(Authentication());
+            StartCoroutine(TitleLogoProduction());
         }
+    }
+
+    /// <summary>
+    /// TitleのLogo演出用のこるーちん
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TitleLogoProduction()
+    {
+        yield return null;
+        StartCoroutine(Authentication());
     }
 
     /// <summary>
@@ -142,7 +152,10 @@ public class TitleManager : MonoBehaviour
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
 
-        NoiseSwitch.instance.OnGlitch(); //test
+        //NoiseSwitch.instance.OnGlitch(); //test
+
+        //AudioManager.instance.playSe(AudioName.SeName.Thunder); //SEの予定
+        
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
@@ -152,7 +165,7 @@ public class TitleManager : MonoBehaviour
         //Animationを待った後、UIの演出が終わるまで待つ
         yield return new WaitForSeconds(0.6f * 5 + 2.0f);
 
-        NoiseSwitch.instance.OffGlitch();
+        //NoiseSwitch.instance.OffGlitch();
 
         //消えるアニメーションに変更
         _idCanvas.GetComponentInChildren<Animator>().SetBool("End", true);
@@ -223,6 +236,7 @@ public class TitleManager : MonoBehaviour
     {
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "スローを使ってみよう！";
+        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
         var time = 0.0f;
 
@@ -267,6 +281,7 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
+        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
         var normalPos = _viveControllerModel[0].transform.position;
         var normalPos2 = _viveControllerModel[1].transform.position;
@@ -338,6 +353,7 @@ public class TitleManager : MonoBehaviour
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
         _descriptionText.text = "敵を倒そう！";
+        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
         //光らせるマテリアルのEmissionを設定
         _viveMaterial[2].EnableKeyword("_EMISSION");
