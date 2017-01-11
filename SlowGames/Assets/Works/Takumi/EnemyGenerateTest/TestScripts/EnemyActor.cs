@@ -114,6 +114,7 @@ public class EnemyActor : MonoBehaviour
             if (waitFrameCount == waitFrameCountMax)
             {
                 //うまくいってなかったら生成仕直し
+                Debug.Log("再生成");
                 this.gameObject.GetComponent<Enemy>().SilentDestroy();
             }
             return;
