@@ -26,6 +26,9 @@ public class TitleManager : MonoBehaviour
     private GameObject[] _gunStand = null;
 
     [SerializeField]
+    private GameObject[] _desk = null;
+
+    [SerializeField]
     private GameObject[] _gun = null;
 
     [SerializeField]
@@ -215,6 +218,7 @@ public class TitleManager : MonoBehaviour
         for (int i = 0; i < _gunStand.Length; i++)
         {
             Destroy(_gunStand[i]);
+            Destroy(_desk[i]);
         }
 
         //Enemyくん起動

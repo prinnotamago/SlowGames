@@ -12,6 +12,9 @@ public class ViveGrab : MonoBehaviour {
     [SerializeField]
     string _tagName = TagName.Weapon;
 
+    [SerializeField]
+    private GameObject[] _viveConObj = null; 
+
     GameObject _pickObj = null;
 
     bool _isPick = false;
@@ -41,6 +44,21 @@ public class ViveGrab : MonoBehaviour {
             _pickObj.gameObject.transform.position = transform.position;
             _pickObj.gameObject.transform.rotation = transform.rotation;
             _pickObj.gameObject.transform.Rotate(235, 0, 180);
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == _tagName)
+        {
+            if(col.gameObject.transform.position.x > 0.0f)
+            {
+                _viveConObj[0].SetActive(true);
+            }
+            else if(col.gameObject.transform.position.x < 0.0f)
+            {
+                _viveConObj[1].SetActive(true);
+            }
         }
     }
 
@@ -88,6 +106,18 @@ public class ViveGrab : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
+        if (col.gameObject.tag == _tagName)
+        {
+            if (col.gameObject.transform.position.x > 0.0f)
+            {
+                _viveConObj[0].SetActive(false);
+            }
+            else if (col.gameObject.transform.position.x < 0.0f)
+            {
+                _viveConObj[1].SetActive(false);
+            }
+        }
+
         if (!_isDrop) { return; }
         if (col.gameObject.tag == _tagName)
         {
