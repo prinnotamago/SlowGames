@@ -254,15 +254,20 @@ public class GenerateManager : MonoBehaviour
         //現在生き残ってる数が新たに敵を出現させるタイミングかをチェック.
         if (liveEnemysCount <= waveData._generateTimingCount)
         {
-
-            //限界値以上出さない
+            //限界値以上はださない
             if (_MAX_ENEMY < _deathCount + liveEnemysCount)
+            {
+                return;
+            }
+           
+            //限界値以上出さない
+            if (_MAX_ENEMY < (_deathCount + liveEnemysCount + waveData._generateCount))
             { 
-                //
+                
                 int lastCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
                 SetEnemy(lastCount, waveData._generateTypeList);
             }
-            else
+            else 
             {
                 //設定した分のエネミーを出す
                 SetEnemy(waveData._generateCount, waveData._generateTypeList);
