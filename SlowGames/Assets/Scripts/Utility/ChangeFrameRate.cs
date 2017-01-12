@@ -23,6 +23,6 @@ public class ChangeFrameRate : MonoBehaviour {
         float fps = 1f / Time.deltaTime;
         //Debug.LogFormat("{0}fps", fps);
 
-        _text.text = "FPS : " + fps;
+        //_text.text = "FPS : " + fps;
     }
 }

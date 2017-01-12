@@ -168,6 +168,11 @@ public class TitleManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            isChange = true;
+        }
+
         // 持っていたらシーンを変える
         if (isChange)
         {
@@ -197,7 +202,7 @@ public class TitleManager : MonoBehaviour
 
         //NoiseSwitch.instance.OnGlitch(); //test
 
-        //AudioManager.instance.playSe(AudioName.SeName.Thunder); //SEの予定
+        AudioManager.instance.playSe(AudioName.SeName.V01); 
         
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
@@ -276,6 +281,19 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
 
+        StartCoroutine(WaitingState());
+    }
+
+    IEnumerator WaitingState()
+    {
+        var time = 0.0f;
+        var endTime = 5.0f;
+        AudioManager.instance.playSe(AudioName.SeName.V03);
+        while(time < endTime)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
         StartCoroutine(SlowDescription());
     }
 
@@ -287,7 +305,7 @@ public class TitleManager : MonoBehaviour
     {
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "スローを使ってみよう！";
-        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
+        AudioManager.instance.playSe(AudioName.SeName.V04); //Voice
 
         var time = 0.0f;
 
@@ -331,6 +349,8 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
+        AudioManager.instance.stopSe(AudioName.SeName.V04);
+
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
         //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
@@ -346,9 +366,18 @@ public class TitleManager : MonoBehaviour
         iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
         iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
+        AudioManager.instance.playSe(AudioName.SeName.V05);
+        var voiceTime = 0.0f;
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
+            voiceTime += Time.unscaledDeltaTime;
+            if (voiceTime > 3.0f)
+            {
+                voiceTime = 0.0f;
+                AudioManager.instance.playSe(AudioName.SeName.V06);
+            }
+
             _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
             if (_viveControllerModel[0].transform.position.y == 0.3f)
             {
@@ -419,6 +448,8 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
+
+        AudioManager.instance.playSe(AudioName.SeName.V08);
         while (!enemyManager.isSceneChange)
         {
             time += Time.deltaTime;
@@ -446,10 +477,18 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
 
+        time = 0.0f;
+        var endTime = 4.0f;
+        AudioManager.instance.playSe(AudioName.SeName.V09);
+        while(time < endTime)
+        {
+            Debug.Log(time);
+            time += Time.unscaledDeltaTime;
+        }
+
         //シーン遷移
         TitleManager.isTurtreal = false;
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
-
 
         //扉の演出
         //StartCoroutine(LightShine());
