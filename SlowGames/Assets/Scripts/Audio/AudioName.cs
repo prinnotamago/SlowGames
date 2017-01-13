@@ -35,6 +35,8 @@ public static class AudioName
         Thunder,
         V00,
         V01,
+        V01a,
+        V01b,
         V02,
         V03,
         V04,

@@ -74,6 +74,7 @@ public class TitleManager : MonoBehaviour
 
 
     private float _time = 0.0f;
+    private float _voiceTIme = 0.0f;
 
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
@@ -137,6 +138,8 @@ public class TitleManager : MonoBehaviour
     void TitleUpdate()
     {
         _time += Time.deltaTime;
+        _voiceTIme += Time.deltaTime;
+
         if (_time > 1.0f)
         {
             _viveMaterial[2].EnableKeyword("_EMISSION");
@@ -166,6 +169,12 @@ public class TitleManager : MonoBehaviour
             {
                 isChange = false;
             }
+        }
+
+        if(_voiceTIme > 30.0f)
+        {
+            _voiceTIme = 0.0f;
+            AudioManager.instance.playSe(AudioName.SeName.V00);
         }
 
         if(Input.GetKeyDown(KeyCode.A))
@@ -202,7 +211,7 @@ public class TitleManager : MonoBehaviour
 
         //NoiseSwitch.instance.OnGlitch(); //test
 
-        AudioManager.instance.playSe(AudioName.SeName.V01); 
+        AudioManager.instance.playSe(AudioName.SeName.V01a); 
         
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
@@ -211,7 +220,11 @@ public class TitleManager : MonoBehaviour
         }
 
         //Animationを待った後、UIの演出が終わるまで待つ
-        yield return new WaitForSeconds(0.6f * 5 + 2.0f);
+        yield return new WaitForSeconds(0.6f * 5 + 0.2f);
+
+        AudioManager.instance.playSe(AudioName.SeName.V01b);
+
+        yield return new WaitForSeconds(2.0f);
 
         //NoiseSwitch.instance.OffGlitch();
 
@@ -242,6 +255,23 @@ public class TitleManager : MonoBehaviour
         //Cameraをの切り替え
         _cameraRig[0].SetActive(false);
         _cameraRig[1].SetActive(true);
+
+        while(time < 1.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        AudioManager.instance.playSe(AudioName.SeName.V02);
+
+        //Voiceが流れてる間、とめる
+        while(time < 10.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        time = 0.0f;
 
         //弾を撃てるようにする
         foreach (var shot in FindObjectsOfType<PlayerShot>())
@@ -305,10 +335,10 @@ public class TitleManager : MonoBehaviour
     {
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "スローを使ってみよう！";
-        AudioManager.instance.playSe(AudioName.SeName.V04); //Voice
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.V04); //Voice
 
         var time = 0.0f;
-
+        var voiceTime = 0.0f;
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
         _viveMaterial2[1].EnableKeyword("_EMISSION");
@@ -318,6 +348,7 @@ public class TitleManager : MonoBehaviour
         while (!SlowMotion._instance.isSlow)
         {
             time += Time.deltaTime;
+            voiceTime += Time.unscaledDeltaTime;
             if (time > 1.0f)
             {
                 _viveMaterial[1].EnableKeyword("_EMISSION");
@@ -334,6 +365,13 @@ public class TitleManager : MonoBehaviour
                 _viveMaterial2[1].EnableKeyword("_EMISSION");
                 _viveMaterial2[1].SetColor("_EmissionColor", Color.white);
             }
+
+            if(voiceTime > 15.0f)
+            {
+                voiceTime = 0.0f;
+                //AudioManager.instance.playNotSlowSe(AudioName.SeName.V04);
+            }
+
             yield return null;
         }
 
@@ -352,7 +390,6 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.stopSe(AudioName.SeName.V04);
 
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
-        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
         var normalPos = _viveControllerModel[0].transform.position;
         var normalPos2 = _viveControllerModel[1].transform.position;
@@ -366,13 +403,13 @@ public class TitleManager : MonoBehaviour
         iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
         iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
-        AudioManager.instance.playSe(AudioName.SeName.V05);
-        var voiceTime = 0.0f;
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
+        voiceTime = 0.0f;
         //スローゲージが回復したらぬける
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
         {
             voiceTime += Time.unscaledDeltaTime;
-            if (voiceTime > 3.0f)
+            if (voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
                 AudioManager.instance.playSe(AudioName.SeName.V06);
@@ -403,7 +440,8 @@ public class TitleManager : MonoBehaviour
             }
             yield return null;
         }
-
+        AudioManager.instance.stopSe(AudioName.SeName.V05);
+        AudioManager.instance.stopSe(AudioName.SeName.V06);
         _arrowAnim.gameObject.SetActive(false);
 
         iTween.Stop(_viveControllerModel[0], "move");
@@ -433,7 +471,6 @@ public class TitleManager : MonoBehaviour
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
         _descriptionText.text = "敵を倒そう！";
-        //AudioManager.instance.playSe(AudioName.SeName.gun1); //Voice
 
         //光らせるマテリアルのEmissionを設定
         _viveMaterial[2].EnableKeyword("_EMISSION");
@@ -448,8 +485,8 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
-
         AudioManager.instance.playSe(AudioName.SeName.V08);
+
         while (!enemyManager.isSceneChange)
         {
             time += Time.deltaTime;

@@ -126,8 +126,29 @@ public class GameDirector : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// フェーズが変わるときに流すセリフ
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator AudioPlay()
+    {
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV02);
+        while(GenerateManager.GetCurrentWave() == 0)
+        {
+            yield return null;
+        }
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV03);
+        while(GenerateManager.GetCurrentWave() == 1)
+        {
+            yield return null;
+        }
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
+
+    }
+
     private IEnumerator GameStartCutIn()
     {
+        AudioManager.instance.playSe(AudioName.SeName.IV01);
         var time = 0.0f;
         while(time < _gameStartTime)
         {
@@ -137,7 +158,7 @@ public class GameDirector : MonoBehaviour {
         }
         _gamePlay = true;
         GameSet();
-
+        StartCoroutine(AudioPlay());
     }
 
     void Update()
