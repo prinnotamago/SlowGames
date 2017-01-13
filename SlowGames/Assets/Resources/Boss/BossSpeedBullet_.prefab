@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23514549887817564}
   - component: {fileID: 65897260400608782}
   - component: {fileID: 54467220075066008}
-  - component: {fileID: 114156336177292556}
+  - component: {fileID: 114261375055665678}
   m_Layer: 9
   m_Name: BossSpeedBullet_
   m_TagString: EnemyBullet
@@ -140,7 +140,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2511768, y: 0.27337396, z: 0.8411934}
   m_Center: {x: 0, y: -0.000000022351742, z: -0.017687917}
---- !u!114 &114156336177292556
+--- !u!114 &114261375055665678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1356666004370112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dbe2cbcd1164ecd8aff2286a080854, type: 3}
+  m_Script: {fileID: 11500000, guid: 24309121d0e4a6947b5547550b330e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 50
@@ -156,7 +156,6 @@ MonoBehaviour:
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
   _targetDirection: {x: 0, y: 0, z: 0}
-  _doChaseToPlayer: 0
 --- !u!198 &198053858660352846
 ParticleSystem:
   m_ObjectHideFlags: 1

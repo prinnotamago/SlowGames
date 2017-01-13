@@ -162,6 +162,10 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _climaxDestroyTime = 5.0f;
     float _climaxTime = 0.0f;
+    [SerializeField]
+    int _climaxBoundNum = 2;    // バウンドする回数
+    [SerializeField]
+    float _climaxBoundPower = 5.0f; // バウンドのパワー
     //////////////////////////////////////////////////////////////////////////////
 
     [SerializeField]
@@ -207,6 +211,9 @@ public class BossAI : MonoBehaviour {
                 moveObj.transform.position.z + Random.Range(-z, z)
             );
         _level_2_randomStopTime = _level_2_randomStopTimeMax;
+
+        // ボス登場ボイス
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
     }
 
     // Update is called once per frame
@@ -308,6 +315,12 @@ public class BossAI : MonoBehaviour {
             // 一定ダメージを受けたらハチの字モードに変える
             if (_level_2_modeIndex < _level_2_modeChangeHP.Length && _level_2_modeChangeHP[_level_2_modeIndex] >= _hp)
             {
+                if (0 == _level_2_modeIndex)
+                {
+                    // クライマックスになったボイスを流す
+                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV10);
+                }
+
                 _level_2_mode = Level_2_Mode.EIGHT_MOVE;
                 ++_level_2_modeIndex;
             }
@@ -318,14 +331,30 @@ public class BossAI : MonoBehaviour {
         {
             _state++;
             ++_changeStateIndex;
+
+            if(_state == BossState.LEVEL_2)
+            {
+                // 第２形態になったボイスを流す
+                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV09);
+            }
+            else if(_state == BossState.LAST)
+            {
+                // 突っ込んでくることを伝えるボイス
+                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV11);
+            }
+            else if(_state == BossState.CLIMAX)
+            {
+                // ボスを倒したことを伝えるボイス
+                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV14);
+            }
         }
 
-        // HP が 0 になったら死ぬ
-        if (_hp == 0)
-        {
-            Destroy(gameObject);
-            GameDirector.instance.isBossDestroy();
-        }
+        //// HP が 0 になったら死ぬ
+        //if (_hp == 0)
+        //{
+        //    Destroy(gameObject);
+        //    GameDirector.instance.isBossDestroy();
+        //}
     }
 
     // 速い球を撃つ
@@ -344,8 +373,11 @@ public class BossAI : MonoBehaviour {
             _speedBulletFlag = false;
             _attackTime = 0.0f;
 
+            // 高速弾を撃つのを伝える
+            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
+
             // 第２形態ならランダム移動に戻す
-            if(_level_2_mode == Level_2_Mode.EIGHT_MOVE)
+            if (_level_2_mode == Level_2_Mode.EIGHT_MOVE)
             {
                 _level_2_mode = Level_2_Mode.RANDOM;
             }
@@ -367,6 +399,9 @@ public class BossAI : MonoBehaviour {
                 {
                     _speedBulletFlag = true;
                     ++_speedBulletIndex;
+                    
+                    // 高速弾を準備してることを伝える
+                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV05);
                 }
             }
 
@@ -581,8 +616,14 @@ public class BossAI : MonoBehaviour {
         {
             var length = _lastMovePos[_lastMoveIndex] - transform.position;
             transform.position += length * _lastMoveSpeed * Time.deltaTime;
-            if(length.magnitude < 1.5f)
+            if (length.magnitude < 1.5f)
             {
+                // タックルをしようとしていたらボイスを流す
+                if ((_lastMoveNum - 1) == _lastMoveIndex)
+                {
+                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV12);
+                }
+
                 ++_lastMoveIndex;
             }
         }
@@ -594,6 +635,12 @@ public class BossAI : MonoBehaviour {
             {
                 SlowMotion._instance.GameSpeed(0.1f);
                 SlowMotion._instance.isLimit = false;
+
+                // 撃ち続けてボイスを流す
+                if (!SlowMotion._instance.isLimit)
+                {
+                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV13);
+                }
             }
             var length = _player.transform.position - transform.position;
             transform.position += length * _lastTackleSpeed * Time.deltaTime;
@@ -614,20 +661,56 @@ public class BossAI : MonoBehaviour {
         {
             _rigidbody.useGravity = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            _rigidbody.velocity = Vector3.forward * _climaxVelocity;
+
+            var vector = transform.position - _player.transform.position;
+            _rigidbody.velocity = vector.normalized * _climaxVelocity;
         }
 
         _climaxTime += Time.deltaTime;
         if(_climaxDestroyTime < _climaxTime)
         {
             Damage();
+
+            // HP が 0 になったら死ぬ
+            if (_hp <= 0)
+            {
+                Destroy(gameObject);
+                GameDirector.instance.isBossDestroy();
+            }
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        // クライマックスなら
+        if (_state == BossState.CLIMAX)
+        {
+            if (col.gameObject.tag == TagName.Floor)
+            {
+                if (_climaxBoundNum > 0)
+                {
+                    _climaxBoundNum--;
+                    
+                    // バウンドの力を半分に
+                    _climaxBoundPower *= 0.5f;
+                    var vector = transform.position - _player.transform.position;
+                    _rigidbody.velocity = vector.normalized * _climaxBoundPower;
+                    _rigidbody.velocity += Vector3.up * _climaxBoundPower;
+
+                    if (_climaxBoundNum == 0)
+                    {
+                        _rigidbody.velocity += vector.normalized * _climaxVelocity;
+                    }
+                }
+            }
+            return;
         }
     }
 
     void OnTriggerEnter(Collider col)
     {
         // 出現時は当たらないようにする
-        if (_state == BossState.START || _state == BossState.CLIMAX) { return; }
+        if (_state == BossState.START || _state == BossState.CLIMAX) { return; }   
 
         // 弾が当たったら体力を減らす
         if (col.gameObject.tag == TagName.Bullet)

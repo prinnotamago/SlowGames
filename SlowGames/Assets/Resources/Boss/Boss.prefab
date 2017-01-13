@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4350889140522976}
   - component: {fileID: 33569592401402626}
   - component: {fileID: 65212362722296514}
+  - component: {fileID: 65785331399294320}
   - component: {fileID: 23727707881199650}
   - component: {fileID: 54231172998812910}
   - component: {fileID: 114700038475548854}
@@ -739,6 +740,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65785331399294320
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510459827905888}
+  m_Material: {fileID: 13400000, guid: 033afee6ea5117249ac016d28f47ffeb, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65810970708045774
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -796,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 50
-  _changeStateHP: 280000001400000001000000
+  _changeStateHP: 280000001400000000000000
   _parts:
   - {fileID: 114265860944830838}
   - {fileID: 114753581827855704}
@@ -841,8 +854,9 @@ MonoBehaviour:
   _lastMoveSpeed: 3
   _lastMoveNum: 5
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
-  _climaxVelocity: 5
+  _climaxVelocity: 7
   _climaxDestroyTime: 5
+  _climaxBoundNum: 2
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
 --- !u!114 &114753581827855704
