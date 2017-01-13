@@ -58,6 +58,9 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _speedBulletChargeMax = 2.0f;
     float _speedBulletChargeTime = 0.0f;
+    bool _speedBulletVoiceFlag = true;
+    [SerializeField]
+    float _speedBulletInformTime = 3.0f;
 
     /// <summary>
     /// 攻撃頻度(秒)
@@ -75,6 +78,7 @@ public class BossAI : MonoBehaviour {
 
     enum BossState
     {
+        STANDBY,
         START,
         LEVEL_1,
         LEVEL_2,
@@ -82,7 +86,12 @@ public class BossAI : MonoBehaviour {
         CLIMAX,
     }
     [SerializeField]
-    BossState _state = BossState.START;
+    BossState _state = BossState.STANDBY;
+
+    // STANDBY の情報 ////////////////////////////////////////////////////////////
+    [SerializeField]
+    float _standbyTimeMax = 5.0f;
+    float _standbyTime = 0.0f;
 
     // START の情報 //////////////////////////////////////////////////////////////
     [SerializeField]
@@ -153,6 +162,7 @@ public class BossAI : MonoBehaviour {
     int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
     [SerializeField]
     Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
+    bool _lastTackleFlag = false;
     //////////////////////////////////////////////////////////////////////////////
 
     // CLIMAX の情報//////////////////////////////////////////////////////////////
@@ -213,6 +223,7 @@ public class BossAI : MonoBehaviour {
         _level_2_randomStopTime = _level_2_randomStopTimeMax;
 
         // ボス登場ボイス
+        AudioManager.instance.stopAllNotSlowSe();
         AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
     }
 
@@ -222,6 +233,17 @@ public class BossAI : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Damage();
+        }
+
+        // STANDBYモードなら時間が過ぎるまで上で待機
+        if(_state == BossState.STANDBY)
+        {
+            _standbyTime += Time.deltaTime;
+            if(_standbyTime >= _standbyTimeMax)
+            {
+                _state = BossState.START;
+            }
+            return;
         }
 
         // 弾を撃つの制御
@@ -318,6 +340,7 @@ public class BossAI : MonoBehaviour {
                 if (0 == _level_2_modeIndex)
                 {
                     // クライマックスになったボイスを流す
+                    AudioManager.instance.stopAllNotSlowSe();
                     AudioManager.instance.playNotSlowSe(AudioName.SeName.IV10);
                 }
 
@@ -335,16 +358,19 @@ public class BossAI : MonoBehaviour {
             if(_state == BossState.LEVEL_2)
             {
                 // 第２形態になったボイスを流す
+                AudioManager.instance.stopAllNotSlowSe();
                 AudioManager.instance.playNotSlowSe(AudioName.SeName.IV09);
             }
             else if(_state == BossState.LAST)
             {
                 // 突っ込んでくることを伝えるボイス
+                AudioManager.instance.stopAllNotSlowSe();
                 AudioManager.instance.playNotSlowSe(AudioName.SeName.IV11);
             }
             else if(_state == BossState.CLIMAX)
             {
                 // ボスを倒したことを伝えるボイス
+                AudioManager.instance.stopAllNotSlowSe();
                 AudioManager.instance.playNotSlowSe(AudioName.SeName.IV14);
             }
         }
@@ -360,21 +386,35 @@ public class BossAI : MonoBehaviour {
     // 速い球を撃つ
     void SpeedBulletShot()
     {
-        _speedBulletChargeTime += Time.deltaTime;
-        if (_speedBulletChargeTime > _speedBulletChargeMax)
+        if(_speedBulletChargeTime == 0.0f)
         {
             // 速い弾を撃つ
             var bullet = Instantiate(_speedBullet);
             bullet.transform.position = _frontGunObjPos.position;
             bullet.transform.LookAt(_player.transform);
+            bullet.GetComponent<BossBullet>().chargeTime = _speedBulletChargeMax;
+        }
 
+        _speedBulletChargeTime += Time.unscaledDeltaTime;
+
+        if (_speedBulletChargeTime > _speedBulletChargeMax - _speedBulletInformTime && _speedBulletVoiceFlag)
+        {
+            // 高速弾を撃つのを伝える
+            AudioManager.instance.stopAllNotSlowSe();
+            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
+
+            _speedBulletVoiceFlag = false;
+        }
+
+        if (_speedBulletChargeTime > _speedBulletChargeMax)
+        {
             // 数値たちをリセット
             _speedBulletChargeTime = 0.0f;
             _speedBulletFlag = false;
             _attackTime = 0.0f;
 
-            // 高速弾を撃つのを伝える
-            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
+            _speedBulletVoiceFlag = true;
+
 
             // 第２形態ならランダム移動に戻す
             if (_level_2_mode == Level_2_Mode.EIGHT_MOVE)
@@ -399,8 +439,9 @@ public class BossAI : MonoBehaviour {
                 {
                     _speedBulletFlag = true;
                     ++_speedBulletIndex;
-                    
+
                     // 高速弾を準備してることを伝える
+                    AudioManager.instance.stopAllNotSlowSe();
                     AudioManager.instance.playNotSlowSe(AudioName.SeName.IV05);
                 }
             }
@@ -619,12 +660,20 @@ public class BossAI : MonoBehaviour {
             if (length.magnitude < 1.5f)
             {
                 // タックルをしようとしていたらボイスを流す
-                if ((_lastMoveNum - 1) == _lastMoveIndex)
+                if ((10) == _lastMoveIndex)
                 {
+                    AudioManager.instance.stopAllNotSlowSe();
                     AudioManager.instance.playNotSlowSe(AudioName.SeName.IV12);
                 }
 
                 ++_lastMoveIndex;
+
+                // すべての場所に移動しおわったら
+                if (_lastMoveIndex == _lastMovePos.Count)
+                {
+                    // タックルフラグをオンに
+                    _lastTackleFlag = true;
+                }
             }
         }
         // プレイヤーへのタックル
@@ -639,6 +688,7 @@ public class BossAI : MonoBehaviour {
                 // 撃ち続けてボイスを流す
                 if (!SlowMotion._instance.isLimit)
                 {
+                    AudioManager.instance.stopAllNotSlowSe();
                     AudioManager.instance.playNotSlowSe(AudioName.SeName.IV13);
                 }
             }
@@ -655,6 +705,9 @@ public class BossAI : MonoBehaviour {
         {
             SlowMotion._instance.ResetSpeed();
             SlowMotion._instance.isLimit = true;
+
+            // タックルフラグを切る
+            _lastTackleFlag = false;
         }
 
         if (!_rigidbody.useGravity)
@@ -719,7 +772,7 @@ public class BossAI : MonoBehaviour {
             particle.transform.position = col.transform.position;
 
             // 高速弾を撃つときはエフェクトだけを出す
-            if (!_speedBulletFlag)
+            if (!_speedBulletFlag || (_state == BossState.LAST && _lastTackleFlag))
             {
                 Damage();
             }

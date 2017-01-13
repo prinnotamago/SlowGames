@@ -19,10 +19,19 @@ public class BossBullet : MonoBehaviour {
 
     GameObject _player;
 
+    float _standbyTime = 1.0f;
+    float _standbySpeed = 1.0f;
+
+    float _chargeTime = 0.0f;
+    public float chargeTime {
+        set { _chargeTime = value - _standbyTime; }
+    }
+
+    bool _destroyFlag = true;
 
     void Start()
     {
-        Destroy(this.gameObject, 5);
+
     }
 
     void Update()
@@ -32,8 +41,26 @@ public class BossBullet : MonoBehaviour {
             return;
         }
 
-        // 前進
-        transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
+        if (_standbyTime > 0.0f)
+        {
+            _standbyTime -= Time.unscaledDeltaTime;
+            transform.position += transform.TransformDirection(Vector3.forward) * _standbySpeed * Time.unscaledDeltaTime;
+        }
+        else if (_chargeTime > 0.0f)
+        {
+            _chargeTime -= Time.unscaledDeltaTime;
+        }
+        else
+        {
+            // 前進
+            transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
+
+            if (_destroyFlag)
+            {
+                Destroy(this.gameObject, 5);
+                _destroyFlag = false;
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -46,6 +73,8 @@ public class BossBullet : MonoBehaviour {
 
         //玉にあった時は弾かせて消す
 
+        if(_chargeTime > 0.0f && _standbyTime > 0.0f) { return; }
+
         if (other.gameObject.tag == TagName.Bullet)
         {
             //エフェクト
@@ -53,6 +82,7 @@ public class BossBullet : MonoBehaviour {
             effect.transform.position = transform.position;
             // 音
             // ボスの弾をはじいたとき成功ボイスを流す
+            AudioManager.instance.stopAllNotSlowSe();
             AudioManager.instance.playNotSlowSe(AudioName.SeName.IV07);
 
             //判定消す
@@ -67,6 +97,7 @@ public class BossBullet : MonoBehaviour {
         else if (other.gameObject.tag == TagName.Player)
         {
             // ボスの弾が当たったときに失敗ボイスを流す
+            AudioManager.instance.stopAllNotSlowSe();
             AudioManager.instance.playNotSlowSe(AudioName.SeName.IV08);
 
             Destroy(gameObject);

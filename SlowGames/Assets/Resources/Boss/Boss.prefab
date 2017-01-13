@@ -588,7 +588,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234473624122288}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -603,7 +603,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062000748714176}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -618,7 +618,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1583452942863914}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -633,7 +633,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213535352995818}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -826,11 +826,13 @@ MonoBehaviour:
     type: 2}
   _speedBullet: {fileID: 1356666004370112, guid: b6cc354eef876ff4e966c274a4fbe1b3,
     type: 2}
-  _speedBulletHP: 2d0000001e00000014000000
-  _speedBulletChargeMax: 2
+  _speedBulletHP: 2d0000001e000000
+  _speedBulletChargeMax: 11
+  _speedBulletInformTime: 3
   _attackInterval: 0.5
   _patternRatio: 0.5
   _state: 0
+  _standbyTimeMax: 10
   _startPos: {x: 0, y: 3.5, z: 0}
   _startSpeed: 50
   _level_1_pos:
@@ -852,11 +854,12 @@ MonoBehaviour:
   _lastTacklePos: {x: 0, y: 3.5, z: 0}
   _lastTackleSpeed: 3
   _lastMoveSpeed: 3
-  _lastMoveNum: 5
+  _lastMoveNum: 42
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
   _climaxVelocity: 7
   _climaxDestroyTime: 5
   _climaxBoundNum: 2
+  _climaxBoundPower: 5
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
 --- !u!114 &114753581827855704
