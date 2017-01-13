@@ -387,7 +387,7 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
-        AudioManager.instance.stopSe(AudioName.SeName.V04);
+        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V04);
 
         _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
@@ -412,7 +412,7 @@ public class TitleManager : MonoBehaviour
             if (voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
-                AudioManager.instance.playSe(AudioName.SeName.V06);
+                AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
             }
 
             _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
@@ -440,8 +440,8 @@ public class TitleManager : MonoBehaviour
             }
             yield return null;
         }
-        AudioManager.instance.stopSe(AudioName.SeName.V05);
-        AudioManager.instance.stopSe(AudioName.SeName.V06);
+        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
+        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
         _arrowAnim.gameObject.SetActive(false);
 
         iTween.Stop(_viveControllerModel[0], "move");

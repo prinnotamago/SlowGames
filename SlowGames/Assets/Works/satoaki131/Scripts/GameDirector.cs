@@ -142,7 +142,6 @@ public class GameDirector : MonoBehaviour {
         {
             yield return null;
         }
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
 
     }
 
