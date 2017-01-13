@@ -519,7 +519,7 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.playSe(AudioName.SeName.V09);
         while(time < endTime)
         {
-            Debug.Log(time);
+            //Debug.Log(time);
             time += Time.unscaledDeltaTime;
         }
 

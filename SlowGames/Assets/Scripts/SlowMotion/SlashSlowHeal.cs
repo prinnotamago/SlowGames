@@ -39,7 +39,7 @@ public class SlashSlowHeal : MonoBehaviour {
 
         if (isSlash)
         {
-            Debug.Log("回復");
+            //Debug.Log("回復");
             SlowMotion._instance.slowTime = SlowMotion._instance.slowTimeMax;
         }
 	}

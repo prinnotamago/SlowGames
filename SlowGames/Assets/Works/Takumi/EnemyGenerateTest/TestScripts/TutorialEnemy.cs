@@ -131,7 +131,7 @@ public class TutorialEnemy : MonoBehaviour
         }
 
         //stayに遷移
-        Debug.Log("a");
+        //Debug.Log("a");
         _enemyAnimator.SetInteger("TutorialState", (int)TutorialState.stay);
 
         yield return null;

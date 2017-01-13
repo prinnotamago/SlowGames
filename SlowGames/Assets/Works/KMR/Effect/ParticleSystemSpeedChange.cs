@@ -27,7 +27,7 @@ public class ParticleSystemSpeedChange : MonoBehaviour
             _particleSystem.playbackSpeed = 1  * SlowMotion._instance.RealSpeed();
         }
 
-        Debug.Log(_particleSystem.playbackSpeed);
+        //Debug.Log(_particleSystem.playbackSpeed);
 
     }
 }
