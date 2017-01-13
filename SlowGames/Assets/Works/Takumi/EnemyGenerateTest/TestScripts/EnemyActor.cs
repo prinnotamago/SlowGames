@@ -88,6 +88,8 @@ public class EnemyActor : MonoBehaviour
         _isHitToEnemy = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
+
+        AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Genrtate,true);
        
     }
 
@@ -412,6 +414,8 @@ public class EnemyActor : MonoBehaviour
 
             //ナビメッシュの移動をやめる
             _navimesh.enabled = false;
+             AudioManager.instance.stop3DSe(gameObject,AudioName.SeName.Genrtate);
+             AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Flying,true);
             _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
         }
