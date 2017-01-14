@@ -670,13 +670,6 @@ public class BossAI : MonoBehaviour {
                 }
 
                 ++_lastMoveIndex;
-
-                // すべての場所に移動しおわったら
-                if (_lastMoveIndex == _lastMovePos.Count)
-                {
-                    // タックルフラグをオンに
-                    _lastTackleFlag = true;
-                }
             }
         }
         // プレイヤーへのタックル
@@ -685,6 +678,9 @@ public class BossAI : MonoBehaviour {
             // スローじゃなかったらスローにする
             if (!SlowMotion._instance.isSlow)
             {
+                // タックルフラグをオンに
+                _lastTackleFlag = true;
+
                 SlowMotion._instance.GameSpeed(0.1f);
                 SlowMotion._instance.isLimit = false;
 
@@ -778,7 +774,7 @@ public class BossAI : MonoBehaviour {
             if (_state == BossState.START || _state == BossState.CLIMAX || _state == BossState.STANDBY) { return; }
 
             // 高速弾を撃つときはエフェクトだけを出す
-            if (!_speedBulletFlag || (_state == BossState.LAST && _lastTackleFlag))
+            if ((_state != BossState.LAST && !_speedBulletFlag) || (_state == BossState.LAST && _lastTackleFlag))
             {
                 Damage();
             }
