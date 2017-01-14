@@ -87,7 +87,7 @@ public class TitleManager : MonoBehaviour
     }
 
     private Dictionary<State, Action> _stateUpdate = null;
-    private State _state = State.Title;
+    private State _state = State.LogoProduction;
 
     void Start()
     {
@@ -121,26 +121,37 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
         _arrowAnim.gameObject.SetActive(false);
+
+        //NoiseSwitch.instance.OnNoise();
     }
 
     void Update()
     {
         _stateUpdate[_state]();
 
-        //デバック用
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneChange.ChangeScene(SceneName.Name.MainGame, Color.white);
-        }
+        ////デバック用
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    SceneChange.ChangeScene(SceneName.Name.MainGame, Color.white);
+        //}
     }
 
     void LogoProductionUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            //Logoの
-            _state = State.Title;
+            _state = State.Wait;
+            StartCoroutine(NoiseCancel());
         }
+    }
+
+    private IEnumerator NoiseCancel()
+    {
+        while(NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
+        {
+            yield return null;
+        }
+        _state = State.Title;
     }
 
     /// <summary>
@@ -220,7 +231,6 @@ public class TitleManager : MonoBehaviour
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
 
-        //NoiseSwitch.instance.OnGlitch(); //test
 
         AudioManager.instance.playSe(AudioName.SeName.V01a); 
         
@@ -236,8 +246,6 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.playSe(AudioName.SeName.V01b);
 
         yield return new WaitForSeconds(2.0f);
-
-        //NoiseSwitch.instance.OffGlitch();
 
         //消えるアニメーションに変更
         _idCanvas.GetComponentInChildren<Animator>().SetBool("End", true);

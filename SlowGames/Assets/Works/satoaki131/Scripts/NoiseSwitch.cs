@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class NoiseSwitch : MonoBehaviour {
 
-    private GlitchFx _glitchFx = null;
+    private UnityStandardAssets.ImageEffects.NoiseAndGrain _noise = null;
+    public UnityStandardAssets.ImageEffects.NoiseAndGrain noise
+    {
+        get { return _noise; }
+    }
 
     public static NoiseSwitch instance
     {
@@ -18,23 +22,23 @@ public class NoiseSwitch : MonoBehaviour {
 
     void Start()
     {
-        _glitchFx = GetComponent<GlitchFx>();
+        _noise = GetComponent<UnityStandardAssets.ImageEffects.NoiseAndGrain>();
     }
 
     /// <summary>
     /// じりじりをOnにする
     /// </summary>
-    public void OnGlitch()
+    public void OnNoise()
     {
-        _glitchFx.enabled = true;
+        _noise.enabled = true;
     }
 
     /// <summary>
     /// じりじりをOffにする
     /// </summary>
-    public void OffGlitch()
+    public void OffNoise()
     {
-        _glitchFx.enabled = false;
+        _noise.enabled = false;
     }
 
     /// <summary>
@@ -43,8 +47,8 @@ public class NoiseSwitch : MonoBehaviour {
     /// <param name="intensity"></param>
     public void setIntensity(float intensity)
     {
-        intensity = intensity > 1.0f ? 1.0f : intensity < 0.0f ? 0.0f : intensity; //intensityが数値0～１以内じゃなければ上限値にする
-        _glitchFx.intensity = intensity;
+        intensity = intensity > 10.0f ? 10.0f : intensity < 0.0f ? 0.0f : intensity; //intensityが数値0～１以内じゃなければ上限値にする
+        _noise.intensityMultiplier = intensity;
     }
 
 }
