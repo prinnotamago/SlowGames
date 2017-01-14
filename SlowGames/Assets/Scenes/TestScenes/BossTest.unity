@@ -513,7 +513,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4350889140522976, guid: 30235a3f043378b48bb8a247ea87ea6d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 16.38
+      value: 60.41
       objectReference: {fileID: 0}
     - target: {fileID: 4350889140522976, guid: 30235a3f043378b48bb8a247ea87ea6d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 1860306802}
   - component: {fileID: 1860306801}
   - component: {fileID: 1860306806}
+  - component: {fileID: 1860306807}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Player
@@ -944,6 +945,18 @@ MonoBehaviour:
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
   chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
     type: 3}
+--- !u!65 &1860306807
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860306800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1923564827
 Prefab:
   m_ObjectHideFlags: 0

@@ -225,7 +225,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1510459827905888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 16.38, z: 1.65}
+  m_LocalPosition: {x: 0, y: 60.41, z: 1.65}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4276696163468390}
@@ -820,6 +820,7 @@ MonoBehaviour:
   _sideGunObjPos:
   - {fileID: 4189202841074578}
   - {fileID: 4730707155901576}
+  _SpeedGunObjPos: {fileID: 4943080859781676}
   _normalBullet: {fileID: 1356666004370112, guid: 8504ddac783d54742a3fbd4ef91f45ff,
     type: 2}
   _homingBullet: {fileID: 1075047434841038, guid: 59e4cf7a2e037b4408cc512118e67a28,
@@ -852,14 +853,19 @@ MonoBehaviour:
   _level_2_randomMoveSpeed: 5
   _level_2_randomStopTimeMax: 0
   _lastTacklePos: {x: 0, y: 3.5, z: 0}
-  _lastTackleSpeed: 3
-  _lastMoveSpeed: 3
+  _lastTackleSpeed: 2
+  _lastMoveSpeed: 10
   _lastMoveNum: 42
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
   _climaxVelocity: 7
   _climaxDestroyTime: 5
   _climaxBoundNum: 2
   _climaxBoundPower: 5
+  _effectPos: {fileID: 1557029499121204}
+  _boundParticle: {fileID: 1781873274365052, guid: 749a6ba38b346754b867ad42856c0d4c,
+    type: 2}
+  _slideParticle: {fileID: 1654325434213786, guid: 2209fae6e3a7e9442b145fe385448c47,
+    type: 2}
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
 --- !u!114 &114753581827855704
