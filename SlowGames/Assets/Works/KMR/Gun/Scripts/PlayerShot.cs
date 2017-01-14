@@ -77,6 +77,8 @@ public class PlayerShot : MonoBehaviour
 
     bool _isStart = false;
 
+    AudioSource _bulletShotSe = null;
+
     public bool isStart
     {
         get{ return _isStart; }
@@ -101,6 +103,8 @@ public class PlayerShot : MonoBehaviour
        // _time = _burstIntervalTime;
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
+
+        _bulletShotSe = AudioManager.instance.getSe(AudioName.SeName.gun1);
     }
 
     void Update()
@@ -149,7 +153,7 @@ public class PlayerShot : MonoBehaviour
         //_time -= Time.unscaledDeltaTime;
         //if (_time > 0) return;
 
-        AudioManager.instance.playSe(AudioName.SeName.gun1);
+        _bulletShotSe.Play();
 
         //_recoil.RecoilAnimation();
 
