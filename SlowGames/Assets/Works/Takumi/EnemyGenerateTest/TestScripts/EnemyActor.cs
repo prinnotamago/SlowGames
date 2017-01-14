@@ -183,7 +183,7 @@ public class EnemyActor : MonoBehaviour
                                        (Random.Range(-_enemy.info.sideMoveRange,_enemy.info.sideMoveRange)));
           var targetPosition = _basePosition + _provMoveTarget;
 
-                //float activeTime = RandomActiveTime(1);
+          //float activeTime = RandomActiveTime(1);
           float activeTime = _enemy.info.activeTimeMax;
           iTween.MoveTo (gameObject, iTween.Hash ("x", targetPosition.x,"z", targetPosition.z,
                                                   "time",activeTime,"easeType",iTween.EaseType.linear));
@@ -593,7 +593,7 @@ public class EnemyActor : MonoBehaviour
         }
 
         ChangeAction(ActionType.Takkle, _tackleChargeTime);
-
+        this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         yield return null;
     }
 
@@ -609,6 +609,7 @@ public class EnemyActor : MonoBehaviour
         else
         {   
            // タックル
+           transform.LookAt(_playerTransform.transform.position);
            transform.position += (transform.forward) * Time.deltaTime * _tackleSpeed;
         }
 
