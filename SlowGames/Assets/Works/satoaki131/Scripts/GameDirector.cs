@@ -132,12 +132,12 @@ public class GameDirector : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator AudioPlay()
     {
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV02);
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV02);
         while(GenerateManager.GetCurrentWave() == 0)
         {
             yield return null;
         }
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV03);
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV03);
         while(GenerateManager.GetCurrentWave() == 1)
         {
             yield return null;
@@ -147,7 +147,7 @@ public class GameDirector : MonoBehaviour {
 
     private IEnumerator GameStartCutIn()
     {
-        AudioManager.instance.playSe(AudioName.SeName.IV01);
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV01);
         var time = 0.0f;
         while(time < _gameStartTime)
         {

@@ -201,7 +201,7 @@ public class TitleManager : MonoBehaviour
         if(_voiceTIme > 30.0f)
         {
             _voiceTIme = 0.0f;
-            AudioManager.instance.playSe(AudioName.SeName.V00);
+            AudioManager.instance.playVoice(AudioName.VoiceName.V00);
         }
 
         //Debug用
@@ -227,7 +227,7 @@ public class TitleManager : MonoBehaviour
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
 
-        AudioManager.instance.playSe(AudioName.SeName.V01a); 
+        AudioManager.instance.playVoice(AudioName.VoiceName.V01a); 
         
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
@@ -238,7 +238,7 @@ public class TitleManager : MonoBehaviour
         //Animationを待った後、UIの演出が終わるまで待つ
         yield return new WaitForSeconds(0.6f * 5 + 0.2f);
 
-        AudioManager.instance.playSe(AudioName.SeName.V01b);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V01b);
 
         yield return new WaitForSeconds(2.0f);
 
@@ -276,7 +276,7 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.instance.playSe(AudioName.SeName.V02);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V02);
 
         //Voiceが流れてる間、とめる
         while(time < 10.0f)
@@ -333,7 +333,7 @@ public class TitleManager : MonoBehaviour
     {
         var time = 0.0f;
         var endTime = 5.0f;
-        AudioManager.instance.playSe(AudioName.SeName.V03);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V03);
         while(time < endTime)
         {
             time += Time.unscaledDeltaTime;
@@ -350,7 +350,7 @@ public class TitleManager : MonoBehaviour
     {
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.V04); //Voice
+        AudioManager.instance.playVoice(AudioName.VoiceName.V04); //Voice
 
         var time = 0.0f;
         var voiceTime = 0.0f;
@@ -402,7 +402,7 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
-        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V04);
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
         //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
@@ -500,7 +500,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
-        AudioManager.instance.playSe(AudioName.SeName.V08);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V08);
 
         while (!enemyManager.isSceneChange)
         {
@@ -531,7 +531,7 @@ public class TitleManager : MonoBehaviour
 
         time = 0.0f;
         var endTime = 4.0f;
-        AudioManager.instance.playSe(AudioName.SeName.V09);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V09);
         while(time < endTime)
         {
             time += Time.unscaledDeltaTime;
