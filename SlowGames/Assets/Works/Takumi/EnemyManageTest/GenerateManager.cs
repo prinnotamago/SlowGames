@@ -63,6 +63,10 @@ public class GenerateManager : MonoBehaviour
 
     int _MAX_ENEMY = 30;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>int型で現在のウェーブ数が帰ってきます。(※０始まりです。)</returns>
     public static int GetCurrentWave()
     {
          return _currentWaveCount;
@@ -70,6 +74,8 @@ public class GenerateManager : MonoBehaviour
 
     //死亡数をカウントします
     public int _deathCount = 0;
+    
+
 
     void Start()
     {
