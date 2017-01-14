@@ -306,7 +306,6 @@ public class TitleManager : MonoBehaviour
         }
 
         //Enemyくん起動
-        //_enemyManager.SetActive(true);
         //_enemyManager.SetTurtrealBulletActive(true);
 
         _viveControllerModel[0].SetActive(true);
@@ -476,6 +475,8 @@ public class TitleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator TurtrealEnd()
     {
+        _enemyManager.SetActive(true);
+
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();

@@ -23,14 +23,14 @@ public class AutoSlowHeal : MonoBehaviour {
             if (SlowMotion._instance.slowTime == SlowMotion._instance.slowTimeMax) { return; }
 
             // 一定時間が過ぎたらゲージを回復
-            if (_slowHealTimeMax > _slowHealTime)
+            if (_slowHealTimeMax <= _slowHealTime)
             {
                 SlowMotion._instance.slowTime = SlowMotion._instance.slowTimeMax;
                 _slowHealTime = 0.0f;
 
                 // チャージ完了ボイス
                 AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.V09);
+                AudioManager.instance.playVoice(AudioName.VoiceName.V07Charge);
             }
             else
             {
