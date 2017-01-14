@@ -1149,7 +1149,7 @@ MonoBehaviour:
   - {fileID: 1601191394965124, guid: bf386dd71ae004f5082dfbcc8a9c43b6, type: 2}
   _normalEnemys:
   - {fileID: 1601191394965124, guid: bf386dd71ae004f5082dfbcc8a9c43b6, type: 2}
-  - {fileID: 1123511972681742, guid: b9350fe8dca91414eacb6a14afa6346c, type: 2}
+  - {fileID: 1242068687375224, guid: 35eaa732d5b1c4b7e999a82d638a4037, type: 2}
   _hardEnemys:
   - {fileID: 1532482501004534, guid: 236fc9f36d33043469788f6dd1285c9e, type: 2}
   _generateList: []
