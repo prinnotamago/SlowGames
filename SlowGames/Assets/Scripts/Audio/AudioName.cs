@@ -3,49 +3,53 @@
 /// </summary>
 public static class AudioName
 {
-    public enum BgmName
-    {
-        stage01,
-    }
-    public enum SeName
-    {
-        Diying,
-        Flying,
-        Genrtate,
-        gunreload1,
-        gunreload2,
-        gun1,
-        IV01,
-        IV02,
-        IV03,
-        IV04,
-        IV05,
-        IV06,
-        IV06_ballet_kuru_,
-        IV07,
-        IV08,
-        IV09,
-        IV10,
-        IV11,
-        IV12,
-        IV13,
-        IV14,
-        IV15,
-        IV16,
-        IV17,
-        Thunder,
-        V00,
-        V01,
-        V01a,
-        V01b,
-        V02,
-        V03,
-        V04,
-        V04b,
-        V05,
-        V06,
-        V07Charge,
-        V08,
-        V09,
-    }
+public enum BgmName
+{
+	stage01,
+}
+public enum SeName
+{
+	Diying,
+	Flying,
+	Genrtate,
+	gun1,
+	gunreload1,
+	gunreload2,
+	Thunder,
+}
+public enum VoiceName
+{
+	IV01,
+	IV02,
+	IV03,
+	IV04,
+	IV05,
+	IV06,
+	IV06_ballet_kuru_,
+	IV07,
+	IV08,
+	IV09,
+	IV10,
+	IV11,
+	IV12,
+	IV13,
+	IV14,
+	IV15,
+	IV16,
+	IV17,
+	V00,
+	V01,
+	V01a,
+	V01b,
+	V02,
+	V03,
+	V04,
+	V04b,
+	V05,
+	V06,
+	V07Charge,
+	V07,
+	V08,
+	V09,
+}
 }

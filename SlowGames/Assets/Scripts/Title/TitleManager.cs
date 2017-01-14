@@ -201,7 +201,7 @@ public class TitleManager : MonoBehaviour
         if(_voiceTIme > 30.0f)
         {
             _voiceTIme = 0.0f;
-            AudioManager.instance.playSe(AudioName.SeName.V00);
+            AudioManager.instance.playVoice(AudioName.VoiceName.V00);
         }
 
         //Debug用
@@ -227,7 +227,7 @@ public class TitleManager : MonoBehaviour
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
 
-        AudioManager.instance.playSe(AudioName.SeName.V01a); 
+        AudioManager.instance.playVoice(AudioName.VoiceName.V01a); 
         
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
@@ -238,7 +238,7 @@ public class TitleManager : MonoBehaviour
         //Animationを待った後、UIの演出が終わるまで待つ
         yield return new WaitForSeconds(0.6f * 5 + 0.2f);
 
-        AudioManager.instance.playSe(AudioName.SeName.V01b);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V01b);
 
         yield return new WaitForSeconds(2.0f);
 
@@ -276,7 +276,7 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.instance.playSe(AudioName.SeName.V02);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V02);
 
         //Voiceが流れてる間、とめる
         while(time < 10.0f)
@@ -299,8 +299,8 @@ public class TitleManager : MonoBehaviour
             time += Time.unscaledDeltaTime;
             for (int i = 0; i < _spotLights.Length; i++)
             {
-                _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
-                //_spotLights[i].intensity = (float)Easing.OutCirc(time, endTime, 0.0f, 1.0f);
+                //_spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
+                _spotLights[i].intensity = (float)Easing.OutCirc(time, endTime, 0.0f, 1.0f);
             }
             yield return null;
         }
@@ -310,6 +310,10 @@ public class TitleManager : MonoBehaviour
             Destroy(_gunStand[i]);
             Destroy(_desk[i]);
         }
+
+        //Enemyくん起動
+        //_enemyManager.SetActive(true);
+        //_enemyManager.SetTurtrealBulletActive(true);
 
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
@@ -321,6 +325,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.eulerAngles = Vector3.zero;
         _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
+
         StartCoroutine(WaitingState());
     }
 
@@ -328,9 +333,8 @@ public class TitleManager : MonoBehaviour
     {
         var time = 0.0f;
         var endTime = 5.0f;
-        AudioManager.instance.playSe(AudioName.SeName.V03);
-
-        while (time < endTime)
+        AudioManager.instance.playVoice(AudioName.VoiceName.V03);
+        while(time < endTime)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -344,10 +348,9 @@ public class TitleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SlowDescription()
     {
-
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.V04); //Voice
+        AudioManager.instance.playVoice(AudioName.VoiceName.V04); //Voice
 
         var time = 0.0f;
         var voiceTime = 0.0f;
@@ -387,7 +390,6 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
         _viveMaterial2[1].EnableKeyword("_EMISSION");
@@ -400,84 +402,78 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
-        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V04);
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
-        //ゲージが回復したら次に進む
-        while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
-        {
-            yield return null;
-        }
+        //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
-            //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
+        //var normalPos = _viveControllerModel[0].transform.position;
+        //var normalPos2 = _viveControllerModel[1].transform.position;
 
-            //var normalPos = _viveControllerModel[0].transform.position;
-            //var normalPos2 = _viveControllerModel[1].transform.position;
+        //var normalRotate = _viveControllerModel[0].transform.eulerAngles;
 
-            //var normalRotate = _viveControllerModel[0].transform.eulerAngles;
+        //_arrowAnim.gameObject.SetActive(true);
 
-            //_arrowAnim.gameObject.SetActive(true);
+        //iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
-            //iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-            //iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-            //iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-            //iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
+        //voiceTime = 0.0f;
+        ////スローゲージが回復したらぬける
+        //while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        //{
+        //    voiceTime += Time.unscaledDeltaTime;
+        //    if (voiceTime > 15.0f)
+        //    {
+        //        voiceTime = 0.0f;
+        //        AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
+        //    }
 
-            //AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
-            //voiceTime = 0.0f;
-            ////スローゲージが回復したらぬける
-            //while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
-            //{
-            //    voiceTime += Time.unscaledDeltaTime;
-            //    if (voiceTime > 15.0f)
-            //    {
-            //        voiceTime = 0.0f;
-            //        AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
-            //    }
+        //    _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
+        //    if (_viveControllerModel[0].transform.position.y == 0.3f)
+        //    {
+        //        var pos = _viveControllerModel[0].transform.position;
+        //        var pos2 = _viveControllerModel[1].transform.position;
+        //        pos.y = normalPos.y;
+        //        pos2.y = normalPos2.y;
 
-            //    _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
-            //    if (_viveControllerModel[0].transform.position.y == 0.3f)
-            //    {
-            //        var pos = _viveControllerModel[0].transform.position;
-            //        var pos2 = _viveControllerModel[1].transform.position;
-            //        pos.y = normalPos.y;
-            //        pos2.y = normalPos2.y;
+        //        _viveControllerModel[0].transform.eulerAngles = normalRotate;
+        //        _viveControllerModel[1].transform.eulerAngles = normalRotate;
 
-            //        _viveControllerModel[0].transform.eulerAngles = normalRotate;
-            //        _viveControllerModel[1].transform.eulerAngles = normalRotate;
+        //        _viveControllerModel[0].transform.position = pos;
+        //        _viveControllerModel[1].transform.position = pos2;
 
-            //        _viveControllerModel[0].transform.position = pos;
-            //        _viveControllerModel[1].transform.position = pos2;
+        //        //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+        //        //_arrowAnim.Play(animationHash, 0, 0);
 
-            //        //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-            //        //_arrowAnim.Play(animationHash, 0, 0);
+        //        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
-            //        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-            //        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-            //        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-            //        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //    }
+        //    yield return null;
+        //}
+        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
+        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
+        //_arrowAnim.gameObject.SetActive(false);
 
-            //    }
-            //    yield return null;
-            //}
-            //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
-            //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
-            //_arrowAnim.gameObject.SetActive(false);
+        //iTween.Stop(_viveControllerModel[0], "move");
+        //iTween.Stop(_viveControllerModel[1], "move");
+        //iTween.Stop(_viveControllerModel[0], "rotate");
+        //iTween.Stop(_viveControllerModel[1], "rotate");
 
-            //iTween.Stop(_viveControllerModel[0], "move");
-            //iTween.Stop(_viveControllerModel[1], "move");
-            //iTween.Stop(_viveControllerModel[0], "rotate");
-            //iTween.Stop(_viveControllerModel[1], "rotate");
+        //yield return null;
 
-            //yield return null;
+        //_viveControllerModel[0].transform.position = normalPos;
+        //_viveControllerModel[1].transform.position = normalPos2;
 
-            //_viveControllerModel[0].transform.position = normalPos;
-            //_viveControllerModel[1].transform.position = normalPos2;
-
-            //_viveControllerModel[0].transform.eulerAngles = normalRotate;
-            //_viveControllerModel[1].transform.eulerAngles = normalRotate;
+        //_viveControllerModel[0].transform.eulerAngles = normalRotate;
+        //_viveControllerModel[1].transform.eulerAngles = normalRotate;
 
 
-            StartCoroutine(TurtrealEnd());
+        StartCoroutine(TurtrealEnd());
     }
 
     /// <summary>
@@ -486,9 +482,6 @@ public class TitleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator TurtrealEnd()
     {
-        //Enemyくん起動
-        _enemyManager.SetActive(true);
-
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
@@ -507,7 +500,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
-        AudioManager.instance.playSe(AudioName.SeName.V08);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V08);
 
         while (!enemyManager.isSceneChange)
         {
@@ -538,7 +531,7 @@ public class TitleManager : MonoBehaviour
 
         time = 0.0f;
         var endTime = 4.0f;
-        AudioManager.instance.playSe(AudioName.SeName.V09);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V09);
         while(time < endTime)
         {
             time += Time.unscaledDeltaTime;

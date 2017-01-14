@@ -21,6 +21,8 @@ AudioMixerController:
     name: MasterVolume
   - guid: 55848e53e814169418849469733fced9
     name: SEVolume
+  - guid: 4db76805ff275874cb0936a306ce83c3
+    name: VoiceVolume
   m_AudioMixerGroupViews:
   - guids:
     - e5ebe0242a46a294c871cb14926502e4
