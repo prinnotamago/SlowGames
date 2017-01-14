@@ -299,7 +299,8 @@ public class TitleManager : MonoBehaviour
             time += Time.unscaledDeltaTime;
             for (int i = 0; i < _spotLights.Length; i++)
             {
-                _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
+                //_spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
+                _spotLights[i].intensity = (float)Easing.OutCirc(time, endTime, 0.0f, 1.0f);
             }
             yield return null;
         }
