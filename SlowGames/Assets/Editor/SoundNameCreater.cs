@@ -89,6 +89,22 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("}");
         }
 
+		{
+			builder.AppendLine("public enum VoiceName");
+			builder.AppendLine("{");
+
+			var path = "Assets/Resources/Audio/Voice";
+
+			var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+
+			foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+			{
+				builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
+			}
+
+			builder.AppendLine("}");
+		}
+
         builder.AppendLine("}");
 
         var directoryName = Path.GetDirectoryName(PATH);

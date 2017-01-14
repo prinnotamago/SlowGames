@@ -12,16 +12,9 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     {
         MASTER,
         BGM,
-        SE
+        SE,
+		VOICE
     }
-
-    /// <summary>
-    /// Seの最大音数
-    /// </summary>
-    protected const uint SE_CHANNEL = 32;
-
-    [SerializeField, Tooltip("同じSEが鳴るときの最大音数")]
-    protected uint LIMIT_SE_COUNT = 4;
 
     [SerializeField]
     AudioClip[] _bgmClips = null;
@@ -29,9 +22,14 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     [SerializeField]
     protected AudioClip[] _seClips = null;
 
+	[SerializeField]
+	protected AudioClip[] _voiceClips = null;
+
     AudioSource _bgmSource = null;
 
-    AudioSource[] _seSources = new AudioSource[SE_CHANNEL];
+	List<AudioSource> _seSources = new List<AudioSource> ();
+
+	List<AudioSource> _voiceSources = new List<AudioSource> ();
 
     List<AudioMixerGroup> _audioMixerGroup = new List<AudioMixerGroup>();
 
@@ -110,19 +108,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
     public AudioSource getSe(int index)
     {
-        int sourceIndex = -1;
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            if (_seSources[i].clip != null) continue;
-            sourceIndex = i;
-            break;
-        }
-
-        if (sourceIndex == -1) return null;
-
-        var source = _seSources[sourceIndex];
-        source.clip = _seClips[index];
-        return source;
+		return _seSources [index];
     }
 
     /// <summary>
@@ -136,17 +122,6 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     }
 
     /// <summary>
-    /// SeのAudioSourceを取得
-    /// </summary>
-    /// <param name="channel">チャンネル番号</param>
-    /// <returns></returns>
-    public AudioSource getSeSource(uint channel)
-    {
-        if (!(0 <= channel && channel < SE_CHANNEL)) return null;
-        return _seSources[channel];
-    }
-
-    /// <summary>
     /// index番号のSeを再生
     /// Seのチャンネル数が最大数使用していた場合、再生できない
     /// </summary>
@@ -155,44 +130,10 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
     public AudioSource playSe(int index, bool loop = false)
     {
-        int sourceIndex = -1;
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            var tempSource = _seSources[i];
-            if (tempSource.clip != null) continue;
-
-            sourceIndex = i;
-            break;
-        }
-
-        var count = 0;
-
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            var tempSource = _seSources[i];
-            if (tempSource.clip == null) continue;
-
-            for (int j = 0; j < _seClips.Length; ++j)
-            {
-                if (tempSource.clip.name == _seClips[j].name)
-                {
-                    count++;
-                }
-            }
-        }
-
-        if (count > LIMIT_SE_COUNT)
-        {
-            return null;
-        }
-
-        if (sourceIndex == -1) return null;
-
-        var source = _seSources[sourceIndex];
-        source.clip = _seClips[index];
-        source.Play();
-        source.loop = loop;
-        return source;
+		var source = _seSources [index];
+		source.loop = loop;
+		source.Play ();
+		return source;
     }
 
     /// <summary>
@@ -212,14 +153,11 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// </summary>
     public void stopAllSe()
     {
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            var source = _seSources[i];
-            if (source.clip == null) continue;
-            source.Stop();
-            source.loop = false;
-            source.clip = null;
-        }
+		for(int i = 0; i < _seSources.Count; ++i){
+			var source = _seSources [i];
+			source.loop = false;
+			source.Stop ();
+		}
     }
 
     /// <summary>
@@ -381,9 +319,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public AudioSource findSeSource(AudioName.SeName name)
     {
         AudioSource source = null;
-        for (int i = 0; i < _seSources.Length; ++i)
+		for (int i = 0; i < _seSources.Count; ++i)
         {
-            if (_seSources[i].clip == null) continue;
             if (_seSources[i].clip.name != name.ToString()) continue;
             source = _seSources[i];
             break;
@@ -399,9 +336,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public IEnumerable<AudioSource> findSeSources(AudioName.SeName name)
     {
         List<AudioSource> sources = new List<AudioSource>();
-        for (int i = 0; i < _seSources.Length; ++i)
+		for (int i = 0; i < _seSources.Count; ++i)
         {
-            if (_seSources[i].clip == null) continue;
             if (_seSources[i].clip.name != name.ToString()) continue;
             sources.Add(_seSources[i]);
         }
@@ -421,7 +357,6 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             var source = sources.Current;
             source.Stop();
             source.loop = false;
-            source.clip = null;
         }
         return this;
     }
@@ -655,7 +590,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         return this;
     }
 
-    AudioSource[] _slowSources = new AudioSource[SE_CHANNEL];
+	List<AudioSource> _slowSources = new List<AudioSource>();
 
     /// <summary>
     /// index番号のclipを入れ、AudioSourceを取得
@@ -664,19 +599,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
     public AudioSource getNotSlowSe(int index)
     {
-        int sourceIndex = -1;
-        for (int i = 0; i < _slowSources.Length; ++i)
-        {
-            if (_slowSources[i].clip != null) continue;
-            sourceIndex = i;
-            break;
-        }
-
-        if (sourceIndex == -1) return null;
-
-        var source = _slowSources[sourceIndex];
-        source.clip = _seClips[index];
-        return source;
+		return _slowSources [index];
     }
 
     /// <summary>
@@ -694,9 +617,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// </summary>
     /// <param name="channel">チャンネル番号</param>
     /// <returns></returns>
-    public AudioSource getNotSlowSeSource(uint channel)
+    public AudioSource getNotSlowSeSource(int channel)
     {
-        if (!(0 <= channel && channel < SE_CHANNEL)) return null;
         return _slowSources[channel];
     }
 
@@ -709,43 +631,9 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
     public AudioSource playNotSlowSe(int index, bool loop = false)
     {
-        int sourceIndex = -1;
-        for (int i = 0; i < _slowSources.Length; ++i)
-        {
-            var tempSource = _slowSources[i];
-            if (tempSource.clip != null) continue;
-
-            sourceIndex = i;
-            break;
-        }
-
-        var count = 0;
-
-        for (int i = 0; i < _slowSources.Length; ++i)
-        {
-            var tempSource = _slowSources[i];
-            if (tempSource.clip == null) continue;
-
-            for (int j = 0; j < _seClips.Length; ++j)
-            {
-                if (tempSource.clip.name == _seClips[j].name)
-                {
-                    count++;
-                }
-            }
-        }
-
-        if (count > LIMIT_SE_COUNT)
-        {
-            return null;
-        }
-
-        if (sourceIndex == -1) return null;
-
-        var source = _slowSources[sourceIndex];
-        source.clip = _seClips[index];
-        source.Play();
-        source.loop = loop;
+		var source = _slowSources [index];
+		source.loop = loop;
+		source.Play ();
         return source;
     }
 
@@ -766,13 +654,11 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// </summary>
     public void stopAllNotSlowSe()
     {
-        for (int i = 0; i < _slowSources.Length; ++i)
+		for (int i = 0; i < _slowSources.Count; ++i)
         {
             var source = _slowSources[i];
-            if (source.clip == null) continue;
             source.Stop();
             source.loop = false;
-            source.clip = null;
         }
     }
 
@@ -784,9 +670,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public AudioSource findNotSlowSeSource(AudioName.SeName name)
     {
         AudioSource source = null;
-        for (int i = 0; i < _slowSources.Length; ++i)
+		for (int i = 0; i < _slowSources.Count; ++i)
         {
-            if (_slowSources[i].clip == null) continue;
             if (_slowSources[i].clip.name != name.ToString()) continue;
             source = _slowSources[i];
             break;
@@ -802,9 +687,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public IEnumerable<AudioSource> findNotSlowSeSources(AudioName.SeName name)
     {
         List<AudioSource> sources = new List<AudioSource>();
-        for (int i = 0; i < _slowSources.Length; ++i)
+		for (int i = 0; i < _slowSources.Count; ++i)
         {
-            if (_slowSources[i].clip == null) continue;
             if (_slowSources[i].clip.name != name.ToString()) continue;
             sources.Add(_slowSources[i]);
         }
@@ -824,10 +708,120 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             var source = sources.Current;
             source.Stop();
             source.loop = false;
-            source.clip = null;
         }
         return this;
     }
+
+	// ====================================================================
+
+	/// <summary>
+	/// index番号のclipを入れ、AudioSourceを取得
+	/// </summary>
+	/// <param name="index">se番号</param>
+	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
+	public AudioSource getVoice(int index)
+	{
+		return _voiceSources [index];
+	}
+
+	/// <summary>
+	/// nameのclipを入れ、AudioSourceを取得
+	/// </summary>
+	/// <param name="name">se名</param>
+	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
+	public AudioSource getVoice(AudioName.SeName name)
+	{
+		return getVoice((int)name);
+	}
+
+	/// <summary>
+	/// index番号のSeを再生
+	/// Seのチャンネル数が最大数使用していた場合、再生できない
+	/// </summary>
+	/// <param name="index">se番号</param>
+	/// <param name="loop">ループするか</param>
+	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
+	public AudioSource playVoice(int index, bool loop = false)
+	{
+		var source = _voiceSources [index];
+		source.loop = loop;
+		source.Play ();
+		return source;
+	}
+
+	/// <summary>
+	/// index番号のSeを再生
+	/// Seのチャンネル数が最大数使用していた場合、再生できない
+	/// </summary>
+	/// <param name="name">se名</param>    
+	/// <param name="loop">ループするか</param>
+	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
+	public AudioSource playVoice(AudioName.SeName name, bool loop = false)
+	{
+		return playVoice((int)name, loop);
+	}
+
+	/// <summary>
+	/// すべてのSeを停止
+	/// </summary>
+	public void stopAllVoice()
+	{
+		for (int i = 0; i < _voiceSources.Count; ++i) {
+			var source = _voiceSources[i];
+			source.Stop();
+			source.loop = false;
+		}
+	}
+
+	/// <summary>
+	/// Seを検索
+	/// </summary>
+	/// <param name="name">Seの名前</param>
+	/// <returns>検索がヒットしなかったらnull</returns>
+	public AudioSource findVoiceSource(AudioName.SeName name)
+	{
+		AudioSource source = null;
+		for (int i = 0; i < _voiceSources.Count; ++i)
+		{
+			if (_voiceSources[i].clip.name != name.ToString()) continue;
+			source = _voiceSources[i];
+			break;
+		}
+		return source;
+	}
+
+	/// <summary>
+	/// Seを検索(複数)
+	/// </summary>
+	/// <param name="name">Seの名前</param>
+	/// <returns>検索がヒットしなかったら空</returns>
+	public IEnumerable<AudioSource> findVoiceSources(AudioName.SeName name)
+	{
+		List<AudioSource> sources = new List<AudioSource>();
+		for (int i = 0; i < _voiceSources.Count; ++i)
+		{
+			if (_voiceSources[i].clip.name != name.ToString()) continue;
+			sources.Add(_voiceSources[i]);
+		}
+		return sources;
+	}
+
+	/// <summary>
+	/// 特定のSeを止める
+	/// </summary>
+	/// <param name="name">Seの名前</param>
+	/// <returns></returns>
+	public AudioManager stopVoiceSe(AudioName.SeName name)
+	{
+		var sources = findVoiceSources(name).GetEnumerator();
+		while (sources.MoveNext())
+		{
+			var source = sources.Current;
+			source.Stop();
+			source.loop = false;
+		}
+		return this;
+	}
 
     //============================================================================================
 
@@ -850,39 +844,30 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
         int seType = (int)Type.SE;
 
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            _seSources[i] = gameObject.AddComponent<AudioSource>();
+		_bgmClips = Resources.LoadAll<AudioClip>("Audio/BGM");
+		_seClips = Resources.LoadAll<AudioClip>("Audio/SE");
+		_voiceClips = Resources.LoadAll<AudioClip>("Audio/Voice");
+
+		for (int i = 0; i < _seClips.Length; ++i) {
+			var audioSource = gameObject.AddComponent<AudioSource> ();
+			audioSource.clip = _seClips [i];
+			_seSources.Add(audioSource);
+			_slowSources.Add(audioSource);
             _seSources[i].outputAudioMixerGroup = _audioMixerGroup[seType];
         }
 
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            _slowSources[i] = gameObject.AddComponent<AudioSource>();
-            _slowSources[i].outputAudioMixerGroup = _audioMixerGroup[seType];
-        }
+		int voiceType = (int)Type.VOICE;
 
-        _bgmClips = Resources.LoadAll<AudioClip>("Audio/BGM");
-        _seClips = Resources.LoadAll<AudioClip>("Audio/SE");
+		for (int i = 0; i < _voiceClips.Length; ++i) {
+			var source = gameObject.AddComponent<AudioSource> ();
+			source.clip = _voiceClips [i];
+			_voiceSources.Add (source);
+			_voiceSources [i].outputAudioMixerGroup = _audioMixerGroup [voiceType];
+		}
     }
 
     override protected void Update()
     {
-        for (int i = 0; i < _seSources.Length; ++i)
-        {
-            var source = _seSources[i];
-            if (source.clip == null) continue;
-            if (source.isPlaying) continue;
-            source.clip = null;
-        }
-
-        for (int i = 0; i < _slowSources.Length; ++i)
-        {
-            var source = _slowSources[i];
-            if (source.clip == null) continue;
-            if (source.isPlaying) continue;
-            source.clip = null;
-        }
         _3dSources.RemoveAll(source => source == null);
     }
 
