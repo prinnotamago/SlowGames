@@ -230,8 +230,8 @@ public class BossAI : MonoBehaviour {
         _level_2_randomStopTime = _level_2_randomStopTimeMax;
 
         // ボス登場ボイス
-        AudioManager.instance.stopAllNotSlowSe();
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
+        AudioManager.instance.stopAllVoice();
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV04);
 
         // ボスと弾が当たるようにする
         Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, false);
@@ -350,8 +350,8 @@ public class BossAI : MonoBehaviour {
                 if (0 == _level_2_modeIndex)
                 {
                     // クライマックスになったボイスを流す
-                    AudioManager.instance.stopAllNotSlowSe();
-                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV10);
+                    AudioManager.instance.stopAllVoice();
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV10);
                 }
 
                 _level_2_mode = Level_2_Mode.EIGHT_MOVE;
@@ -368,20 +368,20 @@ public class BossAI : MonoBehaviour {
             if(_state == BossState.LEVEL_2)
             {
                 // 第２形態になったボイスを流す
-                AudioManager.instance.stopAllNotSlowSe();
-                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV09);
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.IV09);
             }
             else if(_state == BossState.LAST)
             {
                 // 突っ込んでくることを伝えるボイス
-                AudioManager.instance.stopAllNotSlowSe();
-                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV11);
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.IV11);
             }
             else if(_state == BossState.CLIMAX)
             {
                 // ボスを倒したことを伝えるボイス
-                AudioManager.instance.stopAllNotSlowSe();
-                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV14);
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.IV14);
             }
         }
 
@@ -440,8 +440,8 @@ public class BossAI : MonoBehaviour {
                     ++_speedBulletIndex;
 
                     // 高速弾を準備してることを伝える
-                    AudioManager.instance.stopAllNotSlowSe();
-                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV05);
+                    AudioManager.instance.stopAllVoice();
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV05);
                 }
             }
 
@@ -661,8 +661,8 @@ public class BossAI : MonoBehaviour {
                 // タックルをしようとしていたらボイスを流す
                 //if ((10) == _lastMoveIndex)
                 //{
-                //    AudioManager.instance.stopAllNotSlowSe();
-                //    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV12);
+                //    AudioManager.instance.stopAllVoice();
+                //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
                 //}
 
                 ++_lastMoveIndex;
@@ -683,8 +683,8 @@ public class BossAI : MonoBehaviour {
                 // 撃ち続けてボイスを流す
                 if (!SlowMotion._instance.isLimit)
                 {
-                    AudioManager.instance.stopAllNotSlowSe();
-                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV13);
+                    AudioManager.instance.stopAllVoice();
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
                 }
             }
             var length = _player.transform.position - transform.position;

@@ -53,8 +53,8 @@ public class BossBullet : MonoBehaviour {
             if (_chargeTime <= 0.0f)
             {
                 // 高速弾を撃つのを伝える
-                AudioManager.instance.stopAllNotSlowSe();
-                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
             }
         }
         else
@@ -96,8 +96,8 @@ public class BossBullet : MonoBehaviour {
             effect.transform.position = transform.position;
             // 音
             // ボスの弾をはじいたとき成功ボイスを流す
-            AudioManager.instance.stopAllNotSlowSe();
-            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV07);
+            AudioManager.instance.stopAllVoice();
+            AudioManager.instance.playVoice(AudioName.VoiceName.IV07);
 
             //判定消す
             _isBlow = true;
@@ -120,8 +120,8 @@ public class BossBullet : MonoBehaviour {
         else if (other.gameObject.tag == TagName.Player)
         {
             // ボスの弾が当たったときに失敗ボイスを流す
-            AudioManager.instance.stopAllNotSlowSe();
-            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV08);
+            AudioManager.instance.stopAllVoice();
+            AudioManager.instance.playVoice(AudioName.VoiceName.IV08);
 
             // スローだったら解除
             if (SlowMotion._instance.isSlow)

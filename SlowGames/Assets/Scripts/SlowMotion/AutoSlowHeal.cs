@@ -29,7 +29,8 @@ public class AutoSlowHeal : MonoBehaviour {
                 _slowHealTime = 0.0f;
 
                 // チャージ完了ボイス
-                AudioManager.instance.playSe(AudioName.SeName.V09);
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.V09);
             }
             else
             {
