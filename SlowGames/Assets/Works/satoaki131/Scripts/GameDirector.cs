@@ -178,8 +178,7 @@ public class GameDirector : MonoBehaviour {
 
         _state = GameState.Result;
         _generateManager.DestroyAllEnemy();
-        activeImage.gameObject.SetActive(false);
-        _resultCanvas.gameObject.SetActive(true);
+        SceneChange.ChangeScene(SceneName.Name.Title);
     }
 
     void GameSet()
