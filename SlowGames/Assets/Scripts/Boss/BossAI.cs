@@ -225,6 +225,9 @@ public class BossAI : MonoBehaviour {
         // ボス登場ボイス
         AudioManager.instance.stopAllNotSlowSe();
         AudioManager.instance.playNotSlowSe(AudioName.SeName.IV04);
+
+        // ボスと弾が当たるようにする
+        Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, false);
     }
 
     // Update is called once per frame
@@ -704,6 +707,8 @@ public class BossAI : MonoBehaviour {
 
             // タックルフラグを切る
             _lastTackleFlag = false;
+
+            Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, true);
         }
 
         if (!_rigidbody.useGravity)
@@ -758,14 +763,15 @@ public class BossAI : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        // 出現時は当たらないようにする
-        if (_state == BossState.START || _state == BossState.CLIMAX) { return; }   
 
         // 弾が当たったら体力を減らす
         if (col.gameObject.tag == TagName.Bullet)
         {
             var particle = Instantiate(_hitParticle);
             particle.transform.position = col.transform.position;
+
+            // 出現時は当たらないようにする
+            if (_state == BossState.START || _state == BossState.CLIMAX || _state == BossState.STANDBY) { return; }
 
             // 高速弾を撃つときはエフェクトだけを出す
             if ((_state != BossState.LAST && !_speedBulletFlag) || (_state == BossState.LAST && _lastTackleFlag))
