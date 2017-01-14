@@ -14,4 +14,5 @@ public static class LayerName
 	public const int Weapon = 11;
 	public const int Sword = 12;
 	public const int SlowCheck = 13;
+	public const int Boss = 14;
 }
