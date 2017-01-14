@@ -199,6 +199,19 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         return this;
     }
 
+	/// <summary>
+	/// SEの音量を変更(デシベル単位)
+	/// デシベルの参考URL：http://macasakr.sakura.ne.jp/decibel.html
+	/// </summary>
+	/// <param name="db">20から-80(0がAudioSourceのVolumeの1に当たる)</param>
+	/// <returns></returns>
+	public AudioManager changeSEVolume(float db)
+	{
+		int type = (int)Type.VOICE;
+		_audioMixerGroup[type].audioMixer.SetFloat("VoiceVolume", db);
+		return this;
+	}
+
     /// <summary>
     /// BGMのピッチを変更
     /// </summary>
@@ -729,7 +742,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="name">se名</param>
 	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
-	public AudioSource getVoice(AudioName.SeName name)
+	public AudioSource getVoice(AudioName.VoiceName name)
 	{
 		return getVoice((int)name);
 	}
@@ -756,7 +769,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// <param name="name">se名</param>    
 	/// <param name="loop">ループするか</param>
 	/// <returns>Seのチャンネル数が最大数使用していた場合nullが返る</returns>
-	public AudioSource playVoice(AudioName.SeName name, bool loop = false)
+	public AudioSource playVoice(AudioName.VoiceName name, bool loop = false)
 	{
 		return playVoice((int)name, loop);
 	}
@@ -778,7 +791,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="name">Seの名前</param>
 	/// <returns>検索がヒットしなかったらnull</returns>
-	public AudioSource findVoiceSource(AudioName.SeName name)
+	public AudioSource findVoiceSource(AudioName.VoiceName name)
 	{
 		AudioSource source = null;
 		for (int i = 0; i < _voiceSources.Count; ++i)
@@ -795,7 +808,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="name">Seの名前</param>
 	/// <returns>検索がヒットしなかったら空</returns>
-	public IEnumerable<AudioSource> findVoiceSources(AudioName.SeName name)
+	public IEnumerable<AudioSource> findVoiceSources(AudioName.VoiceName name)
 	{
 		List<AudioSource> sources = new List<AudioSource>();
 		for (int i = 0; i < _voiceSources.Count; ++i)
@@ -811,7 +824,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="name">Seの名前</param>
 	/// <returns></returns>
-	public AudioManager stopVoiceSe(AudioName.SeName name)
+	public AudioManager stopVoiceSe(AudioName.VoiceName name)
 	{
 		var sources = findVoiceSources(name).GetEnumerator();
 		while (sources.MoveNext())
