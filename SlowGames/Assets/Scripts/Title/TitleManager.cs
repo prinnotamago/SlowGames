@@ -9,6 +9,7 @@ public class TitleManager : MonoBehaviour
 
     enum State
     {
+        LogoProduction,
         Title,
         Wait
     }
@@ -91,6 +92,7 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
+        _stateUpdate.Add(State.LogoProduction, LogoProductionUpdate);
         _stateUpdate.Add(State.Title, TitleUpdate);
         _stateUpdate.Add(State.Wait, () => { });
 
@@ -129,6 +131,15 @@ public class TitleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneChange.ChangeScene(SceneName.Name.MainGame, Color.white);
+        }
+    }
+
+    void LogoProductionUpdate()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            //Logoの
+            _state = State.Title;
         }
     }
 
