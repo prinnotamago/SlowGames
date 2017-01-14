@@ -64,15 +64,13 @@ public class TitleManager : MonoBehaviour
     private Material[] _viveMaterial2 = null; //0:body, 1:slowButton 2:trigger, 3:grip
 
     [SerializeField]
-    private Animator _arrowAnim = null;
-
+    private GameObject _logo = null;
 
     [SerializeField]
-    private Vector3[] START_POS;
+    private Animator _arrowAnim = null;
 
     [SerializeField]
     private Vector3[] TURTREAL_POS;
-
 
     private float _time = 0.0f;
     private float _voiceTIme = 0.0f;
@@ -109,9 +107,6 @@ public class TitleManager : MonoBehaviour
             _viveMaterial2[i] = _viveControllerModel[1].GetComponentInChildren<Renderer>().materials[i];
         }
 
-        _viveControllerModel[0].transform.position = START_POS[0];
-        _viveControllerModel[1].transform.position = START_POS[1];
-
         //コントローラーの向きを変える
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
@@ -147,10 +142,15 @@ public class TitleManager : MonoBehaviour
 
     private IEnumerator NoiseCancel()
     {
+        var time = 0.0f;
         while(NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
         {
+            time += Time.unscaledDeltaTime;
+            NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InOutCubic(time, 2.0f, 0.0f, 10.0f);
             yield return null;
         }
+
+        _logo.SetActive(false);
         _state = State.Title;
     }
 
@@ -193,12 +193,18 @@ public class TitleManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            isChange = true;
+        }
+
         if(_voiceTIme > 30.0f)
         {
             _voiceTIme = 0.0f;
             AudioManager.instance.playSe(AudioName.SeName.V00);
         }
 
+        //Debug用
         if(Input.GetKeyDown(KeyCode.A))
         {
             isChange = true;
@@ -208,18 +214,8 @@ public class TitleManager : MonoBehaviour
         if (isChange)
         {
             _state = State.Wait;
-            StartCoroutine(TitleLogoProduction());
+            StartCoroutine(Authentication());
         }
-    }
-
-    /// <summary>
-    /// TitleのLogo演出用のこるーちん
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator TitleLogoProduction()
-    {
-        yield return null;
-        StartCoroutine(Authentication());
     }
 
     /// <summary>
@@ -230,7 +226,6 @@ public class TitleManager : MonoBehaviour
     {
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
-
 
         AudioManager.instance.playSe(AudioName.SeName.V01a); 
         
@@ -316,8 +311,8 @@ public class TitleManager : MonoBehaviour
         }
 
         //Enemyくん起動
-        _enemyManager.SetActive(true);
-        _enemyManager.SetTurtrealBulletActive(true);
+        //_enemyManager.SetActive(true);
+        //_enemyManager.SetTurtrealBulletActive(true);
 
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
@@ -353,7 +348,7 @@ public class TitleManager : MonoBehaviour
     IEnumerator SlowDescription()
     {
         _descriptionPanel.gameObject.SetActive(true);
-        _descriptionText.text = "スローを使ってみよう！";
+        _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
         AudioManager.instance.playNotSlowSe(AudioName.SeName.V04); //Voice
 
         var time = 0.0f;
@@ -408,73 +403,73 @@ public class TitleManager : MonoBehaviour
         }
         AudioManager.instance.stopNotSlowSe(AudioName.SeName.V04);
 
-        _descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
+        //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
-        var normalPos = _viveControllerModel[0].transform.position;
-        var normalPos2 = _viveControllerModel[1].transform.position;
+        //var normalPos = _viveControllerModel[0].transform.position;
+        //var normalPos2 = _viveControllerModel[1].transform.position;
 
-        var normalRotate = _viveControllerModel[0].transform.eulerAngles;
+        //var normalRotate = _viveControllerModel[0].transform.eulerAngles;
 
-        _arrowAnim.gameObject.SetActive(true);
+        //_arrowAnim.gameObject.SetActive(true);
 
-        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
-        voiceTime = 0.0f;
-        //スローゲージが回復したらぬける
-        while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
-        {
-            voiceTime += Time.unscaledDeltaTime;
-            if (voiceTime > 15.0f)
-            {
-                voiceTime = 0.0f;
-                AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
-            }
+        //AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
+        //voiceTime = 0.0f;
+        ////スローゲージが回復したらぬける
+        //while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        //{
+        //    voiceTime += Time.unscaledDeltaTime;
+        //    if (voiceTime > 15.0f)
+        //    {
+        //        voiceTime = 0.0f;
+        //        AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
+        //    }
 
-            _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
-            if (_viveControllerModel[0].transform.position.y == 0.3f)
-            {
-                var pos = _viveControllerModel[0].transform.position;
-                var pos2 = _viveControllerModel[1].transform.position;
-                pos.y = normalPos.y;
-                pos2.y = normalPos2.y;
+        //    _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
+        //    if (_viveControllerModel[0].transform.position.y == 0.3f)
+        //    {
+        //        var pos = _viveControllerModel[0].transform.position;
+        //        var pos2 = _viveControllerModel[1].transform.position;
+        //        pos.y = normalPos.y;
+        //        pos2.y = normalPos2.y;
 
-                _viveControllerModel[0].transform.eulerAngles = normalRotate;
-                _viveControllerModel[1].transform.eulerAngles = normalRotate;
+        //        _viveControllerModel[0].transform.eulerAngles = normalRotate;
+        //        _viveControllerModel[1].transform.eulerAngles = normalRotate;
 
-                _viveControllerModel[0].transform.position = pos;
-                _viveControllerModel[1].transform.position = pos2;
+        //        _viveControllerModel[0].transform.position = pos;
+        //        _viveControllerModel[1].transform.position = pos2;
 
-                //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-                //_arrowAnim.Play(animationHash, 0, 0);
+        //        //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+        //        //_arrowAnim.Play(animationHash, 0, 0);
 
-                iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-                iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-                iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-                iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
+        //        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
+        //        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
 
-            }
-            yield return null;
-        }
-        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
-        AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
-        _arrowAnim.gameObject.SetActive(false);
+        //    }
+        //    yield return null;
+        //}
+        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
+        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
+        //_arrowAnim.gameObject.SetActive(false);
 
-        iTween.Stop(_viveControllerModel[0], "move");
-        iTween.Stop(_viveControllerModel[1], "move");
-        iTween.Stop(_viveControllerModel[0], "rotate");
-        iTween.Stop(_viveControllerModel[1], "rotate");
+        //iTween.Stop(_viveControllerModel[0], "move");
+        //iTween.Stop(_viveControllerModel[1], "move");
+        //iTween.Stop(_viveControllerModel[0], "rotate");
+        //iTween.Stop(_viveControllerModel[1], "rotate");
 
-        yield return null;
+        //yield return null;
 
-        _viveControllerModel[0].transform.position = normalPos;
-        _viveControllerModel[1].transform.position = normalPos2;
+        //_viveControllerModel[0].transform.position = normalPos;
+        //_viveControllerModel[1].transform.position = normalPos2;
 
-        _viveControllerModel[0].transform.eulerAngles = normalRotate;
-        _viveControllerModel[1].transform.eulerAngles = normalRotate;
+        //_viveControllerModel[0].transform.eulerAngles = normalRotate;
+        //_viveControllerModel[1].transform.eulerAngles = normalRotate;
 
 
         StartCoroutine(TurtrealEnd());
