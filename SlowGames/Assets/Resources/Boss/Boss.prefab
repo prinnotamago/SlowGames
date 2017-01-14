@@ -225,7 +225,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1510459827905888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 16.38, z: 1.65}
+  m_LocalPosition: {x: 0, y: 60.41, z: 1.65}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4276696163468390}
@@ -852,8 +852,8 @@ MonoBehaviour:
   _level_2_randomMoveSpeed: 5
   _level_2_randomStopTimeMax: 0
   _lastTacklePos: {x: 0, y: 3.5, z: 0}
-  _lastTackleSpeed: 3
-  _lastMoveSpeed: 3
+  _lastTackleSpeed: 2
+  _lastMoveSpeed: 10
   _lastMoveNum: 42
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
   _climaxVelocity: 7

@@ -49,9 +49,23 @@ public class BossBullet : MonoBehaviour {
         else if (_chargeTime > 0.0f)
         {
             _chargeTime -= Time.unscaledDeltaTime;
+
+            if (_chargeTime <= 0.0f)
+            {
+                // 高速弾を撃つのを伝える
+                AudioManager.instance.stopAllNotSlowSe();
+                AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
+            }
         }
         else
         {
+            // スローじゃなかったらスローにする
+            if (!SlowMotion._instance.isSlow)
+            {
+                SlowMotion._instance.GameSpeed(0.1f);
+                SlowMotion._instance.isLimit = false;
+            }
+
             // 前進
             transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
 
@@ -89,6 +103,15 @@ public class BossBullet : MonoBehaviour {
             _isBlow = true;
             this.GetComponent<Collider>().enabled = false;
             StartCoroutine(RandomBlow());
+
+            // スローだったら解除
+            if (SlowMotion._instance.isSlow)
+            {
+                SlowMotion._instance.ResetSpeed();
+                SlowMotion._instance.isLimit = true;
+            }
+
+
             //プレイヤーの弾を消す
             Destroy(other.gameObject);
             return;
@@ -99,6 +122,13 @@ public class BossBullet : MonoBehaviour {
             // ボスの弾が当たったときに失敗ボイスを流す
             AudioManager.instance.stopAllNotSlowSe();
             AudioManager.instance.playNotSlowSe(AudioName.SeName.IV08);
+
+            // スローだったら解除
+            if (SlowMotion._instance.isSlow)
+            {
+                SlowMotion._instance.ResetSpeed();
+                SlowMotion._instance.isLimit = true;
+            }
 
             Destroy(gameObject);
         }

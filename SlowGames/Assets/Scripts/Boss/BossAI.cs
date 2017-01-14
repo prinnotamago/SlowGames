@@ -58,7 +58,6 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _speedBulletChargeMax = 2.0f;
     float _speedBulletChargeTime = 0.0f;
-    bool _speedBulletVoiceFlag = true;
     [SerializeField]
     float _speedBulletInformTime = 3.0f;
 
@@ -400,23 +399,12 @@ public class BossAI : MonoBehaviour {
 
         _speedBulletChargeTime += Time.unscaledDeltaTime;
 
-        if (_speedBulletChargeTime > _speedBulletChargeMax - _speedBulletInformTime && _speedBulletVoiceFlag)
-        {
-            // 高速弾を撃つのを伝える
-            AudioManager.instance.stopAllNotSlowSe();
-            AudioManager.instance.playNotSlowSe(AudioName.SeName.IV06);
-
-            _speedBulletVoiceFlag = false;
-        }
-
         if (_speedBulletChargeTime > _speedBulletChargeMax)
         {
             // 数値たちをリセット
             _speedBulletChargeTime = 0.0f;
             _speedBulletFlag = false;
             _attackTime = 0.0f;
-
-            _speedBulletVoiceFlag = true;
 
 
             // 第２形態ならランダム移動に戻す
@@ -663,11 +651,11 @@ public class BossAI : MonoBehaviour {
             if (length.magnitude < 1.5f)
             {
                 // タックルをしようとしていたらボイスを流す
-                if ((10) == _lastMoveIndex)
-                {
-                    AudioManager.instance.stopAllNotSlowSe();
-                    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV12);
-                }
+                //if ((10) == _lastMoveIndex)
+                //{
+                //    AudioManager.instance.stopAllNotSlowSe();
+                //    AudioManager.instance.playNotSlowSe(AudioName.SeName.IV12);
+                //}
 
                 ++_lastMoveIndex;
             }
@@ -708,6 +696,7 @@ public class BossAI : MonoBehaviour {
             // タックルフラグを切る
             _lastTackleFlag = false;
 
+            // 弾がボスに当たらないようにする
             Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, true);
         }
 
@@ -743,14 +732,25 @@ public class BossAI : MonoBehaviour {
             {
                 if (_climaxBoundNum > 0)
                 {
+                    // バウンドの回数を減らす
                     _climaxBoundNum--;
                     
                     // バウンドの力を半分に
                     _climaxBoundPower *= 0.5f;
-                    var vector = transform.position - _player.transform.position;
+
+                    // ２次元での向きを出す
+                    var bossPos = new Vector2(transform.position.x, transform.position.y);
+                    var playerPos = new Vector2(_player.transform.position.x, _player.transform.position.y);
+                    var vector2 = bossPos - playerPos;
+
+                    // ３次元に変換
+                    var vector = new Vector3(vector2.x, vector2.y, 0.0f);
+
+                    // その方向に飛ばす
                     _rigidbody.velocity = vector.normalized * _climaxBoundPower;
                     _rigidbody.velocity += Vector3.up * _climaxBoundPower;
 
+                    // 最後のバウンドの時滑らせるために強い力をあたえる
                     if (_climaxBoundNum == 0)
                     {
                         _rigidbody.velocity += vector.normalized * _climaxVelocity;
@@ -778,6 +778,12 @@ public class BossAI : MonoBehaviour {
             {
                 Damage();
             }
+        }
+        // プレイヤーと当たったら
+        else if (col.gameObject.tag == TagName.Player)
+        {
+            // 即死させる
+            _player.GetComponent<PlayerHP>().Damage(1000000000);
         }
     }
 
