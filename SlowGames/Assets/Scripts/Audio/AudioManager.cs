@@ -818,7 +818,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     /// <returns></returns>
     public AudioManager stopNotSlowSe(AudioName.SeName name)
     {
-        var sources = findSeSources(name).GetEnumerator();
+        var sources = findNotSlowSeSources(name).GetEnumerator();
         while (sources.MoveNext())
         {
             var source = sources.Current;
