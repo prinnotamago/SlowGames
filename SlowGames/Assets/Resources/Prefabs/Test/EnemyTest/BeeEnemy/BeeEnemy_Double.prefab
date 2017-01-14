@@ -190,8 +190,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242068687375224}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.31899756, y: -2.9919307e-12, z: 8.889163e-12, w: 0.9477556}
+  m_LocalPosition: {x: 0.08199996, y: 33.35, z: -6.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4501423400839578}
@@ -433,9 +433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490db166179db4ecb9fd05b1ce10a168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyBullet: {fileID: 114586575297573618, guid: 0e127638222394c8cad3c8d04e55b579,
+  _enemyBullet: {fileID: 114111481603753538, guid: 3f55ac385e1e84ff6bfe7f2b1825b2f2,
     type: 2}
-  _doubleBullet: {fileID: 114586575297573618, guid: 0e127638222394c8cad3c8d04e55b579,
+  _doubleBullet: {fileID: 114111481603753538, guid: 3f55ac385e1e84ff6bfe7f2b1825b2f2,
     type: 2}
   _randomShotRange: {x: 1, y: 1, z: 1}
   _shotDelay: 1

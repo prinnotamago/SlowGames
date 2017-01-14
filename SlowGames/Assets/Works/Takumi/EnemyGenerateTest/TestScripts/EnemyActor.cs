@@ -161,7 +161,7 @@ public class EnemyActor : MonoBehaviour
     {
          //ターゲットに向かって走る
         _navimesh.SetDestination(_basePosition);
-        transform.LookAt(_playerTransform.transform.position);
+       // transform.LookAt(_basePosition);
 
     }
 
@@ -297,6 +297,8 @@ public class EnemyActor : MonoBehaviour
 
     void Shot()
     {   
+
+         HormingToTarget();
         //コルーチンで管理
         if (!_isShot)
         {
@@ -390,10 +392,13 @@ public class EnemyActor : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(other.tag != TagName.Finish) return;
+         
         //ナビメッシュの効果がある際に判定
         if (_navimesh.enabled == true)
         {
-
+                    
+                  
             if (_enemy.doFall)//上から出現するなら
             {
                 ChangeAction(ActionType.Fall, 0);
@@ -408,7 +413,9 @@ public class EnemyActor : MonoBehaviour
                 else
                 {
                     //玉のうつひんどを上げるためでてきたらまず撃つ
-                    ChangeAction(ActionType.Shot, RandomActiveTime());
+                    //ChangeAction(ActionType.Shot, RandomActiveTime());
+                    ChangeAction(ActionType.Stay,0.5f);
+                    _stayCount = _enemy.info.shotFrequency;
                 }
             }
 
@@ -416,6 +423,12 @@ public class EnemyActor : MonoBehaviour
             _navimesh.enabled = false;
              AudioManager.instance.stop3DSe(gameObject,AudioName.SeName.Genrtate);
              AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Flying,true);
+
+//            GetComponent<Rigidbody>().constraints = (RigidbodyConstraints.FreezePositionX |
+//                                                     RigidbodyConstraints.FreezePositionY |
+//                                                     RigidbodyConstraints.FreezePositionZ);
+//
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
         }

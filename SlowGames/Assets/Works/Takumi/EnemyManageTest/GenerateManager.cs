@@ -173,7 +173,7 @@ public class GenerateManager : MonoBehaviour
 
             for (int i = 0; i < 3; i++)
             {
-                DefaultSetEnemy(EnemyType.Easy,TargetPosition.Front);
+                DefaultSetEnemy(EnemyType.Easy,TargetPosition.UpLeft);
             }
             //SetEnemy();
 //     
