@@ -37,6 +37,8 @@ public class BossAI : MonoBehaviour {
     Transform _frontGunObjPos;
     [SerializeField]
     Transform[] _sideGunObjPos;
+    [SerializeField]
+    Transform _SpeedGunObjPos;
 
     /// <summary>
     /// ボスの撃つ弾
@@ -175,6 +177,12 @@ public class BossAI : MonoBehaviour {
     int _climaxBoundNum = 2;    // バウンドする回数
     [SerializeField]
     float _climaxBoundPower = 5.0f; // バウンドのパワー
+    [SerializeField]
+    GameObject _effectPos = null;
+    [SerializeField]
+    GameObject _boundParticle = null;
+    [SerializeField]
+    GameObject _slideParticle = null;
     //////////////////////////////////////////////////////////////////////////////
 
     [SerializeField]
@@ -739,12 +747,12 @@ public class BossAI : MonoBehaviour {
                     _climaxBoundPower *= 0.5f;
 
                     // ２次元での向きを出す
-                    var bossPos = new Vector2(transform.position.x, transform.position.y);
-                    var playerPos = new Vector2(_player.transform.position.x, _player.transform.position.y);
+                    var bossPos = new Vector2(transform.position.x, transform.position.z);
+                    var playerPos = new Vector2(_player.transform.position.x, _player.transform.position.z);
                     var vector2 = bossPos - playerPos;
 
                     // ３次元に変換
-                    var vector = new Vector3(vector2.x, vector2.y, 0.0f);
+                    var vector = new Vector3(vector2.x, 0.0f, vector2.y);
 
                     // その方向に飛ばす
                     _rigidbody.velocity = vector.normalized * _climaxBoundPower;
@@ -755,6 +763,17 @@ public class BossAI : MonoBehaviour {
                     {
                         _rigidbody.velocity += vector.normalized * _climaxVelocity;
                     }
+
+                    // バウンドエフェクトを出す
+                    var boundParticle = Instantiate(_boundParticle);
+                    boundParticle.transform.position = _effectPos.transform.position;
+                }
+                else
+                {
+                    // 滑るを出す
+                    var boundParticle = Instantiate(_slideParticle);
+                    boundParticle.transform.position = _effectPos.transform.position;
+                    boundParticle.transform.LookAt(_player.transform);
                 }
             }
             return;
