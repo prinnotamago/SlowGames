@@ -299,8 +299,8 @@ public class TitleManager : MonoBehaviour
             time += Time.unscaledDeltaTime;
             for (int i = 0; i < _spotLights.Length; i++)
             {
-                //_spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
-                _spotLights[i].intensity = (float)Easing.OutCirc(time, endTime, 0.0f, 1.0f);
+                _spotLights[i].intensity = Mathf.Lerp(_spotLights[i].intensity, 0, time / endTime);
+                //_spotLights[i].intensity = (float)Easing.OutCirc(time, endTime, 0.0f, 1.0f);
             }
             yield return null;
         }
@@ -310,10 +310,6 @@ public class TitleManager : MonoBehaviour
             Destroy(_gunStand[i]);
             Destroy(_desk[i]);
         }
-
-        //Enemyくん起動
-        //_enemyManager.SetActive(true);
-        //_enemyManager.SetTurtrealBulletActive(true);
 
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
@@ -325,7 +321,6 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.eulerAngles = Vector3.zero;
         _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
-
         StartCoroutine(WaitingState());
     }
 
@@ -334,7 +329,8 @@ public class TitleManager : MonoBehaviour
         var time = 0.0f;
         var endTime = 5.0f;
         AudioManager.instance.playSe(AudioName.SeName.V03);
-        while(time < endTime)
+
+        while (time < endTime)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -348,6 +344,7 @@ public class TitleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SlowDescription()
     {
+
         _descriptionPanel.gameObject.SetActive(true);
         _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
         AudioManager.instance.playNotSlowSe(AudioName.SeName.V04); //Voice
@@ -389,6 +386,7 @@ public class TitleManager : MonoBehaviour
 
             yield return null;
         }
+
 
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
@@ -482,6 +480,9 @@ public class TitleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator TurtrealEnd()
     {
+        //Enemyくん起動
+        _enemyManager.SetActive(true);
+
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
