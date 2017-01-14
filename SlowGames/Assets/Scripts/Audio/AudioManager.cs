@@ -205,7 +205,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="db">20から-80(0がAudioSourceのVolumeの1に当たる)</param>
 	/// <returns></returns>
-	public AudioManager changeSEVolume(float db)
+	public AudioManager changeVoiceVolume(float db)
 	{
 		int type = (int)Type.VOICE;
 		_audioMixerGroup[type].audioMixer.SetFloat("VoiceVolume", db);
