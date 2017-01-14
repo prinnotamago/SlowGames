@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4354508764683854}
+  - component: {fileID: 114900252592841470}
   m_Layer: 0
   m_Name: DragSparkEfect
   m_TagString: Untagged
@@ -53,8 +54,6 @@ GameObject:
   - component: {fileID: 4215394728381344}
   - component: {fileID: 198734845506348380}
   - component: {fileID: 199090895514793552}
-  - component: {fileID: 114065014246221692}
-  - component: {fileID: 114020032646616782}
   m_Layer: 0
   m_Name: new MazzleFlush (1)
   m_TagString: Untagged
@@ -103,26 +102,15 @@ Transform:
   m_Father: {fileID: 4354508764683854}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114020032646616782
+--- !u!114 &114900252592841470
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807631968277616}
+  m_GameObject: {fileID: 1654325434213786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28bc403ef7be2c1458baf74662640027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114065014246221692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807631968277616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03fcdbdf6e352a42abeaa9824f515be, type: 3}
+  m_Script: {fileID: 11500000, guid: febdc95e5bda1ab4fa19ad81dbbc0589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198205324758946688
