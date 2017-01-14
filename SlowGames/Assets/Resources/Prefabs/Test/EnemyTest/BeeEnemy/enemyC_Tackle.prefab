@@ -100,8 +100,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532482501004534}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28199998, y: 33.37, z: -6.68}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.038000047, y: 30.57, z: -6.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4875580712134376}
@@ -274,7 +274,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 5
+  _generatePostion: 3
   _attackDamege: 2
 --- !u!114 &114455878612764528
 MonoBehaviour:
@@ -353,7 +353,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1532482501004534}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 200
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 180
