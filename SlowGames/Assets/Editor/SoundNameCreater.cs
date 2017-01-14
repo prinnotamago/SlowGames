@@ -79,7 +79,7 @@ public class SoundNameCreater : MonoBehaviour
 
             var path = "Assets/Resources/Audio/SE";
 
-            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
+			var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
 
             foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
