@@ -824,7 +824,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	/// </summary>
 	/// <param name="name">Seの名前</param>
 	/// <returns></returns>
-	public AudioManager stopVoiceSe(AudioName.VoiceName name)
+	public AudioManager stopVoice(AudioName.VoiceName name)
 	{
 		var sources = findVoiceSources(name).GetEnumerator();
 		while (sources.MoveNext())
