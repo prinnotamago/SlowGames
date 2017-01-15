@@ -61,9 +61,11 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("public enum BgmName");
             builder.AppendLine("{");
 
-            var path = "Assets/Resources/Audio/BGM";
+            //var path = "Assets/Resources/Audio/BGM";
+            var path = "Audio/BGM";
 
-            var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
+            //var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany(pattern => Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
+            var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
 
             foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
@@ -77,9 +79,11 @@ public class SoundNameCreater : MonoBehaviour
             builder.AppendLine("public enum SeName");
             builder.AppendLine("{");
 
-            var path = "Assets/Resources/Audio/SE";
+            //var path = "Assets/Resources/Audio/SE";
+            var path = "Audio/SE";
 
-			var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+            //var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+            var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
 
             foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
             {
@@ -93,11 +97,13 @@ public class SoundNameCreater : MonoBehaviour
 			builder.AppendLine("public enum VoiceName");
 			builder.AppendLine("{");
 
-			var path = "Assets/Resources/Audio/Voice";
+			//var path = "Assets/Resources/Audio/Voice";
+            var path = "Audio/Voice";
 
-			var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+            //var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+            var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
 
-			foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
 			{
 				builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
 			}

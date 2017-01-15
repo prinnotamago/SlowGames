@@ -132,7 +132,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     {
 		var source = _seSources [index];
 		source.loop = loop;
-		source.Play ();
+        source.PlayOneShot(source.clip, source.volume);
 		return source;
     }
 
@@ -415,8 +415,9 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
         audioSource.clip = _seClips[index];
         audioSource.loop = loop;
+        audioSource.spatialize = true;
 
-        audioSource.Play();
+        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
 
         return audioSource;
     }
@@ -646,7 +647,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     {
 		var source = _slowSources [index];
 		source.loop = loop;
-		source.Play ();
+        source.PlayOneShot(source.clip, source.volume);
         return source;
     }
 
@@ -758,7 +759,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 	{
 		var source = _voiceSources [index];
 		source.loop = loop;
-		source.Play ();
+        source.PlayOneShot(source.clip, source.volume);
 		return source;
 	}
 

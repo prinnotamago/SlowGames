@@ -12,9 +12,9 @@ public enum SeName
 	Diying,
 	Flying,
 	Genrtate,
-	gun1,
 	gunreload1,
 	gunreload2,
+	gun1,
 	Thunder,
 }
 public enum VoiceName
@@ -47,8 +47,8 @@ public enum VoiceName
 	V04b,
 	V05,
 	V06,
-	V07Charge,
 	V07,
+	V07Charge,
 	V08,
 	V09,
 }
