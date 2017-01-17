@@ -146,7 +146,7 @@ public class TitleManager : MonoBehaviour
         while(NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
         {
             time += Time.unscaledDeltaTime;
-            NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InOutCubic(time, 2.0f, 0.0f, 10.0f);
+            NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InCubic(time, 2.0f, 0.0f, 10.0f);
             yield return null;
         }
 
