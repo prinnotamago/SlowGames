@@ -131,8 +131,16 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     public AudioSource playSe(int index, bool loop = false)
     {
 		var source = _seSources [index];
-		source.loop = loop;
-        source.PlayOneShot(source.clip, source.volume);
+        if (loop)
+        {
+            source.loop = loop;
+            source.Play();
+        }
+        else
+        {
+            source.PlayOneShot(source.clip, source.volume);
+        }
+
 		return source;
     }
 
