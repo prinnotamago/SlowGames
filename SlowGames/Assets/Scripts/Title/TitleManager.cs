@@ -146,7 +146,7 @@ public class TitleManager : MonoBehaviour
         while(NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
         {
             time += Time.unscaledDeltaTime;
-            NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InOutCubic(time, 2.0f, 0.0f, 10.0f);
+            NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InCubic(time, 2.0f, 0.0f, 10.0f);
             yield return null;
         }
 
@@ -377,11 +377,13 @@ public class TitleManager : MonoBehaviour
             if(voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
-                //AudioManager.instance.playNotSlowSe(AudioName.SeName.V04);
+                AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
             }
 
             yield return null;
         }
+
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V04b);
 
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
