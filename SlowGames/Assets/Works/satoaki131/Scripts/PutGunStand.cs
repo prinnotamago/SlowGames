@@ -37,6 +37,7 @@ public class PutGunStand : MonoBehaviour {
     {
         if(col.gameObject.tag == TagName.Stand)
         {
+            AudioManager.instance.playSe(AudioName.SeName.GunGet);
             _gunObj.transform.parent = null; //子供解除
             var localPosition = col.transform.position;
             localPosition.y = 0.7f;
