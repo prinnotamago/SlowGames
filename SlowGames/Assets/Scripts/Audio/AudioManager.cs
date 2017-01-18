@@ -422,10 +422,20 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         }
 
         audioSource.clip = _seClips[index];
-        audioSource.loop = loop;
-        audioSource.spatialize = true;
+        //audioSource.loop = loop;
+        //audioSource.spatialize = true;
 
-        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+        //audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+
+        if (loop)
+        {
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+        }
 
         return audioSource;
     }
