@@ -16,7 +16,7 @@ public class DisplayStartCountDown : MonoBehaviour {
         _image = GetComponentInParent<Image>();
         _color = _image.color;
 	}
-	
+
 	void Update()
     {
         _text.text = GameDirector.instance.displayTime.ToString();
