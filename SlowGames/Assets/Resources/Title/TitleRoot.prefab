@@ -1945,7 +1945,6 @@ GameObject:
   - component: {fileID: 23489887858226468}
   - component: {fileID: 33585216431235196}
   - component: {fileID: 114030674945076808}
-  - component: {fileID: 114552494164039716}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -2793,6 +2792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4356742607825014}
   - component: {fileID: 114359100135362518}
+  - component: {fileID: 114000585307734584}
   m_Layer: 0
   m_Name: PlaneManager
   m_TagString: Untagged
@@ -2867,7 +2867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1754243607777940
 GameObject:
   m_ObjectHideFlags: 0
@@ -9560,6 +9560,24 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114000585307734584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743356930344410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0294f4464e8933e4bb7858d41a4a0576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _createPosMax: {x: 5, y: -3}
+  _createPosMin: {x: -5, y: -3}
+  _startZ: -10
+  _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
+  _speedMax: 5
+  _speedMin: 2
+  _createTimeDecision: 0.05
 --- !u!114 &114001490728460972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10521,8 +10539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0294f4464e8933e4bb7858d41a4a0576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createPosMax: {x: 5, y: 4}
-  _createPosMin: {x: -5, y: 4}
+  _createPosMax: {x: 5, y: 3}
+  _createPosMin: {x: -5, y: 3}
+  _startZ: -10
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
   _speedMax: 5
   _speedMin: 2
@@ -10993,23 +11012,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
---- !u!114 &114552494164039716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1548791019084926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d0b5c28bfadde45919d6ef957ffdd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _put:
-  - {fileID: 114719157389910870}
-  - {fileID: 114386801888448456}
-  _logo: {fileID: 0}
-  _thankyouText: {fileID: 0}
-  _logoMoveEndTime: 2
 --- !u!114 &114560306911220864
 MonoBehaviour:
   m_ObjectHideFlags: 1
