@@ -189,10 +189,17 @@ public class BossAI : MonoBehaviour {
     GameObject _boundParticle = null;
     [SerializeField]
     GameObject _slideParticle = null;
+    [SerializeField]
+    GameObject _slideParticleParent = null;
     //////////////////////////////////////////////////////////////////////////////
 
+    // ヒットエフェクト
     [SerializeField]
     GameObject _hitParticle = null;
+
+    // ラストでタックルされてるときに出すヒットエフェクト
+    [SerializeField]
+    GameObject _hitLastParticle = null;
 
     Animator _anim;
 
@@ -421,7 +428,7 @@ public class BossAI : MonoBehaviour {
         {
             // 速い弾を撃つ
             var bullet = Instantiate(_speedBullet);
-            bullet.transform.position = _frontGunObjPos.position;
+            bullet.transform.position = _SpeedGunObjPos.position;
             bullet.transform.LookAt(_player.transform);
             bullet.GetComponent<BossBullet>().chargeTime = _speedBulletChargeMax;
         }
@@ -803,7 +810,7 @@ public class BossAI : MonoBehaviour {
                     var boundParticle = Instantiate(_slideParticle);
                     boundParticle.transform.position = _effectPos.transform.position;
                     boundParticle.transform.LookAt(_player.transform);
-                    boundParticle.transform.parent = transform;
+                    boundParticle.transform.parent = _slideParticleParent.transform;
                 }
             }
             return;
@@ -812,9 +819,17 @@ public class BossAI : MonoBehaviour {
 
     void EffectAndDamage(Collider col)
     {
-        var particle = Instantiate(_hitParticle);
-        particle.transform.position = col.transform.position;
-
+        if (_lastTackleFlag)
+        {
+            var particle = Instantiate(_hitLastParticle);
+            particle.transform.position = col.transform.position;
+        }
+        else
+        {
+            var particle = Instantiate(_hitParticle);
+            particle.transform.position = col.transform.position;
+        }
+            
         // 出現時は当たらないようにする
         if (_state == BossState.START || _state == BossState.CLIMAX || _state == BossState.STANDBY) { return; }
 

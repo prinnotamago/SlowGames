@@ -31,9 +31,13 @@ public class BossBullet : MonoBehaviour {
 
     float _destroyCount = 5.0f;
 
+    [SerializeField]
+    GameObject _chargeEffect;
+
     void Start()
     {
-
+        var particle = Instantiate(_chargeEffect);
+        particle.transform.position = transform.position;
     }
 
     void Update()

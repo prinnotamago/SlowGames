@@ -156,6 +156,8 @@ MonoBehaviour:
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
   _targetDirection: {x: 0, y: 0, z: 0}
+  _chargeEffect: {fileID: 1979463909858250, guid: a599030045c649648812c888c5a47697,
+    type: 2}
 --- !u!198 &198053858660352846
 ParticleSystem:
   m_ObjectHideFlags: 1
