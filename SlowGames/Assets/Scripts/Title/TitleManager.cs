@@ -408,7 +408,7 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
-
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V05);
 
         yield return new WaitForSeconds(1.0f); //チャージ完了のセリフ待ってから進む
 
@@ -544,7 +544,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].SetActive(false);
 
         time = 0.0f;
-        var endTime = 8.0f;
+        var endTime = 9.0f;
         AudioManager.instance.playVoice(AudioName.VoiceName.V09);
         while (time < endTime)
         {
