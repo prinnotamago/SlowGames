@@ -62,13 +62,6 @@ public class ResultManager : MonoBehaviour
 
     private IEnumerator Production()
     {
-        //thank you for playing演出
-        _thankyouText.isMoveText = true;
-        while(!_thankyouText.isPopText)
-        {
-            yield return null;
-        }
-
         //Logo演出
         var time = 0.0f;
         while (time < _logoMoveEndTime)
@@ -77,6 +70,14 @@ public class ResultManager : MonoBehaviour
             _logo.fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
             yield return null;
         }
+
+        //thank you for playing演出
+        _thankyouText.isMoveText = true;
+        while (!_thankyouText.isPopText)
+        {
+            yield return null;
+        }
+
 
         //ざらざら演出
         time = 0.0f;
