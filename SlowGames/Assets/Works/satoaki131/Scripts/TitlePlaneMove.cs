@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TitlePlaneMove : MonoBehaviour {
 
+    [SerializeField]
+    private float endZ = 10.0f;
+
     // 動く速さ
     public float speed
     {
@@ -20,7 +23,7 @@ public class TitlePlaneMove : MonoBehaviour {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // 一定距離を超えたら消す
-        if (transform.position.z > 25)
+        if (transform.position.z > endZ)
         {
             Destroy(gameObject);
         }
