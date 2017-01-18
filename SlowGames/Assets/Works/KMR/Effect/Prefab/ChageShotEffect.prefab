@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4008267123055084}
   - component: {fileID: 198778176732528382}
   - component: {fileID: 199799815528882064}
+  - component: {fileID: 114162092197263990}
   m_Layer: 0
   m_Name: ChageShotEffect (1)
   m_TagString: Untagged
@@ -39,6 +40,7 @@ GameObject:
   - component: {fileID: 198440999995641342}
   - component: {fileID: 199913166649510776}
   - component: {fileID: 114304251069117564}
+  - component: {fileID: 114334560265830126}
   m_Layer: 0
   m_Name: ChageShotEffect
   m_TagString: Untagged
@@ -66,13 +68,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979463909858250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9.26}
+  m_LocalPosition: {x: 0, y: 0, z: 8.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4008267123055084}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114162092197263990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747106812923942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bc403ef7be2c1458baf74662640027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114304251069117564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +95,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a03fcdbdf6e352a42abeaa9824f515be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114334560265830126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979463909858250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bc403ef7be2c1458baf74662640027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198440999995641342
@@ -139,7 +163,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 4692352
+  randomSeed: -2125326397
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -171,7 +195,7 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 0
     startSpeed:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -303,7 +327,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 1
     startSize:
-      scalar: 0.8
+      scalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -583,7 +607,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     type: 0
-    radius: 5.18
+    radius: 1.1
     angle: 26.6
     length: 5
     boxX: 1
@@ -606,7 +630,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 400
+      scalar: 200
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2754,7 +2778,7 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 0
     startSpeed:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2886,7 +2910,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 1
     startSize:
-      scalar: 0.3
+      scalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2925,7 +2949,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSizeY:
-      scalar: 1
+      scalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2964,7 +2988,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSizeZ:
-      scalar: 1
+      scalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3166,7 +3190,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     type: 0
-    radius: 5.18
+    radius: 1.1
     angle: 26.6
     length: 5
     boxX: 1
@@ -3189,7 +3213,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 200
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:

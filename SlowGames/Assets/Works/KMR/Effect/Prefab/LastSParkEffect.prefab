@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199695704196179546}
   - component: {fileID: 114460771392774792}
   m_Layer: 0
-  m_Name: LastSParkEffect
+  m_Name: LastSparkEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983096564665020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 9.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,12 +108,12 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 952343651
+  randomSeed: -1883326842
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.15
+      scalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -152,7 +152,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 18
+      scalar: 13
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -284,7 +284,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 0.4
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -564,7 +564,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     type: 0
-    radius: 1
+    radius: 0.23
     angle: 25
     length: 5
     boxX: 1
@@ -664,7 +664,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 30
+    cnt0: 50
     cnt1: 30
     cnt2: 30
     cnt3: 30
