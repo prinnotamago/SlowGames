@@ -756,7 +756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4861436511722074}
   - component: {fileID: 114207268013568552}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1704,7 +1704,7 @@ GameObject:
   - component: {fileID: 114386801888448456}
   - component: {fileID: 54412619545554590}
   - component: {fileID: 114291735021722700}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Controller (right)
   m_TagString: GameController
   m_Icon: {fileID: 0}
@@ -1894,7 +1894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4139498870123888}
   - component: {fileID: 114574895762114014}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3739,7 +3739,7 @@ GameObject:
   - component: {fileID: 114719157389910870}
   - component: {fileID: 54991070996544786}
   - component: {fileID: 114220580262271440}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Controller (left)
   m_TagString: GameController
   m_Icon: {fileID: 0}
@@ -7589,7 +7589,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830028741415516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7809,7 +7809,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288592768273972}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -10521,12 +10521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0294f4464e8933e4bb7858d41a4a0576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createPosMax: {x: 12, y: 40}
-  _createPosMin: {x: -12, y: -40}
+  _createPosMax: {x: 5, y: 4}
+  _createPosMin: {x: -5, y: 4}
+  _startZ: -15
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
-  _speedMax: 1
-  _speedMin: 0.3
-  _createTimeDecision: 0.5
+  _speedMax: 5
+  _speedMin: 2
+  _createTimeDecision: 0.05
 --- !u!114 &114359334724507824
 MonoBehaviour:
   m_ObjectHideFlags: 1

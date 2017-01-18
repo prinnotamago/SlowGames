@@ -11,6 +11,9 @@ public class TitlePlaneManager : MonoBehaviour {
     [SerializeField]
     Vector2 _createPosMin = new Vector2(-12, -40);
 
+    [SerializeField]
+    private float _startZ = 0.0f;
+
     // 生成する板
     [SerializeField]
     GameObject _planeObj = null;
@@ -49,7 +52,7 @@ public class TitlePlaneManager : MonoBehaviour {
             var obj = Instantiate(_planeObj);
             var x = Random.Range(_createPosMin.x, _createPosMax.x);
             var y = Random.Range(_createPosMin.y, _createPosMax.y);
-            obj.transform.position = new Vector3(x, y, -12);
+            obj.transform.position = new Vector3(x, y, _startZ);
             obj.transform.parent = transform;
             var speed = Random.Range(_speedMin, _speedMax);
             obj.GetComponent<TitlePlaneMove>().speed = speed;

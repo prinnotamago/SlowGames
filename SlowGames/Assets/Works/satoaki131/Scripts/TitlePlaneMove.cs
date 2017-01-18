@@ -17,10 +17,10 @@ public class TitlePlaneMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // 移動
-        transform.Translate(Vector3.forward * speed);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // 一定距離を超えたら消す
-        if (transform.position.z > 100)
+        if (transform.position.z > 25)
         {
             Destroy(gameObject);
         }
