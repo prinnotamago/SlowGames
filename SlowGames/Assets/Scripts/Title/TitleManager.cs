@@ -116,8 +116,6 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
         _arrowAnim.gameObject.SetActive(false);
-
-        //NoiseSwitch.instance.OnNoise();
     }
 
     void Update()
@@ -482,7 +480,7 @@ public class TitleManager : MonoBehaviour
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
-        _descriptionText.text = "敵を倒そう！";
+        _descriptionText.text = "ミサイルを打ち落とそう！";
 
         //光らせるマテリアルのEmissionを設定
         _viveMaterial[2].EnableKeyword("_EMISSION");
