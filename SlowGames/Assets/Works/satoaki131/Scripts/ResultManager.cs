@@ -34,6 +34,7 @@ public class ResultManager : MonoBehaviour
         _stateUpdate.Add(State.GunPut, GunPutUpdate);
         _stateUpdate.Add(State.Wait, () => { });
         _stateUpdate.Add(State.End, EndUpdate);
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
     }
 
     void Update()
@@ -62,8 +63,17 @@ public class ResultManager : MonoBehaviour
 
     private IEnumerator Production()
     {
-        //Logo演出
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV17);
         var time = 0.0f;
+        //音声終わるの待つ
+        while (time < 3.5f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        //Logo演出
+        time = 0.0f;
         while (time < _logoMoveEndTime)
         {
             time += Time.unscaledDeltaTime;

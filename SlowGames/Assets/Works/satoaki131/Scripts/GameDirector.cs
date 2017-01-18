@@ -118,12 +118,24 @@ public class GameDirector : MonoBehaviour {
         }
         else if(_isBossDestroy && _gamePlay)
         {
-            SceneChange.ChangeScene(SceneName.Name.Result, Color.white);
-            //_gamePlay = false;
+            _gamePlay = false;
+            StartCoroutine(GameEndAudio());
             //GameSet();
             //StartCoroutine(ResultChangeStage(_gameClearImage));
         }
 
+    }
+
+    private IEnumerator GameEndAudio()
+    {
+        AudioManager.instance.playVoice(AudioName.VoiceName.IV15);
+        var time = 0.0f;
+        while(time < 9.5f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        SceneChange.ChangeScene(SceneName.Name.Result, Color.white);
     }
 
     /// <summary>
