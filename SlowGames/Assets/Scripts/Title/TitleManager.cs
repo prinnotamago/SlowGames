@@ -377,13 +377,13 @@ public class TitleManager : MonoBehaviour
             if (voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
-                //AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
+                AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
             }
 
             yield return null;
         }
 
-        //AudioManager.instance.stopVoice(AudioName.VoiceName.V04b);
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V04b);
 
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);

@@ -40,6 +40,7 @@ public enum VoiceName
 	V02,
 	V03,
 	V04,
+	V04b,
 	V05,
 	V07Charge,
 	V07b,
