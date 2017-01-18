@@ -120,19 +120,22 @@ public class GenerateManager : MonoBehaviour
     }
 
 
+    List<TargetPosition> _genePos = new List<TargetPosition>();
+
+    void Awake()
+    {
+        _genePos.Add(TargetPosition.Left);
+        _genePos.Add(TargetPosition.Right);
+        _genePos.Add(TargetPosition.UpFront);
+
+    }
+
     public void TutorialSet()
     {
-
-        List<TargetPosition> genePos = new List<TargetPosition>();
-
-        genePos.Add(TargetPosition.Left);
-        genePos.Add(TargetPosition.Right);
-        genePos.Add(TargetPosition.UpFront);
-
         //チュートリアル用の三体を生成
-        for (int i = 0; i < genePos.Count; i++)
+        for (int i = 0; i < _genePos.Count; i++)
         {
-            DefaultSetEnemy(EnemyType.Easy,genePos[i]);
+            DefaultSetEnemy(EnemyType.Easy,_genePos[i]);
         }
 
     }
