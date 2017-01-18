@@ -10523,7 +10523,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _createPosMax: {x: 5, y: 4}
   _createPosMin: {x: -5, y: 4}
-  _startZ: -15
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
   _speedMax: 5
   _speedMin: 2
@@ -13452,7 +13451,7 @@ RectTransform:
   m_GameObject: {fileID: 1781543238796572}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -198}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 224403314672011666}
   m_RootOrder: 0
@@ -13460,7 +13459,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -111.5, y: -183}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 800, y: 95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224942858438019996
 RectTransform:
