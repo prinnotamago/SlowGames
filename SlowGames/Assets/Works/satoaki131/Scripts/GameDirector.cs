@@ -163,7 +163,7 @@ public class GameDirector : MonoBehaviour {
     private IEnumerator GameStartCutIn()
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV01);
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(5.0f);
         _gameStartImage.gameObject.SetActive(true);
         var time = 0.0f;
         while(time < _gameStartTime)
