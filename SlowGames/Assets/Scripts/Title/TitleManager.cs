@@ -131,7 +131,7 @@ public class TitleManager : MonoBehaviour
 
     void LogoProductionUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             _state = State.Wait;
             StartCoroutine(NoiseCancel());
@@ -141,7 +141,7 @@ public class TitleManager : MonoBehaviour
     private IEnumerator NoiseCancel()
     {
         var time = 0.0f;
-        while(NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
+        while (NoiseSwitch.instance.noise.intensityMultiplier > 0.0f)
         {
             time += Time.unscaledDeltaTime;
             NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InCubic(time, 2.0f, 0.0f, 10.0f);
@@ -191,12 +191,12 @@ public class TitleManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             isChange = true;
         }
 
-        if(_voiceTIme > 30.0f)
+        if (_voiceTIme > 30.0f)
         {
             _voiceTIme = 0.0f;
             AudioManager.instance.playVoice(AudioName.VoiceName.V00);
@@ -219,8 +219,8 @@ public class TitleManager : MonoBehaviour
         //IDのキャンバスを表示
         _idCanvas.gameObject.SetActive(true);
 
-        AudioManager.instance.playVoice(AudioName.VoiceName.V01a); 
-        
+        AudioManager.instance.playVoice(AudioName.VoiceName.V01a);
+
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
@@ -262,7 +262,7 @@ public class TitleManager : MonoBehaviour
         _cameraRig[0].SetActive(false);
         _cameraRig[1].SetActive(true);
 
-        while(time < 1.0f)
+        while (time < 1.0f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -271,7 +271,7 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.playVoice(AudioName.VoiceName.V02);
 
         //Voiceが流れてる間、とめる
-        while(time < 10.0f)
+        while (time < 10.0f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -306,6 +306,20 @@ public class TitleManager : MonoBehaviour
         //Enemyくん起動
         //_enemyManager.SetTurtrealBulletActive(true);
 
+        StartCoroutine(WaitingState());
+    }
+
+    IEnumerator WaitingState()
+    {
+        var time = 0.0f;
+        var endTime = 5.0f;
+        AudioManager.instance.playVoice(AudioName.VoiceName.V03);
+        while (time < endTime)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
 
@@ -317,19 +331,6 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
 
-        StartCoroutine(WaitingState());
-    }
-
-    IEnumerator WaitingState()
-    {
-        var time = 0.0f;
-        var endTime = 5.0f;
-        AudioManager.instance.playVoice(AudioName.VoiceName.V03);
-        while(time < endTime)
-        {
-            time += Time.unscaledDeltaTime;
-            yield return null;
-        }
         StartCoroutine(SlowDescription());
     }
 
@@ -372,7 +373,7 @@ public class TitleManager : MonoBehaviour
                 _viveMaterial2[1].SetColor("_EmissionColor", Color.white);
             }
 
-            if(voiceTime > 15.0f)
+            if (voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
                 AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
@@ -395,7 +396,18 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
+
+        _descriptionText.text = "スロ―ゲージ回復中";
+
+        //スローゲージが回復するまで待つ
+        while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        {
+            yield return null;
+        }
+
         AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
+
+        yield return new WaitForSeconds(1.0f); //チャージ完了のセリフ待ってから進む
 
         //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
@@ -525,9 +537,9 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].SetActive(false);
 
         time = 0.0f;
-        var endTime = 4.0f;
+        var endTime = 8.0f;
         AudioManager.instance.playVoice(AudioName.VoiceName.V09);
-        while(time < endTime)
+        while (time < endTime)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
