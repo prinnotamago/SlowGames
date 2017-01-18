@@ -9,12 +9,16 @@ public enum BgmName
 }
 public enum SeName
 {
+	BulletFlip,
 	Diying,
 	Flying,
 	Genrtate,
 	gunreload1,
 	gunreload2,
 	gun1,
+	GunGet,
+	PlayerGun,
+	Reload,
 	Thunder,
 }
 public enum VoiceName
