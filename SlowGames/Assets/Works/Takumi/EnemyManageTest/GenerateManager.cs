@@ -62,6 +62,7 @@ public class GenerateManager : MonoBehaviour
     static int _currentWaveCount = 0;
 
     int _MAX_ENEMY = 30;
+    int _enemyNumber = 0; //次が何番目の生成かを取得.
 
     /// <summary>
     /// 
@@ -162,6 +163,7 @@ public class GenerateManager : MonoBehaviour
     {
             //生成した場所のカウントを覚えておく
             _currentEnemysCount[(int)targetPosition] += 1;
+            _enemyNumber++;
             //生成
             _enemyGenerator.GenerateEnemy(EnemyType.Easy, targetPosition);    
                          
@@ -218,14 +220,80 @@ public class GenerateManager : MonoBehaviour
     }
 
 
+//    //敵キャラを生成
+//    void UpdateEnemyCount()
+//    {
+//
+//        //ウェーブデータを感じた.
+//        var waveData = _waveDate[_currentWaveCount];
+//
+//        //ウェーブのデータが最大にいったらそれ以上はいかない
+//        if (_currentWaveCount < _waveDate.Count - 1)
+//        {
+//
+//            //敵の死亡数が一定数行っていたらウェーブを更新
+//            if (_deathCount > _waveDate[(_currentWaveCount + 1)]._startDieCount)
+//            {
+//                _currentWaveCount += 1;
+//            }
+//
+//        }
+//
+//        //生成しようとする数
+//        int GenerateCount = waveData._generateCount;
+//
+//
+//
+//        //指定した的キャラの出現
+//        //最大数でてたら通らない
+//        int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
+//        if (waveData._rareEnemyInfo.Count > rareEnemyCount)
+//        {
+//            //タイミングに合わせて、ホーミングタイプのキャラを出す
+//            if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
+//            {
+//                //指定したエネミータイプを生成 
+//                //更新
+//                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
+//                _rareEnemyCount[_currentWaveCount] += 1;
+//            }
+//        }
+//
+//        //死ぬごとに、敵キャラを生成
+//        int liveEnemysCount = GetLiveEnemyCount(); 
+//
+//        //現在生き残ってる数が新たに敵を出現させるタイミングかをチェック.
+//        if (liveEnemysCount <= waveData._generateTimingCount)
+//        {
+//            //限界値以上はださない
+//            if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
+//            {
+//                return;
+//            }
+//           
+//            //限界値以上出さない
+//            if (_MAX_ENEMY < _deathCount + liveEnemysCount + waveData._generateCount)
+//            { 
+//                
+//                int lastCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
+//                //Debug.Log("max_enmy:" + _MAX_ENEMY + " _deathocount:" +_deathCount +" liveEnemyCount :"+ liveEnemysCount);
+//                SetEnemy(lastCount, waveData._generateTypeList);
+//            }
+//            else 
+//            {
+//                //設定した分のエネミーを出す
+//                SetEnemy(waveData._generateCount, waveData._generateTypeList);
+//            }
+//        }
+//
+//    }
+
+
     //敵キャラを生成
     void UpdateEnemyCount()
     {
-
-        //ウェーブデータを感じた.
-        var waveData = _waveDate[_currentWaveCount];
-
-        //ウェーブのデータが最大にいったらそれ以上はいかない
+ 
+        //ウェーブのデータの更新チェック.
         if (_currentWaveCount < _waveDate.Count - 1)
         {
 
@@ -236,53 +304,58 @@ public class GenerateManager : MonoBehaviour
             }
 
         }
+     
 
-        //生成しようとする数
-        int GenerateCount = waveData._generateCount;
-
-
-
-        //指定した的キャラの出現
-        //最大数でてたら通らない
-        int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
-        if (waveData._rareEnemyInfo.Count > rareEnemyCount)
-        {
-            //タイミングに合わせて、ホーミングタイプのキャラを出す
-            if (_deathCount >= waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
-            {
-                //指定したエネミータイプを生成 
-                //更新
-                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
-                _rareEnemyCount[_currentWaveCount] += 1;
-            }
-        }
-
-        //死ぬごとに、敵キャラを生成
+        //現在のウェーブデータに合わせた生成情報を取得.
+        var waveData = _waveDate[_currentWaveCount];
+        //現在ステージ常に敵キャラ.
         int liveEnemysCount = GetLiveEnemyCount(); 
 
-        //現在生き残ってる数が新たに敵を出現させるタイミングかをチェック.
-        if (liveEnemysCount <= waveData._generateTimingCount)
+
+        //限界値以上はださない
+        if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
         {
-            //限界値以上はださない
-            if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
-            {
-                return;
-            }
-           
-            //限界値以上出さない
-            if (_MAX_ENEMY < _deathCount + liveEnemysCount + waveData._generateCount)
-            { 
-                
-                int lastCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
-                //Debug.Log("max_enmy:" + _MAX_ENEMY + " _deathocount:" +_deathCount +" liveEnemyCount :"+ liveEnemysCount);
-                SetEnemy(lastCount, waveData._generateTypeList);
-            }
-            else 
-            {
-                //設定した分のエネミーを出す
-                SetEnemy(waveData._generateCount, waveData._generateTypeList);
-            }
+            return;
         }
+
+
+        //生成する数
+        int GenerateCount = waveData._generateCount;
+
+        //最後の数を調整.
+        if (_MAX_ENEMY < _deathCount + liveEnemysCount + waveData._generateCount)
+        { 
+            GenerateCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
+        }
+
+
+        for (int i = 0; i < GenerateCount; i++)
+        {
+            //生成番号を更新.
+            _enemyNumber++;
+
+            //指定した的キャラの出現
+            //最大数でてたら通らない
+
+            int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
+           
+
+            //レアキャラ生成チェック
+            //それ以外は通常生成
+            if (_enemyNumber == waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
+            {
+                
+                SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
+                _rareEnemyCount[_currentWaveCount] += 1;
+
+            }
+            else
+            {
+                SetEnemy(1, waveData._generateTypeList);
+            }
+       }
+
+
 
     }
 
