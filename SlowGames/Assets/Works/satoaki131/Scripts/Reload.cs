@@ -51,7 +51,7 @@ public class Reload : MonoBehaviour {
         var time = 0.0f;
         isReload = true;
         //Audioを追加する(カシャッ)
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.gunreload1);
+        AudioManager.instance.playNotSlowSe(AudioName.SeName.Reload);
         //AudioManager.instance.playSe(AudioName.SeName.gunreload1);
         while(time < _reloadTime)
         {

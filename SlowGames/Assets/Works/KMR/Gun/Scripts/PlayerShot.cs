@@ -104,7 +104,7 @@ public class PlayerShot : MonoBehaviour
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
 
-        _bulletShotSe = AudioManager.instance.getSe(AudioName.SeName.gun1);
+        _bulletShotSe = AudioManager.instance.getSe(AudioName.SeName.PlayerGun);
     }
 
     void Update()
