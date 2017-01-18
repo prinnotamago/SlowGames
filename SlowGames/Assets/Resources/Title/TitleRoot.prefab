@@ -2793,6 +2793,7 @@ GameObject:
   - component: {fileID: 4356742607825014}
   - component: {fileID: 114359100135362518}
   - component: {fileID: 114000585307734584}
+  - component: {fileID: 114837095040746960}
   m_Layer: 0
   m_Name: PlaneManager
   m_TagString: Untagged
@@ -11147,7 +11148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32317ea92f8ab274d908caacfa54b1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slowHealTimeMax: 5
+  _slowHealTimeMax: 5.7
 --- !u!114 &114601719288886934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11679,6 +11680,24 @@ MonoBehaviour:
   - {fileID: 114202736855526452}
   - {fileID: 114787158664347676}
   - {fileID: 114148821754647588}
+--- !u!114 &114837095040746960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743356930344410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0294f4464e8933e4bb7858d41a4a0576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _createPosMax: {x: 5, y: -3}
+  _createPosMin: {x: -5, y: -3}
+  _startZ: -10
+  _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
+  _speedMax: 5
+  _speedMin: 2
+  _createTimeDecision: 0.05
 --- !u!114 &114845699200043658
 MonoBehaviour:
   m_ObjectHideFlags: 1

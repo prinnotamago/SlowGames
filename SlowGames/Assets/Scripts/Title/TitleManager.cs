@@ -410,7 +410,7 @@ public class TitleManager : MonoBehaviour
         }
         AudioManager.instance.stopVoice(AudioName.VoiceName.V05);
 
-        yield return new WaitForSeconds(1.0f); //チャージ完了のセリフ待ってから進む
+        yield return new WaitForSeconds(2.0f); //チャージ完了のセリフ待ってから進む
 
         //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
