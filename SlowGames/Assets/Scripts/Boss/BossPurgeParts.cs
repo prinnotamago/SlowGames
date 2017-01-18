@@ -21,6 +21,8 @@ public class BossPurgeParts : MonoBehaviour
     [SerializeField]
     BossAI _ai;
 
+    //static bool _oneHitFrame = true;
+
     // Use this for initialization
     void Start()
     {
@@ -29,8 +31,9 @@ public class BossPurgeParts : MonoBehaviour
     }
 
     // Update is called once per frame
-    //void Update () {
-
+    //void Update()
+    //{
+    //    _oneHitFrame = true;
     //}
 
     //void OnTriggerEnter(Collider col)
@@ -70,8 +73,10 @@ public class BossPurgeParts : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
+        //if (!_oneHitFrame) { return; }
         if (!_hitFlag) { return; }
-
+        if (_ai == null) { return; }
         _ai.PargeDamage(col);
+        //_oneHitFrame = false;
     }
 }

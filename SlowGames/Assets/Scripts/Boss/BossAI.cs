@@ -196,6 +196,8 @@ public class BossAI : MonoBehaviour {
 
     Animator _anim;
 
+    bool _oneHitFrame = true;
+
     // Use this for initialization
     void Start () {
         // 狙うためのプレイヤーを探していれる
@@ -251,6 +253,8 @@ public class BossAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        _oneHitFrame = true;
+
         // デバック用damage
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -341,7 +345,9 @@ public class BossAI : MonoBehaviour {
     // ダメージを受ける
     void Damage()
     {
+        if (!_oneHitFrame) { return; }
         _hp--;
+        _oneHitFrame = false;
     }
     // ダメージが一定受けたらの処理たち
     void DamageCheck()
@@ -395,7 +401,8 @@ public class BossAI : MonoBehaviour {
                 AudioManager.instance.stopAllVoice();
                 AudioManager.instance.playVoice(AudioName.VoiceName.IV14);
 
-                _anim.SetBool("down", true);
+                //_anim.SetBool("down", true);
+                _anim.Play("Down");
             }
         }
 
@@ -680,6 +687,12 @@ public class BossAI : MonoBehaviour {
                 //}
 
                 ++_lastMoveIndex;
+
+                if (_lastMoveIndex == _lastMovePos.Count - 2)
+                {
+                    //_anim.SetBool("tackle", true);
+                    _anim.Play("Tackle");
+                }
             }
         }
         // プレイヤーへのタックル
@@ -700,6 +713,8 @@ public class BossAI : MonoBehaviour {
                     AudioManager.instance.stopAllVoice();
                     AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
                 }
+
+                
             }
             var length = _player.transform.position - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastTackleSpeed * Time.deltaTime;
@@ -788,7 +803,7 @@ public class BossAI : MonoBehaviour {
                     var boundParticle = Instantiate(_slideParticle);
                     boundParticle.transform.position = _effectPos.transform.position;
                     boundParticle.transform.LookAt(_player.transform);
-                    boundParticle.transform.parent = _bossBodyParent.transform;
+                    boundParticle.transform.parent = transform;
                 }
             }
             return;

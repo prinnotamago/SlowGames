@@ -29,6 +29,8 @@ public class BossBullet : MonoBehaviour {
 
     bool _destroyFlag = true;
 
+    float _destroyCount = 5.0f;
+
     void Start()
     {
 
@@ -69,10 +71,12 @@ public class BossBullet : MonoBehaviour {
             // 前進
             transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
 
-            if (_destroyFlag)
+            _destroyCount -= Time.unscaledDeltaTime;
+            if (_destroyCount <= 0.0f)
             {
-                Destroy(this.gameObject, 5);
-                _destroyFlag = false;
+                SlowMotion._instance.ResetSpeed();
+                SlowMotion._instance.isLimit = true;
+                Destroy(this.gameObject);
             }
         }
     }
