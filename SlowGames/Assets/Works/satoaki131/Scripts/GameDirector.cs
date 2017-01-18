@@ -27,11 +27,14 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     private Canvas _resultCanvas = null;
 
-    [SerializeField]
-    private Image _gameClearImage = null;
+    //[SerializeField]
+    //private Image _gameClearImage = null;
 
     [SerializeField]
     private GameObject _boss = null;
+
+    [SerializeField]
+    private Image _gameStartImage = null;
 
     private Dictionary<GameState, Action> _update = null;
 
@@ -160,6 +163,8 @@ public class GameDirector : MonoBehaviour {
     private IEnumerator GameStartCutIn()
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV01);
+        yield return new WaitForSeconds(4.0f);
+        _gameStartImage.gameObject.SetActive(true);
         var time = 0.0f;
         while(time < _gameStartTime)
         {
