@@ -761,7 +761,7 @@ public class BossAI : MonoBehaviour {
             // HP が 0 になったら死ぬ
             if (_hp <= 0)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
                 GameDirector.instance.isBossDestroy();
             }
         }

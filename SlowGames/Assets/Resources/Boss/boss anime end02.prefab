@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 135016464916567302}
   - component: {fileID: 135390312937260654}
   - component: {fileID: 135617454159320744}
+  - component: {fileID: 135640676821413798}
   m_Layer: 14
   m_Name: body
   m_TagString: Enemy
@@ -1899,6 +1900,18 @@ SphereCollider:
   m_GameObject: {fileID: 1731861635482264}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 6, z: 0}
+--- !u!135 &135640676821413798
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731861635482264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
