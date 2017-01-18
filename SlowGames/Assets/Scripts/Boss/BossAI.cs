@@ -18,6 +18,12 @@ public class BossAI : MonoBehaviour {
     int _changeStateIndex = 0;  // 形態が変わるごとに1つ進める  
 
     /// <summary>
+    /// ボスの本体
+    /// </summary>
+    [SerializeField]
+    GameObject _bossBody = null;
+
+    /// <summary>
     /// パージするパーツ
     /// </summary>
     [SerializeField]
@@ -188,6 +194,8 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     GameObject _hitParticle = null;
 
+    Animator _anim;
+
     // Use this for initialization
     void Start () {
         // 狙うためのプレイヤーを探していれる
@@ -205,7 +213,7 @@ public class BossAI : MonoBehaviour {
         }
         _lastMovePos.Add(_lastTacklePos);
 
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = /*_bossBody.*/GetComponent<Rigidbody>();
 
         // 第２形態で使う MoveObj を生成する
         var moveObjParent = Instantiate(_level_2_moveObjPrefab);
@@ -235,6 +243,10 @@ public class BossAI : MonoBehaviour {
 
         // ボスと弾が当たるようにする
         Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, false);
+
+        // アニメーションを入れる
+        _anim = GetComponent<Animator>();
+        _anim.Play("PataPata");
     }
 
     // Update is called once per frame
@@ -382,6 +394,8 @@ public class BossAI : MonoBehaviour {
                 // ボスを倒したことを伝えるボイス
                 AudioManager.instance.stopAllVoice();
                 AudioManager.instance.playVoice(AudioName.VoiceName.IV14);
+
+                _anim.SetBool("down", true);
             }
         }
 
@@ -774,6 +788,7 @@ public class BossAI : MonoBehaviour {
                     var boundParticle = Instantiate(_slideParticle);
                     boundParticle.transform.position = _effectPos.transform.position;
                     boundParticle.transform.LookAt(_player.transform);
+                    boundParticle.transform.parent = transform;
                 }
             }
             return;
@@ -809,18 +824,20 @@ public class BossAI : MonoBehaviour {
     // パーツをランダムでパージする
     void PartsPurge()
     {
-        List<BossPurgeParts> parts = new List<BossPurgeParts>();
-        foreach(var part in _parts)
-        {
-            if (!part.isPurge)
-            {
-                parts.Add(part);
-            }
-        }
+        //List<BossPurgeParts> parts = new List<BossPurgeParts>();
+        //foreach(var part in _parts)
+        //{
+        //    if (!part.isPurge)
+        //    {
+        //        parts.Add(part);
+        //    }
+        //}
 
-        if(parts.Count == 0) { return; }
+        //if(parts.Count == 0) { return; }
 
-        int rand = Random.Range(0, parts.Count);
-        parts[rand].Purge();
+        //int rand = Random.Range(0, parts.Count);
+        //parts[rand].Purge();
+
+        _parts[_purgeIndex].Purge();
     }
 }
