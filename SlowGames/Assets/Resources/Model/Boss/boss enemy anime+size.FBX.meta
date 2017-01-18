@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7c29f73f5da932540ad49b7a9b72b55b
-timeCreated: 1484699608
+guid: c0bbc76cc66099f40ae59cdcbe8da4cb
+timeCreated: 1484702479
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -58,7 +58,8 @@ ModelImporter:
     4300012: right_under_wing
     4300014: body
     4300016: left_under_wing
-    7400000: Take 001
+    7400000: Down
+    7400002: PataPata
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -80,7 +81,115 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: PataPata
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: body/body 1
+        weight: 1
+      - path: head_parge_01
+        weight: 1
+      - path: head_parge_02
+        weight: 1
+      - path: head_parge_03
+        weight: 1
+      - path: head_parge_04
+        weight: 1
+      - path: left underwing
+        weight: 1
+      - path: left underwing/left_under_wing
+        weight: 1
+      - path: left_parge_part
+        weight: 1
+      - path: right underwing
+        weight: 1
+      - path: right underwing/right_under_wing
+        weight: 1
+      - path: right_parge_part
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Down
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: body/body 1
+        weight: 1
+      - path: head_parge_01
+        weight: 1
+      - path: head_parge_02
+        weight: 1
+      - path: head_parge_03
+        weight: 1
+      - path: head_parge_04
+        weight: 1
+      - path: left underwing
+        weight: 1
+      - path: left underwing/left_under_wing
+        weight: 1
+      - path: left_parge_part
+        weight: 1
+      - path: right underwing
+        weight: 1
+      - path: right underwing/right_under_wing
+        weight: 1
+      - path: right_parge_part
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

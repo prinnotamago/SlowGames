@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossPurgeParts : MonoBehaviour {
+public class BossPurgeParts : MonoBehaviour
+{
 
     // パーツの体力
     //[SerializeField]
@@ -15,16 +16,22 @@ public class BossPurgeParts : MonoBehaviour {
     Rigidbody _rigidbody = null;
     Collider _collider = null;
 
-	// Use this for initialization
-	void Start () {
+    bool _hitFlag = true;
+
+    [SerializeField]
+    BossAI _ai;
+
+    // Use this for initialization
+    void Start()
+    {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponent<Collider>();
     }
-	
-	// Update is called once per frame
-	//void Update () {
-		
-	//}
+
+    // Update is called once per frame
+    //void Update () {
+
+    //}
 
     //void OnTriggerEnter(Collider col)
     //{
@@ -52,9 +59,19 @@ public class BossPurgeParts : MonoBehaviour {
         _rigidbody.useGravity = true;
         var vector = transform.position - transform.parent.transform.position;
         //Debug.Log(vector);
+        _rigidbody.constraints = RigidbodyConstraints.None;
         _rigidbody.velocity = vector.normalized * 25 + Vector3.down * 25;
         transform.parent = null;
 
         _isPurge = true;
+
+        _hitFlag = false;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (!_hitFlag) { return; }
+
+        _ai.PargeDamage(col);
     }
 }

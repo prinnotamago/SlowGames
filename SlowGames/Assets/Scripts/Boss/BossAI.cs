@@ -21,7 +21,7 @@ public class BossAI : MonoBehaviour {
     /// ボスの本体
     /// </summary>
     [SerializeField]
-    GameObject _bossBody = null;
+    GameObject _bossBodyParent = null;
 
     /// <summary>
     /// パージするパーツ
@@ -245,7 +245,7 @@ public class BossAI : MonoBehaviour {
         Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, false);
 
         // アニメーションを入れる
-        _anim = GetComponent<Animator>();
+        _anim = _bossBodyParent.GetComponent<Animator>();
         _anim.Play("PataPata");
     }
 
@@ -275,7 +275,7 @@ public class BossAI : MonoBehaviour {
         DamageCheck();
 
         // クライマックス以外プレイヤーに向かせる
-        if (_state != BossState.CLIMAX) { transform.LookAt(_player.transform); }
+        if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
 
         // 速い弾を撃つときは各形態の動作をしないようにする
         if (_speedBulletFlag) { return; }
@@ -482,8 +482,8 @@ public class BossAI : MonoBehaviour {
         //    transform.position += Vector3.down * Time.deltaTime;
         //}
 
-        var vector = _startPos - transform.position;
-        transform.position += vector / _startSpeed;
+        var vector = _startPos - _bossBodyParent.transform.position;
+        _bossBodyParent.transform.position += vector / _startSpeed;
         if(vector.magnitude <= 0.5f)
         {
             _state++;
@@ -553,7 +553,7 @@ public class BossAI : MonoBehaviour {
         //    _level_1_moveAngle = (-Mathf.PI / 4) * 2;
         //}
 
-        var vector = _level_1_pos[_level_1_posIndex] - transform.position;
+        var vector = _level_1_pos[_level_1_posIndex] - _bossBodyParent.transform.position;
 
         Vector3 length = _level_1_pos[_level_1_posIndex] - _level_1_pos[_level_1_posIndexBefore];
         var nomarize = (vector.magnitude / length.magnitude);
@@ -561,7 +561,7 @@ public class BossAI : MonoBehaviour {
         // 0.4f は微調整の数値
         _level_1_moveAngle += _level_1_speed * Time.deltaTime * 0.4f;
 
-        transform.position += new Vector3(
+        _bossBodyParent.transform.position += new Vector3(
                vector.normalized.x * _level_1_speed * Time.deltaTime + Mathf.Cos(_level_1_moveAngle) * _level_1_speed * Time.deltaTime,
                vector.normalized.y * _level_1_speed * Time.deltaTime + Mathf.Sin(_level_1_moveAngle) * _level_1_speed * Time.deltaTime,
                vector.normalized.z * _level_1_speed * Time.deltaTime
@@ -608,14 +608,14 @@ public class BossAI : MonoBehaviour {
                 Mathf.Sin(_level_2_moveAngle * 2) * _level_2_maxHeight,
                 0);
 
-            var vector = nextPos - transform.position;
+            var vector = nextPos - _bossBodyParent.transform.position;
 
-            transform.position += vector * 3.0f * Time.deltaTime;
+            _bossBodyParent.transform.position += vector * 3.0f * Time.deltaTime;
         }
         // ランダムに動く動き
         else if(_level_2_mode == Level_2_Mode.RANDOM)
         {
-            var vector = _level_2_movePos - transform.position;
+            var vector = _level_2_movePos - _bossBodyParent.transform.position;
 
             // 向かう場所に近づいたら
             if (vector.magnitude < 0.1f)
@@ -653,7 +653,7 @@ public class BossAI : MonoBehaviour {
                 //Debug.Log(_level_2_randomIndex);
                 //transform.position += vector.normalized * _level_2_randomMoveSpeed * Time.deltaTime;
 
-                transform.position += vector * _level_2_randomMoveSpeed * Time.deltaTime;
+                _bossBodyParent.transform.position += vector * _level_2_randomMoveSpeed * Time.deltaTime;
             }
         }
 
@@ -668,8 +668,8 @@ public class BossAI : MonoBehaviour {
         // 移動する場所に動く処理
         if(_lastMoveIndex < _lastMovePos.Count)
         {
-            var length = _lastMovePos[_lastMoveIndex] - transform.position;
-            transform.position += length * _lastMoveSpeed * Time.deltaTime;
+            var length = _lastMovePos[_lastMoveIndex] - _bossBodyParent.transform.position;
+            _bossBodyParent.transform.position += length * _lastMoveSpeed * Time.deltaTime;
             if (length.magnitude < 1.5f)
             {
                 // タックルをしようとしていたらボイスを流す
@@ -701,8 +701,8 @@ public class BossAI : MonoBehaviour {
                     AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
                 }
             }
-            var length = _player.transform.position - transform.position;
-            transform.position += length * _lastTackleSpeed * Time.deltaTime;
+            var length = _player.transform.position - _bossBodyParent.transform.position;
+            _bossBodyParent.transform.position += length * _lastTackleSpeed * Time.deltaTime;
         }
     }
 
@@ -727,7 +727,7 @@ public class BossAI : MonoBehaviour {
             _rigidbody.useGravity = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
-            var vector = transform.position - _player.transform.position;
+            var vector = _bossBodyParent.transform.position - _player.transform.position;
             _rigidbody.velocity = vector.normalized * _climaxVelocity;
         }
 
@@ -761,7 +761,7 @@ public class BossAI : MonoBehaviour {
                     _climaxBoundPower *= 0.5f;
 
                     // ２次元での向きを出す
-                    var bossPos = new Vector2(transform.position.x, transform.position.z);
+                    var bossPos = new Vector2(_bossBodyParent.transform.position.x, _bossBodyParent.transform.position.z);
                     var playerPos = new Vector2(_player.transform.position.x, _player.transform.position.z);
                     var vector2 = bossPos - playerPos;
 
@@ -788,10 +788,33 @@ public class BossAI : MonoBehaviour {
                     var boundParticle = Instantiate(_slideParticle);
                     boundParticle.transform.position = _effectPos.transform.position;
                     boundParticle.transform.LookAt(_player.transform);
-                    boundParticle.transform.parent = transform;
+                    boundParticle.transform.parent = _bossBodyParent.transform;
                 }
             }
             return;
+        }
+    }
+
+    void EffectAndDamage(Collider col)
+    {
+        var particle = Instantiate(_hitParticle);
+        particle.transform.position = col.transform.position;
+
+        // 出現時は当たらないようにする
+        if (_state == BossState.START || _state == BossState.CLIMAX || _state == BossState.STANDBY) { return; }
+
+        // 高速弾を撃つときはエフェクトだけを出す
+        if ((_state != BossState.LAST && !_speedBulletFlag) || (_state == BossState.LAST && _lastTackleFlag))
+        {
+            Damage();
+        }
+    }
+
+    public void PargeDamage(Collider col)
+    {
+        if (col.gameObject.tag == TagName.Bullet)
+        {
+            EffectAndDamage(col);
         }
     }
 
@@ -801,17 +824,7 @@ public class BossAI : MonoBehaviour {
         // 弾が当たったら体力を減らす
         if (col.gameObject.tag == TagName.Bullet)
         {
-            var particle = Instantiate(_hitParticle);
-            particle.transform.position = col.transform.position;
-
-            // 出現時は当たらないようにする
-            if (_state == BossState.START || _state == BossState.CLIMAX || _state == BossState.STANDBY) { return; }
-
-            // 高速弾を撃つときはエフェクトだけを出す
-            if ((_state != BossState.LAST && !_speedBulletFlag) || (_state == BossState.LAST && _lastTackleFlag))
-            {
-                Damage();
-            }
+            EffectAndDamage(col);
         }
         // プレイヤーと当たったら
         else if (col.gameObject.tag == TagName.Player)
