@@ -9,7 +9,6 @@ public class TitleManager : MonoBehaviour
 
     enum State
     {
-        LogoProduction,
         Title,
         Wait
     }
@@ -85,12 +84,11 @@ public class TitleManager : MonoBehaviour
     }
 
     private Dictionary<State, Action> _stateUpdate = null;
-    private State _state = State.LogoProduction;
+    private State _state = State.Title;
 
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
-        _stateUpdate.Add(State.LogoProduction, LogoProductionUpdate);
         _stateUpdate.Add(State.Title, TitleUpdate);
         _stateUpdate.Add(State.Wait, () => { });
 
@@ -129,15 +127,6 @@ public class TitleManager : MonoBehaviour
         //}
     }
 
-    void LogoProductionUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            _state = State.Wait;
-            StartCoroutine(NoiseCancel());
-        }
-    }
-
     private IEnumerator NoiseCancel()
     {
         var time = 0.0f;
@@ -149,7 +138,7 @@ public class TitleManager : MonoBehaviour
         }
 
         _logo.SetActive(false);
-        _state = State.Title;
+        StartCoroutine(Authentication());
     }
 
     /// <summary>
@@ -177,9 +166,6 @@ public class TitleManager : MonoBehaviour
             _viveMaterial2[2].SetColor("_EmissionColor", Color.white);
         }
 
-
-
-
         // 必要なアイテムを手に持っているか確かめる
         bool isChange = true;
         foreach (var item in _items)
@@ -206,7 +192,7 @@ public class TitleManager : MonoBehaviour
         if (isChange)
         {
             _state = State.Wait;
-            StartCoroutine(Authentication());
+            StartCoroutine(NoiseCancel());
         }
     }
 
