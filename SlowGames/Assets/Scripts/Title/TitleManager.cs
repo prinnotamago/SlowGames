@@ -306,20 +306,6 @@ public class TitleManager : MonoBehaviour
         //Enemyくん起動
         //_enemyManager.SetTurtrealBulletActive(true);
 
-        StartCoroutine(WaitingState());
-    }
-
-    IEnumerator WaitingState()
-    {
-        var time = 0.0f;
-        var endTime = 5.0f;
-        AudioManager.instance.playVoice(AudioName.VoiceName.V03);
-        while (time < endTime)
-        {
-            time += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
         _viveControllerModel[0].SetActive(true);
         _viveControllerModel[1].SetActive(true);
 
@@ -331,8 +317,23 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].transform.eulerAngles = Vector3.zero;
 
 
+
         StartCoroutine(SlowDescription());
     }
+
+    //IEnumerator WaitingState()
+    //{
+    //    var time = 0.0f;
+    //    var endTime = 5.0f;
+    //    AudioManager.instance.playVoice(AudioName.VoiceName.V03);
+    //    while (time < endTime)
+    //    {
+    //        time += Time.unscaledDeltaTime;
+    //        yield return null;
+    //    }
+
+    //    StartCoroutine(SlowDescription());
+    //}
 
     /// <summary>
     /// スローのチュートリアル
@@ -376,13 +377,13 @@ public class TitleManager : MonoBehaviour
             if (voiceTime > 15.0f)
             {
                 voiceTime = 0.0f;
-                AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
+                //AudioManager.instance.playVoice(AudioName.VoiceName.V04b);
             }
 
             yield return null;
         }
 
-        AudioManager.instance.stopVoice(AudioName.VoiceName.V04b);
+        //AudioManager.instance.stopVoice(AudioName.VoiceName.V04b);
 
         _viveMaterial[1].EnableKeyword("_EMISSION");
         _viveMaterial[1].SetColor("_EmissionColor", Color.black);
@@ -396,8 +397,11 @@ public class TitleManager : MonoBehaviour
         {
             yield return null;
         }
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
         _descriptionText.text = "スロ―ゲージ回復中";
+
+        AudioManager.instance.playVoice(AudioName.VoiceName.V05);
 
         //スローゲージが回復するまで待つ
         while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
@@ -405,7 +409,6 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
         yield return new WaitForSeconds(1.0f); //チャージ完了のセリフ待ってから進む
 
@@ -507,7 +510,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].transform.Rotate(0, 90, 0);
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
-        AudioManager.instance.playVoice(AudioName.VoiceName.V08);
+        AudioManager.instance.playVoice(AudioName.VoiceName.V07b);
 
         while (!enemyManager.isSceneChange)
         {
@@ -531,6 +534,10 @@ public class TitleManager : MonoBehaviour
 
             yield return null;
         }
+
+        AudioManager.instance.playVoice(AudioName.VoiceName.V07c);
+        yield return new WaitForSeconds(2.0f);
+
         _descriptionPanel.gameObject.SetActive(false);
 
         _viveControllerModel[0].SetActive(false);
