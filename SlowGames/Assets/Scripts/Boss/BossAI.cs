@@ -455,7 +455,7 @@ public class BossAI : MonoBehaviour {
 
                     // 高速弾を準備してることを伝える
                     AudioManager.instance.stopAllVoice();
-                    AudioManager.instance.playVoice(AudioName.VoiceName.IV05);
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
                 }
             }
 
