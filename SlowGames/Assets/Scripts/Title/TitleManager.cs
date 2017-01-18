@@ -534,7 +534,7 @@ public class TitleManager : MonoBehaviour
 
             yield return null;
         }
-
+        AudioManager.instance.stopVoice(AudioName.VoiceName.V07b);
         AudioManager.instance.playVoice(AudioName.VoiceName.V07c);
         yield return new WaitForSeconds(2.0f);
 
