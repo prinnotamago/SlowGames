@@ -119,7 +119,10 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         _stateUpdate[_state]();
-
+        //if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    AudioManager.instance.playSe(AudioName.SeName.GunGet);
+        //}
         ////デバック用
         //if (Input.GetKeyDown(KeyCode.Return))
         //{
@@ -138,6 +141,8 @@ public class TitleManager : MonoBehaviour
         }
 
         _logo.SetActive(false);
+
+        yield return new WaitForSeconds(1.0f);
         StartCoroutine(Authentication());
     }
 

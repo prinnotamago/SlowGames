@@ -103,7 +103,7 @@ public class ViveGrab : MonoBehaviour {
                         i.enabled = false;
                     }
                     GetComponent<BoxCollider>().enabled = false;
-
+                    AudioManager.instance.playSe(AudioName.SeName.GunGet);
                 }
             }
         }
