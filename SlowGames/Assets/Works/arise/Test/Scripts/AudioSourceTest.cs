@@ -10,7 +10,7 @@ public class AudioSourceTest : MonoBehaviour
 
         //AudioManager.instance.playSe(AudioName.SeName.gun1);
 
-        AudioManager.instance.playNotSlowSe(AudioName.SeName.gun1);
+        //AudioManager.instance.playNotSlowSe(AudioName.SeName.gun1);
     }
 
     void Update()

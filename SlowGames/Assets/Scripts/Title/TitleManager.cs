@@ -119,9 +119,9 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         _stateUpdate[_state]();
-        //if(Input.GetKeyDown(KeyCode.V))
+        //if (Input.GetKeyDown(KeyCode.V))
         //{
-        //    AudioManager.instance.playSe(AudioName.SeName.GunGet);
+        //    AudioManager.instance.playSe(AudioName.SeName.Reload);
         //}
         ////デバック用
         //if (Input.GetKeyDown(KeyCode.Return))
