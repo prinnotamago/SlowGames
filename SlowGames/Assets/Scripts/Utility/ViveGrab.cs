@@ -104,6 +104,7 @@ public class ViveGrab : MonoBehaviour {
                     }
                     GetComponent<BoxCollider>().enabled = false;
                     AudioManager.instance.playSe(AudioName.SeName.GunGet);
+                    device.TriggerHapticPulse(4000);
                 }
             }
         }

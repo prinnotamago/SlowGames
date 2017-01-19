@@ -461,7 +461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1275085536962418
 GameObject:
   m_ObjectHideFlags: 1
@@ -999,7 +999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1624063989841698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1646168533123010
 GameObject:
   m_ObjectHideFlags: 1
@@ -1184,7 +1184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1768672000868780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4615,6 +4615,12 @@ MonoBehaviour:
   _logo: {fileID: 114986064393552452}
   _thankyouText: {fileID: 114493269479875690}
   _logoMoveEndTime: 2
+  _desk:
+  - {fileID: 1624063989841698}
+  - {fileID: 1608263910081672}
+  _stand:
+  - {fileID: 1262144086568064}
+  - {fileID: 1767492004147582}
 --- !u!114 &114103184165869570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5057,7 +5063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
