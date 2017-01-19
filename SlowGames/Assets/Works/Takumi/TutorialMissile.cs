@@ -80,11 +80,11 @@ public class TutorialMissile : MonoBehaviour
                 return;
                
         }
-        else if(other.gameObject.tag == TagName.Player)
+      /*else if(other.gameObject.tag == TagName.Player)
         {
             Destroy(gameObject);
         }
-
+        */
         //ScoreManager.instance.AddFlipEnemyBulletCount();
         //プレイヤーに当たった時は、そのまま消す
         //Destroy(gameObject);
