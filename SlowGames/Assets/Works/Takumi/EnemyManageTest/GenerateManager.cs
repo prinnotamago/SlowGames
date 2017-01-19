@@ -137,8 +137,10 @@ public class GenerateManager : MonoBehaviour
         for (int i = 0; i < _genePos.Count; i++)
         {
             DefaultSetEnemy(EnemyType.Easy,_genePos[i]);
+            _enemyNumber += 1;
+            
         }
-
+        Debug.Log("enemyNumbe" + _enemyNumber);
     }
 
     public void GameStartSet()
@@ -163,7 +165,7 @@ public class GenerateManager : MonoBehaviour
     {
             //生成した場所のカウントを覚えておく
             _currentEnemysCount[(int)targetPosition] += 1;
-            _enemyNumber++;
+            
             //生成
             _enemyGenerator.GenerateEnemy(EnemyType.Easy, targetPosition);    
                          
@@ -292,7 +294,7 @@ public class GenerateManager : MonoBehaviour
     //敵キャラを生成
     void UpdateEnemyCount()
     {
- 
+   
         //ウェーブのデータの更新チェック.
         if (_currentWaveCount < _waveDate.Count - 1)
         {
@@ -309,8 +311,10 @@ public class GenerateManager : MonoBehaviour
         //現在のウェーブデータに合わせた生成情報を取得.
         var waveData = _waveDate[_currentWaveCount];
         //現在ステージ常に敵キャラ.
-        int liveEnemysCount = GetLiveEnemyCount(); 
+        int liveEnemysCount = GetLiveEnemyCount();
 
+
+        if (waveData._generateTimingCount < liveEnemysCount) return;
 
         //限界値以上はださない
         if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
@@ -332,26 +336,35 @@ public class GenerateManager : MonoBehaviour
         for (int i = 0; i < GenerateCount; i++)
         {
             //生成番号を更新.
-            _enemyNumber++;
-
+            _enemyNumber += 1;
+           
             //指定した的キャラの出現
             //最大数でてたら通らない
 
             int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
-           
 
+            Debug.Log(waveData._rareEnemyInfo[rareEnemyCount].generateTiming + " == " + _enemyNumber);
             //レアキャラ生成チェック
             //それ以外は通常生成
             if (_enemyNumber == waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
                 
                 SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
-                _rareEnemyCount[_currentWaveCount] += 1;
+                Debug.Log(waveData._rareEnemyInfo[rareEnemyCount].type + " type" + _enemyNumber);
 
+                if (waveData._rareEnemyInfo.Count - 1 == rareEnemyCount)
+                {
+
+                }
+                else
+                {
+                    _rareEnemyCount[_currentWaveCount] += 1;
+                }
             }
             else
             {
                 SetEnemy(1, waveData._generateTypeList);
+                
             }
        }
 

@@ -102,7 +102,7 @@ public class EnemyGenerator : MonoBehaviour
 
 
     //ランダムに,生成位置を取得する
-    public  TargetPosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 1)
+    public  TargetPosition GetRandomGeneratePos(int[] generateCount, int  enemyLimit = 2)
     {
         //生成可能な,配列番号を記憶する
         List<int> canGeneratePos = new List<int>();
