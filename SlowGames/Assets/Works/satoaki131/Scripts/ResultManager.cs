@@ -14,7 +14,7 @@ public class ResultManager : MonoBehaviour
         Wait
     }
     private Dictionary<State, Action> _stateUpdate = null;
-    private State _state = State.GunPut;
+    private State _state = State.Wait;
 
     [SerializeField]
     private PutGunStand[] _put = null;
@@ -22,11 +22,17 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private Image _logo = null;
 
-    [SerializeField] //仮置き
+    [SerializeField] 
     private TextMessage _thankyouText = null;
 
     [SerializeField, Range(2.0f, 6.0f)]
     private float _logoMoveEndTime = 2.0f;
+
+    [SerializeField]
+    private GameObject[] _desk = null;
+
+    [SerializeField]
+    private GameObject[] _stand = null;
 
     void Start()
     {
@@ -35,6 +41,22 @@ public class ResultManager : MonoBehaviour
         _stateUpdate.Add(State.Wait, () => { });
         _stateUpdate.Add(State.End, EndUpdate);
         AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
+        StartCoroutine(AudioMessage());
+    }
+
+    private IEnumerator AudioMessage()
+    {
+        var time = 0.0f;
+        while(time < 8.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _desk[0].SetActive(true);
+        _desk[1].SetActive(true);
+        _stand[0].SetActive(true);
+        _stand[1].SetActive(true);
+        _state = State.GunPut;
     }
 
     void Update()
