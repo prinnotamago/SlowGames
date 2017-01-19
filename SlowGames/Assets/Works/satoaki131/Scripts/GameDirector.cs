@@ -33,8 +33,8 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     private GameObject _boss = null;
 
-    [SerializeField]
-    private Image _gameStartImage = null;
+    //[SerializeField]
+    //private Image _gameStartImage = null;
 
     private Dictionary<GameState, Action> _update = null;
 
@@ -164,7 +164,7 @@ public class GameDirector : MonoBehaviour {
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV01);
         yield return new WaitForSeconds(5.0f);
-        _gameStartImage.gameObject.SetActive(true);
+        //_gameStartImage.gameObject.SetActive(true);
         var time = 0.0f;
         while(time < _gameStartTime)
         {
