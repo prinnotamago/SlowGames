@@ -47,7 +47,7 @@ public class ResultManager : MonoBehaviour
     private IEnumerator AudioMessage()
     {
         var time = 0.0f;
-        while(time < 8.0f)
+        while(time < 4.0f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -88,7 +88,7 @@ public class ResultManager : MonoBehaviour
         AudioManager.instance.playVoice(AudioName.VoiceName.IV17);
         var time = 0.0f;
         //音声終わるの待つ
-        while (time < 3.5f)
+        while (time < 7.5f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
