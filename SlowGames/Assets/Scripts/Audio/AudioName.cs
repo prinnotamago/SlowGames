@@ -15,10 +15,9 @@ public enum SeName
 	Genrtate,
 	gunreload1,
 	gunreload2,
-	gun1,
 	GunGet,
-	GunPut,
 	PlayerGun,
+	Reload,
 	Thunder,
 }
 public enum VoiceName
