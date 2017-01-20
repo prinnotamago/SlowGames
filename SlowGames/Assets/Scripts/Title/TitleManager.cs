@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
+/// <summary>
+/// Titleからチュートリアルまでの管理class
+/// </summary>
 public class TitleManager : MonoBehaviour
 {
 

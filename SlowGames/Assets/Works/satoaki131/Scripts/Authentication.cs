@@ -40,27 +40,28 @@ public class Authentication : MonoBehaviour {
 
     void Update()
     {
-        _time += Time.unscaledDeltaTime; 
+        _time += Time.unscaledDeltaTime; //時間を計測
         for (int i = 0; i < _text.Length; i++)
         {
-            if (_authenticationEnd) break;
-            if (i < END_INDEX) continue;
-            _randomNumber = UnityEngine.Random.Range(0, 10);
-            _text[i].text = _randomNumber.ToString();
+            if (_authenticationEnd) break; //全部表示されたらfor文抜ける
+            if (i < END_INDEX) continue; //Random演出が終わったindexはfor文を回さない
+            _randomNumber = UnityEngine.Random.Range(0, 10); //ランダム演出用の数字を決める
+            _text[i].text = _randomNumber.ToString(); //いったんRandomの数字を表示
 
-            //Timeが一定越えたら配列の一番後ろから止めていく
+            //Timeが一定越えたら配列の先頭から止めていく
             if (_time > _stopTime)
             {
-                _stopTime += 0.6f;
-                END_INDEX++;
-                _text[i].text = _displayPassNumber[i].ToString();
-                if (END_INDEX == _text.Length && !_authenticationEnd) { _authenticationEnd = true; }
+                _stopTime += 0.6f; //次の数字を止めるまでの時間を追加
+                END_INDEX++; //演出が終わってるindex番号を一つ増やす
+                _text[i].text = _displayPassNumber[i].ToString(); //表示する数字を代入
+                if (END_INDEX == _text.Length && !_authenticationEnd) { _authenticationEnd = true; } //全部終わったらfor文を回さないようにするboolをtrueにする
             }
         }
 
         if (!_authenticationEnd) return;
         if (!_changeText[0].gameObject.activeSelf) { return; }
 
+        //全ての演出が終わったら「認証官僚」の文字に切り替える
 
         _changeText[0].gameObject.SetActive(false);
         _changeText[1].gameObject.SetActive(false);

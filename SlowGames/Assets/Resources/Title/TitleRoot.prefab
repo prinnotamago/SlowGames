@@ -9575,6 +9575,7 @@ MonoBehaviour:
   _createPosMax: {x: 5, y: -3}
   _createPosMin: {x: -5, y: -3}
   _startZ: -10
+  _endZ: 10
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
   _speedMax: 5
   _speedMin: 2
@@ -10543,6 +10544,7 @@ MonoBehaviour:
   _createPosMax: {x: 5, y: 3}
   _createPosMin: {x: -5, y: 3}
   _startZ: -10
+  _endZ: 10
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
   _speedMax: 5
   _speedMin: 2
@@ -10785,7 +10787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -11694,6 +11696,7 @@ MonoBehaviour:
   _createPosMax: {x: 5, y: -3}
   _createPosMin: {x: -5, y: -3}
   _startZ: -10
+  _endZ: 10
   _planeObj: {fileID: 190416, guid: 75ea1d98671d44b46858dd2336d9550b, type: 2}
   _speedMax: 5
   _speedMin: 2
@@ -12832,7 +12835,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206724611613358}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -11.8}
+  m_LocalPosition: {x: 0, y: 0, z: -7.2}
   m_LocalScale: {x: 0.0100000035, y: 0.01, z: 0.0100000035}
   m_Children:
   - {fileID: 224817986262833998}
