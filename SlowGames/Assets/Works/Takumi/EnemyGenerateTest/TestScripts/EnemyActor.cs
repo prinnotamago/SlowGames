@@ -118,6 +118,7 @@ public class EnemyActor : MonoBehaviour
                 //うまくいってなかったら生成仕直し
                 //Debug.Log("再生成");
                 this.gameObject.GetComponent<Enemy>().SilentDestroy();
+
             }
             return;
         }
@@ -127,7 +128,9 @@ public class EnemyActor : MonoBehaviour
             //しっかりターゲットがきまってたら移動開始
             _basePosition = _currentTarget.position;
             _currentAction = ActionType.TargetRun;
+            transform.LookAt(_basePosition);
             this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         } 
 
     }
