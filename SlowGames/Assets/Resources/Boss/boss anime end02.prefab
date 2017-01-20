@@ -476,8 +476,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1409245543342586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 60.67, z: 2.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 250, z: 2.15}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 4996693288179392}
   - {fileID: 4564472660425594}
@@ -1819,29 +1819,30 @@ MonoBehaviour:
   _patternRatio: 0.5
   _state: 0
   _standbyTimeMax: 10
-  _startPos: {x: 0, y: 3.5, z: 0}
+  _startPos: {x: 0, y: 5, z: 0}
   _startSpeed: 50
   _level_1_pos:
-  - {x: -6, y: 7.6, z: 1.65}
-  - {x: 0, y: 3.4, z: 1.65}
-  - {x: 6, y: 7.6, z: 1.65}
+  - {x: -10, y: 10, z: 1.65}
+  - {x: 0, y: 5, z: 1.65}
+  - {x: 10, y: 10, z: 1.65}
   _level_1_moveHp: 5f0000005a00000055000000
   _level_1_speed: 5
-  _level_2_maxHeight: 3
-  _level_2_maxWidth: 10
-  _level_2_minWidth: 5
+  _level_2_maxHeight: 5
+  _level_2_maxWidth: 16
+  _level_2_minWidth: 10
+  _level_2_Z: 20
   _level_2_eightSpeed: 2
-  _level_2_centerPos: {x: 0, y: 4.5, z: 1.65}
+  _level_2_centerPos: {x: 0, y: 7, z: 15}
   _level_2_moveObjPrefab: {fileID: 1154740623382328, guid: a144822d20e76cf4e8d3579a955bb181,
     type: 2}
   _level_2_modeChangeHP: 2300000019000000
   _level_2_randomMoveSpeed: 5
   _level_2_randomStopTimeMax: 0
-  _lastTacklePos: {x: 0, y: 3.5, z: 0}
+  _lastTacklePos: {x: 0, y: 5, z: 0}
   _lastTackleSpeed: 2
   _lastMoveSpeed: 10
   _lastMoveNum: 30
-  _lastRandMoveLength: {x: 5, y: 2, z: 5}
+  _lastRandMoveLength: {x: 10, y: 3, z: 5}
   _climaxVelocity: 7
   _climaxDestroyTime: 5
   _climaxBoundNum: 5

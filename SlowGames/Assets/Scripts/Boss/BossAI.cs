@@ -130,8 +130,11 @@ public class BossAI : MonoBehaviour {
     float _level_2_minWidth = 5.0f;     // ハチの字の横の最小距離
     float _level_2_width = 10.0f;        // 今の八の字での横の長さ
     [SerializeField]
+    float _level_2_Z = 5.0f;     // ハチの字の横の最小距離
+    [SerializeField]
     float _level_2_eightSpeed = 5.0f;        // 移動速度
     float _level_2_moveAngle = 0.0f;       // 移動するのに Sin を使ってるのに 角度 で調節している
+    float _level_2_moveAngle_Z = 0.0f;
     [SerializeField]
     Vector3 _level_2_centerPos;                 // 中心距離
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
@@ -619,10 +622,23 @@ public class BossAI : MonoBehaviour {
             }
             //Debug.Log(_level_2_moveAngle);
 
+            if (_level_2_moveAngle <= (Mathf.PI / 2) || _level_2_moveAngle > (Mathf.PI / 2) * 3)
+            {
+                _level_2_moveAngle_Z += Time.deltaTime * _level_2_eightSpeed;
+            }
+            else if(_level_2_moveAngle > (Mathf.PI / 2) || (_level_2_moveAngle >= (Mathf.PI / 2) && _level_2_moveAngle <= (Mathf.PI / 2) * 3))
+            {
+                _level_2_moveAngle_Z -= Time.deltaTime * _level_2_eightSpeed;
+            }
+            
+
             var nextPos = _level_2_centerPos + new Vector3(
                 Mathf.Cos(_level_2_moveAngle) * _level_2_width,
                 Mathf.Sin(_level_2_moveAngle * 2) * _level_2_maxHeight,
-                0);
+                //0,
+                //Mathf.Abs(Mathf.Cos(_level_2_moveAngle)) / 1.0f * -10.0f - Mathf.Sin(_level_2_moveAngle) * 3,
+                Mathf.Cos(_level_2_moveAngle_Z) * -_level_2_Z
+                );
 
             var vector = nextPos - _bossBodyParent.transform.position;
 
