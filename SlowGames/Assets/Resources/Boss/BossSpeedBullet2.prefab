@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95074634337259946}
   - component: {fileID: 65162506907922348}
   - component: {fileID: 54241319250352296}
-  - component: {fileID: 114736190746038388}
+  - component: {fileID: 114245289885452012}
   m_Layer: 0
   m_Name: BossSpeedBullet2
   m_TagString: Untagged
@@ -127,7 +127,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114736190746038388
+--- !u!114 &114245289885452012
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1483375365638578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dbe2cbcd1164ecd8aff2286a080854, type: 3}
+  m_Script: {fileID: 11500000, guid: 24309121d0e4a6947b5547550b330e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 50
@@ -143,4 +143,5 @@ MonoBehaviour:
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
   _targetDirection: {x: 0, y: 0, z: 0}
-  _doChaseToPlayer: 0
+  _chargeEffect: {fileID: 1979463909858250, guid: a599030045c649648812c888c5a47697,
+    type: 2}

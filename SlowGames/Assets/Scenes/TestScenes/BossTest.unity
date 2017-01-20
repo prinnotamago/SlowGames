@@ -350,16 +350,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 114859459040652412, guid: c1f4ef47312452747bc5c2f5a2dcece3,
-        type: 2}
-      propertyPath: _climaxBoundPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114859459040652412, guid: c1f4ef47312452747bc5c2f5a2dcece3,
-        type: 2}
-      propertyPath: _climaxBoundPowerUp
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1f4ef47312452747bc5c2f5a2dcece3, type: 2}
   m_IsPrefabParent: 0
