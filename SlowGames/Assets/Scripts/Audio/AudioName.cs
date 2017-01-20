@@ -9,8 +9,11 @@ public enum BgmName
 }
 public enum SeName
 {
+	Authentication,
 	BulletFlip,
 	Diying,
+	EnemyBulletShot,
+	EnemyExplotion,
 	Flying,
 	Genrtate,
 	gunreload1,
@@ -18,7 +21,9 @@ public enum SeName
 	GunGet,
 	PlayerGun,
 	Reload,
+	SlowCharge,
 	Thunder,
+	TitleLogoEnding,
 }
 public enum VoiceName
 {
