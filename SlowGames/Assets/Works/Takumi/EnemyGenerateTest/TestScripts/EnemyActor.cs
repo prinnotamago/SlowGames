@@ -352,7 +352,7 @@ public class EnemyActor : MonoBehaviour
             //実際に射撃
             //:test サウンド 
             gameObject.GetComponentInChildren<EnemyShot>().DoShot();
-            AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Thunder);
+            AudioManager.instance.play3DSe(gameObject,AudioName.SeName.EnemyBulletShot);
 
             //二発以上かつ最後の弾じゃなければ
             if (shotCount > 1 && (shotCount - 1) > i)

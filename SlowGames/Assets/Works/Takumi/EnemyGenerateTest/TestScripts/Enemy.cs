@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
             //死ぬ
             FindObjectOfType<GenerateManager>().AddDeathCount(_generatePostion);
             AudioManager.instance.stop3DSe(gameObject,AudioName.SeName.Flying);
-            AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Diying);
+            AudioManager.instance.play3DSe(gameObject,AudioName.SeName.EnemyExplotion);
             //Test:スコア
 //          ScoreManager.instance.AddHitEnemyCount();
 //          ScoreManager.instance.AddScore(_type);
