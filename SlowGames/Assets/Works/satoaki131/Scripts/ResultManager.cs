@@ -34,6 +34,12 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _stand = null;
 
+    [SerializeField]
+    private GameObject[] _gun = null;
+
+    [SerializeField]
+    private float _deskMoveSpeed = 0.0f;
+
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
@@ -52,8 +58,27 @@ public class ResultManager : MonoBehaviour
             time += Time.unscaledDeltaTime;
             yield return null;
         }
-        _desk[0].SetActive(true);
-        _desk[1].SetActive(true);
+
+        //_desk[0].SetActive(true);
+        //_desk[1].SetActive(true);
+
+
+        for (int i = 0; i <_desk.Length; i++)
+        {
+            iTween.ScaleTo(_desk[i], iTween.Hash(
+                "y", 0.05f,
+                "time", 1.0f,
+                "easeType", iTween.EaseType.easeOutCubic
+                ));
+        }
+
+        time = 0.0f;
+        while(time < 1.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
         _stand[0].SetActive(true);
         _stand[1].SetActive(true);
         _state = State.GunPut;
@@ -66,6 +91,14 @@ public class ResultManager : MonoBehaviour
         {
             SceneChange.ChangeScene(SceneName.Name.Title, Color.white);
         }
+
+        //デバッグ用:台座に置いてないときでも戻れるように
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    _state = State.Wait;
+        //    StartCoroutine(Production());
+        //}
+
         _stateUpdate[_state]();
     }
 
@@ -76,6 +109,9 @@ public class ResultManager : MonoBehaviour
     {
         if (!_put[0].isPutGun) return;
         if (!_put[1].isPutGun) return;
+
+        _stand[0].SetActive(false);
+        _stand[1].SetActive(false);
 
         _state = State.Wait;
         StartCoroutine(Production());
@@ -93,7 +129,21 @@ public class ResultManager : MonoBehaviour
         while (time < 7.5f)
         {
             time += Time.unscaledDeltaTime;
+            if(time > 3.5f)
+            {
+                for(int i = 0; i < _desk.Length; i++)
+                {
+                    _desk[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                    _gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                }
+            }
             yield return null;
+        }
+
+        for (int i = 0; i < _desk.Length; i++)
+        {
+            _desk[i].SetActive(false);
+            _gun[i].SetActive(false);
         }
 
         //Logo演出
@@ -122,7 +172,6 @@ public class ResultManager : MonoBehaviour
             NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.OutCubic(time, _logoMoveEndTime * 2, 10.0f, 0.0f);
             yield return null;
         }
-
         yield return null;
         _state = State.End;
     }
