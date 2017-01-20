@@ -96,6 +96,7 @@ public class ResultManager : MonoBehaviour
 
         //Logo演出
         time = 0.0f;
+        AudioManager.instance.playSe(AudioName.SeName.TitleLogoEnding);
         while (time < _logoMoveEndTime)
         {
             time += Time.unscaledDeltaTime;
