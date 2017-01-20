@@ -314,7 +314,8 @@ public class GenerateManager : MonoBehaviour
         int liveEnemysCount = GetLiveEnemyCount();
 
 
-        if (waveData._generateTimingCount < liveEnemysCount) return;
+        if (waveData._generateTimingCount < liveEnemysCount)
+            return;
 
         //限界値以上はださない
         if (_MAX_ENEMY <= _deathCount + liveEnemysCount)
@@ -332,7 +333,7 @@ public class GenerateManager : MonoBehaviour
             GenerateCount = _MAX_ENEMY - (_deathCount + liveEnemysCount);
         }
 
-
+        //生成.
         for (int i = 0; i < GenerateCount; i++)
         {
             //生成番号を更新.
@@ -366,6 +367,18 @@ public class GenerateManager : MonoBehaviour
                 SetEnemy(1, waveData._generateTypeList);
                 
             }
+
+            if (_currentWaveCount < _waveDate.Count - 1)
+            {
+                //生成中に、ウェーブ更新をチェック.
+                if (_enemyNumber >= _waveDate[(_currentWaveCount + 1)]._startDieCount)
+                {
+                
+                    _currentWaveCount += 1;
+                    waveData = _waveDate[_currentWaveCount];
+                }
+            }
+
        }
 
 
