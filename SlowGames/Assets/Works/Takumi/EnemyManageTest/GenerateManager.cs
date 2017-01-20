@@ -140,7 +140,7 @@ public class GenerateManager : MonoBehaviour
             _enemyNumber += 1;
             
         }
-        Debug.Log("enemyNumbe" + _enemyNumber);
+       
     }
 
     public void GameStartSet()
@@ -344,14 +344,14 @@ public class GenerateManager : MonoBehaviour
 
             int rareEnemyCount = _rareEnemyCount[_currentWaveCount];
 
-            Debug.Log(waveData._rareEnemyInfo[rareEnemyCount].generateTiming + " == " + _enemyNumber);
+
             //レアキャラ生成チェック
             //それ以外は通常生成
             if (_enemyNumber == waveData._rareEnemyInfo[rareEnemyCount].generateTiming)
             {
                 
                 SetEnemy(1, waveData._rareEnemyInfo[rareEnemyCount].type);
-                Debug.Log(waveData._rareEnemyInfo[rareEnemyCount].type + " type" + _enemyNumber);
+               
 
                 if (waveData._rareEnemyInfo.Count - 1 == rareEnemyCount)
                 {
