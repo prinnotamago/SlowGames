@@ -211,6 +211,7 @@ public class TitleManager : MonoBehaviour
         _idCanvas.gameObject.SetActive(true);
 
         AudioManager.instance.playVoice(AudioName.VoiceName.V01a);
+        AudioManager.instance.playSe(AudioName.SeName.Authentication);
 
         //アニメーションが終わるまで待つ
         while (_idCanvas.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
