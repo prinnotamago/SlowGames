@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 65663533898623032}
   - component: {fileID: 65377596464527990}
   - component: {fileID: 114314100095724026}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: head parge 03
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 65450554883829784}
   - component: {fileID: 65705084644040360}
   - component: {fileID: 114217913006452138}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: head parge 02
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 65012193147300232}
   - component: {fileID: 65760484636878238}
   - component: {fileID: 114259113230538206}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: head parge 01
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 65235603345089976}
   - component: {fileID: 65652638994411350}
   - component: {fileID: 114568511805979296}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: head parge 04
   m_TagString: Enemy
   m_Icon: {fileID: 0}
