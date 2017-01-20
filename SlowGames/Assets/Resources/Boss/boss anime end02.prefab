@@ -1810,7 +1810,7 @@ MonoBehaviour:
     type: 2}
   _homingBullet: {fileID: 1016474626274050, guid: 99b17837928193947b768048b259cc0f,
     type: 2}
-  _speedBullet: {fileID: 1356666004370112, guid: b6cc354eef876ff4e966c274a4fbe1b3,
+  _speedBullet: {fileID: 1483375365638578, guid: 45c59d1179ffd5444954499266c273c8,
     type: 2}
   _speedBulletHP: 2d0000001e000000
   _speedBulletChargeMax: 5
