@@ -92,36 +92,12 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &725906478
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
---- !u!43 &772738118
+--- !u!1 &705278525 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1094144631215842, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1288230582}
+--- !u!43 &723172103
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -249,6 +225,11 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &872443323 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1725748774623414, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1288230582}
 --- !u!1001 &1288230582
 Prefab:
   m_ObjectHideFlags: 0
@@ -256,6 +237,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: _gun.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4419737987181882, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -292,12 +278,80 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 725906478}
+      objectReference: {fileID: 2048715548}
     - target: {fileID: 33535258716080618, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 772738118}
+      objectReference: {fileID: 723172103}
+    - target: {fileID: 1608263910081672, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624063989841698, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1262144086568064, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767492004147582, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532965650338844, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758026993581854, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: _gun.Array.data[0]
+      value: 
+      objectReference: {fileID: 705278525}
+    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: _gun.Array.data[1]
+      value: 
+      objectReference: {fileID: 872443323}
+    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: _deskMoveSpeed
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
   m_IsPrefabParent: 0
+--- !u!21 &2048715548
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
