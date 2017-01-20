@@ -220,7 +220,36 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!43 &265258270
+--- !u!21 &1122461116
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
+--- !u!43 &1219212114
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -546,35 +575,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e95c6a3adda45a64fbce32f3c8c8b82f, type: 2}
   m_IsPrefabParent: 0
---- !u!21 &1705534777
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1853712607
 Prefab:
   m_ObjectHideFlags: 0
@@ -614,50 +614,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 33712035326518486, guid: 5e93183d58e97b340b1bb306d359023a,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 100618311}
-    - target: {fileID: 33585216431235196, guid: 5e93183d58e97b340b1bb306d359023a,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 265258270}
-    - target: {fileID: 23489887858226468, guid: 5e93183d58e97b340b1bb306d359023a,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 1705534777}
     - target: {fileID: 23263450344350992, guid: 5e93183d58e97b340b1bb306d359023a,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1617405320}
-    - target: {fileID: 114449657403674000, guid: 5e93183d58e97b340b1bb306d359023a,
+    - target: {fileID: 23489887858226468, guid: 5e93183d58e97b340b1bb306d359023a,
         type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114449657403674000, guid: 5e93183d58e97b340b1bb306d359023a,
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1122461116}
+    - target: {fileID: 33585216431235196, guid: 5e93183d58e97b340b1bb306d359023a,
         type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114449657403674000, guid: 5e93183d58e97b340b1bb306d359023a,
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1219212114}
+    - target: {fileID: 33712035326518486, guid: 5e93183d58e97b340b1bb306d359023a,
         type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224185317945119172, guid: 5e93183d58e97b340b1bb306d359023a,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -7.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1855880830047536, guid: 5e93183d58e97b340b1bb306d359023a, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 100618311}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e93183d58e97b340b1bb306d359023a, type: 2}
   m_IsPrefabParent: 0

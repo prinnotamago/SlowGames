@@ -50,14 +50,14 @@ public class TextMessage : MonoBehaviour {
     //文字を１文字ずつ出していく関数
     void TextCount(ref char[] text)
     {
-        if (_count > text.Length)
+        if (isPopText) return;
+        if (_count > text.Length) //文字が最後まで表示されたらreturn
         {
             _count = text.Length;
             isPopText = true;
-            return;
         }
         _textMoveCount += Time.deltaTime;
-        if (_textMoveCount > _textPopTime)
+        if (_textMoveCount > _textPopTime) //一定時間超えたら１文字表示
         {
             _textMoveCount = 0.0f;
             if (_count < text.Length) _text.text += text[_count];

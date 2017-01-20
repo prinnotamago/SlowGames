@@ -66,14 +66,12 @@ public class ResultManager : MonoBehaviour
         {
             SceneChange.ChangeScene(SceneName.Name.Title, Color.white);
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            _state = State.Wait;
-            StartCoroutine(Production());
-        }
         _stateUpdate[_state]();
     }
 
+    /// <summary>
+    /// 銃を置くまでのUpdate
+    /// </summary>
     void GunPutUpdate()
     {
         if (!_put[0].isPutGun) return;
@@ -82,7 +80,11 @@ public class ResultManager : MonoBehaviour
         _state = State.Wait;
         StartCoroutine(Production());
     }
-
+    
+    /// <summary>
+    /// 最後の演出
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Production()
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV17);
@@ -125,6 +127,9 @@ public class ResultManager : MonoBehaviour
         _state = State.End;
     }
 
+    /// <summary>
+    /// 演出が終わった後、タイトルに戻れるようにする処理
+    /// </summary>
     void EndUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

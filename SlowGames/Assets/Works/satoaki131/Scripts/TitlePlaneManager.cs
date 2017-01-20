@@ -11,8 +11,13 @@ public class TitlePlaneManager : MonoBehaviour {
     [SerializeField]
     Vector2 _createPosMin = new Vector2(-12, -40);
 
+    // 生成するZ座標
     [SerializeField]
     private float _startZ = 0.0f;
+
+    // Planeの死ぬZ座標
+    [SerializeField]
+    private float _endZ = 0.0f;
 
     // 生成する板
     [SerializeField]
@@ -56,6 +61,7 @@ public class TitlePlaneManager : MonoBehaviour {
             obj.transform.parent = transform;
             var speed = Random.Range(_speedMin, _speedMax);
             obj.GetComponent<TitlePlaneMove>().speed = speed;
+            obj.GetComponent<TitlePlaneMove>().endZ = _endZ;
 
             // 生成する時間をリセット
             _createTime = _createTimeDecision;
