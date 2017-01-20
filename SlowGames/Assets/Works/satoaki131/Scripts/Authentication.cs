@@ -43,6 +43,7 @@ public class Authentication : MonoBehaviour {
         _time += Time.unscaledDeltaTime; 
         for (int i = 0; i < _text.Length; i++)
         {
+            if (_authenticationEnd) break;
             if (i < END_INDEX) continue;
             _randomNumber = UnityEngine.Random.Range(0, 10);
             _text[i].text = _randomNumber.ToString();
@@ -52,8 +53,8 @@ public class Authentication : MonoBehaviour {
             {
                 _stopTime += 0.6f;
                 END_INDEX++;
-                if(END_INDEX == _text.Length && !_authenticationEnd) { _authenticationEnd = true; break; }
-                _text[END_INDEX].text = _displayPassNumber[END_INDEX].ToString();
+                _text[i].text = _displayPassNumber[i].ToString();
+                if (END_INDEX == _text.Length && !_authenticationEnd) { _authenticationEnd = true; }
             }
         }
 
