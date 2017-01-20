@@ -167,7 +167,7 @@ public class GenerateManager : MonoBehaviour
             _currentEnemysCount[(int)targetPosition] += 1;
             
             //生成
-            _enemyGenerator.GenerateEnemy(EnemyType.Easy, targetPosition);    
+            _enemyGenerator.GenerateEnemy(EnemyType.Normal, targetPosition);    
                          
     }
 
