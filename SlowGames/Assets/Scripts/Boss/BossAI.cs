@@ -182,7 +182,9 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     int _climaxBoundNum = 2;    // バウンドする回数
     [SerializeField]
-    float _climaxBoundPower = 5.0f; // バウンドのパワー
+    float _climaxBoundPowerSide = 5.0f; // バウンドのパワー
+    [SerializeField]
+    float _climaxBoundPowerUp = 5.0f; // バウンドのパワー
     [SerializeField]
     GameObject _effectPos = null;
     [SerializeField]
@@ -778,9 +780,6 @@ public class BossAI : MonoBehaviour {
                 {
                     // バウンドの回数を減らす
                     _climaxBoundNum--;
-                    
-                    // バウンドの力を半分に
-                    _climaxBoundPower *= 0.5f;
 
                     // ２次元での向きを出す
                     var bossPos = new Vector2(_bossBodyParent.transform.position.x, _bossBodyParent.transform.position.z);
@@ -791,13 +790,20 @@ public class BossAI : MonoBehaviour {
                     var vector = new Vector3(vector2.x, 0.0f, vector2.y);
 
                     // その方向に飛ばす
-                    _rigidbody.velocity = vector.normalized * _climaxBoundPower;
-                    _rigidbody.velocity += Vector3.up * _climaxBoundPower;
+                    _rigidbody.velocity = vector.normalized * _climaxBoundPowerSide;
+                    _rigidbody.velocity += Vector3.up * _climaxBoundPowerUp;
+
+                    // バウンドの力を半分に
+                    _climaxBoundPowerSide *= 0.5f;
+                    _climaxBoundPowerUp *= 0.5f;
 
                     // 最後のバウンドの時滑らせるために強い力をあたえる
                     if (_climaxBoundNum == 0)
                     {
                         _rigidbody.velocity += vector.normalized * _climaxVelocity;
+
+                        //_anim.SetBool("slide", true);
+                        _anim.Play("Slide");
                     }
 
                     // バウンドエフェクトを出す
@@ -810,7 +816,7 @@ public class BossAI : MonoBehaviour {
                     var boundParticle = Instantiate(_slideParticle);
                     boundParticle.transform.position = _effectPos.transform.position;
                     boundParticle.transform.LookAt(_player.transform);
-                    boundParticle.transform.parent = _slideParticleParent.transform;
+                    boundParticle.transform.parent = transform;
                 }
             }
             return;

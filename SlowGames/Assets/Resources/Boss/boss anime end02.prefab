@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 65663533898623032}
   - component: {fileID: 65377596464527990}
   - component: {fileID: 114314100095724026}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: head parge 03
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 65450554883829784}
   - component: {fileID: 65705084644040360}
   - component: {fileID: 114217913006452138}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: head parge 02
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 65012193147300232}
   - component: {fileID: 65760484636878238}
   - component: {fileID: 114259113230538206}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: head parge 01
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 65235603345089976}
   - component: {fileID: 65652638994411350}
   - component: {fileID: 114568511805979296}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: head parge 04
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1409245543342586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 250, z: 2.15}
+  m_LocalPosition: {x: 0, y: 60.67, z: 2.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996693288179392}
@@ -1844,8 +1844,9 @@ MonoBehaviour:
   _lastRandMoveLength: {x: 5, y: 2, z: 5}
   _climaxVelocity: 7
   _climaxDestroyTime: 5
-  _climaxBoundNum: 2
-  _climaxBoundPower: 5
+  _climaxBoundNum: 5
+  _climaxBoundPowerSide: 5
+  _climaxBoundPowerUp: 10
   _effectPos: {fileID: 1362081353054274}
   _boundParticle: {fileID: 1781873274365052, guid: 749a6ba38b346754b867ad42856c0d4c,
     type: 2}

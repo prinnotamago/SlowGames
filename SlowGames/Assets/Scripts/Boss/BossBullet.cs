@@ -56,12 +56,12 @@ public class BossBullet : MonoBehaviour {
         {
             _chargeTime -= Time.unscaledDeltaTime;
 
-            if (_chargeTime <= 0.0f)
-            {
-                // 高速弾を撃つのを伝える
-                AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
-            }
+            //if (_chargeTime <= 0.0f)
+            //{
+            //    // 高速弾を撃つのを伝える
+            //    AudioManager.instance.stopAllVoice();
+            //    AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
+            //}
         }
         else
         {
