@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpeed: 10
   _rotateSpeed: 100
-  _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+  _deathEffect: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
   _targetDirection: {x: 2, y: 2, z: 2}
   _doChaseToPlayer: 1
