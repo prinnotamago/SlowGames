@@ -40,7 +40,7 @@ public class PutGunStand : MonoBehaviour {
             AudioManager.instance.playSe(AudioName.SeName.GunGet);
             _gunObj.transform.parent = null; //子供解除
             var localPosition = col.transform.position;
-            localPosition.y = 0.7f;
+            localPosition.y = 0.8f;
             _gunObj.transform.localPosition = localPosition;
             _gunObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             col.GetComponent<SphereCollider>().enabled = false;

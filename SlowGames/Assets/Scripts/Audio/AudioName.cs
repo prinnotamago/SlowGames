@@ -51,11 +51,10 @@ public enum VoiceName
 	V04,
 	V04b,
 	V05,
-	V07Charge,
+	V07,
 	V07b,
 	V07c,
 	V07d,
 	V09,
-	V9,
 }
 }

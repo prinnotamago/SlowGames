@@ -30,7 +30,7 @@ public class AutoSlowHeal : MonoBehaviour {
 
                 // チャージ完了ボイス
                 //AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.V07Charge);
+                AudioManager.instance.playVoice(AudioName.VoiceName.V07);
             }
             else
             {
