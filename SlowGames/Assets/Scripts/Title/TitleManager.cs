@@ -146,9 +146,9 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-        iTween.ScaleTo(_logo, iTween.Hash(
+        iTween.ScaleTo(_logo.GetComponentInChildren<Image>().gameObject, iTween.Hash(
             "y", 0.0f,
-            "time", 0.7f,
+            "time", 0.4f,
             "easeType", iTween.EaseType.easeInBack
             ));
 
@@ -390,6 +390,10 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
         AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
+        foreach (var slow in FindObjectsOfType<GunSlowButton>())
+        {
+            slow.enabled = false;
+        }
 
         _descriptionText.text = "スロ―ゲージ回復中\nスローゲージは２秒で回復します。";
         _slowTutorealMissile[0].SetActive(false);
@@ -404,6 +408,10 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
         AudioManager.instance.stopVoice(AudioName.VoiceName.V05);
+        foreach (var slow in FindObjectsOfType<GunSlowButton>())
+        {
+            slow.enabled = true;
+        }
 
         yield return new WaitForSeconds(2.0f); //チャージ完了のセリフ待ってから進む
 

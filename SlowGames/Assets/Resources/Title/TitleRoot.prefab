@@ -4774,7 +4774,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140337202684524}
   m_LocalRotation: {x: 0.026167953, y: -0.026167953, z: 0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4662181265337026}
@@ -4788,7 +4788,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212153761367484}
   m_LocalRotation: {x: 0.026167953, y: 0.026167953, z: -0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4897576026334052}
@@ -4929,7 +4929,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158258416245112}
   m_LocalRotation: {x: -0.026167953, y: -0.026167953, z: -0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4881951139795210}
@@ -5315,7 +5315,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407125705158118}
   m_LocalRotation: {x: -0.026167953, y: 0.026167953, z: 0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4884250015988532}
@@ -5456,7 +5456,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1313785074421306}
   m_LocalRotation: {x: -0.026167953, y: -0.026167953, z: -0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4122890535792138}
@@ -5723,7 +5723,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1927448348962286}
   m_LocalRotation: {x: 0, y: -0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4828050088918426}
@@ -6304,7 +6304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632271232767588}
   m_LocalRotation: {x: 0.026167953, y: 0.026167953, z: -0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4551476777474746}
@@ -6399,7 +6399,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1302468229161532}
   m_LocalRotation: {x: 0, y: 0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181627533506200}
@@ -6497,7 +6497,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1192068184123914}
   m_LocalRotation: {x: -0.026167953, y: 0.026167953, z: 0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4392603504560856}
@@ -6587,7 +6587,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394620378428772}
   m_LocalRotation: {x: 0.026167953, y: -0.026167953, z: 0.0006852313, w: 0.9993148}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4584243512291764}
@@ -6976,7 +6976,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331139815205574}
   m_LocalRotation: {x: 0, y: -0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4412520437666402}
@@ -7092,7 +7092,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1103788776698544}
   m_LocalRotation: {x: 0, y: 0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0, y: 1, z: -20}
+  m_LocalPosition: {x: 0, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4317955757620216}
@@ -11781,12 +11781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114073485525881040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12124,12 +12124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114178867567510764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12431,12 +12431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114289958252434964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12606,12 +12606,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114328187145314514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12713,12 +12713,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114375512427660306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13172,12 +13172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114524641227418836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13201,12 +13201,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114560306911220864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13342,7 +13342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32317ea92f8ab274d908caacfa54b1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slowHealTimeMax: 5.7
+  _slowHealTimeMax: 7
 --- !u!114 &114601719288886934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13484,12 +13484,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114686387118192376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13775,8 +13775,8 @@ MonoBehaviour:
   - {x: 0.5, y: 0.7, z: -1.5}
   - {x: -0.5, y: 0.7, z: -1.5}
   _slowTutorealMissile:
-  - {fileID: 1895825093214532}
-  - {fileID: 1468490334328892}
+  - {fileID: 1791213422401674}
+  - {fileID: 1607599073810038}
 --- !u!114 &114816132975696318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13920,12 +13920,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114850168530720594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13951,12 +13951,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114890008181145790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14088,12 +14088,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114936151352709672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14200,12 +14200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d60647052bd4b3399684463d85f6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 20
+  _bulletSpeed: 30
   _rotateSpeed: 100
-  _resizeTime: 0.8
+  _resizeTime: 0
   _deathEffect: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
     type: 2}
-  _moveTimeMax: 3
+  _moveTimeMax: 1
 --- !u!114 &114971021390155308
 MonoBehaviour:
   m_ObjectHideFlags: 1
