@@ -46,6 +46,7 @@ public class TitleManager : MonoBehaviour
 
     private TurtrealEnemyManager _enemyManager = null;
 
+    [SerializeField]
     private PlayerShot[] _playerShot = null;
 
     //[SerializeField]
@@ -76,6 +77,9 @@ public class TitleManager : MonoBehaviour
 
     private float _time = 0.0f;
     private float _voiceTIme = 0.0f;
+
+    [SerializeField]
+    private GameObject _slowTutorealMissile = null;
 
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
@@ -117,6 +121,11 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
         _arrowAnim.gameObject.SetActive(false);
+
+        for(int i = 0; i < _playerShot.Length; i++)
+        {
+            _playerShot[i].isStart = false;
+        }
     }
 
     void Update()
@@ -337,6 +346,7 @@ public class TitleManager : MonoBehaviour
     IEnumerator SlowDescription()
     {
         _descriptionPanel.gameObject.SetActive(true);
+        _slowTutorealMissile.SetActive(true);
         _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
         AudioManager.instance.playVoice(AudioName.VoiceName.V04); //Voice
 
@@ -394,7 +404,7 @@ public class TitleManager : MonoBehaviour
         }
         AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
-        _descriptionText.text = "スロ―ゲージ回復中";
+        _descriptionText.text = "スロ―ゲージ回復中\nスローゲージは２秒で回復します。";
 
         AudioManager.instance.playVoice(AudioName.VoiceName.V05);
 
@@ -406,6 +416,15 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.stopVoice(AudioName.VoiceName.V05);
 
         yield return new WaitForSeconds(2.0f); //チャージ完了のセリフ待ってから進む
+
+        //セーフティ解除のセリフ？
+
+        //セーフティの解除
+        for (int i = 0; i < _playerShot.Length; i++)
+        {
+            _playerShot[i].isStart = true;
+        }
+
 
         //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
 
@@ -486,7 +505,7 @@ public class TitleManager : MonoBehaviour
     IEnumerator TurtrealEnd()
     {
         _enemyManager.SetActive(true);
-
+        _slowTutorealMissile.SetActive(false);
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
@@ -533,7 +552,8 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.playVoice(AudioName.VoiceName.V07c);
         yield return new WaitForSeconds(2.0f);
 
-        _descriptionPanel.gameObject.SetActive(false);
+        _descriptionPanel.GetComponentInChildren<Animator>().SetBool("End", true);
+        //_descriptionPanel.gameObject.SetActive(false);
 
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
