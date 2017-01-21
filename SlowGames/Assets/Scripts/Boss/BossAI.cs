@@ -69,6 +69,8 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _speedBulletInformTime = 3.0f;
 
+    bool _normalBulletFlag = true;  // 通常弾を撃つフラグ
+
     /// <summary>
     /// 攻撃頻度(秒)
     /// </summary>
@@ -296,10 +298,10 @@ public class BossAI : MonoBehaviour {
         DamageCheck();
 
         // クライマックス以外プレイヤーに向かせる
-        if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
+        //if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
 
         // 速い弾を撃つときは各形態の動作をしないようにする
-        if (_speedBulletFlag) { return; }
+        //if (_speedBulletFlag) { return; }
 
         // 各形態の動作
         switch (_state)
@@ -438,6 +440,7 @@ public class BossAI : MonoBehaviour {
         {
             // 速い弾を撃つ
             var bullet = Instantiate(_speedBullet);
+            bullet.transform.parent = transform;
             bullet.transform.position = _SpeedGunObjPos.position;
             bullet.transform.LookAt(_player.transform);
             bullet.GetComponent<BossBullet>().chargeTime = _speedBulletChargeMax;
@@ -487,7 +490,8 @@ public class BossAI : MonoBehaviour {
             {
                 SpeedBulletShot();
             }
-            else
+
+            if (_normalBulletFlag)
             {
                 NormalShot();
             }
@@ -506,6 +510,8 @@ public class BossAI : MonoBehaviour {
         //    transform.position += Vector3.down * Time.deltaTime;
         //}
 
+        _bossBodyParent.transform.LookAt(_player.transform);
+
         var vector = _startPos - _bossBodyParent.transform.position;
         _bossBodyParent.transform.position += vector / _startSpeed;
         if(vector.magnitude <= 0.5f)
@@ -513,10 +519,15 @@ public class BossAI : MonoBehaviour {
             _state++;
         }
     }
-
+    [SerializeField]
+    float anglex = Mathf.PI / 4;
+    [SerializeField]
+    float anglex2 = Mathf.PI / 4;
     // 第一形態
     void Level_1_Update()
     {
+        _bossBodyParent.transform.LookAt(_player.transform);
+
         if (_level_1_moveHpIndex < _level_1_moveHp.Length && _level_1_moveHp[_level_1_moveHpIndex] >= _hp)
         {
             ++_level_1_moveHpIndex;
@@ -648,10 +659,41 @@ public class BossAI : MonoBehaviour {
             var vector = nextPos - _bossBodyParent.transform.position;
 
             _bossBodyParent.transform.position += vector * 3.0f * Time.deltaTime;
+
+            //_bossBodyParent.transform.LookAt(nextPos);
+            //_bossBodyParent.transform.LookAt(_player.transform);
+
+            //_bossBodyParent.transform.Rotate(0, 0,-_level_2_moveAngle * Mathf.Rad2Deg);
+
+           
+
+            //Quaternion q = Quaternion.LookRotation(nextPos);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 360.0f * Time.deltaTime);
+
+            if (_level_2_moveAngle <= (Mathf.PI / 2) || _level_2_moveAngle > (Mathf.PI / 2) * 3)
+            {
+                _bossBodyParent.transform.Rotate(0, 0, -Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
+            }
+            else if (_level_2_moveAngle > (Mathf.PI / 2) || (_level_2_moveAngle >= (Mathf.PI / 2) && _level_2_moveAngle <= (Mathf.PI / 2) * 3))
+            {
+                _bossBodyParent.transform.Rotate(0, 0, Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
+            }
+
+            //Debug.Log(_level_2_moveAngle);
+            //if (_level_2_moveAngle <= Mathf.PI)
+            //{
+            //    _bossBodyParent.transform.Rotate(0, 0, _level_2_moveAngle * Mathf.Rad2Deg);
+            //}
+            //else
+            //{
+            //    _bossBodyParent.transform.Rotate(0, 0, _level_2_moveAngle * Mathf.Rad2Deg);
+            //}
         }
         // ランダムに動く動き
         else if(_level_2_mode == Level_2_Mode.RANDOM)
         {
+            _bossBodyParent.transform.LookAt(_player.transform);
+
             var vector = _level_2_movePos - _bossBodyParent.transform.position;
 
             // 向かう場所に近づいたら

@@ -19,7 +19,7 @@ public class BossBullet : MonoBehaviour {
 
     GameObject _player;
 
-    float _standbyTime = 1.0f;
+    float _standbyTime = 2.0f;
     float _standbySpeed = 1.0f;
 
     float _chargeTime = 0.0f;
@@ -32,12 +32,21 @@ public class BossBullet : MonoBehaviour {
     float _destroyCount = 5.0f;
 
     [SerializeField]
+    float _slowStartTime = 0.01f;
+
+    [SerializeField]
+    float _angleSpeed = 5.0f;
+
+    [SerializeField]
     GameObject _chargeEffect;
+
+    //GameObject _particle;
 
     void Start()
     {
         var particle = Instantiate(_chargeEffect);
         particle.transform.position = transform.position;
+        particle.transform.parent = transform;
     }
 
     void Update()
@@ -65,8 +74,15 @@ public class BossBullet : MonoBehaviour {
         }
         else
         {
+            transform.parent = null;
+
+            if(_slowStartTime > 0.0f)
+            {
+                _slowStartTime -= Time.unscaledDeltaTime;
+            }
+
             // スローじゃなかったらスローにする
-            if (!SlowMotion._instance.isSlow)
+            if (!SlowMotion._instance.isSlow && _slowStartTime <= 0.0f)
             {
                 SlowMotion._instance.GameSpeed(0.1f);
                 SlowMotion._instance.isLimit = false;
@@ -74,6 +90,8 @@ public class BossBullet : MonoBehaviour {
 
             // 前進
             transform.position += transform.TransformDirection(Vector3.forward) * _bulletSpeed * Time.deltaTime;
+
+            transform.Rotate(0, 0, _angleSpeed);
 
             _destroyCount -= Time.unscaledDeltaTime;
             if (_destroyCount <= 0.0f)

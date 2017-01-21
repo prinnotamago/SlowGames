@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cb46dddde24c4b44db009cba7d78b2da
-timeCreated: 1484722594
+guid: 869b0f9a8e2f2c347aefc0ed22add55b
+timeCreated: 1484985995
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -14,12 +14,30 @@ ModelImporter:
     100012: head parge 02
     100014: head parge 03
     100016: head parge 04
-    100018: parge bottom left
-    100020: parge bottom right
-    100022: under wing left
-    100024: under wing left dammy
-    100026: under wing right
-    100028: under wing right dammy
+    100018: hi
+    100020: jyoint
+    100022: parge bottom left
+    100024: parge bottom right
+    100026: polySurface2
+    100028: polySurface3
+    100030: polySurface4
+    100032: polySurface4 1
+    100034: polySurface5
+    100036: polySurface6
+    100038: pPipe11
+    100040: transform1
+    100042: transform2
+    100044: transform3
+    100046: transform4
+    100048: transform5
+    100050: transform6
+    100052: under wing left
+    100054: under wing left dammy
+    100056: under wing right
+    100058: under wing right dammy
+    100060: yari:pCone1
+    100062: yari:transform1
+    100064: yari:transform2
     400000: body
     400002: body dammy
     400004: //RootNode
@@ -29,32 +47,52 @@ ModelImporter:
     400012: head parge 02
     400014: head parge 03
     400016: head parge 04
-    400018: parge bottom left
-    400020: parge bottom right
-    400022: under wing left
-    400024: under wing left dammy
-    400026: under wing right
-    400028: under wing right dammy
+    400018: hi
+    400020: jyoint
+    400022: parge bottom left
+    400024: parge bottom right
+    400026: polySurface2
+    400028: polySurface3
+    400030: polySurface4
+    400032: polySurface4 1
+    400034: polySurface5
+    400036: polySurface6
+    400038: pPipe11
+    400040: transform1
+    400042: transform2
+    400044: transform3
+    400046: transform4
+    400048: transform5
+    400050: transform6
+    400052: under wing left
+    400054: under wing left dammy
+    400056: under wing right
+    400058: under wing right dammy
+    400060: yari:pCone1
+    400062: yari:transform1
+    400064: yari:transform2
     2300000: body
     2300002: head
     2300004: head parge 01
     2300006: head parge 02
     2300008: head parge 03
     2300010: head parge 04
-    2300012: parge bottom left
-    2300014: parge bottom right
-    2300016: under wing left
-    2300018: under wing right
+    2300012: jyoint
+    2300014: parge bottom left
+    2300016: parge bottom right
+    2300018: under wing left
+    2300020: under wing right
     3300000: body
     3300002: head
     3300004: head parge 01
     3300006: head parge 02
     3300008: head parge 03
     3300010: head parge 04
-    3300012: parge bottom left
-    3300014: parge bottom right
-    3300016: under wing left
-    3300018: under wing right
+    3300012: jyoint
+    3300014: parge bottom left
+    3300016: parge bottom right
+    3300018: under wing left
+    3300020: under wing right
     4300000: under wing left
     4300002: under wing right
     4300004: body
@@ -63,8 +101,9 @@ ModelImporter:
     4300010: head parge 02
     4300012: head parge 03
     4300014: head parge 04
-    4300016: parge bottom right
-    4300018: parge bottom left
+    4300016: jyoint
+    4300018: parge bottom right
+    4300020: parge bottom left
     7400000: PataPata
     7400002: Tackle
     7400004: Down
@@ -134,9 +173,45 @@ ModelImporter:
         weight: 1
       - path: body dammy/body/head dammy/head parge 04
         weight: 1
+      - path: body dammy/body/jyoint
+        weight: 1
+      - path: hi
+        weight: 1
+      - path: hi/pPipe11
+        weight: 1
+      - path: hi/pPipe11/polySurface2
+        weight: 1
+      - path: hi/pPipe11/polySurface2/transform3
+        weight: 1
+      - path: hi/pPipe11/polySurface3
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1/transform4
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5/transform5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/transform2
+        weight: 1
+      - path: hi/pPipe11/transform1
+        weight: 1
+      - path: hi/yari:pCone1
+        weight: 1
+      - path: hi/yari:pCone1/yari:transform2
+        weight: 1
       - path: parge bottom left
         weight: 1
       - path: parge bottom right
+        weight: 1
+      - path: polySurface4
+        weight: 1
+      - path: polySurface4/transform6
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/yari:transform1
         weight: 1
       - path: under wing left dammy
         weight: 1
@@ -192,9 +267,45 @@ ModelImporter:
         weight: 1
       - path: body dammy/body/head dammy/head parge 04
         weight: 1
+      - path: body dammy/body/jyoint
+        weight: 1
+      - path: hi
+        weight: 1
+      - path: hi/pPipe11
+        weight: 1
+      - path: hi/pPipe11/polySurface2
+        weight: 1
+      - path: hi/pPipe11/polySurface2/transform3
+        weight: 1
+      - path: hi/pPipe11/polySurface3
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1/transform4
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5/transform5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/transform2
+        weight: 1
+      - path: hi/pPipe11/transform1
+        weight: 1
+      - path: hi/yari:pCone1
+        weight: 1
+      - path: hi/yari:pCone1/yari:transform2
+        weight: 1
       - path: parge bottom left
         weight: 1
       - path: parge bottom right
+        weight: 1
+      - path: polySurface4
+        weight: 1
+      - path: polySurface4/transform6
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/yari:transform1
         weight: 1
       - path: under wing left dammy
         weight: 1
@@ -250,9 +361,45 @@ ModelImporter:
         weight: 1
       - path: body dammy/body/head dammy/head parge 04
         weight: 1
+      - path: body dammy/body/jyoint
+        weight: 1
+      - path: hi
+        weight: 1
+      - path: hi/pPipe11
+        weight: 1
+      - path: hi/pPipe11/polySurface2
+        weight: 1
+      - path: hi/pPipe11/polySurface2/transform3
+        weight: 1
+      - path: hi/pPipe11/polySurface3
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1/transform4
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5/transform5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/transform2
+        weight: 1
+      - path: hi/pPipe11/transform1
+        weight: 1
+      - path: hi/yari:pCone1
+        weight: 1
+      - path: hi/yari:pCone1/yari:transform2
+        weight: 1
       - path: parge bottom left
         weight: 1
       - path: parge bottom right
+        weight: 1
+      - path: polySurface4
+        weight: 1
+      - path: polySurface4/transform6
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/yari:transform1
         weight: 1
       - path: under wing left dammy
         weight: 1
@@ -269,7 +416,7 @@ ModelImporter:
       name: Slide
       takeName: Take 001
       firstFrame: 19
-      lastFrame: 24
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -308,9 +455,45 @@ ModelImporter:
         weight: 1
       - path: body dammy/body/head dammy/head parge 04
         weight: 1
+      - path: body dammy/body/jyoint
+        weight: 1
+      - path: hi
+        weight: 1
+      - path: hi/pPipe11
+        weight: 1
+      - path: hi/pPipe11/polySurface2
+        weight: 1
+      - path: hi/pPipe11/polySurface2/transform3
+        weight: 1
+      - path: hi/pPipe11/polySurface3
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface4 1/transform4
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/polySurface5/transform5
+        weight: 1
+      - path: hi/pPipe11/polySurface3/transform2
+        weight: 1
+      - path: hi/pPipe11/transform1
+        weight: 1
+      - path: hi/yari:pCone1
+        weight: 1
+      - path: hi/yari:pCone1/yari:transform2
+        weight: 1
       - path: parge bottom left
         weight: 1
       - path: parge bottom right
+        weight: 1
+      - path: polySurface4
+        weight: 1
+      - path: polySurface4/transform6
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/yari:transform1
         weight: 1
       - path: under wing left dammy
         weight: 1
