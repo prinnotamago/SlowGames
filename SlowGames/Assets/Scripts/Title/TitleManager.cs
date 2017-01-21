@@ -49,12 +49,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private PlayerShot[] _playerShot = null;
 
-    //[SerializeField]
-    //private GameObject _door = null; //ドア用のオブジェクト
-
-    //[SerializeField]
-    //private Light _afterShade = null; //後光用のライト
-
     [SerializeField, Range(1.0f, 3.0f)]
     private float END_TIME = 2.0f;
 
@@ -79,7 +73,7 @@ public class TitleManager : MonoBehaviour
     private float _voiceTIme = 0.0f;
 
     [SerializeField]
-    private GameObject _slowTutorealMissile = null;
+    private GameObject[] _slowTutorealMissile = null;
 
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
@@ -152,9 +146,14 @@ public class TitleManager : MonoBehaviour
             yield return null;
         }
 
-        _logo.SetActive(false);
+        iTween.ScaleTo(_logo, iTween.Hash(
+            "y", 0.0f,
+            "time", 0.7f,
+            "easeType", iTween.EaseType.easeInBack
+            ));
 
         yield return new WaitForSeconds(1.0f);
+        _logo.SetActive(false);
         StartCoroutine(Authentication());
     }
 
@@ -283,12 +282,6 @@ public class TitleManager : MonoBehaviour
 
         time = 0.0f;
 
-        //弾を撃てるようにする
-        //foreach (var shot in FindObjectsOfType<PlayerShot>())
-        //{
-        //    shot.isStart = true;
-        //}
-
         //ライトを少しずつ暗くしていく
         while (_spotLights[0].intensity != 0)
         {
@@ -325,20 +318,6 @@ public class TitleManager : MonoBehaviour
         StartCoroutine(SlowDescription());
     }
 
-    //IEnumerator WaitingState()
-    //{
-    //    var time = 0.0f;
-    //    var endTime = 5.0f;
-    //    AudioManager.instance.playVoice(AudioName.VoiceName.V03);
-    //    while (time < endTime)
-    //    {
-    //        time += Time.unscaledDeltaTime;
-    //        yield return null;
-    //    }
-
-    //    StartCoroutine(SlowDescription());
-    //}
-
     /// <summary>
     /// スローのチュートリアル
     /// </summary>
@@ -346,7 +325,6 @@ public class TitleManager : MonoBehaviour
     IEnumerator SlowDescription()
     {
         _descriptionPanel.gameObject.SetActive(true);
-        _slowTutorealMissile.SetActive(true);
         _descriptionText.text = "パッドを押し込んで\nスローを使ってみよう！";
         AudioManager.instance.playVoice(AudioName.VoiceName.V04); //Voice
 
@@ -357,7 +335,11 @@ public class TitleManager : MonoBehaviour
         _viveMaterial2[1].EnableKeyword("_EMISSION");
         _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
 
-        foreach(var slow in FindObjectsOfType<GunSlowButton>())
+        _slowTutorealMissile[0].SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _slowTutorealMissile[1].SetActive(true);
+
+        foreach (var slow in FindObjectsOfType<GunSlowButton>())
         {
             slow.enabled = true;
         }
@@ -410,12 +392,15 @@ public class TitleManager : MonoBehaviour
         AudioManager.instance.stopVoice(AudioName.VoiceName.V04);
 
         _descriptionText.text = "スロ―ゲージ回復中\nスローゲージは２秒で回復します。";
+        _slowTutorealMissile[0].SetActive(false);
+        _slowTutorealMissile[1].SetActive(false);
 
         AudioManager.instance.playVoice(AudioName.VoiceName.V05);
-
+        time = 0.0f;
         //スローゲージが回復するまで待つ
-        while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
+        while (time < 7.0f)
         {
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
         AudioManager.instance.stopVoice(AudioName.VoiceName.V05);
@@ -423,76 +408,6 @@ public class TitleManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f); //チャージ完了のセリフ待ってから進む
 
         //セーフティ解除のセリフ？
-
-
-
-        //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
-
-        //var normalPos = _viveControllerModel[0].transform.position;
-        //var normalPos2 = _viveControllerModel[1].transform.position;
-
-        //var normalRotate = _viveControllerModel[0].transform.eulerAngles;
-
-        //_arrowAnim.gameObject.SetActive(true);
-
-        //iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        //iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        //iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-        //iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-
-        //AudioManager.instance.playNotSlowSe(AudioName.SeName.V05);
-        //voiceTime = 0.0f;
-        ////スローゲージが回復したらぬける
-        //while (SlowMotion._instance.slowTime != SlowMotion._instance.slowTimeMax)
-        //{
-        //    voiceTime += Time.unscaledDeltaTime;
-        //    if (voiceTime > 15.0f)
-        //    {
-        //        voiceTime = 0.0f;
-        //        AudioManager.instance.playNotSlowSe(AudioName.SeName.V06);
-        //    }
-
-        //    _arrowAnim.gameObject.transform.Rotate(new Vector3(0, 75, 0) * Time.unscaledDeltaTime);
-        //    if (_viveControllerModel[0].transform.position.y == 0.3f)
-        //    {
-        //        var pos = _viveControllerModel[0].transform.position;
-        //        var pos2 = _viveControllerModel[1].transform.position;
-        //        pos.y = normalPos.y;
-        //        pos2.y = normalPos2.y;
-
-        //        _viveControllerModel[0].transform.eulerAngles = normalRotate;
-        //        _viveControllerModel[1].transform.eulerAngles = normalRotate;
-
-        //        _viveControllerModel[0].transform.position = pos;
-        //        _viveControllerModel[1].transform.position = pos2;
-
-        //        //var animationHash = _arrowAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-        //        //_arrowAnim.Play(animationHash, 0, 0);
-
-        //        iTween.MoveTo(_viveControllerModel[0], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        //        iTween.MoveTo(_viveControllerModel[1], iTween.Hash("y", 0.30f, "time", 3.0f, "easeType", iTween.EaseType.easeOutCubic));
-        //        iTween.RotateTo(_viveControllerModel[0], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-        //        iTween.RotateTo(_viveControllerModel[1], iTween.Hash("x", -75, "time", 2.0f, "easeType", iTween.EaseType.easeOutCirc));
-
-        //    }
-        //    yield return null;
-        //}
-        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V05);
-        //AudioManager.instance.stopNotSlowSe(AudioName.SeName.V06);
-        //_arrowAnim.gameObject.SetActive(false);
-
-        //iTween.Stop(_viveControllerModel[0], "move");
-        //iTween.Stop(_viveControllerModel[1], "move");
-        //iTween.Stop(_viveControllerModel[0], "rotate");
-        //iTween.Stop(_viveControllerModel[1], "rotate");
-
-        //yield return null;
-
-        //_viveControllerModel[0].transform.position = normalPos;
-        //_viveControllerModel[1].transform.position = normalPos2;
-
-        //_viveControllerModel[0].transform.eulerAngles = normalRotate;
-        //_viveControllerModel[1].transform.eulerAngles = normalRotate;
 
 
         StartCoroutine(TurtrealEnd());
@@ -505,7 +420,6 @@ public class TitleManager : MonoBehaviour
     IEnumerator TurtrealEnd()
     {
         _enemyManager.SetActive(true);
-        _slowTutorealMissile.SetActive(false);
         //Enemyを殺させる
         TitleManager.isTurtreal = true;
         var enemyManager = FindObjectOfType<TurtrealEnemyManager>();
@@ -578,48 +492,6 @@ public class TitleManager : MonoBehaviour
         TitleManager.isTurtreal = false;
         SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
 
-        //扉の演出
-        //StartCoroutine(LightShine());
     }
 
-    /// <summary>
-    /// ライトをシーン遷移と同時に強くしていくコルーチン
-    /// </summary>
-    /// <returns></returns>
-    //private IEnumerator LightShine()
-    //{
-    //    var time = 0.0f;
-    //    var mat = _door.GetComponent<Renderer>().material;
-    //    var color = new Color(1, 1, 1, 0);
-
-    //    //光の強さとDoorのα値をを上げていく
-    //    while (time < END_TIME)
-    //    {
-    //        time += Time.unscaledDeltaTime;
-    //        _afterShade.intensity = Mathf.Lerp(_afterShade.intensity, 8, time / END_TIME);
-    //        color.a = Mathf.Lerp(color.a, 1, time / END_TIME);
-    //        mat.color = color;
-    //        _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
-    //        yield return null;
-    //    }
-
-    //    //StartCoroutine(DoorMove());
-    //    ////シーン遷移
-    //    //TitleManager.isTurtreal = false;
-    //    //SceneChange.ChangeScene(SceneName.Name.MainGame, 1.0f, 1.0f, Color.white);
-
-    //}
-
-    /// <summary>
-    /// ドアを動かし続ける
-    /// </summary>
-    /// <returns></returns>
-    //private IEnumerator DoorMove()
-    //{
-    //    while (true)
-    //    {
-    //        _door.transform.Translate(new Vector3(0, _moveSpeed, 0) * Time.unscaledDeltaTime);
-    //        yield return null;
-    //    }
-    //}
 }
