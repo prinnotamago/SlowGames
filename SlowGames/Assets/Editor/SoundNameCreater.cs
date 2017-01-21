@@ -97,18 +97,32 @@ public class SoundNameCreater : MonoBehaviour
 			builder.AppendLine("public enum VoiceName");
 			builder.AppendLine("{");
 
-			//var path = "Assets/Resources/Audio/Voice";
+            //var path = "Assets/Resources/Audio/Voice";
             var path = "Audio/Voice";
 
-            //var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
-            var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
+            {
 
-            foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
-			{
-				builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
-			}
+                //var names = new[] { "*.wav", "*.mp3", "*.ogg" }.SelectMany (pattern => Directory.GetFiles (path, pattern, SearchOption.TopDirectoryOnly)).OrderBy (fileName => fileName);
+                var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
 
-			builder.AppendLine("}");
+                foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+                {
+                    builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
+                }
+            }
+
+            {
+                path = "Audio/Navigations/0";
+                var names = Resources.LoadAll(path).Select(unityObj => unityObj.name);
+
+                foreach (var n in names.Select(c => Path.GetFileNameWithoutExtension(c)).Distinct().Select(c => new { var = RemoveInvalidChars(c) }))
+                {
+                    builder.Append("\t").AppendFormat("{0},", n.var).AppendLine();
+                }
+
+            }
+
+            builder.AppendLine("}");
 		}
 
         builder.AppendLine("}");

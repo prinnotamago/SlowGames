@@ -56,5 +56,6 @@ public enum VoiceName
 	V07c,
 	V07d,
 	V09,
+	V10,
 }
 }
