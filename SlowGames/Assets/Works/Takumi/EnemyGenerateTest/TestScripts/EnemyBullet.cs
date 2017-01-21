@@ -33,6 +33,12 @@ public class EnemyBullet : MonoBehaviour {
 
 	void Update()
     {   
+//        if (Input.GetKeyDown(KeyCode.A))
+//        {
+//            StartCoroutine(RandomBlow());
+//            _isBlow = true;
+//        }
+        
         if (_isBlow)
         {
             return;
@@ -119,13 +125,15 @@ public class EnemyBullet : MonoBehaviour {
     //ランダムに弾けます
     IEnumerator RandomBlow()
     {
+
         Vector3 randomDirec = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
         float deathTime   = 1.0f;
-        float acceraition = 2.0f;
+        float acceraition = 3.0f;
         float unacceration = 3.0f;
-        float firstTime = 300.0f;
+        float firstTime = 400.0f;
 
         //初速
+        transform.LookAt(randomDirec);
         transform.position += randomDirec * (_bulletSpeed + firstTime) * Time.deltaTime;
 
         //加速
