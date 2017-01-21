@@ -284,10 +284,10 @@ public class TitleManager : MonoBehaviour
         time = 0.0f;
 
         //弾を撃てるようにする
-        foreach (var shot in FindObjectsOfType<PlayerShot>())
-        {
-            shot.isStart = true;
-        }
+        //foreach (var shot in FindObjectsOfType<PlayerShot>())
+        //{
+        //    shot.isStart = true;
+        //}
 
         //ライトを少しずつ暗くしていく
         while (_spotLights[0].intensity != 0)
@@ -357,6 +357,11 @@ public class TitleManager : MonoBehaviour
         _viveMaterial2[1].EnableKeyword("_EMISSION");
         _viveMaterial2[1].SetColor("_EmissionColor", Color.black);
 
+        foreach(var slow in FindObjectsOfType<GunSlowButton>())
+        {
+            slow.enabled = true;
+        }
+
         //スローを使うまでループ抜けない
         while (!SlowMotion._instance.isSlow)
         {
@@ -419,11 +424,6 @@ public class TitleManager : MonoBehaviour
 
         //セーフティ解除のセリフ？
 
-        //セーフティの解除
-        for (int i = 0; i < _playerShot.Length; i++)
-        {
-            _playerShot[i].isStart = true;
-        }
 
 
         //_descriptionText.text = "銃を縦にふって\nスローを回復しよう！";
@@ -525,6 +525,13 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].transform.Rotate(0, -90, 0);
 
         AudioManager.instance.playVoice(AudioName.VoiceName.V07b);
+
+        //セーフティの解除
+        for (int i = 0; i < _playerShot.Length; i++)
+        {
+            _playerShot[i].isStart = true;
+        }
+
 
         while (!enemyManager.isSceneChange)
         {
