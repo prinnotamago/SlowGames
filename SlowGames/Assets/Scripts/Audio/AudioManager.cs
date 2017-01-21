@@ -855,9 +855,14 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 		return this;
 	}
 
-    public AudioManager loadNavigations(int navigationFileNumber) {
+    /// <summary>
+    /// ナビゲーションボイスをロードする
+    /// </summary>
+    /// <param name="navigationFileNumber">ロードしたいナビゲーションのフォルダナンバー</param>
+    /// <returns></returns>
+    public AudioManager loadNavigations(int navigationFolderNumber) {
 
-        var path = navigationFileNumber.ToString();
+        var path = navigationFolderNumber.ToString();
         var resources = Resources.LoadAll<AudioClip>("Audio/Navigations/" + path);
         _voiceClips.AddRange(resources);
 
