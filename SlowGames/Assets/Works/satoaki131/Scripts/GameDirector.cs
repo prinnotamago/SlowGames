@@ -33,6 +33,9 @@ public class GameDirector : MonoBehaviour {
     [SerializeField]
     private GameObject _boss = null;
 
+    [SerializeField, Tooltip("敵を殺した数でボイスを流す、ボイスタイミング")]
+    private int _voiceTiming = 0;
+
     //[SerializeField]
     //private Image _gameStartImage = null;
 
@@ -148,16 +151,12 @@ public class GameDirector : MonoBehaviour {
     private IEnumerator AudioPlay()
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV02);
-        while(GenerateManager.GetCurrentWave() == 0)
+        while(_generateManager._deathCount < _voiceTiming)
         {
             yield return null;
         }
         AudioManager.instance.playVoice(AudioName.VoiceName.IV03);
-        while(GenerateManager.GetCurrentWave() == 1)
-        {
-            yield return null;
-        }
-
+        yield return null;
     }
 
     private IEnumerator GameStartCutIn()
