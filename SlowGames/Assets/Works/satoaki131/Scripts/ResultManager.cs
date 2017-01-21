@@ -40,6 +40,9 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private float _deskMoveSpeed = 0.0f;
 
+    [SerializeField]
+    private GameObject[] _deskSpotLight = null;
+
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
@@ -81,6 +84,9 @@ public class ResultManager : MonoBehaviour
 
         _stand[0].SetActive(true);
         _stand[1].SetActive(true);
+        _deskSpotLight[0].SetActive(true);
+        _deskSpotLight[1].SetActive(true);
+
         _state = State.GunPut;
     }
 
@@ -112,6 +118,12 @@ public class ResultManager : MonoBehaviour
 
         _stand[0].SetActive(false);
         _stand[1].SetActive(false);
+        
+
+        for(int i = 0; i < _desk.Length; i++)
+        {
+            _gun[i].transform.parent = _desk[i].transform;
+        }
 
         _state = State.Wait;
         StartCoroutine(Production());
@@ -134,7 +146,7 @@ public class ResultManager : MonoBehaviour
                 for(int i = 0; i < _desk.Length; i++)
                 {
                     _desk[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
-                    _gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                    //_gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
                 }
             }
             yield return null;
