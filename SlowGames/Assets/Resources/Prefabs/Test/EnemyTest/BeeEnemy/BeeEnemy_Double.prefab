@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242068687375224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.038000047, y: 30.57, z: -6.68}
+  m_LocalPosition: {x: 0.08199996, y: 30.490002, z: -6.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4501423400839578}
@@ -489,7 +489,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 3
+  _generatePostion: 4
   _attackDamege: 2
 --- !u!137 &137031403495594404
 SkinnedMeshRenderer:

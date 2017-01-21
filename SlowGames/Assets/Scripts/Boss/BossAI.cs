@@ -99,6 +99,8 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _standbyTimeMax = 5.0f;
     float _standbyTime = 0.0f;
+    [SerializeField]
+    GameObject _standbySandParticle = null;
 
     // START の情報 //////////////////////////////////////////////////////////////
     [SerializeField]
@@ -208,7 +210,7 @@ public class BossAI : MonoBehaviour {
 
     Animator _anim;
 
-    bool _oneHitFrame = true;
+    bool _oneHitFrame = true;   // 1フレームに複数回ダメージを受けるのを防ぐ
 
     // Use this for initialization
     void Start () {
@@ -261,6 +263,9 @@ public class BossAI : MonoBehaviour {
         // アニメーションを入れる
         _anim = _bossBodyParent.GetComponent<Animator>();
         _anim.Play("PataPata");
+
+        // サンドを落とす
+        Instantiate(_standbySandParticle);
     }
 
     // Update is called once per frame
@@ -718,6 +723,12 @@ public class BossAI : MonoBehaviour {
                     //_anim.SetBool("tackle", true);
                     _anim.Play("Tackle");
                 }
+                else if (_lastMoveIndex == _lastMovePos.Count)
+                {
+                    // 撃ち続けてボイスを流す
+                    AudioManager.instance.stopAllVoice();
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+                }
             }
         }
         // プレイヤーへのタックル
@@ -730,16 +741,7 @@ public class BossAI : MonoBehaviour {
                 _lastTackleFlag = true;
 
                 SlowMotion._instance.GameSpeed(0.1f);
-                SlowMotion._instance.isLimit = false;
-
-                // 撃ち続けてボイスを流す
-                if (!SlowMotion._instance.isLimit)
-                {
-                    AudioManager.instance.stopAllVoice();
-                    AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
-                }
-
-                
+                SlowMotion._instance.isLimit = false;    
             }
             var length = _player.transform.position - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastTackleSpeed * Time.deltaTime;

@@ -1818,7 +1818,9 @@ MonoBehaviour:
   _attackInterval: 0.5
   _patternRatio: 0.5
   _state: 0
-  _standbyTimeMax: 10
+  _standbyTimeMax: 4
+  _standbySandParticle: {fileID: 1000010715882420, guid: 14d81e2c407975245973a11cdfbeb902,
+    type: 2}
   _startPos: {x: 0, y: 5, z: 0}
   _startSpeed: 50
   _level_1_pos:

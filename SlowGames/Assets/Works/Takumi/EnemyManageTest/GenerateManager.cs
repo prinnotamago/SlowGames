@@ -60,7 +60,7 @@ public class GenerateManager : MonoBehaviour
     List<WaveData> _waveDate = new List<WaveData>();
     List<int> _rareEnemyCount = new List<int>();
     static int _currentWaveCount = 0;
-
+    [SerializeField]
     int _MAX_ENEMY = 30;
     int _enemyNumber = 0; //次が何番目の生成かを取得.
 

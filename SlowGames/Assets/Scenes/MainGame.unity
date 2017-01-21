@@ -667,6 +667,10 @@ Prefab:
       propertyPath: acceleration
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1316348846204640, guid: 61eefc0a029175e4b969ce66e32c2052, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114468472445186156, guid: 61eefc0a029175e4b969ce66e32c2052, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 61eefc0a029175e4b969ce66e32c2052, type: 2}
@@ -869,7 +873,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1314241826039600, guid: a18c66ae22840264f93a1f37baa142a0, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114615475708456596, guid: a18c66ae22840264f93a1f37baa142a0,
         type: 2}
@@ -1168,35 +1172,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650053345}
---- !u!21 &701294180
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &781490895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1423,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 804188596}
-  m_Mesh: {fileID: 1141090849}
+  m_Mesh: {fileID: 1175623846}
 --- !u!23 &804188600
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1463,7 +1438,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 701294180}
+  - {fileID: 837808525}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1664,9 +1639,43 @@ Prefab:
       propertyPath: _gameStartImage
       value: 
       objectReference: {fileID: 812281001}
+    - target: {fileID: 114599284998527570, guid: 33e25453d48d561428d904b612705394,
+        type: 2}
+      propertyPath: _clearDeathCount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33e25453d48d561428d904b612705394, type: 2}
   m_IsPrefabParent: 0
+--- !u!21 &837808525
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &959266071
 Prefab:
   m_ObjectHideFlags: 0
@@ -1751,7 +1760,13 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95a579590beb5443f9b77ee36f065a93, type: 2}
   m_IsPrefabParent: 0
---- !u!43 &1141090849
+--- !u!114 &1160011816 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+    type: 2}
+  m_PrefabInternal: {fileID: 1622908989}
+  m_Script: {fileID: 11500000, guid: 8590905076f8141f081aa99df9a0c06b, type: 3}
+--- !u!43 &1175623846
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1879,12 +1894,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!114 &1160011816 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
-    type: 2}
-  m_PrefabInternal: {fileID: 1622908989}
-  m_Script: {fileID: 11500000, guid: 8590905076f8141f081aa99df9a0c06b, type: 3}
 --- !u!1001 &1206040203
 Prefab:
   m_ObjectHideFlags: 0
@@ -2556,6 +2565,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[2]._generateTypeList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4000010612609758, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.77
@@ -2591,6 +2605,51 @@ Prefab:
     - target: {fileID: 1000013975915816, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012818717764, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _MAX_ENEMY
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[2]._generateTypeList.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[2]._generateTimingCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[2]._generateCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[0]._generateTimingCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[0]._generateCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[1]._generateTimingCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012695826002, guid: f57dcbc6ba4f04d23a3f356147013b21,
+        type: 2}
+      propertyPath: _waveDate.Array.data[1]._generateCount
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f57dcbc6ba4f04d23a3f356147013b21, type: 2}
