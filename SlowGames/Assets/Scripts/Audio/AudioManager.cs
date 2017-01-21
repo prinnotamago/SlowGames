@@ -23,7 +23,7 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
     protected AudioClip[] _seClips = null;
 
 	[SerializeField]
-	protected AudioClip[] _voiceClips = null;
+	protected List<AudioClip> _voiceClips = null;
 
     AudioSource _bgmSource = null;
 
@@ -855,6 +855,30 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 		return this;
 	}
 
+    /// <summary>
+    /// ナビゲーションボイスをロードする
+    /// </summary>
+    /// <param name="navigationFileNumber">ロードしたいナビゲーションのフォルダナンバー</param>
+    /// <returns></returns>
+    public AudioManager loadNavigations(int navigationFolderNumber) {
+
+        var path = navigationFolderNumber.ToString();
+        var resources = Resources.LoadAll<AudioClip>("Audio/Navigations/" + path);
+        _voiceClips.AddRange(resources);
+
+        const int voiceType = (int)Type.VOICE;
+
+        for (int i = 0; i < resources.Length; ++i)
+        {
+            var source = gameObject.AddComponent<AudioSource>();
+            source.clip = resources[i];
+            source.outputAudioMixerGroup = _audioMixerGroup[voiceType];
+            _voiceSources.Add(source);
+        }
+
+        return this;
+    }
+
     //============================================================================================
 
     override protected void Awake()
@@ -870,15 +894,15 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
         _bgmSource = gameObject.AddComponent<AudioSource>();
         _bgmSource.loop = true;
 
-        int bgmType = (int)Type.BGM;
+        const int bgmType = (int)Type.BGM;
 
         _bgmSource.outputAudioMixerGroup = _audioMixerGroup[bgmType];
 
-        int seType = (int)Type.SE;
+        const int seType = (int)Type.SE;
 
 		_bgmClips = Resources.LoadAll<AudioClip>("Audio/BGM");
 		_seClips = Resources.LoadAll<AudioClip>("Audio/SE");
-		_voiceClips = Resources.LoadAll<AudioClip>("Audio/Voice");
+        _voiceClips.AddRange(Resources.LoadAll<AudioClip>("Audio/Voice"));
 
 		for (int i = 0; i < _seClips.Length; ++i) {
 			var audioSource = gameObject.AddComponent<AudioSource> ();
@@ -888,9 +912,9 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
             _seSources[i].outputAudioMixerGroup = _audioMixerGroup[seType];
         }
 
-		int voiceType = (int)Type.VOICE;
+		const int voiceType = (int)Type.VOICE;
 
-		for (int i = 0; i < _voiceClips.Length; ++i) {
+		for (int i = 0; i < _voiceClips.Count; ++i) {
 			var source = gameObject.AddComponent<AudioSource> ();
 			source.clip = _voiceClips [i];
 			_voiceSources.Add (source);
