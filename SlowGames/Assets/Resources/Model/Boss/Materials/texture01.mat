@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: f463513b33183ca498d51e3ec0f7c1d0, type: 3}
+        m_Texture: {fileID: 2800000, guid: a7e9b69c50790804984c28b2a13d9ede, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -60,7 +60,7 @@ Material:
     - first:
         name: _OcclusionMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6081c02a482200e408c76118ff412529, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -93,7 +93,7 @@ Material:
       second: 1
     - first:
         name: _Glossiness
-      second: 0.007
+      second: 0.336
     - first:
         name: _GlossyReflections
       second: 1
@@ -133,4 +133,4 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _SpecColor
-      second: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+      second: {r: 0.2794118, g: 0.2794118, b: 0.2794118, a: 1}

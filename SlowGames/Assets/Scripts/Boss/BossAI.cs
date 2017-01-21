@@ -298,7 +298,7 @@ public class BossAI : MonoBehaviour {
         DamageCheck();
 
         // クライマックス以外プレイヤーに向かせる
-        //if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
+        if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
 
         // 速い弾を撃つときは各形態の動作をしないようにする
         //if (_speedBulletFlag) { return; }
@@ -392,6 +392,7 @@ public class BossAI : MonoBehaviour {
                 }
 
                 _level_2_mode = Level_2_Mode.EIGHT_MOVE;
+                //_anim.Play("Tackle");
                 ++_level_2_modeIndex;
             }
         }
@@ -460,6 +461,7 @@ public class BossAI : MonoBehaviour {
             if (_level_2_mode == Level_2_Mode.EIGHT_MOVE)
             {
                 _level_2_mode = Level_2_Mode.RANDOM;
+                //_anim.Play("Up");
             }
         }
     }
@@ -510,7 +512,7 @@ public class BossAI : MonoBehaviour {
         //    transform.position += Vector3.down * Time.deltaTime;
         //}
 
-        _bossBodyParent.transform.LookAt(_player.transform);
+        //_bossBodyParent.transform.LookAt(_player.transform);
 
         var vector = _startPos - _bossBodyParent.transform.position;
         _bossBodyParent.transform.position += vector / _startSpeed;
@@ -526,7 +528,7 @@ public class BossAI : MonoBehaviour {
     // 第一形態
     void Level_1_Update()
     {
-        _bossBodyParent.transform.LookAt(_player.transform);
+        //_bossBodyParent.transform.LookAt(_player.transform);
 
         if (_level_1_moveHpIndex < _level_1_moveHp.Length && _level_1_moveHp[_level_1_moveHpIndex] >= _hp)
         {
@@ -665,19 +667,19 @@ public class BossAI : MonoBehaviour {
 
             //_bossBodyParent.transform.Rotate(0, 0,-_level_2_moveAngle * Mathf.Rad2Deg);
 
-           
+
 
             //Quaternion q = Quaternion.LookRotation(nextPos);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 360.0f * Time.deltaTime);
+            //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 36000.0f * Time.deltaTime);
 
-            if (_level_2_moveAngle <= (Mathf.PI / 2) || _level_2_moveAngle > (Mathf.PI / 2) * 3)
-            {
-                _bossBodyParent.transform.Rotate(0, 0, -Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
-            }
-            else if (_level_2_moveAngle > (Mathf.PI / 2) || (_level_2_moveAngle >= (Mathf.PI / 2) && _level_2_moveAngle <= (Mathf.PI / 2) * 3))
-            {
-                _bossBodyParent.transform.Rotate(0, 0, Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
-            }
+            //if (_level_2_moveAngle <= (Mathf.PI / 2) || _level_2_moveAngle > (Mathf.PI / 2) * 3)
+            //{
+            //    _bossBodyParent.transform.Rotate(0, 0, -Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
+            //}
+            //else if (_level_2_moveAngle > (Mathf.PI / 2) || (_level_2_moveAngle >= (Mathf.PI / 2) && _level_2_moveAngle <= (Mathf.PI / 2) * 3))
+            //{
+            //    _bossBodyParent.transform.Rotate(0, 0, Time.deltaTime * _level_2_eightSpeed * Mathf.Rad2Deg * 1.5f);
+            //}
 
             //Debug.Log(_level_2_moveAngle);
             //if (_level_2_moveAngle <= Mathf.PI)
@@ -692,7 +694,7 @@ public class BossAI : MonoBehaviour {
         // ランダムに動く動き
         else if(_level_2_mode == Level_2_Mode.RANDOM)
         {
-            _bossBodyParent.transform.LookAt(_player.transform);
+            //_bossBodyParent.transform.LookAt(_player.transform);
 
             var vector = _level_2_movePos - _bossBodyParent.transform.position;
 

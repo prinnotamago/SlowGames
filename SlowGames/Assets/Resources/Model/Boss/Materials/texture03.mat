@@ -60,7 +60,7 @@ Material:
     - first:
         name: _OcclusionMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fd2b778cf646e044480f736ca5beb136, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -93,7 +93,7 @@ Material:
       second: 1
     - first:
         name: _Glossiness
-      second: 0.164
+      second: 0.149
     - first:
         name: _GlossyReflections
       second: 1
@@ -133,4 +133,4 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _SpecColor
-      second: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+      second: {r: 0.30147058, g: 0.30147058, b: 0.30147058, a: 1}

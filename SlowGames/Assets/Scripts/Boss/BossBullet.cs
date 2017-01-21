@@ -40,13 +40,13 @@ public class BossBullet : MonoBehaviour {
     [SerializeField]
     GameObject _chargeEffect;
 
-    //GameObject _particle;
+    GameObject _particle;
 
     void Start()
     {
-        var particle = Instantiate(_chargeEffect);
-        particle.transform.position = transform.position;
-        particle.transform.parent = transform;
+        _particle = Instantiate(_chargeEffect);
+        _particle.transform.position = transform.position;
+        _particle.transform.parent = transform;
     }
 
     void Update()
@@ -74,6 +74,8 @@ public class BossBullet : MonoBehaviour {
         }
         else
         {
+            _particle.transform.parent = null;
+
             transform.parent = null;
 
             if(_slowStartTime > 0.0f)
