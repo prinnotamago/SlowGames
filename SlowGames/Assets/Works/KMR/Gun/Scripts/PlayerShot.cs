@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(Reload))]
 public class PlayerShot : MonoBehaviour
@@ -115,24 +117,35 @@ public class PlayerShot : MonoBehaviour
         if (!_isStart) return;
         //Debug.Log(_reShot);
         ReloadAnim();
-        if (_reShot)
-        {
-            _reShot = false;
-            _gunAnim.SetBool(_reShotHash, _reShot);
-        }
+
+
+        //_gunAnim.SetBool(_reShotHash, _reShot);
+
+
+        //if (_reShot)
+        //{
+        //    _reShot = false;
+        //    _gunAnim.SetBool(_reShotHash, _reShot);
+        //}
         //if (_isShot) { _isShot = false; }
-        
+
+
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
             return;
         }
-        ThreeBurst();
-        if (_triggerAnim != null)
+        if(_reShot)
+        {
+            return;
+        }
+        if (_gunAnim != null)
         {
             float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
             SetAnimFrame(value); //Animationの決定
         }
+        ThreeBurst();
+
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
         
@@ -174,9 +187,13 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-        
-        _gunAnim.SetTrigger("isShot");
-        ResetShotMove();
+
+        //_gunAnim.SetTrigger("isShot");
+        //ResetShotMove();
+        _reShot = true;
+        _gunAnim.SetBool(_reShotHash, _reShot);
+        StartCoroutine(Test());
+
 
         //弾の発生位置変更
         shotBullet.transform.position = transform.position + transform.forward * 0.4f - transform.up * 0.4f;
@@ -198,14 +215,22 @@ public class PlayerShot : MonoBehaviour
         //}
     }
 
+    private IEnumerator Test()
+    {
+        yield return new WaitForSeconds(0.05f);
+        _reShot = false;
+        _gunAnim.SetBool(_reShotHash, _reShot);
+        yield return null;
+    }
+
     void SetAnimFrame(float frame)
     {
         //var clip = _animator.GetCurrentAnimatorClipInfo(0)[0].clip;
 
         //float time = (float)frame / clip.frameRate;
-
-        var animationHash = _triggerAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-        _triggerAnim.Play(animationHash, 0, frame);
+        if (!_gunAnim.GetCurrentAnimatorStateInfo(0).IsName("Wait")) return;
+        var animationHash = _gunAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+        _gunAnim.Play(animationHash, 0, frame);
     }
 
     void ResetShotMove()

@@ -1,0 +1,152 @@
+fileFormatVersion: 2
+guid: 13f5fab7811d632409e6d1a1ce43b76e
+timeCreated: 1485305526
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: blow back
+    100004: Bone004
+    100006: Bone005
+    100008: Bone006
+    100010: Bone007
+    100012: Bone008
+    100014: Bone009
+    100016: Bone011
+    100018: Bone012
+    100020: Bone013
+    100022: Bone014
+    100024: Bone016
+    100026: Bone017
+    100028: Bone018
+    100030: Bone019
+    100032: Bone020
+    100034: Bone021
+    100036: Bone022
+    100038: Bone023
+    100040: Bone024
+    100042: Bone025
+    100044: Bone026
+    100046: Bone027
+    100048: Bone028
+    100050: Dummy001
+    100052: gun
+    100054: gun 1
+    100056: gun body
+    100058: hand2:polySurface104
+    100060: polySurface3
+    100062: total
+    100064: under
+    100066: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    400000: //RootNode
+    400002: blow back
+    400004: Bone004
+    400006: Bone005
+    400008: Bone006
+    400010: Bone007
+    400012: Bone008
+    400014: Bone009
+    400016: Bone011
+    400018: Bone012
+    400020: Bone013
+    400022: Bone014
+    400024: Bone016
+    400026: Bone017
+    400028: Bone018
+    400030: Bone019
+    400032: Bone020
+    400034: Bone021
+    400036: Bone022
+    400038: Bone023
+    400040: Bone024
+    400042: Bone025
+    400044: Bone026
+    400046: Bone027
+    400048: Bone028
+    400050: Dummy001
+    400052: gun
+    400054: gun 1
+    400056: gun body
+    400058: hand2:polySurface104
+    400060: polySurface3
+    400062: total
+    400064: under
+    400066: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    2300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    3300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    4300000: polySurface3
+    4300002: hand2:polySurface104
+    4300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: hand2:polySurface104
+    13700002: polySurface3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
