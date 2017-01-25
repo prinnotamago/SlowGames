@@ -1180,7 +1180,7 @@ MonoBehaviour:
   - _startDieCount: 0
     _generateTimingCount: 1
     _generateCount: 2
-    _enemyLimit: 6
+    _enemyLimit: 1
     _generateTypeList: 00000000
     _rareEnemyInfo:
     - type: 1
@@ -1191,7 +1191,7 @@ MonoBehaviour:
       generateTiming: 7
   - _startDieCount: 10
     _generateTimingCount: 2
-    _generateCount: 4
+    _generateCount: 5
     _enemyLimit: 6
     _generateTypeList: 00000000
     _rareEnemyInfo:
@@ -1205,10 +1205,10 @@ MonoBehaviour:
       generateTiming: 20
     - type: 2
       generateTiming: 20
-  - _startDieCount: 20
-    _generateTimingCount: 2
-    _generateCount: 4
-    _enemyLimit: 8
+  - _startDieCount: 30
+    _generateTimingCount: 3
+    _generateCount: 6
+    _enemyLimit: 1
     _generateTypeList: 0000000001000000
     _rareEnemyInfo:
     - type: 2
@@ -1217,7 +1217,25 @@ MonoBehaviour:
       generateTiming: 24
     - type: 2
       generateTiming: 26
-  _deathCount: 0
+  - _startDieCount: 36
+    _generateTimingCount: 3
+    _generateCount: 6
+    _enemyLimit: 2
+    _generateTypeList: 0000000001000000
+    _rareEnemyInfo:
+    - type: 2
+      generateTiming: 22
+    - type: 2
+      generateTiming: 24
+    - type: 2
+      generateTiming: 26
+  - _startDieCount: 36
+    _generateTimingCount: 2
+    _generateCount: 4
+    _enemyLimit: 8
+    _generateTypeList: 0000000001000000
+    _rareEnemyInfo: []
+  _deathCount: 36
   _isTutorial: 0
 --- !u!114 &114092702494977140
 MonoBehaviour:
