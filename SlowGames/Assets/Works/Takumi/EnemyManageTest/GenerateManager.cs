@@ -73,6 +73,10 @@ public class GenerateManager : MonoBehaviour
          return _currentWaveCount;
     }
 
+
+
+
+
     //死亡数をカウントします
     public int _deathCount = 0;
     
@@ -82,6 +86,11 @@ public class GenerateManager : MonoBehaviour
     {
         //初期化
         _enemyGenerator = this.gameObject.GetComponent<EnemyGenerator>();
+        if (GameDirector.instance != null)
+        {
+            _MAX_ENEMY = GameDirector.instance.clearEnemyKillCount;
+        }
+
         for (int i = 0; i < _waveDate.Count; i++)
         {
             _rareEnemyCount.Add(0);
