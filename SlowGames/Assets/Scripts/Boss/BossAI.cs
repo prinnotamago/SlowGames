@@ -267,6 +267,17 @@ public class BossAI : MonoBehaviour {
 
     bool _oneHitFrame = true;   // 1フレームに複数回ダメージを受けるのを防ぐ
 
+    [SerializeField]
+    bool _debugFlag = false;
+
+    void Awake()
+    {
+        if (_debugFlag)
+        {
+            VoiceNumberStorage.setVoice();
+        }
+    }
+
     // Use this for initialization
     void Start () {
         // HP の最大値保存
@@ -874,6 +885,7 @@ public class BossAI : MonoBehaviour {
         {
             if(_lastRotateAngle == 0)
             {
+                _anim.SetBool("tackle", true);
                 _anim.Play("Tackle");
             }
 
