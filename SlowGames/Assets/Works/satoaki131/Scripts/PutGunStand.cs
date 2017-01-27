@@ -7,6 +7,9 @@ public class PutGunStand : MonoBehaviour {
     [SerializeField]
     private GameObject _gunObj = null;
 
+    [SerializeField]
+    private ResultChangeModel _changeModel = null;
+
     private bool _isPut = false;
 
     public bool isPutGun
@@ -16,20 +19,20 @@ public class PutGunStand : MonoBehaviour {
 
     void Start()
     {
-        _gunObj.transform.parent = transform; //自分の子供にする
-        _gunObj.gameObject.transform.position = transform.position;
-        _gunObj.gameObject.transform.rotation = transform.rotation;
-        _gunObj.gameObject.transform.Rotate(235, 0, 180);
+        //_gunObj.transform.parent = transform; //自分の子供にする
+        //_gunObj.gameObject.transform.position = transform.position;
+        //_gunObj.gameObject.transform.rotation = transform.rotation;
+        //_gunObj.gameObject.transform.Rotate(235, 0, 180);
     }
 
     void Update()
     {
         if(!_isPut)
         {
-            _gunObj.transform.parent = transform; //自分の子供にする
-            _gunObj.gameObject.transform.position = transform.position;
-            _gunObj.gameObject.transform.rotation = transform.rotation;
-            _gunObj.gameObject.transform.Rotate(235, 0, 180);
+            //_gunObj.transform.parent = transform; //自分の子供にする
+            //_gunObj.gameObject.transform.position = transform.position;
+            //_gunObj.gameObject.transform.rotation = transform.rotation;
+            //_gunObj.gameObject.transform.Rotate(235, 0, 180);
         }
     }
 
@@ -37,8 +40,10 @@ public class PutGunStand : MonoBehaviour {
     {
         if(col.gameObject.tag == TagName.Stand)
         {
+            Debug.Log("OK");
             AudioManager.instance.playSe(AudioName.SeName.GunGet);
-            _gunObj.transform.parent = null; //子供解除
+            //_gunObj.transform.parent = null; //子供解除
+            _gunObj.SetActive(true);
             var localPosition = col.transform.position;
             localPosition.y = 0.8f;
             _gunObj.transform.localPosition = localPosition;
@@ -49,6 +54,8 @@ public class PutGunStand : MonoBehaviour {
             localRotation.z = col.transform.position.x < 0 ? 72.89301f : -89.953f;
             _gunObj.transform.eulerAngles = localRotation; 
             _isPut = true;
+            _changeModel.isGunPut = true;
+            
         }
     }
 
