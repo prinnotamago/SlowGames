@@ -28,11 +28,14 @@ public class ViveGrab : MonoBehaviour {
     [SerializeField]
     bool _isDrop = false;
 
+    private HandMoveAnim _handModel = null;
+
     // Use this for initialization
     void Start () {
         //_rigidbody = GetComponent<Rigidbody>();
 
         _viveCon = GetComponent<SteamVR_TrackedObject>();
+        _handModel = GetComponentInChildren<HandMoveAnim>();
 	}
 
     // Update is called once per frame
@@ -105,6 +108,7 @@ public class ViveGrab : MonoBehaviour {
                     GetComponent<BoxCollider>().enabled = false;
                     AudioManager.instance.playSe(AudioName.SeName.GunGet);
                     device.TriggerHapticPulse(4000);
+                    _handModel.setGunState(true);             
                 }
             }
         }
