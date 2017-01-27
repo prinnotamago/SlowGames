@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8590905076f8141f081aa99df9a0c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyLimit: 1
+  _enemyLimit: 2
   _waveDate:
   - _startDieCount: 0
     _generateTimingCount: 1
@@ -1189,8 +1189,8 @@ MonoBehaviour:
       generateTiming: 6
     - type: 2
       generateTiming: 7
-  - _startDieCount: 10
-    _generateTimingCount: 2
+  - _startDieCount: 7
+    _generateTimingCount: 3
     _generateCount: 5
     _enemyLimit: 2
     _generateTypeList: 00000000
@@ -1201,10 +1201,6 @@ MonoBehaviour:
       generateTiming: 16
     - type: 2
       generateTiming: 19
-    - type: 2
-      generateTiming: 20
-    - type: 2
-      generateTiming: 20
   - _startDieCount: 20
     _generateTimingCount: 3
     _generateCount: 6
@@ -1223,30 +1219,12 @@ MonoBehaviour:
     _enemyLimit: 2
     _generateTypeList: 0000000001000000
     _rareEnemyInfo:
-    - type: 2
-      generateTiming: 22
-    - type: 2
-      generateTiming: 24
-    - type: 2
-      generateTiming: 26
-  - _startDieCount: 36
-    _generateTimingCount: 2
-    _generateCount: 4
-    _enemyLimit: 8
-    _generateTypeList: 0000000001000000
-    _rareEnemyInfo:
-    - type: 2
-      generateTiming: 31
-    - type: 2
+    - type: 1
       generateTiming: 32
     - type: 2
       generateTiming: 33
-    - type: 1
+    - type: 2
       generateTiming: 34
-    - type: 1
-      generateTiming: 35
-    - type: 1
-      generateTiming: 36
   _MAX_ENEMY: 36
   _deathCount: 0
   _isTutorial: 1
