@@ -139,6 +139,10 @@ public class GameDirector : MonoBehaviour {
 
     private IEnumerator GameEndAudio()
     {
+        foreach(var overHeat in _playerShot)
+        {
+            overHeat.gameObject.GetComponent<OverHeat>().FinishProduction();
+        }
         AudioManager.instance.playVoice(AudioName.VoiceName.IV15);
         var time = 0.0f;
         while(time < 9.5f)
