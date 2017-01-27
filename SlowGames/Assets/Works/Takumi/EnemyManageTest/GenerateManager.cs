@@ -142,15 +142,33 @@ public class GenerateManager : MonoBehaviour
 
     public void TutorialSet()
     {
+
+//        //チュートリアル用の三体を生成
+//        for (int i = 0; i < _genePos.Count; i++)
+//        {
+//            DefaultSetEnemy(EnemyType.Easy,_genePos[i]);
+//            _enemyNumber += 1;
+//        }
+
+        StartCoroutine(Set());
+
+    }
+
+    IEnumerator Set()
+    {
         //チュートリアル用の三体を生成
         for (int i = 0; i < _genePos.Count; i++)
         {
             DefaultSetEnemy(EnemyType.Easy,_genePos[i]);
             _enemyNumber += 1;
-            
+            yield return null;
         }
-       
+
+        yield return null;
+
+
     }
+
 
     public void GameStartSet()
     {
