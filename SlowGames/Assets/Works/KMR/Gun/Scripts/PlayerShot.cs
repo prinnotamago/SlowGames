@@ -135,7 +135,10 @@ public class PlayerShot : MonoBehaviour
             if (_isShot) _isShot = false;
             return;
         }
-        if(_reShot)
+
+        
+
+        if (_reShot)
         {
             return;
         }
@@ -162,6 +165,7 @@ public class PlayerShot : MonoBehaviour
             if (_bulletsNumber <= 0) return;
         }
         if (_isShot == false) return;
+        _gunAnim.speed = 1.0f;
 
         //_time -= Time.unscaledDeltaTime;
         //if (_time > 0) return;
@@ -190,9 +194,11 @@ public class PlayerShot : MonoBehaviour
 
         //_gunAnim.SetTrigger("isShot");
         //ResetShotMove();
+
         _reShot = true;
+        //_gunAnim.speed = 1.0f;
         _gunAnim.SetBool(_reShotHash, _reShot);
-        StartCoroutine(Test());
+        StartCoroutine(ShotInterval());
 
 
         //弾の発生位置変更
@@ -215,9 +221,14 @@ public class PlayerShot : MonoBehaviour
         //}
     }
 
-    private IEnumerator Test()
+    private IEnumerator ShotInterval()
     {
-        yield return new WaitForSeconds(0.05f);
+        //var time = 0.0f;
+        //while(time < 0.05f)
+        //{
+        //    time += Time.unscaledDeltaTime;
+        //}
+        yield return new WaitForSecondsRealtime(0.05f);
         _reShot = false;
         _gunAnim.SetBool(_reShotHash, _reShot);
         yield return null;
@@ -243,14 +254,17 @@ public class PlayerShot : MonoBehaviour
         if(_reload.isReload)
         {
             _isReload = true;
-
-        }else
+            _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed(); ;
+        }
+        else
         if(!_reload.isReload)
         {
+            _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
             _isReload = false;
 
         }
         _gunAnim.SetBool(_reloadHash, _isReload);
+        
 
     }
 

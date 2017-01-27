@@ -1,0 +1,638 @@
+fileFormatVersion: 2
+guid: 502e375e24e0f1b45b14a8ca1548aab9
+timeCreated: 1485326841
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: blow back
+    100002: Bone004
+    100004: Bone005
+    100006: Bone006
+    100008: Bone007
+    100010: Bone008
+    100012: Bone009
+    100014: Bone011
+    100016: Bone012
+    100018: Bone013
+    100020: Bone014
+    100022: Bone016
+    100024: Bone017
+    100026: Bone018
+    100028: Bone019
+    100030: Bone020
+    100032: Bone021
+    100034: Bone022
+    100036: Bone023
+    100038: Bone024
+    100040: Bone025
+    100042: Bone026
+    100044: Bone027
+    100046: Bone028
+    100048: Dummy001
+    100050: gun
+    100052: gun 1
+    100054: gun body
+    100056: //RootNode
+    100058: hand2:polySurface104
+    100060: polySurface3
+    100062: total
+    100064: under
+    100066: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    400000: blow back
+    400002: Bone004
+    400004: Bone005
+    400006: Bone006
+    400008: Bone007
+    400010: Bone008
+    400012: Bone009
+    400014: Bone011
+    400016: Bone012
+    400018: Bone013
+    400020: Bone014
+    400022: Bone016
+    400024: Bone017
+    400026: Bone018
+    400028: Bone019
+    400030: Bone020
+    400032: Bone021
+    400034: Bone022
+    400036: Bone023
+    400038: Bone024
+    400040: Bone025
+    400042: Bone026
+    400044: Bone027
+    400046: Bone028
+    400048: Dummy001
+    400050: gun
+    400052: gun 1
+    400054: gun body
+    400056: //RootNode
+    400058: hand2:polySurface104
+    400060: polySurface3
+    400062: total
+    400064: under
+    400066: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    2300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    3300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    4300000: polySurface3
+    4300002: hand2:polySurface104
+    4300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    7400000: Take 001
+    7400002: HandTrigger
+    7400004: Hand
+    7400006: HandRecoilOnly
+    7400008: ReloadStart
+    7400010: ReloadFinish
+    7400012: HandAndGunRecoil
+    9500000: //RootNode
+    13700000: hand2:polySurface104
+    13700002: polySurface3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: HandTrigger
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 5
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun 1
+        weight: 1
+      - path: gun 1/under
+        weight: 1
+      - path: gun 1/under/polySurface3
+        weight: 1
+      - path: hand2:polySurface104
+        weight: 1
+      - path: total
+        weight: 1
+      - path: total/Bone004
+        weight: 1
+      - path: total/Bone004/Bone005
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013/Bone014
+        weight: 1
+      - path: total/Bone004/Bone020
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023/Bone024
+        weight: 1
+      - path: total/Bone004/Bone025
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027/Bone028
+        weight: 1
+      - path: total/Dummy001
+        weight: 1
+      - path: "total/Dummy001/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+        weight: 1
+      - path: total/gun body
+        weight: 1
+      - path: total/gun body/blow back
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: HandRecoilOnly
+      takeName: Take 001
+      firstFrame: 6
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun 1
+        weight: 1
+      - path: gun 1/under
+        weight: 1
+      - path: gun 1/under/polySurface3
+        weight: 1
+      - path: hand2:polySurface104
+        weight: 1
+      - path: total
+        weight: 1
+      - path: total/Bone004
+        weight: 1
+      - path: total/Bone004/Bone005
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013/Bone014
+        weight: 1
+      - path: total/Bone004/Bone020
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023/Bone024
+        weight: 1
+      - path: total/Bone004/Bone025
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027/Bone028
+        weight: 1
+      - path: total/Dummy001
+        weight: 1
+      - path: "total/Dummy001/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+        weight: 1
+      - path: total/gun body
+        weight: 1
+      - path: total/gun body/blow back
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ReloadStart
+      takeName: Take 001
+      firstFrame: 8
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun 1
+        weight: 1
+      - path: gun 1/under
+        weight: 1
+      - path: gun 1/under/polySurface3
+        weight: 1
+      - path: hand2:polySurface104
+        weight: 1
+      - path: total
+        weight: 1
+      - path: total/Bone004
+        weight: 1
+      - path: total/Bone004/Bone005
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013/Bone014
+        weight: 1
+      - path: total/Bone004/Bone020
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023/Bone024
+        weight: 1
+      - path: total/Bone004/Bone025
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027/Bone028
+        weight: 1
+      - path: total/Dummy001
+        weight: 1
+      - path: "total/Dummy001/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+        weight: 1
+      - path: total/gun body
+        weight: 1
+      - path: total/gun body/blow back
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ReloadFinish
+      takeName: Take 001
+      firstFrame: 9
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun 1
+        weight: 1
+      - path: gun 1/under
+        weight: 1
+      - path: gun 1/under/polySurface3
+        weight: 1
+      - path: hand2:polySurface104
+        weight: 1
+      - path: total
+        weight: 1
+      - path: total/Bone004
+        weight: 1
+      - path: total/Bone004/Bone005
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013/Bone014
+        weight: 1
+      - path: total/Bone004/Bone020
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023/Bone024
+        weight: 1
+      - path: total/Bone004/Bone025
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027/Bone028
+        weight: 1
+      - path: total/Dummy001
+        weight: 1
+      - path: "total/Dummy001/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+        weight: 1
+      - path: total/gun body
+        weight: 1
+      - path: total/gun body/blow back
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: HandAndGunRecoil
+      takeName: Take 001
+      firstFrame: 11
+      lastFrame: 13
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun 1
+        weight: 1
+      - path: gun 1/under
+        weight: 1
+      - path: gun 1/under/polySurface3
+        weight: 1
+      - path: hand2:polySurface104
+        weight: 1
+      - path: total
+        weight: 1
+      - path: total/Bone004
+        weight: 1
+      - path: total/Bone004/Bone005
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: total/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013
+        weight: 1
+      - path: total/Bone004/Bone005/Bone011/Bone012/Bone013/Bone014
+        weight: 1
+      - path: total/Bone004/Bone020
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018
+        weight: 1
+      - path: total/Bone004/Bone020/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: total/Bone004/Bone020/Bone021/Bone022/Bone023/Bone024
+        weight: 1
+      - path: total/Bone004/Bone025
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027
+        weight: 1
+      - path: total/Bone004/Bone025/Bone026/Bone027/Bone028
+        weight: 1
+      - path: total/Dummy001
+        weight: 1
+      - path: "total/Dummy001/\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+        weight: 1
+      - path: total/gun body
+        weight: 1
+      - path: total/gun body/blow back
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
