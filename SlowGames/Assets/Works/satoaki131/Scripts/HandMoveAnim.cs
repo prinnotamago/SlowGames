@@ -15,6 +15,9 @@ public class HandMoveAnim : MonoBehaviour {
     SteamVR_TrackedObject _trackedObject;
     SteamVR_Controller.Device _device;
 
+    [SerializeField]
+    private GameObject _gunAndHandModel;
+
     void Start()
     {
         isholdGun = false;
@@ -29,6 +32,10 @@ public class HandMoveAnim : MonoBehaviour {
             float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
             SetAnimFrame(value); //Animationの決定
         }
+
+        if (!isholdGun) return;
+        _gunAndHandModel.SetActive(true);        
+        gameObject.SetActive(false);
     }
 
     void SetAnimFrame(float frame)

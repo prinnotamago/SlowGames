@@ -42,13 +42,13 @@ public class ViveGrab : MonoBehaviour {
     void Update()
     {
         //Debug.Log(_isPick);
-        if (!_isDrop && _isPick)
-        {
-            _pickObjRigidbody.velocity = Vector3.zero;
-            _pickObj.gameObject.transform.position = transform.position;
-            _pickObj.gameObject.transform.rotation = transform.rotation;
-            _pickObj.gameObject.transform.Rotate(235, 0, 180);
-        }
+        //if (!_isDrop && _isPick)
+        //{
+        //    _pickObjRigidbody.velocity = Vector3.zero;
+        //    _pickObj.gameObject.transform.position = transform.position;
+        //    _pickObj.gameObject.transform.rotation = transform.rotation;
+        //    _pickObj.gameObject.transform.Rotate(235, 0, 180);
+        //}
         
         
     }
@@ -108,7 +108,8 @@ public class ViveGrab : MonoBehaviour {
                     GetComponent<BoxCollider>().enabled = false;
                     AudioManager.instance.playSe(AudioName.SeName.GunGet);
                     device.TriggerHapticPulse(4000);
-                    _handModel.setGunState(true);             
+                    _pickObj.SetActive(false);
+                    _handModel.setGunState(true);            
                 }
             }
         }
