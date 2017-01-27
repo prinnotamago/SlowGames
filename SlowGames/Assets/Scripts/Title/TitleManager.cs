@@ -121,8 +121,7 @@ public class TitleManager : MonoBehaviour
             _playerShot[i].isStart = false;
         }
 
-        var index = UnityEngine.Random.Range(0, 2);
-        AudioManager.instance.loadNavigations(index);
+        VoiceNumberStorage.VoiceSelect(); 
     }
 
     void Update()

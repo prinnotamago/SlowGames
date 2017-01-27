@@ -95,8 +95,13 @@ public class GameDirector : MonoBehaviour {
         _update.Add(GameState.MainGame,MainGameUpdate);
         _update.Add(GameState.Result,() => { });
         GameSet();
-        StartCoroutine(GameStartCutIn());
         _hp = FindObjectOfType<PlayerHP>();
+    }
+
+    private void Start()
+    {
+        VoiceNumberStorage.setVoice();
+        StartCoroutine(GameStartCutIn());
     }
 
     [SerializeField]

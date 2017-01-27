@@ -49,6 +49,7 @@ public class ResultManager : MonoBehaviour
         _stateUpdate.Add(State.GunPut, GunPutUpdate);
         _stateUpdate.Add(State.Wait, () => { });
         _stateUpdate.Add(State.End, EndUpdate);
+        VoiceNumberStorage.setVoice();
         AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
         StartCoroutine(AudioMessage());
     }
