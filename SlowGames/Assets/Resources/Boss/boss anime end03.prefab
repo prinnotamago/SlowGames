@@ -1928,7 +1928,7 @@ MonoBehaviour:
   _speedBulletInformTime: 3
   _attackInterval: 0.5
   _patternRatio: 0.5
-  _state: 4
+  _state: 0
   _standbyTimeMax: 4
   _standbySandParticle: {fileID: 1000010715882420, guid: 14d81e2c407975245973a11cdfbeb902,
     type: 2}
@@ -1952,21 +1952,21 @@ MonoBehaviour:
   _level_2_randomMoveSpeed: 5
   _level_2_randomStopTimeMax: 0
   _lastTacklePos: {x: 0, y: 7, z: 0}
-  _lastTackleBeforePos: {x: 0, y: 20, z: 0}
+  _lastTackleBeforePos: {x: 0, y: 30, z: 0}
   _lastTackleSpeed: 2
   _lastMoveSpeed: 10
   _lastMoveNum: 10
   _lastRandMoveLength: {x: 16, y: 5, z: 8}
   _lastRandomStopTimeMax: 0
   _lastFlyTime: 3
-  _lastRotateSenterPos: {x: 0, y: 5, z: 0}
-  _lastRotateSpeed: 15
+  _lastRotateSenterPos: {x: 0, y: 10, z: 0}
+  _lastRotateSpeed: 7
   _lastRotateLength: 15
   _lastRotateLengthDownSpeed: 4
   _lastRotateUpSpeed: 5
   _lastBeforeSleepTime: 3
   _lastBeforeTackleSenterPos: {x: 0, y: 15, z: 0}
-  _lastBeforeRotateSpeed: 8
+  _lastBeforeRotateSpeed: 10
   _lastBeforeMoveSpeed: 10
   _lastBeforeLengthY: 10
   _lastBeforeLengthZ: 5
@@ -1985,6 +1985,7 @@ MonoBehaviour:
     type: 2}
   _hitLastParticle: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
+  _debugFlag: 1
   anglex: 0
   anglex2: 0
 --- !u!114 &114288619788247730
