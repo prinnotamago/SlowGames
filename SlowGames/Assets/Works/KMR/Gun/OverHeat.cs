@@ -22,16 +22,6 @@ public class OverHeat : MonoBehaviour
     void Update()
     {
 
-    if(Input.GetKeyDown(KeyCode.K))
-        {
-            FinishProduction();
-        }
-    else
-    if (Input.GetKeyDown(KeyCode.O))
-        {
-            BlowbackCompleted();
-        }
-      
     }
 
     //ブローバックアニメーションしてからその状態を維持する
@@ -47,7 +37,7 @@ public class OverHeat : MonoBehaviour
     {
         _playerShot.isStart = false;
         _isFinish = true;
-        _overHeatAnim.SetBool(_isFinishHash, _isFinish);
+        //_overHeatAnim.SetBool(_isFinishHash, _isFinish);
         var animationHash = _overHeatAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
         _overHeatAnim.Play(animationHash,0,9);
     }
