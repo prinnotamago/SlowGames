@@ -193,6 +193,10 @@ public class BossAI : MonoBehaviour {
     Vector3 _lastRandomVectorPos;
     bool _lastTackleFlag = false;
 
+    Bezier _bezier;
+    float _bezierTime = 0.0f;
+    float _bezierTimeSpeed = 1.0f;
+
     // 自由に飛び回る
     [SerializeField]
     float _lastFlyTime = 10.0f;
@@ -216,6 +220,8 @@ public class BossAI : MonoBehaviour {
     //float _lastBeforeTackleSpeed = 5.0f;
     [SerializeField]
     float _lastBeforeSleepTime = 3.0f;
+    [SerializeField]
+    float _lastBrforeSleepDownSpeed = 1.0f;
     //bool _lastSleepVoiceFlag = true;
 
     [SerializeField]
@@ -230,6 +236,9 @@ public class BossAI : MonoBehaviour {
     float _lastBeforeLengthY;
     [SerializeField]
     float _lastBeforeLengthZ;
+
+    [SerializeField]
+    float _lastSlowStartTime = 1.0f;
     //////////////////////////////////////////////////////////////////////////////
 
     // CLIMAX の情報//////////////////////////////////////////////////////////////
@@ -288,15 +297,86 @@ public class BossAI : MonoBehaviour {
 
         // ラストで使うタックルをする前に移動する場所を決める
         Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z;
+        //for (int r = 0; r < 3; ++r)
+        //{
+        //    Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+        //                                     Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+        //                                     Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+        //    Vector3 pos = lastRandPos + randLength;
+        //    _lastMovePos.Add(pos);
+        //}
         for (int i = 0; i < _lastMoveNum; ++i)
         {
-            Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
-                                             Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
-                                             Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
-            Vector3 pos = lastRandPos + randLength;
-            _lastMovePos.Add(pos);
+
+            if (_lastMoveNum == i + 1)
+            {
+                for (int r = 0; r < 2; ++r)
+                {
+                    Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+                                                        Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+                                                        Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+                    Vector3 pos = lastRandPos + randLength;
+                    _lastMovePos.Add(pos);
+                }
+                _lastMovePos.Add(_lastTackleBeforePos);
+            }
+            else
+            {
+                for (int r = 0; r < 3; ++r)
+                {
+                    Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+                                                        Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+                                                        Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+                    Vector3 pos = lastRandPos + randLength;
+                    _lastMovePos.Add(pos);
+                }
+            }
+
+            //{
+            //    var vector = _lastMovePos[i - 1] - _lastMovePos[i - 2];
+            //    _lastMovePos.Add(_lastMovePos[i - 1] + vector.normalized);
+            //}
+            //{
+            //    var vector = _lastMovePos[i] - _lastMovePos[i - 1];
+            //    _lastMovePos.Add(_lastMovePos[i] + vector.normalized);
+            //}
+
+            //for (int r = 0; r < 2; ++r)
+            //{
+            //    if (i == _lastMoveNum * 4 - 4 - 1)
+            //    {
+            //        if (r == 1)
+            //        {
+            //            _lastMovePos.Add(_lastTackleBeforePos);
+            //        }
+            //        else
+            //        {
+            //            Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+            //                                    Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+            //                                    Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+            //            Vector3 pos = lastRandPos + randLength;
+            //            _lastMovePos.Add(pos);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+            //                                     Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+            //                                     Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+            //        Vector3 pos = lastRandPos + randLength;
+            //        _lastMovePos.Add(pos);
+            //    }
+            //}
+
+            //if(i == _lastMoveNum - 1)
+            //{
+            //    //var vector = _lastMovePos[i + 2] - _lastMovePos[i + 1];
+            //}
+            //else
+            //{
+            //    _lastMovePos.Add(_lastTackleBeforePos);
+            //}
         }
-        _lastMovePos.Add(_lastTackleBeforePos);
         //_lastMovePos.Add(_lastTacklePos);
 
         _rigidbody = /*_bossBody.*/GetComponent<Rigidbody>();
@@ -871,14 +951,14 @@ public class BossAI : MonoBehaviour {
         //    }
         //}
 
-        const float randMinMax = 10.0f;
-        _bossBodyParent.transform.Translate(
-            new Vector3(
-                  Random.Range(-randMinMax, randMinMax)
-                , Random.Range(-randMinMax, randMinMax)
-                , Random.Range(-randMinMax, randMinMax)
-                ) * Time.deltaTime
-                );
+        //const float randMinMax = 10.0f;
+        //_bossBodyParent.transform.Translate(
+        //    new Vector3(
+        //          Random.Range(-randMinMax, randMinMax)
+        //        , Random.Range(-randMinMax, randMinMax)
+        //        , Random.Range(-randMinMax, randMinMax)
+        //        ) * Time.deltaTime
+        //        );
 
         // 自由に飛び回る
         if (_lastFlyTime > 0)
@@ -904,59 +984,99 @@ public class BossAI : MonoBehaviour {
 
             Quaternion q = Quaternion.LookRotation(length);
             _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
+
+            if (_lastFlyTime <= 0)
+            {
+                _bezier = new Bezier(_bossBodyParent.transform.position, _lastMovePos[_lastMoveIndex], _lastMovePos[_lastMoveIndex + 1], _lastMovePos[_lastMoveIndex + 2]);
+                //_bezier = new Bezier(_lastMovePos[0], _lastMovePos[1], _lastMovePos[2], _lastMovePos[3]);
+            }
         }
         else if (_lastMoveIndex < _lastMovePos.Count)
         {
             //_bossBodyParent.transform.LookAt(_player.transform);
 
-            var length = _lastMovePos[_lastMoveIndex] - _bossBodyParent.transform.position;
-            _bossBodyParent.transform.position += length * _lastMoveSpeed * Time.deltaTime;
+            //var length = _lastMovePos[_lastMoveIndex] - _bossBodyParent.transform.position;
+            //_bossBodyParent.transform.position += length.normalized * _lastMoveSpeed * Time.deltaTime;
 
-            if (_lastMoveIndex == _lastMovePos.Count - 1)
+            //if (_lastMoveIndex == _lastMovePos.Count - 1)
+            //{
+            //    _bossBodyParent.transform.LookAt(_player.transform);
+            //}
+            //else
+            //{
+            //    //Quaternion q = Quaternion.LookRotation(_bossBodyParent.transform.position + _lastRandomVectorPos);
+            //    Quaternion q = Quaternion.LookRotation(_lastMovePos[_lastMoveIndex]);
+            //    _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 100.0f * Time.deltaTime);
+            //    //_bossBodyParent.transform.Rotate(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f));
+
+            //    //_bossBodyParent.transform.LookAt(_bossBodyParent.transform.position + _lastRandomVectorPos);
+            //    //_bossBodyParent.transform.LookAt(_player.transform);
+            //}
+
+            //if (length.magnitude < 1.5f)
+            //{
+            //    // タックルをしようとしていたらボイスを流す
+            //    //if ((10) == _lastMoveIndex)
+            //    //{
+            //    //    AudioManager.instance.stopAllVoice();
+            //    //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
+            //    //}
+
+            //    _lastRandomStopTime -= Time.deltaTime;
+
+            //    if (_lastRandomStopTime <= 0.0f)
+            //    {
+
+            //        _lastRandomStopTime = _lastRandomStopTimeMax;
+            //        _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 10.0f), Random.Range(-100.0f, 100.0f));
+
+            //        ++_lastMoveIndex;
+
+            //        if (_lastMoveIndex == _lastMovePos.Count)
+            //        {
+            //            //_anim.SetBool("tackle", true);
+            //            //_anim.Play("Tackle");
+
+
+            //            // 撃ち続けてボイスを流す
+            //            //AudioManager.instance.stopAllVoice();
+            //            //AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+            //        }
+            //    }
+            //}
+
+            _bezierTime += Time.deltaTime * _bezierTimeSpeed;
+            if (_bezierTime >= 1)
             {
-                _bossBodyParent.transform.LookAt(_player.transform);
+                _bezierTime = 1.0f;
             }
-            else
+
+            var nextPos = _bezier.GetPointAtTime(_bezierTime);
+            //var length = nextPos - _bossBodyParent.transform.position;
+            //_bossBodyParent.transform.position = _bezier.GetPointAtTime(_bezierTime);
+
+            _bossBodyParent.transform.LookAt(nextPos);
+            //Quaternion q = Quaternion.LookRotation(nextPos);
+            //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
+
+            //_bossBodyParent.transform.position += length * Time.deltaTime * 10;
+            _bossBodyParent.transform.position = nextPos;
+
+            if (_bezierTime == 1)
             {
-                Quaternion q = Quaternion.LookRotation(_bossBodyParent.transform.position + _lastRandomVectorPos);
-                _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
-                //_bossBodyParent.transform.Rotate(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f));
+                _bezierTime = 0;
 
-                //_bossBodyParent.transform.LookAt(_bossBodyParent.transform.position + _lastRandomVectorPos);
-                //_bossBodyParent.transform.LookAt(_player.transform);
-            }
+                //if (_lastMoveIndex >= _lastMovePos.Count) { return; }
+                //_bezier = _bezier = new Bezier(_lastMovePos[_lastMoveIndex], _lastMovePos[_lastMoveIndex + 1], _lastMovePos[_lastMoveIndex + 2], _lastMovePos[_lastMoveIndex + 3]);
+                //_lastMoveIndex += 4;
 
-            if (length.magnitude < 1.5f)
-            {
-                // タックルをしようとしていたらボイスを流す
-                //if ((10) == _lastMoveIndex)
-                //{
-                //    AudioManager.instance.stopAllVoice();
-                //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
-                //}
+                var vector = _bossBodyParent.transform.position - _lastMovePos[_lastMoveIndex + 1];
+                var newPos = _bossBodyParent.transform.position + vector;
 
-                _lastRandomStopTime -= Time.deltaTime;
-
-                if (_lastRandomStopTime <= 0.0f)
-                {
-
-                    _lastRandomStopTime = _lastRandomStopTimeMax;
-                    _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 10.0f), Random.Range(-100.0f, 100.0f));
-
-                    ++_lastMoveIndex;
-
-                    if (_lastMoveIndex == _lastMovePos.Count)
-                    {
-                        //_anim.SetBool("tackle", true);
-                        //_anim.Play("Tackle");
-
-
-                        // 撃ち続けてボイスを流す
-                        //AudioManager.instance.stopAllVoice();
-                        //AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
-                    }
-                }
-            }
+                _lastMoveIndex += 3;
+                if (_lastMoveIndex >= _lastMovePos.Count) { return; }
+                _bezier = new Bezier(_bossBodyParent.transform.position, newPos, _lastMovePos[_lastMoveIndex + 1], _lastMovePos[_lastMoveIndex + 2]);
+            }         
         }
         // タックル前の予備動作
         else if (_lastBeforeRotateAngle > _LAST_BEFORE_ROTATE_ANGLE_MAX)
@@ -992,6 +1112,7 @@ public class BossAI : MonoBehaviour {
                 //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
                 //    _lastSleepVoiceFlag = false;
                 //}
+                _bossBodyParent.transform.Translate(0, -Time.deltaTime * _lastBrforeSleepDownSpeed, 0);
 
                 return;
             }
@@ -1005,14 +1126,16 @@ public class BossAI : MonoBehaviour {
             var length = nextPos - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastBeforeMoveSpeed * Time.deltaTime;
 
-            _bossBodyParent.transform.LookAt(nextPos);
+            //_bossBodyParent.transform.LookAt(nextPos);
+            Quaternion q = Quaternion.LookRotation(nextPos);
+            _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 1000.0f * Time.deltaTime);
             //transform.Rotate(-_lastBeforeRotateSpeed * Time.deltaTime * Mathf.Rad2Deg, 0, 0);
             //_bossBodyParent.transform.Rotate(_lastBeforeRotateAngle * Mathf.Rad2Deg, 0, 0);
 
             //Quaternion q = Quaternion.LookRotation(length);
             //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
 
-            if(_lastBeforeRotateAngle <= _LAST_BEFORE_ROTATE_ANGLE_MAX)
+            if (_lastBeforeRotateAngle <= _LAST_BEFORE_ROTATE_ANGLE_MAX)
             {
                 _anim.Play("Tackle");
             }
@@ -1030,18 +1153,26 @@ public class BossAI : MonoBehaviour {
                 AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
             }
 
-            // スローじゃなかったらスローにする
-            if (!SlowMotion._instance.isSlow)
+            if (_lastSlowStartTime <= 0)
             {
-                // タックルフラグをオンに
-                _lastTackleFlag = true;
+                // スローじゃなかったらスローにする
+                if (!SlowMotion._instance.isSlow)
+                {
+                    // タックルフラグをオンに
+                    _lastTackleFlag = true;
 
-                SlowMotion._instance.GameSpeed(0.1f);
-                SlowMotion._instance.isLimit = false;    
+                    SlowMotion._instance.GameSpeed(0.1f);
+                    SlowMotion._instance.isLimit = false;
+                }
             }
+            else
+            {
+                _lastSlowStartTime -= Time.deltaTime;
+            }
+
             var length = _player.transform.position - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastTackleSpeed * Time.deltaTime;
-
+            
             //Quaternion q = Quaternion.LookRotation(_player.transform.position);
             //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 1000.0f * Time.deltaTime);
 
@@ -1219,6 +1350,97 @@ public class BossAI : MonoBehaviour {
             Color color = (color1 * sin) + (color2 * cos);
             mat.EnableKeyword("_EMISSION");
             mat.SetColor("_EmissionColor", color);
+        }
+    }
+
+    //Vector3 Bezier(float count, Vector3[] pos)
+    //{
+    //    float x = (1 - count) * (1 - count) * pos[0].x
+    //              + 2 * (1 - count) * count * pos[1].x
+    //                        + count * count * pos[2].x;
+    //    float y = (1 - count) * (1 - count) * pos[0].y
+    //              + 2 * (1 - count) * count * pos[1].y
+    //                        + count * count * pos[2].y;
+    //    float z = (1 - count) * (1 - count) * pos[0].z
+    //              + 2 * (1 - count) * count * pos[1].z
+    //                        + count * count * pos[2].z;
+    //    return new Vector3(x, y, z);
+    //}
+}
+
+[System.Serializable]
+public class Bezier : System.Object
+{
+    public Vector3 p0;
+    public Vector3 p1;
+    public Vector3 p2;
+    public Vector3 p3;
+
+    public float ti = 0f;
+
+    private Vector3 b0 = Vector3.zero;
+    private Vector3 b1 = Vector3.zero;
+    private Vector3 b2 = Vector3.zero;
+    private Vector3 b3 = Vector3.zero;
+
+    private float Ax;
+    private float Ay;
+    private float Az;
+
+    private float Bx;
+    private float By;
+    private float Bz;
+
+    private float Cx;
+    private float Cy;
+    private float Cz;
+
+    // Init function v0 = 1st point, v1 = handle of the 1st point , v2 = handle of the 2nd point, v3 = 2nd point
+    // handle1 = v0 + v1
+    // handle2 = v3 + v2
+    public Bezier(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
+    {
+        this.p0 = v0;
+        this.p1 = v1;
+        this.p2 = v2;
+        this.p3 = v3;
+    }
+    // 0.0 >= t <= 1.0
+    public Vector3 GetPointAtTime(float t)
+    {
+        this.CheckConstant();
+        float t2 = t * t;
+        float t3 = t * t * t;
+        float x = this.Ax * t3 + this.Bx * t2 + this.Cx * t + p0.x;
+        float y = this.Ay * t3 + this.By * t2 + this.Cy * t + p0.y;
+        float z = this.Az * t3 + this.Bz * t2 + this.Cz * t + p0.z;
+        return new Vector3(x, y, z);
+    }
+
+    private void SetConstant()
+    {
+        this.Cx = 3f * ((this.p0.x + this.p1.x) - this.p0.x);
+        this.Bx = 3f * ((this.p3.x + this.p2.x) - (this.p0.x + this.p1.x)) - this.Cx;
+        this.Ax = this.p3.x - this.p0.x - this.Cx - this.Bx;
+        this.Cy = 3f * ((this.p0.y + this.p1.y) - this.p0.y);
+        this.By = 3f * ((this.p3.y + this.p2.y) - (this.p0.y + this.p1.y)) - this.Cy;
+        this.Ay = this.p3.y - this.p0.y - this.Cy - this.By;
+
+        this.Cz = 3f * ((this.p0.z + this.p1.z) - this.p0.z);
+        this.Bz = 3f * ((this.p3.z + this.p2.z) - (this.p0.z + this.p1.z)) - this.Cz;
+        this.Az = this.p3.z - this.p0.z - this.Cz - this.Bz;
+    }
+
+    // Check if p0, p1, p2 or p3 have change
+    private void CheckConstant()
+    {
+        if (this.p0 != this.b0 || this.p1 != this.b1 || this.p2 != this.b2 || this.p3 != this.b3)
+        {
+            this.SetConstant();
+            this.b0 = this.p0;
+            this.b1 = this.p1;
+            this.b2 = this.p2;
+            this.b3 = this.p3;
         }
     }
 }

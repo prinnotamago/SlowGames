@@ -1954,22 +1954,24 @@ MonoBehaviour:
   _lastTacklePos: {x: 0, y: 7, z: 0}
   _lastTackleBeforePos: {x: 0, y: 30, z: 0}
   _lastTackleSpeed: 2
-  _lastMoveSpeed: 10
-  _lastMoveNum: 10
+  _lastMoveSpeed: 30
+  _lastMoveNum: 4
   _lastRandMoveLength: {x: 16, y: 5, z: 8}
   _lastRandomStopTimeMax: 0
   _lastFlyTime: 3
   _lastRotateSenterPos: {x: 0, y: 10, z: 0}
-  _lastRotateSpeed: 7
+  _lastRotateSpeed: 5
   _lastRotateLength: 15
   _lastRotateLengthDownSpeed: 4
   _lastRotateUpSpeed: 5
   _lastBeforeSleepTime: 3
+  _lastBrforeSleepDownSpeed: 0.5
   _lastBeforeTackleSenterPos: {x: 0, y: 15, z: 0}
   _lastBeforeRotateSpeed: 10
   _lastBeforeMoveSpeed: 10
   _lastBeforeLengthY: 10
   _lastBeforeLengthZ: 5
+  _lastSlowStartTime: 0.4
   _climaxVelocity: 7
   _climaxDestroyTime: 5
   _climaxBoundNum: 5
@@ -1985,7 +1987,7 @@ MonoBehaviour:
     type: 2}
   _hitLastParticle: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
-  _debugFlag: 1
+  _debugFlag: 0
   anglex: 0
   anglex2: 0
 --- !u!114 &114288619788247730
