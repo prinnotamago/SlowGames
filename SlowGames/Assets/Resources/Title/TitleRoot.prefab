@@ -14787,7 +14787,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1280677859678274}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.39684024, y: -0.58525026, z: -0.39684024, w: 0.58525026}
   m_LocalPosition: {x: 0, y: -0.05, z: -0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14795,7 +14795,7 @@ Transform:
   - {fileID: 4784224778338126}
   m_Father: {fileID: 4798549503679238}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -68.28, y: -90, z: 0}
 --- !u!4 &4696454674275592
 Transform:
   m_ObjectHideFlags: 1
@@ -16684,7 +16684,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849721280951578}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.39684024, y: 0.58525026, z: 0.39684024, w: 0.58525026}
   m_LocalPosition: {x: 0, y: -0.05, z: -0.18}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
@@ -16692,7 +16692,7 @@ Transform:
   - {fileID: 4123290817635730}
   m_Father: {fileID: 4132321541347356}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -68.28, y: 90, z: 0}
 --- !u!4 &4908423414752226
 Transform:
   m_ObjectHideFlags: 1
@@ -21162,8 +21162,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.05}
-  m_Center: {x: 0, y: -0.03, z: 0.02}
+  m_Size: {x: 0.1, y: 0.05, z: 0.2}
+  m_Center: {x: 0, y: -0.05, z: -0.06}
 --- !u!65 &65566933882338690
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -21330,8 +21330,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.05}
-  m_Center: {x: 0, y: -0.03, z: 0.02}
+  m_Size: {x: 0.1, y: 0.05, z: 0.2}
+  m_Center: {x: 0, y: -0.05, z: -0.06}
 --- !u!65 &65972538129729880
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -23327,6 +23327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunObj: {fileID: 0}
+  _changeModel: {fileID: 0}
 --- !u!114 &114421080890541950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24343,6 +24344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunObj: {fileID: 0}
+  _changeModel: {fileID: 0}
 --- !u!114 &114722353337112186
 MonoBehaviour:
   m_ObjectHideFlags: 1
