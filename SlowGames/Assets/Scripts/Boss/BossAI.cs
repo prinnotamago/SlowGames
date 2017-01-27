@@ -9,6 +9,7 @@ public class BossAI : MonoBehaviour {
     /// </summary>
     [SerializeField]
     int _hp = 10;
+    int _hpMax = 0;
 
     /// <summary>
     /// ボスの形態が変わるHP
@@ -55,6 +56,14 @@ public class BossAI : MonoBehaviour {
     GameObject _homingBullet;   // 誘導
     [SerializeField]
     GameObject _speedBullet;    // 速い弾
+
+    /// <summary>
+    /// ボスのエミッションをいじる
+    /// </summary>
+    [SerializeField]
+    Material[] _mat;
+    float _changeColorSpeed = 1.0f;
+    float _changeColorTime = 0.0f;
 
     /// <summary>
     /// 速い球を撃つHP
@@ -167,6 +176,8 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     Vector3 _lastTacklePos;       // タックルをする座標
     [SerializeField]
+    Vector3 _lastTackleBeforePos;       // タックルをする座標
+    [SerializeField]
     float _lastTackleSpeed;     // タックルするときの速さ
     List<Vector3> _lastMovePos = new List<Vector3>();   // タックルをする前に移動する場所
     [SerializeField]
@@ -176,7 +187,49 @@ public class BossAI : MonoBehaviour {
     int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
     [SerializeField]
     Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
+    [SerializeField]
+    float _lastRandomStopTimeMax = 1.0f;  // ランダムの動きで目的地に着いたらどのくらい止まるか最大値
+    float _lastRandomStopTime = 0.0f;     // ランダムの動きで目的地に着いたらどのくらい止まるか数える
+    Vector3 _lastRandomVectorPos;
     bool _lastTackleFlag = false;
+
+    // 自由に飛び回る
+    [SerializeField]
+    float _lastFlyTime = 10.0f;
+    [SerializeField]
+    Vector3 _lastRotateSenterPos;
+    float _lastRotateAngle = 0.0f;
+    [SerializeField]
+    float _lastRotateSpeed = 5.0f;
+    [SerializeField]
+    float _lastRotateLength = 10.0f;
+    [SerializeField]
+    float _lastRotateLengthDownSpeed = 1.0f;
+    [SerializeField]
+    float _lastRotateUpSpeed = 1.0f;
+
+    // タックル前の予備動作
+    //[SerializeField]
+    //Vector3[] _lastBeforeTacklePos;
+    //int _lastBeforeTacklePosIndex = 0;
+    //[SerializeField]
+    //float _lastBeforeTackleSpeed = 5.0f;
+    [SerializeField]
+    float _lastBeforeSleepTime = 3.0f;
+    //bool _lastSleepVoiceFlag = true;
+
+    [SerializeField]
+    Vector3 _lastBeforeTackleSenterPos;
+    float _lastBeforeRotateAngle = 0.0f;
+    const float _LAST_BEFORE_ROTATE_ANGLE_MAX = -Mathf.PI * 3;
+    [SerializeField]
+    float _lastBeforeRotateSpeed;
+    [SerializeField]
+    float _lastBeforeMoveSpeed;
+    [SerializeField]
+    float _lastBeforeLengthY;
+    [SerializeField]
+    float _lastBeforeLengthZ;
     //////////////////////////////////////////////////////////////////////////////
 
     // CLIMAX の情報//////////////////////////////////////////////////////////////
@@ -216,6 +269,9 @@ public class BossAI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        // HP の最大値保存
+        _hpMax = _hp;
+
         // 狙うためのプレイヤーを探していれる
         _player = GameObject.FindGameObjectWithTag(TagName.Player);
 
@@ -229,7 +285,8 @@ public class BossAI : MonoBehaviour {
             Vector3 pos = lastRandPos + randLength;
             _lastMovePos.Add(pos);
         }
-        _lastMovePos.Add(_lastTacklePos);
+        _lastMovePos.Add(_lastTackleBeforePos);
+        //_lastMovePos.Add(_lastTacklePos);
 
         _rigidbody = /*_bossBody.*/GetComponent<Rigidbody>();
 
@@ -254,6 +311,8 @@ public class BossAI : MonoBehaviour {
                 moveObj.transform.position.z + Random.Range(-z, z)
             );
         _level_2_randomStopTime = _level_2_randomStopTimeMax;
+        _lastRandomStopTime = _lastRandomStopTimeMax;
+        _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f));
 
         // ボス登場ボイス
         AudioManager.instance.stopAllVoice();
@@ -272,6 +331,11 @@ public class BossAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        _changeColorTime += Time.deltaTime * _changeColorSpeed;
+        float sin = Mathf.Abs(Mathf.Sin(_changeColorTime));
+        EmissionColorChange(Color.red, Color.black, sin);
+
+        // そのフレーム中１回しか当たらないようにする
         _oneHitFrame = true;
 
         // デバック用damage
@@ -298,7 +362,7 @@ public class BossAI : MonoBehaviour {
         DamageCheck();
 
         // クライマックス以外プレイヤーに向かせる
-        if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
+        //if (_state != BossState.CLIMAX) { _bossBodyParent.transform.LookAt(_player.transform); }
 
         // 速い弾を撃つときは各形態の動作をしないようにする
         //if (_speedBulletFlag) { return; }
@@ -367,6 +431,13 @@ public class BossAI : MonoBehaviour {
         if (!_oneHitFrame) { return; }
         _hp--;
         _oneHitFrame = false;
+
+        if (_hpMax / 2 == _hp)
+        {
+            // HP50%切ったら１度だけ優性ボイス
+            AudioManager.instance.stopAllVoice();
+            AudioManager.instance.playVoice(AudioName.VoiceName.IV10);
+        }
     }
     // ダメージが一定受けたらの処理たち
     void DamageCheck()
@@ -384,12 +455,12 @@ public class BossAI : MonoBehaviour {
             // 一定ダメージを受けたらハチの字モードに変える
             if (_level_2_modeIndex < _level_2_modeChangeHP.Length && _level_2_modeChangeHP[_level_2_modeIndex] >= _hp)
             {
-                if (0 == _level_2_modeIndex)
-                {
-                    // クライマックスになったボイスを流す
-                    AudioManager.instance.stopAllVoice();
-                    AudioManager.instance.playVoice(AudioName.VoiceName.IV10);
-                }
+                //if (0 == _level_2_modeIndex)
+                //{
+                //    // HP50%切ったら１度だけ優性ボイス
+                //    AudioManager.instance.stopAllVoice();
+                //    AudioManager.instance.playVoice(AudioName.VoiceName.IV10);
+                //}
 
                 _level_2_mode = Level_2_Mode.EIGHT_MOVE;
                 //_anim.Play("Tackle");
@@ -449,6 +520,8 @@ public class BossAI : MonoBehaviour {
 
         _speedBulletChargeTime += Time.unscaledDeltaTime;
 
+        // エミッションを変える速度を上げる
+        _changeColorTime += Time.deltaTime * _changeColorSpeed * 10;
         if (_speedBulletChargeTime > _speedBulletChargeMax)
         {
             // 数値たちをリセット
@@ -481,10 +554,6 @@ public class BossAI : MonoBehaviour {
                 {
                     _speedBulletFlag = true;
                     ++_speedBulletIndex;
-
-                    // 高速弾を準備してることを伝える
-                    AudioManager.instance.stopAllVoice();
-                    AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
                 }
             }
 
@@ -529,6 +598,7 @@ public class BossAI : MonoBehaviour {
     void Level_1_Update()
     {
         //_bossBodyParent.transform.LookAt(_player.transform);
+        _bossBodyParent.transform.LookAt(_player.transform);
 
         if (_level_1_moveHpIndex < _level_1_moveHp.Length && _level_1_moveHp[_level_1_moveHpIndex] >= _hp)
         {
@@ -618,6 +688,7 @@ public class BossAI : MonoBehaviour {
     // 第二形態
     void Level_2_Update()
     {
+        _bossBodyParent.transform.LookAt(_player.transform);
         // ハチの字の動き
         if (_level_2_mode == Level_2_Mode.EIGHT_MOVE)
         {
@@ -747,10 +818,102 @@ public class BossAI : MonoBehaviour {
         //transform.position += test / 10.0f;
 
         // 移動する場所に動く処理
-        if(_lastMoveIndex < _lastMovePos.Count)
+        //if(_lastMoveIndex < _lastMovePos.Count)
+        //{
+        //    var length = _lastMovePos[_lastMoveIndex] - _bossBodyParent.transform.position;
+        //    _bossBodyParent.transform.position += length * _lastMoveSpeed * Time.deltaTime;
+        //    if (length.magnitude < 1.5f)
+        //    {
+        //        // タックルをしようとしていたらボイスを流す
+        //        //if ((10) == _lastMoveIndex)
+        //        //{
+        //        //    AudioManager.instance.stopAllVoice();
+        //        //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
+        //        //}
+
+        //        //Quaternion q = Quaternion.LookRotation(_bossBodyParent.transform.position + _lastRandomVectorPos);
+        //        //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 36000.0f * Time.deltaTime);
+        //        //_bossBodyParent.transform.Rotate(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f));
+
+        //        _lastRandomStopTime -= Time.deltaTime;
+
+        //        if (_lastRandomStopTime <= 0.0f)
+        //        {
+
+        //            _lastRandomStopTime = _lastRandomStopTimeMax;
+        //            //_lastRandomVectorPos = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+
+        //            ++_lastMoveIndex;
+
+        //            if (_lastMoveIndex == _lastMovePos.Count)
+        //            {
+        //                //_anim.SetBool("tackle", true);
+        //                _anim.Play("Tackle");
+        //            }
+        //            else if (_lastMoveIndex == _lastMovePos.Count)
+        //            {
+        //                // 撃ち続けてボイスを流す
+        //                AudioManager.instance.stopAllVoice();
+        //                AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+        //            }
+        //        }
+        //    }
+        //}
+
+        const float randMinMax = 10.0f;
+        _bossBodyParent.transform.Translate(
+            new Vector3(
+                  Random.Range(-randMinMax, randMinMax)
+                , Random.Range(-randMinMax, randMinMax)
+                , Random.Range(-randMinMax, randMinMax)
+                ) * Time.deltaTime
+                );
+
+        // 自由に飛び回る
+        if (_lastFlyTime > 0)
         {
+            if(_lastRotateAngle == 0)
+            {
+                _anim.Play("Tackle");
+            }
+
+            _lastFlyTime -= Time.deltaTime;
+
+            _lastRotateAngle += _lastRotateSpeed * Time.deltaTime;
+
+            var offset = new Vector3(Mathf.Sin(_lastRotateAngle), 0, Mathf.Cos(_lastRotateAngle)) * _lastRotateLength;
+            var nextPos = _lastRotateSenterPos + offset;
+
+            var length = nextPos - _bossBodyParent.transform.position;
+            _bossBodyParent.transform.position += length * _lastRotateSpeed * Time.deltaTime;
+
+            _lastRotateLength -= _lastRotateLengthDownSpeed * Time.deltaTime;
+            _lastRotateSenterPos += Vector3.up * _lastRotateUpSpeed * Time.deltaTime;
+
+            Quaternion q = Quaternion.LookRotation(length);
+            _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
+        }
+        else if (_lastMoveIndex < _lastMovePos.Count)
+        {
+            //_bossBodyParent.transform.LookAt(_player.transform);
+
             var length = _lastMovePos[_lastMoveIndex] - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastMoveSpeed * Time.deltaTime;
+
+            if (_lastMoveIndex == _lastMovePos.Count - 1)
+            {
+                _bossBodyParent.transform.LookAt(_player.transform);
+            }
+            else
+            {
+                Quaternion q = Quaternion.LookRotation(_bossBodyParent.transform.position + _lastRandomVectorPos);
+                _bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
+                //_bossBodyParent.transform.Rotate(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f));
+
+                //_bossBodyParent.transform.LookAt(_bossBodyParent.transform.position + _lastRandomVectorPos);
+                //_bossBodyParent.transform.LookAt(_player.transform);
+            }
+
             if (length.magnitude < 1.5f)
             {
                 // タックルをしようとしていたらボイスを流す
@@ -760,24 +923,101 @@ public class BossAI : MonoBehaviour {
                 //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
                 //}
 
-                ++_lastMoveIndex;
+                _lastRandomStopTime -= Time.deltaTime;
 
-                if (_lastMoveIndex == _lastMovePos.Count - 2)
+                if (_lastRandomStopTime <= 0.0f)
                 {
-                    //_anim.SetBool("tackle", true);
-                    _anim.Play("Tackle");
-                }
-                else if (_lastMoveIndex == _lastMovePos.Count)
-                {
-                    // 撃ち続けてボイスを流す
-                    AudioManager.instance.stopAllVoice();
-                    AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+
+                    _lastRandomStopTime = _lastRandomStopTimeMax;
+                    _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 10.0f), Random.Range(-100.0f, 100.0f));
+
+                    ++_lastMoveIndex;
+
+                    if (_lastMoveIndex == _lastMovePos.Count)
+                    {
+                        //_anim.SetBool("tackle", true);
+                        //_anim.Play("Tackle");
+
+
+                        // 撃ち続けてボイスを流す
+                        //AudioManager.instance.stopAllVoice();
+                        //AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+                    }
                 }
             }
+        }
+        // タックル前の予備動作
+        else if (_lastBeforeRotateAngle > _LAST_BEFORE_ROTATE_ANGLE_MAX)
+        {
+            //var length = _lastBeforeTacklePos[_lastBeforeTacklePosIndex] - _bossBodyParent.transform.position;
+            //_bossBodyParent.transform.position += length * _lastBeforeTackleSpeed * Time.deltaTime;
+
+            ////_bossBodyParent.transform.LookAt(_lastBeforeTacklePos[_lastBeforeTacklePosIndex]);
+
+            //Quaternion q = Quaternion.LookRotation(_lastBeforeTacklePos[_lastBeforeTacklePosIndex]);
+            //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 1000.0f * Time.deltaTime);
+
+            //if (length.magnitude < 1.5f)
+            //{
+            //    ++_lastBeforeTacklePosIndex;
+
+            //    if (_lastBeforeTacklePosIndex == _lastBeforeTacklePos.Length)
+            //    {
+            //        _anim.Play("Tackle");
+            //    }
+            //}
+
+            if (_lastBeforeSleepTime > 0)
+            {
+                _lastBeforeSleepTime -= Time.deltaTime;
+                //Quaternion q = Quaternion.LookRotation(_player.transform.position);
+                //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 1000.0f * Time.deltaTime);
+                _bossBodyParent.transform.LookAt(_player.transform);
+
+                //if (_lastSleepVoiceFlag)
+                //{
+                //    AudioManager.instance.stopAllVoice();
+                //    AudioManager.instance.playVoice(AudioName.VoiceName.IV12);
+                //    _lastSleepVoiceFlag = false;
+                //}
+
+                return;
+            }
+
+            _lastBeforeRotateAngle -= _lastBeforeRotateSpeed * Time.deltaTime;
+
+            var offsetAngle = _lastBeforeRotateAngle + Mathf.PI / 2;
+            var offset = new Vector3(0, Mathf.Sin(offsetAngle) * _lastBeforeLengthY, Mathf.Cos(offsetAngle) * _lastBeforeLengthZ);
+            var nextPos = _lastBeforeTackleSenterPos + offset;
+
+            var length = nextPos - _bossBodyParent.transform.position;
+            _bossBodyParent.transform.position += length * _lastBeforeMoveSpeed * Time.deltaTime;
+
+            _bossBodyParent.transform.LookAt(nextPos);
+            //transform.Rotate(-_lastBeforeRotateSpeed * Time.deltaTime * Mathf.Rad2Deg, 0, 0);
+            //_bossBodyParent.transform.Rotate(_lastBeforeRotateAngle * Mathf.Rad2Deg, 0, 0);
+
+            //Quaternion q = Quaternion.LookRotation(length);
+            //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 3600.0f * Time.deltaTime);
+
+            if(_lastBeforeRotateAngle <= _LAST_BEFORE_ROTATE_ANGLE_MAX)
+            {
+                _anim.Play("Tackle");
+            }
+
         }
         // プレイヤーへのタックル
         else
         {
+            //_bossBodyParent.transform.LookAt(_player.transform);
+
+            if (!_lastTackleFlag)
+            {
+                // 撃ち続けてボイスを流す
+                AudioManager.instance.stopAllVoice();
+                AudioManager.instance.playVoice(AudioName.VoiceName.IV13);
+            }
+
             // スローじゃなかったらスローにする
             if (!SlowMotion._instance.isSlow)
             {
@@ -789,6 +1029,11 @@ public class BossAI : MonoBehaviour {
             }
             var length = _player.transform.position - _bossBodyParent.transform.position;
             _bossBodyParent.transform.position += length * _lastTackleSpeed * Time.deltaTime;
+
+            //Quaternion q = Quaternion.LookRotation(_player.transform.position);
+            //_bossBodyParent.transform.rotation = Quaternion.RotateTowards(_bossBodyParent.transform.rotation, q, 1000.0f * Time.deltaTime);
+
+            _bossBodyParent.transform.LookAt(_player.transform);
         }
     }
 
@@ -950,5 +1195,18 @@ public class BossAI : MonoBehaviour {
         //parts[rand].Purge();
 
         _parts[_purgeIndex].Purge();
+    }
+
+    void EmissionColorChange(Color color1, Color color2, float time, float timeMax = 1.0f)
+    {
+        float r = (time / timeMax);
+        float sin = r;
+        float cos = timeMax - r;
+        foreach (var mat in _mat)
+        {
+            Color color = (color1 * sin) + (color2 * cos);
+            mat.EnableKeyword("_EMISSION");
+            mat.SetColor("_EmissionColor", color);
+        }
     }
 }
