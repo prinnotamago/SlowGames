@@ -415,7 +415,7 @@ public class TitleManager : MonoBehaviour
             slow.enabled = true;
         }
 
-        yield return new WaitForSeconds(2.0f); //チャージ完了のセリフ待ってから進む
+        yield return new WaitForSecondsRealtime(2.0f); //チャージ完了のセリフ待ってから進む
 
         //セーフティ解除のセリフ？
 
@@ -479,9 +479,15 @@ public class TitleManager : MonoBehaviour
 
             yield return null;
         }
+
+        foreach (var slow in FindObjectsOfType<GunSlowButton>())
+        {
+            slow.enabled = false;
+        }
+
         AudioManager.instance.stopVoice(AudioName.VoiceName.V07b);
         AudioManager.instance.playVoice(AudioName.VoiceName.V07c);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsRealtime(2.0f);
 
         _descriptionPanel.GetComponentInChildren<Animator>().SetBool("End", true);
         //_descriptionPanel.gameObject.SetActive(false);
