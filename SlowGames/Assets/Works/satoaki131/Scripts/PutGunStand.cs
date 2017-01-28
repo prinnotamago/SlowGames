@@ -45,7 +45,7 @@ public class PutGunStand : MonoBehaviour {
             //_gunObj.transform.parent = null; //子供解除
             _gunObj.SetActive(true);
             var localPosition = col.transform.position;
-            localPosition.y = 0.85f;
+            localPosition.y = 0.9f;
             _gunObj.transform.localPosition = localPosition;
             _gunObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             col.GetComponent<SphereCollider>().enabled = false;

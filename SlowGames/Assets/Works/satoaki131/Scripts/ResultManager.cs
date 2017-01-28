@@ -150,19 +150,35 @@ public class ResultManager : MonoBehaviour
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV17);
         var time = 0.0f;
+        var fadeTime = 0.0F;
         //音声終わるの待つ
         while (time < 7.5f)
         {
             time += Time.unscaledDeltaTime;
-            if (time > 3.5f)
+            if (time > 5.0f)
             {
+                fadeTime += Time.unscaledDeltaTime;
                 for (int i = 0; i < _gun.Length; i++)
                 {
-                    if (!_particle[i].activeSelf) { _particle[i].SetActive(true); }
-                    //_desk[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
-                    ////_gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
-                    var alpha = 1 - (time / (7.5f - 3.5f));
-                    _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, alpha);
+                    if (!_particle[i].activeSelf)
+                    {
+                        _particle[i].SetActive(true);
+
+                        var mat = _gun[i].GetComponent<Renderer>().material;
+
+                        mat.SetFloat("_Mode", 2);
+                        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                        mat.SetInt("_ZWrite", 0);
+                        mat.DisableKeyword("_ALPHATEST_ON");
+                        mat.EnableKeyword("_ALPHABLEND_ON");
+                        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                        mat.renderQueue = 3000;
+
+                        _gun[i].GetComponent<Renderer>().material = mat;
+                    }
+                    var a = (float)Easing.Linear(fadeTime, 7.5f - 5.0f, 0, 1);
+                    _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, a);
                 }
             }
             yield return null;
@@ -173,6 +189,8 @@ public class ResultManager : MonoBehaviour
             _desk[i].SetActive(false);
             _gun[i].SetActive(false);
         }
+
+        yield return new WaitForSecondsRealtime(1.0f);
 
         //Logo演出
         time = 0.0f;
