@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1991256963928612
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4296175778616328}
   - component: {fileID: 198658073036694736}
   - component: {fileID: 199694174672434266}
+  - component: {fileID: 114441969417218856}
   m_Layer: 0
   m_Name: PedestalVanishEffect
   m_TagString: Untagged
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991256963928612}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.48, y: 0.86, z: -0.02}
+  m_LocalPosition: {x: 0.5, y: 0.85, z: -0.2}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4409805058223834}
@@ -72,6 +73,17 @@ Transform:
   m_Father: {fileID: 4296175778616328}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114441969417218856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991256963928612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03fcdbdf6e352a42abeaa9824f515be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198020774717865384
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -127,7 +139,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1147369443
+  randomSeed: -1218838620
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2644,7 +2656,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1083334606
+  randomSeed: -103119404
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3111,7 +3123,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 20
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
