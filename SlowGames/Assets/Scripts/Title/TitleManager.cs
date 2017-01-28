@@ -121,7 +121,7 @@ public class TitleManager : MonoBehaviour
             _playerShot[i].isStart = false;
         }
 
-        VoiceNumberStorage.VoiceSelect(); 
+        VoiceNumberStorage.VoiceCustomSelect();
     }
 
     void Update()
