@@ -1231,8 +1231,6 @@ MonoBehaviour:
       generateTiming: 29
     - type: 2
       generateTiming: 30
-    - type: 1
-      generateTiming: 30
   - _startDieCount: 30
     _generateTimingCount: 3
     _generateCount: 6
@@ -1253,7 +1251,7 @@ MonoBehaviour:
       generateTiming: 34
   _MAX_ENEMY: 36
   _deathCount: 0
-  _isTutorial: 1
+  _isTutorial: 0
 --- !u!114 &114092702494977140
 MonoBehaviour:
   m_ObjectHideFlags: 1
