@@ -45,13 +45,14 @@ public class PutGunStand : MonoBehaviour {
             //_gunObj.transform.parent = null; //子供解除
             _gunObj.SetActive(true);
             var localPosition = col.transform.position;
-            localPosition.y = 0.8f;
+            localPosition.y = 0.85f;
             _gunObj.transform.localPosition = localPosition;
             _gunObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             col.GetComponent<SphereCollider>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
             var localRotation = col.transform.eulerAngles;
-            localRotation.z = col.transform.position.x < 0 ? 72.89301f : -89.953f;
+            localRotation.x = col.transform.position.x < 0 ? -90.0f : 90.0f;
+            localRotation.y = col.transform.position.x < 0 ? 0.0f : 180.0f;
             _gunObj.transform.eulerAngles = localRotation; 
             _isPut = true;
             _changeModel.isGunPut = true;

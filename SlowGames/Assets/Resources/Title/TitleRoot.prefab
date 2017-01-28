@@ -717,9 +717,9 @@ GameObject:
   - component: {fileID: 65240719743532266}
   - component: {fileID: 54428780639292710}
   - component: {fileID: 114279838616115194}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: gun body (1)
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4496,9 +4496,9 @@ GameObject:
   - component: {fileID: 65373689124788266}
   - component: {fileID: 54593072468875222}
   - component: {fileID: 114185748293674686}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: gun body
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
