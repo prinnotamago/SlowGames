@@ -472,8 +472,8 @@ public class AudioManager : SingletonMonoBegaviour<AudioManager>
 
             audioSource.dopplerLevel = 0.0f;
             audioSource.spatialBlend = 1.0f;
-            audioSource.minDistance = 0.01f;
-            audioSource.maxDistance = 30.0f;
+            audioSource.minDistance = 1;
+            audioSource.maxDistance = 30;
 
             int typeIndex = (int)Type.BGM;
             audioSource.outputAudioMixerGroup = _audioMixerGroup[typeIndex];
