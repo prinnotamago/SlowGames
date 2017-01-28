@@ -136,6 +136,9 @@ public class GenerateManager : MonoBehaviour
     {
         _genePos.Add(TargetPosition.Left);
         _genePos.Add(TargetPosition.Right);
+        _genePos.Add(TargetPosition.Front);
+        _genePos.Add(TargetPosition.UpLeft);
+        _genePos.Add(TargetPosition.UpRight);
         _genePos.Add(TargetPosition.UpFront);
 
     }
