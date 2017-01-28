@@ -13,6 +13,15 @@ public class BossPurgeParts : MonoBehaviour
     bool _isPurge = false;
     public bool isPurge { get { return _isPurge; } }
 
+    [SerializeField]
+    GameObject _sparkParticle;
+
+    [SerializeField]
+    GameObject _particlePos;
+
+    [SerializeField]
+    Vector3 _particleRotate;
+
     Rigidbody _rigidbody = null;
     Collider _collider = null;
 
@@ -58,6 +67,11 @@ public class BossPurgeParts : MonoBehaviour
 
     public void Purge()
     {
+        var particle = Instantiate(_sparkParticle);
+        particle.transform.position = _particlePos.transform.position;
+        particle.transform.parent = transform.parent;
+        particle.transform.eulerAngles = _particleRotate;
+
         _collider.isTrigger = false;
         _rigidbody.useGravity = true;
         var vector = transform.position - transform.parent.transform.position;

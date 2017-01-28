@@ -74,6 +74,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1160924646043158
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4940953917281460}
+  m_Layer: 14
+  m_Name: under wing left particlePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1316814363360472
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +120,21 @@ GameObject:
   - component: {fileID: 114288619788247730}
   m_Layer: 14
   m_Name: head parge 04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1326859019950626
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4227048888430538}
+  m_Layer: 14
+  m_Name: parge bottom left particlePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,6 +304,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1642888296579182
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4046216421310532}
+  m_Layer: 14
+  m_Name: under wing left particlePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1648110958671036
 GameObject:
   m_ObjectHideFlags: 1
@@ -388,6 +433,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1801607795964562
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4064812803026592}
+  m_Layer: 14
+  m_Name: parge bottom right particlePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1886867843471126
 GameObject:
   m_ObjectHideFlags: 1
@@ -438,6 +498,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4046216421310532
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642888296579182}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.160001, y: 3.8000104, z: -1.2200003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4210063517950848}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4064812803026592
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801607795964562}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.661, y: 0.49899417, z: 0.823}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4692236827874770}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4210063517950848
 Transform:
   m_ObjectHideFlags: 1
@@ -447,8 +533,22 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -4.6903033, y: -1.1818087, z: -13.553962}
   m_LocalScale: {x: 1.3808565, y: 3.8242486, z: 3.8242486}
-  m_Children: []
+  m_Children:
+  - {fileID: 4046216421310532}
   m_Father: {fileID: 4977092523647334}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4227048888430538
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326859019950626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.661, y: 0.499, z: 0.823}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4509551548794430}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4318666035970650
@@ -570,7 +670,8 @@ Transform:
   m_LocalRotation: {x: 0.00000006657903, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0007182404, y: -1.680218, z: -0.24724247}
   m_LocalScale: {x: 0.5511811, y: 0.5511811, z: 0.5511811}
-  m_Children: []
+  m_Children:
+  - {fileID: 4227048888430538}
   m_Father: {fileID: 4628574397118882}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -614,7 +715,8 @@ Transform:
   m_LocalRotation: {x: 0.00000006657903, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0007182404, y: -1.680218, z: -0.24724247}
   m_LocalScale: {x: 0.5511811, y: 0.5511811, z: 0.5511811}
-  m_Children: []
+  m_Children:
+  - {fileID: 4064812803026592}
   m_Father: {fileID: 4628574397118882}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -714,7 +816,8 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 4.5958357, y: -1.1818087, z: -13.553962}
   m_LocalScale: {x: 1.3808565, y: 3.8242486, z: 3.8242486}
-  m_Children: []
+  m_Children:
+  - {fileID: 4940953917281460}
   m_Father: {fileID: 4700477956503626}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -743,6 +846,19 @@ Transform:
   m_Children:
   - {fileID: 4318666035970650}
   m_Father: {fileID: 4753064635966720}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4940953917281460
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160924646043158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.16, y: 3.8, z: -1.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4822593980646310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4977092523647334
@@ -1870,6 +1986,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+    type: 2}
+  _particlePos: {fileID: 1648110958671036}
+  _particleRotate: {x: 0, y: 180, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114124384295420056
 MonoBehaviour:
@@ -1882,6 +2002,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1698308218585680, guid: a8df141932bd0b544b9437cc3280bcb6,
+    type: 2}
+  _particlePos: {fileID: 1326859019950626}
+  _particleRotate: {x: 68.028, y: 80.42101, z: 81.105}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114253949754342068
 MonoBehaviour:
@@ -1958,36 +2082,28 @@ MonoBehaviour:
   _lastMoveNum: 4
   _lastRandMoveLength: {x: 16, y: 5, z: 8}
   _lastRandomStopTimeMax: 0
-  _lastFlyTime: 3
-  _lastRotateSenterPos: {x: 0, y: 10, z: 0}
-  _lastRotateSpeed: 5
-  _lastRotateLength: 15
-  _lastRotateLengthDownSpeed: 4
-  _lastRotateUpSpeed: 5
-  _lastBeforeSleepTime: 3
-  _lastBrforeSleepDownSpeed: 0.5
-  _lastBeforeTackleSenterPos: {x: 0, y: 15, z: 0}
-  _lastBeforeRotateSpeed: 10
-  _lastBeforeMoveSpeed: 10
-  _lastBeforeLengthY: 10
-  _lastBeforeLengthZ: 5
+  _lastPreparationPos: {x: 0, y: 5, z: 0}
+  _lastPreparationAngleSpeed: 10
+  _lastPreparationAngleAcceleration: 2
+  _lastPreparationMoveSpeed: 3
+  _lastPreparationTime: 10
+  _lastPreparationPoseTime: 5
+  _lastStaggerSpeed: 1
+  _lastStaggerLength: 15
+  _lastParticleInterval: 0.3
+  _lastParticleRandPos: {x: 2, y: 3, z: 1}
+  _lastDownRotateMax: 30
+  _lastDownSpeed: 1
+  _lastSleepTime: 3
   _lastSlowStartTime: 0.4
   _climaxVelocity: 7
   _climaxDestroyTime: 5
-  _climaxBoundNum: 5
-  _climaxBoundPowerSide: 5
-  _climaxBoundPowerUp: 10
-  _effectPos: {fileID: 1095651699265716}
-  _boundParticle: {fileID: 1781873274365052, guid: 749a6ba38b346754b867ad42856c0d4c,
-    type: 2}
-  _slideParticle: {fileID: 1654325434213786, guid: 2209fae6e3a7e9442b145fe385448c47,
-    type: 2}
-  _slideParticleParent: {fileID: 1095651699265716}
+  _climaxUpPower: 3
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
   _hitLastParticle: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
-  _debugFlag: 0
+  _debugFlag: 1
   anglex: 0
   anglex2: 0
 --- !u!114 &114288619788247730
@@ -2001,6 +2117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+    type: 2}
+  _particlePos: {fileID: 1324749464072624}
+  _particleRotate: {x: 0, y: 180, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114398428893081896
 MonoBehaviour:
@@ -2013,6 +2133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+    type: 2}
+  _particlePos: {fileID: 1799954348040970}
+  _particleRotate: {x: 0, y: 180, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114802108780757598
 MonoBehaviour:
@@ -2025,6 +2149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+    type: 2}
+  _particlePos: {fileID: 1441005737207902}
+  _particleRotate: {x: 0, y: 180, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114809560840706714
 MonoBehaviour:
@@ -2037,6 +2165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1698308218585680, guid: a8df141932bd0b544b9437cc3280bcb6,
+    type: 2}
+  _particlePos: {fileID: 1801607795964562}
+  _particleRotate: {x: 68.028, y: -103.634, z: 81.105}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114872137493858258
 MonoBehaviour:
@@ -2049,6 +2181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1698308218585680, guid: a8df141932bd0b544b9437cc3280bcb6,
+    type: 2}
+  _particlePos: {fileID: 1642888296579182}
+  _particleRotate: {x: 0, y: -90, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!114 &114934224312044614
 MonoBehaviour:
@@ -2061,6 +2197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11ec4c69b54c34ea76d338ddf7818d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sparkParticle: {fileID: 1698308218585680, guid: a8df141932bd0b544b9437cc3280bcb6,
+    type: 2}
+  _particlePos: {fileID: 1160924646043158}
+  _particleRotate: {x: 0, y: 90, z: 0}
   _ai: {fileID: 114253949754342068}
 --- !u!135 &135079427021081736
 SphereCollider:

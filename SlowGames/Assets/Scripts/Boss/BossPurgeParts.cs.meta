@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 6e11ec4c69b54c34ea76d338ddf7818d
-timeCreated: 1480475959
+timeCreated: 1485587989
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _sparkParticle: {fileID: 1467349860711380, guid: 982a23ec89be16c4cbf11429c98244d5,
+      type: 2}
+  - _ai: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
