@@ -46,7 +46,7 @@ public class EnemyActor : MonoBehaviour
     float _playerToMaxDistance = 10;
 
     //エネミーが向かう方向
-    public Transform _currentTarget;
+    public Vector3 _currentTarget;
     Vector3 _basePosition;
     bool    _isHitToEnemy;
     Vector3 _provMoveTarget;
@@ -83,14 +83,15 @@ public class EnemyActor : MonoBehaviour
     void Start()
     {
 
-        //_currentTarget = GameObject.FindGameObjectWithTag("Player").transform;
         _isShot = false;
         _isHitToEnemy = false;
         _playerTransform = GameObject.FindGameObjectWithTag(TagName.Player);
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.instruition);
 
         AudioManager.instance.play3DSe(gameObject,AudioName.SeName.Genrtate,true);
-       
+
+
+
     }
 
     void Update()
@@ -103,7 +104,7 @@ public class EnemyActor : MonoBehaviour
     }
 
     int waitFrameCount = 0;
-    int waitFrameCountMax = 2;
+    int waitFrameCountMax = 60;
 
     //生成
     void FirstAction()
@@ -126,7 +127,7 @@ public class EnemyActor : MonoBehaviour
         {
 
             //しっかりターゲットがきまってたら移動開始
-            _basePosition = _currentTarget.position;
+            _basePosition = _currentTarget;
             _currentAction = ActionType.TargetRun;
             transform.LookAt(_basePosition);
             this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
