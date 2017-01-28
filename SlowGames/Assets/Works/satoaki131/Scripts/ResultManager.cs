@@ -43,12 +43,21 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _deskSpotLight = null;
 
+    private Material[] _gunMaterial = null;
+
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
         _stateUpdate.Add(State.GunPut, GunPutUpdate);
         _stateUpdate.Add(State.Wait, () => { });
         _stateUpdate.Add(State.End, EndUpdate);
+
+        _gunMaterial = new Material[2];
+        for(int i = 0; i < _gun.Length; i++)
+        {
+            _gunMaterial[i] = _gun[i].GetComponent<Renderer>().material;
+        }
+
         VoiceNumberStorage.setVoice();
         AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
         StartCoroutine(AudioMessage());
@@ -121,14 +130,17 @@ public class ResultManager : MonoBehaviour
         _stand[1].SetActive(false);
         
 
-        for(int i = 0; i < _desk.Length; i++)
-        {
-            _gun[i].transform.parent = _desk[i].transform;
-        }
+        //for(int i = 0; i < _desk.Length; i++)
+        //{
+        //    _gun[i].transform.parent = _desk[i].transform;
+        //}
 
         _state = State.Wait;
         StartCoroutine(Production());
     }
+
+    [SerializeField]
+    private GameObject[] _particle = null;
     
     /// <summary>
     /// 最後の演出
@@ -142,12 +154,15 @@ public class ResultManager : MonoBehaviour
         while (time < 7.5f)
         {
             time += Time.unscaledDeltaTime;
-            if(time > 3.5f)
+            if (time > 3.5f)
             {
-                for(int i = 0; i < _desk.Length; i++)
+                for (int i = 0; i < _gun.Length; i++)
                 {
-                    _desk[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
-                    //_gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                    if (!_particle[i].activeSelf) { _particle[i].SetActive(true); }
+                    //_desk[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                    ////_gun[i].transform.Translate(new Vector3(0, 0, _deskMoveSpeed) * Time.unscaledDeltaTime);
+                    var alpha = 1 - (time / (7.5f - 3.5f));
+                    _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, alpha);
                 }
             }
             yield return null;
