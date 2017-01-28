@@ -12,6 +12,8 @@ public class CustomerCounter : MonoBehaviour
     [SerializeField]
     Text _text;
 
+    [SerializeField]
+    bool _doCount;
 
     const string HIGH_SCORE_KEY = "highScore";
 
@@ -51,6 +53,10 @@ public class CustomerCounter : MonoBehaviour
     {
         _instance = this;
 
+        if (_doCount)
+        {
+            UpdateCount();
+        }
     }
 
 
