@@ -84,6 +84,14 @@ public class GenerateManager : MonoBehaviour
 
     void Start()
     {
+        _genePos = new List<TargetPosition>();
+        _genePos.Add(TargetPosition.Left);
+        _genePos.Add(TargetPosition.Right);
+        _genePos.Add(TargetPosition.Front);
+        _genePos.Add(TargetPosition.UpLeft);
+        _genePos.Add(TargetPosition.UpRight);
+        _genePos.Add(TargetPosition.UpFront);
+
         //初期化
         _enemyGenerator = this.gameObject.GetComponent<EnemyGenerator>();
         if (GameDirector.instance != null)
@@ -130,16 +138,11 @@ public class GenerateManager : MonoBehaviour
     }
 
 
-    List<TargetPosition> _genePos = new List<TargetPosition>();
+    List<TargetPosition> _genePos;// = new List<TargetPosition>();
 
     void Awake()
     {
-        _genePos.Add(TargetPosition.Left);
-        _genePos.Add(TargetPosition.Right);
-        _genePos.Add(TargetPosition.Front);
-        _genePos.Add(TargetPosition.UpLeft);
-        _genePos.Add(TargetPosition.UpRight);
-        _genePos.Add(TargetPosition.UpFront);
+        
 
     }
 
@@ -164,7 +167,7 @@ public class GenerateManager : MonoBehaviour
         {
             DefaultSetEnemy(EnemyType.Easy,_genePos[i]);
             _enemyNumber += 1;
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return null;
@@ -175,17 +178,17 @@ public class GenerateManager : MonoBehaviour
 
     public void GameStartSet()
     {
-        List<TargetPosition> genePos = new List<TargetPosition>();
-
-        genePos.Add(TargetPosition.Left);
-        genePos.Add(TargetPosition.Right);
-        genePos.Add(TargetPosition.UpFront);
-
-        //ゲームスタート用の三体を生成
-        for (int i = 0; i < genePos.Count; i++)
-        {
-            DefaultSetEnemy(EnemyType.Easy,genePos[i]);
-        }
+//        List<TargetPosition> genePos = new List<TargetPosition>();
+//
+//        genePos.Add(TargetPosition.Left);
+//        genePos.Add(TargetPosition.Right);
+//        genePos.Add(TargetPosition.UpFront);
+//
+//        //ゲームスタート用の三体を生成
+//        for (int i = 0; i < genePos.Count; i++)
+//        {
+//            DefaultSetEnemy(EnemyType.Easy,genePos[i]);
+//        }
 
     }
 
@@ -324,7 +327,7 @@ public class GenerateManager : MonoBehaviour
     //敵キャラを生成
     void UpdateEnemyCount()
     {
-   
+        
         //ウェーブのデータの更新チェック.
         if (_currentWaveCount < _waveDate.Count - 1)
         {
@@ -411,7 +414,7 @@ public class GenerateManager : MonoBehaviour
 
        }
 
-
+  
 
     }
 

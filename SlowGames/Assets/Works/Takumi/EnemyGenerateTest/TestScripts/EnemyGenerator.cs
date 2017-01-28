@@ -40,8 +40,8 @@ public class EnemyGenerator : MonoBehaviour
     List<GameObject> _hardEnemys = new List<GameObject>();
 
 
-    [SerializeField]
-    List<Transform> _generateList = new List<Transform>();
+//    [SerializeField]
+//    List<Transform> _generateList = new List<Transform>();
 
     [SerializeField]
     Transform _left;
@@ -165,7 +165,8 @@ public class EnemyGenerator : MonoBehaviour
 
         //自分がどこに生成された的なのかをキヲクさせる
         enemy.GetComponent<Enemy>()._generatePostion = generatePosition;
-        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition];
+        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition].position;
+
 
     }
 
@@ -192,7 +193,7 @@ public class EnemyGenerator : MonoBehaviour
 
         //自分がどこに生成された的なのかをキヲクさせる
         enemy.GetComponent<Enemy>()._generatePostion = generatePosition;
-        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition];
+        enemy.GetComponent<EnemyActor>()._currentTarget = _targetPositionDic[generatePosition].position;
 
     }
 
