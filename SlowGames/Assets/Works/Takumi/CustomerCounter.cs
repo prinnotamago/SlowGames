@@ -15,7 +15,7 @@ public class CustomerCounter : MonoBehaviour
 
     const string HIGH_SCORE_KEY = "highScore";
 
-    static CustomerCounter instance
+    public static CustomerCounter instance
     {
         get 
         {

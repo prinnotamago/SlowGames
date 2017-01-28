@@ -10,9 +10,18 @@ public class VoiceNumberStorage : MonoBehaviour {
     /// Voiceを選択しなおしてsetする関数
     /// Titleはこっちを呼ぶ
     /// </summary>
-    public static void VoiceSelect()
+    public static void VoiceRadomSelect()
     {
         _voiceNumber = UnityEngine.Random.Range(0, 3);
+        AudioManager.instance.loadNavigations(_voiceNumber);
+    }
+
+    /// <summary>
+    /// お客さんの人数からVoiceを決める
+    /// </summary>
+    public static void VoiceCustomSelect()
+    {
+        _voiceNumber = CustomerCounter.instance.GetCount() % 3;
         AudioManager.instance.loadNavigations(_voiceNumber);
     }
 
