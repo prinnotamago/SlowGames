@@ -259,16 +259,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114274209792734970, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-        type: 2}
-      propertyPath: _gunObj
-      value: 
-      objectReference: {fileID: 985505332}
-    - target: {fileID: 114021265487996924, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-        type: 2}
-      propertyPath: _gunObj
-      value: 
-      objectReference: {fileID: 985505333}
     - target: {fileID: 33337633640617380, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: m_Mesh
@@ -279,29 +269,9 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1606134121}
-    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-        type: 2}
-      propertyPath: _gun.Array.data[0]
-      value: 
-      objectReference: {fileID: 985505333}
-    - target: {fileID: 114073988737325804, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-        type: 2}
-      propertyPath: _gun.Array.data[1]
-      value: 
-      objectReference: {fileID: 985505332}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &985505332 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1404723159308166, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-    type: 2}
-  m_PrefabInternal: {fileID: 985505331}
---- !u!1 &985505333 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1512554753309632, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-    type: 2}
-  m_PrefabInternal: {fileID: 985505331}
 --- !u!21 &1606134121
 Material:
   serializedVersion: 6
