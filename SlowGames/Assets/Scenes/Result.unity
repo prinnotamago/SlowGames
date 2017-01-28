@@ -92,7 +92,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!43 &897488657
+--- !u!43 &401450771
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -220,36 +220,7 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!21 &1160852972
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
---- !u!1001 &1307745835
+--- !u!1001 &985505331
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -292,97 +263,41 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 897488657}
+      objectReference: {fileID: 401450771}
     - target: {fileID: 23549098982892828, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1160852972}
-    - target: {fileID: 4588736250710940, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -6.420623
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984550377169950, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.08461884
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984550377169950, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.4798988
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984550377169950, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.06379095
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984550377169950, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.8709004
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.7277146
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.10845791
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.11836104
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.6668276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 17.776363
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.1422725
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322121016690268, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -2.610417
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659225292298090, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.059949454
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659225292298090, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.000006302844
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659225292298090, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.000000779087
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659225292298090, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.0000000016675266
-      objectReference: {fileID: 0}
-    - target: {fileID: 95719413615074112, guid: 8d5d48abd33d8634cb3f4a47442d550b,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4966618687915074, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.059949454
-      objectReference: {fileID: 0}
-    - target: {fileID: 4966618687915074, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.000006302844
-      objectReference: {fileID: 0}
-    - target: {fileID: 4966618687915074, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.000000779087
-      objectReference: {fileID: 0}
-    - target: {fileID: 4966618687915074, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.0000000016675266
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1606134121}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
   m_IsPrefabParent: 0
+--- !u!21 &1606134121
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
