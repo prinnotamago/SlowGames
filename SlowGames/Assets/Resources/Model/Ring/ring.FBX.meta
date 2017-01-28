@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 3d81e30cbb7648745afa0d5584e77466
+timeCreated: 1485582414
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box004
+    100002: Camera001
+    100004: Camera001.Target
+    100006: HandHigh
+    100008: HandLow
+    100010: PhysCamera001.Target
+    100012: //RootNode
+    100014: Ring_HighPoly
+    100016: Ring_LowPoly
+    100018: Spot001
+    100020: Spot001.Target
+    100022: Spot002
+    100024: Spot002.Target
+    100026: Spot003
+    100028: Spot003.Target
+    100030: Spot004
+    100032: Spot004.Target
+    100034: Spot005
+    100036: Spot005.Target
+    100038: Spot006
+    100040: Spot006.Target
+    400000: Box004
+    400002: Camera001
+    400004: Camera001.Target
+    400006: HandHigh
+    400008: HandLow
+    400010: PhysCamera001.Target
+    400012: //RootNode
+    400014: Ring_HighPoly
+    400016: Ring_LowPoly
+    400018: Spot001
+    400020: Spot001.Target
+    400022: Spot002
+    400024: Spot002.Target
+    400026: Spot003
+    400028: Spot003.Target
+    400030: Spot004
+    400032: Spot004.Target
+    400034: Spot005
+    400036: Spot005.Target
+    400038: Spot006
+    400040: Spot006.Target
+    2300000: Box004
+    2300002: HandHigh
+    2300004: HandLow
+    2300006: Ring_HighPoly
+    2300008: Ring_LowPoly
+    2300010: //RootNode
+    3300000: Box004
+    3300002: HandHigh
+    3300004: HandLow
+    3300006: Ring_HighPoly
+    3300008: Ring_LowPoly
+    3300010: //RootNode
+    4300000: HandHigh
+    4300002: Box004
+    4300004: HandLow
+    4300006: Ring_HighPoly
+    4300008: Ring_LowPoly
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.06
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
