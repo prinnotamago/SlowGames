@@ -152,7 +152,6 @@ public class ResultManager : MonoBehaviour
         var time = 0.0f;
         var fadeTime = 0.0f;
 
-        Debug.Log("OK");
         //銃が光る演出
         while (time < 2.0f)
         {
@@ -241,6 +240,9 @@ public class ResultManager : MonoBehaviour
         }
 
         //ざらざら演出
+        NoiseSwitch.instance.noise.enabled = true;
+        NoiseSwitch.instance.bloom.enabled = false;
+
         time = 0.0f;
         while(time < _logoMoveEndTime)
         {
