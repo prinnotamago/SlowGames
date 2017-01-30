@@ -109,11 +109,11 @@ public class ResultManager : MonoBehaviour
         }
 
         //デバッグ用:台座に置いてないときでも戻れるように
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    _state = State.Wait;
-        //    StartCoroutine(Production());
-        //}
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            _put[0].Test(_stand[0]);
+            _put[1].Test(_stand[1]);
+        }
 
         _stateUpdate[_state]();
     }
@@ -150,20 +150,51 @@ public class ResultManager : MonoBehaviour
     {
         AudioManager.instance.playVoice(AudioName.VoiceName.IV17);
         var time = 0.0f;
-        var fadeTime = 0.0F;
-        //音声終わるの待つ
-        while (time < 7.5f)
+        var fadeTime = 0.0f;
+
+        Debug.Log("OK");
+        //銃が光る演出
+        while (time < 2.0f)
         {
             time += Time.unscaledDeltaTime;
-            if (time > 5.0f)
+            for(int i = 0; i < _gunMaterial.Length; i++)
+            {
+                //var emission = Mathf.Lerp(0, 4, time / 2.0f);
+                var emission = (float)Easing.OutCubic(time, 2.0f, 4, 0);
+                //var emission = (float)Easing.OutQuint(time, 2.0f, 4, 0);
+                var color = new Color(emission, emission, emission);
+                _gunMaterial[i].EnableKeyword("_EMISSION");
+                _gunMaterial[i].SetColor("_EmissionColor", color);
+            }
+            yield return null;
+        }
+        _gun[0].GetComponent<Rigidbody>().useGravity = false;
+        _gun[1].GetComponent<Rigidbody>().useGravity = false;
+        //台座が消える演出
+        for (int i = 0; i < _desk.Length; i++)
+        {
+            iTween.ScaleTo(_desk[i], iTween.Hash(
+                "y", 0.0f,
+                "time", 1.0f,
+                "easeType", iTween.EaseType.easeOutCubic
+                ));
+        }
+
+        time = 0.0f;
+        //音声終わるの待つ
+        while (time < 5.5f)
+        {
+            time += Time.unscaledDeltaTime;
+            if (time > 3.0f)
             {
                 fadeTime += Time.unscaledDeltaTime;
                 for (int i = 0; i < _gun.Length; i++)
                 {
                     if (!_particle[i].activeSelf)
                     {
-                        _particle[i].SetActive(true);
+                        _particle[i].SetActive(true); //ぽわぽわ出る
 
+                        //銃のマテリアルの設定
                         var mat = _gun[i].GetComponent<Renderer>().material;
 
                         mat.SetFloat("_Mode", 2);
@@ -177,8 +208,8 @@ public class ResultManager : MonoBehaviour
 
                         _gun[i].GetComponent<Renderer>().material = mat;
                     }
-                    var a = (float)Easing.Linear(fadeTime, 7.5f - 5.0f, 0, 1);
-                    _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, a);
+                    var a = (float)Easing.Linear(fadeTime, 5.5f - 3.0f, 0, 1);
+                    _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, a); //fadeしていく
                 }
             }
             yield return null;
@@ -192,16 +223,7 @@ public class ResultManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1.0f);
 
-        //Logo演出
-        time = 0.0f;
         AudioManager.instance.playSe(AudioName.SeName.TitleLogoEnding);
-        while (time < _logoMoveEndTime)
-        {
-            time += Time.unscaledDeltaTime;
-            _logo.fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
-            yield return null;
-        }
-
         //thank you for playing演出
         _thankyouText.isMoveText = true;
         while (!_thankyouText.isPopText)
@@ -209,6 +231,14 @@ public class ResultManager : MonoBehaviour
             yield return null;
         }
 
+        //Logo演出
+        time = 0.0f;
+        while (time < _logoMoveEndTime)
+        {
+            time += Time.unscaledDeltaTime;
+            _logo.fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
+            yield return null;
+        }
 
         //ざらざら演出
         time = 0.0f;

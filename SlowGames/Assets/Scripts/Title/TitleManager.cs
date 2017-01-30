@@ -70,7 +70,7 @@ public class TitleManager : MonoBehaviour
     private Vector3[] TURTREAL_POS;
 
     private float _time = 0.0f;
-    private float _voiceTIme = 0.0f;
+    private float _voiceTime = 0.0f;
 
     [SerializeField]
     private GameObject[] _slowTutorealMissile = null;
@@ -116,7 +116,7 @@ public class TitleManager : MonoBehaviour
         _viveControllerModel[1].SetActive(false);
         _arrowAnim.gameObject.SetActive(false);
 
-        for(int i = 0; i < _playerShot.Length; i++)
+        for (int i = 0; i < _playerShot.Length; i++)
         {
             _playerShot[i].isStart = false;
         }
@@ -165,7 +165,7 @@ public class TitleManager : MonoBehaviour
     void TitleUpdate()
     {
         _time += Time.deltaTime;
-        _voiceTIme += Time.deltaTime;
+        _voiceTime += Time.deltaTime;
 
         if (_time > 1.0f)
         {
@@ -200,9 +200,9 @@ public class TitleManager : MonoBehaviour
             isChange = true;
         }
 
-        if (_voiceTIme > 30.0f)
+        if (_voiceTime > 30.0f)
         {
-            _voiceTIme = 0.0f;
+            _voiceTime = 0.0f;
             AudioManager.instance.playVoice(AudioName.VoiceName.V00);
         }
 
