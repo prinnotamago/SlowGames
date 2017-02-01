@@ -29,6 +29,9 @@ public class EnemyBullet : MonoBehaviour {
             _player = GameObject.FindGameObjectWithTag(TagName.Player);
 
         }
+
+
+       
     }
 
 	void Update()
@@ -129,8 +132,8 @@ public class EnemyBullet : MonoBehaviour {
         Vector3 randomDirec = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
         float deathTime   = 1.0f;
         float acceraition = 3.0f;
-        float unacceration = 3.0f;
-        float firstTime = 400.0f;
+        float unacceration = 2.0f;
+        float firstTime = 800.0f;
 
         //初速
         transform.LookAt(randomDirec);
@@ -141,7 +144,7 @@ public class EnemyBullet : MonoBehaviour {
         {   
 
             transform.position += randomDirec * _bulletSpeed * acceraition * Time.deltaTime;
-            acceraition -= Time.deltaTime * unacceration;
+            acceraition += Time.deltaTime * unacceration;
             deathTime -= Time.deltaTime;
 
             if (acceraition < 0)
