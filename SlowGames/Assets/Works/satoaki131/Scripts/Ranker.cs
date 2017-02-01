@@ -23,7 +23,7 @@ public class Ranker : MonoBehaviour {
 
     void Start()
     {
-        _lastScore = ScoreManager.instance.getScore(); //最後はコメント外す
+        //_lastScore = ScoreManager.instance.getScore(); //最後はコメント外す
         for(int i = 0; i < _data.Length; i++)
         {
             if(_lastScore > _data[i].score) { continue; }

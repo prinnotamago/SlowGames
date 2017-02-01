@@ -9,7 +9,7 @@ public class ResultDirector : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            ScoreManager.instance.Reset();
+            //ScoreManager.instance.Reset();
             SceneChange.ChangeScene(SceneName.Name.Title);
         }
     }

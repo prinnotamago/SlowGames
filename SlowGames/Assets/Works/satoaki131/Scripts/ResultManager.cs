@@ -22,7 +22,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private Image _logo = null;
 
-    [SerializeField] 
+    [SerializeField]
     private TextMessage _thankyouText = null;
 
     [SerializeField, Range(2.0f, 6.0f)]
@@ -53,7 +53,7 @@ public class ResultManager : MonoBehaviour
         _stateUpdate.Add(State.End, EndUpdate);
 
         _gunMaterial = new Material[2];
-        for(int i = 0; i < _gun.Length; i++)
+        for (int i = 0; i < _gun.Length; i++)
         {
             _gunMaterial[i] = _gun[i].GetComponent<Renderer>().material;
         }
@@ -66,7 +66,7 @@ public class ResultManager : MonoBehaviour
     private IEnumerator AudioMessage()
     {
         var time = 0.0f;
-        while(time < 4.0f)
+        while (time < 4.0f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -76,7 +76,7 @@ public class ResultManager : MonoBehaviour
         //_desk[1].SetActive(true);
 
 
-        for (int i = 0; i <_desk.Length; i++)
+        for (int i = 0; i < _desk.Length; i++)
         {
             iTween.ScaleTo(_desk[i], iTween.Hash(
                 "y", 0.05f,
@@ -86,7 +86,7 @@ public class ResultManager : MonoBehaviour
         }
 
         time = 0.0f;
-        while(time < 1.0f)
+        while (time < 1.0f)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
@@ -103,7 +103,7 @@ public class ResultManager : MonoBehaviour
     void Update()
     {
         //デバッグ用:台座に置いてないときでも戻れるように
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             SceneChange.ChangeScene(SceneName.Name.Title, Color.white);
         }
@@ -128,7 +128,7 @@ public class ResultManager : MonoBehaviour
 
         _stand[0].SetActive(false);
         _stand[1].SetActive(false);
-        
+
 
         //for(int i = 0; i < _desk.Length; i++)
         //{
@@ -141,7 +141,7 @@ public class ResultManager : MonoBehaviour
 
     [SerializeField]
     private GameObject[] _particle = null;
-    
+
     /// <summary>
     /// 最後の演出
     /// </summary>
@@ -156,7 +156,7 @@ public class ResultManager : MonoBehaviour
         while (time < 2.0f)
         {
             time += Time.unscaledDeltaTime;
-            for(int i = 0; i < _gunMaterial.Length; i++)
+            for (int i = 0; i < _gunMaterial.Length; i++)
             {
                 //var emission = Mathf.Lerp(0, 4, time / 2.0f);
                 var emission = (float)Easing.OutCubic(time, 2.0f, 4, 0);
@@ -179,6 +179,15 @@ public class ResultManager : MonoBehaviour
                 ));
         }
 
+        for (int i = 0; i < _gun.Length; i++)
+        {
+            iTween.RotateTo(_gun[i], iTween.Hash(
+                "x", 0.0f,
+                "time", 3.0f,
+                "easeType", iTween.EaseType.linear
+                ));
+        }
+
         time = 0.0f;
         //音声終わるの待つ
         while (time < 5.5f)
@@ -191,6 +200,18 @@ public class ResultManager : MonoBehaviour
                 {
                     if (!_particle[i].activeSelf)
                     {
+                        iTween.RotateTo(_gun[i], iTween.Hash(
+                            "z", 330.0f,
+                            "time", 2.5f,
+                            "easeType", iTween.EaseType.linear
+                            ));
+
+                        iTween.MoveTo(_gun[i], iTween.Hash(
+                            "y", 1.0f,
+                            "time", 2.5f,
+                            "easeType", iTween.EaseType.linear
+                            ));
+
                         _particle[i].SetActive(true); //ぽわぽわ出る
 
                         //銃のマテリアルの設定
@@ -244,7 +265,7 @@ public class ResultManager : MonoBehaviour
         NoiseSwitch.instance.bloom.enabled = false;
 
         time = 0.0f;
-        while(time < _logoMoveEndTime)
+        while (time < _logoMoveEndTime)
         {
             time += Time.unscaledDeltaTime;
             NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.OutCubic(time, _logoMoveEndTime * 2, 10.0f, 0.0f);
