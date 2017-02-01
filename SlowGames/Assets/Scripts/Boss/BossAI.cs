@@ -306,6 +306,8 @@ public class BossAI : MonoBehaviour {
     //GameObject _slideParticleParent = null;
     [SerializeField]
     float _climaxUpPower = 10.0f;
+    [SerializeField]
+    GameObject _climaxDebrisPrefab = null;
     //////////////////////////////////////////////////////////////////////////////
 
     // ヒットエフェクト
@@ -577,6 +579,9 @@ public class BossAI : MonoBehaviour {
             if(_standbyTime >= _standbyTimeMax)
             {
                 _state = BossState.START;
+
+                // ボス登場音
+                AudioManager.instance.playSe(AudioName.SeName.BossApparance);
             }
             return;
         }
@@ -691,6 +696,9 @@ public class BossAI : MonoBehaviour {
                 _level_2_mode = Level_2_Mode.EIGHT_MOVE;
                 //_anim.Play("Tackle");
                 ++_level_2_modeIndex;
+
+                // 移動音
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove, true);
             }
         }
 
@@ -700,7 +708,10 @@ public class BossAI : MonoBehaviour {
             _state++;
             ++_changeStateIndex;
 
-            if(_state == BossState.LEVEL_2)
+            // 移動音を止める
+            AudioManager.instance.stop3DSe(gameObject, AudioName.SeName.BossMove);
+
+            if (_state == BossState.LEVEL_2)
             {
                 // 第２形態になったボイスを流す
                 AudioManager.instance.stopAllVoice();
@@ -761,6 +772,9 @@ public class BossAI : MonoBehaviour {
             {
                 _level_2_mode = Level_2_Mode.RANDOM;
                 //_anim.Play("Up");
+
+                // 移動音を止める
+                AudioManager.instance.stop3DSe(gameObject, AudioName.SeName.BossMove);
             }
         }
     }
@@ -857,6 +871,9 @@ public class BossAI : MonoBehaviour {
             {
                 _level_1_moveAngle = (-Mathf.PI / 4) * 2;
             }
+
+            // 移動音
+            AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
         }
 
         //if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -904,10 +921,19 @@ public class BossAI : MonoBehaviour {
         if (vector.magnitude < 0.5f)
         {
             _isLevel_1_shot = true;
+
+            // 移動音を止める
+            AudioManager.instance.stop3DSe(gameObject, AudioName.SeName.BossMove);
         }
         else
         {
             _isLevel_1_shot = false;
+
+            // 移動音
+            //if (!AudioManager.instance.findSeSource(AudioName.SeName.BossMove).isPlaying)
+            //{
+            //    AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
+            //}
         }
     }
 
@@ -1023,6 +1049,10 @@ public class BossAI : MonoBehaviour {
                         );
                     _level_2_randomStopTime = _level_2_randomStopTimeMax;
                 }
+
+                // 移動音
+                AudioManager.instance.stop3DSe(gameObject, AudioName.SeName.BossMove);
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
             }
             // 向かう場所についてなかったらそこに移動する
             else
@@ -1358,7 +1388,11 @@ public class BossAI : MonoBehaviour {
         else if(_lastSleepTime > 0.0f)
         {
             _lastSleepTime -= Time.deltaTime;
-            //if(_lastSleepTime <= 0.0f) { _anim.Play("Tackle"); }
+            if (_lastSleepTime <= 0.0f)
+            {
+                //_anim.Play("Tackle");
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
+            }
 
             _bossBodyParent.transform.LookAt(_player.transform);
             if (_lastDownRotate > 0.0f)
@@ -1483,7 +1517,7 @@ public class BossAI : MonoBehaviour {
             var vector2D = new Vector3(vector.x, 0, vector.z);
             _bossBodyParent.transform.position += (vector2D.normalized * _climaxVelocity + Vector3.up * _climaxUpPower) * Time.deltaTime;
             _climaxUpPower -= Time.deltaTime;
-            _bossBodyParent.transform.Rotate(-Time.deltaTime * 360.0f, -Time.deltaTime * 360.0f, -Time.deltaTime * 360.0f);
+            _bossBodyParent.transform.Rotate(-Time.deltaTime * 180.0f, -Time.deltaTime * 180.0f, -Time.deltaTime * 180.0f);
         }
 
         _lastParticleCreateTime += Time.deltaTime;
@@ -1497,18 +1531,32 @@ public class BossAI : MonoBehaviour {
                 );
             particle.transform.position = _bossBodyParent.transform.position + randPos;
 
+            // ボスのパーツ
+            var obj = Instantiate(_climaxDebrisPrefab);
+            obj.transform.position = particle.transform.position = _bossBodyParent.transform.position + randPos;
+            obj.transform.rotation = transform.rotation;
+            obj.transform.localScale = Vector3.one * 0.1f;
+
             _lastParticleCreateTime = 0;
         }
 
         _climaxTime += Time.deltaTime;
-        if(_climaxDestroyTime < _climaxTime)
+        if(/*_climaxDestroyTime < _climaxTime*/ _climaxUpPower <= 0)
         {
             Damage();
 
             // HP が 0 になったら死ぬ
             if (_hp <= 0)
             {
-                //Destroy(gameObject);
+                // ボスのパーツ
+                var obj = Instantiate(_climaxDebrisPrefab);
+                obj.transform.position = transform.position;
+                obj.transform.rotation = transform.rotation;
+
+                // 爆発エフェクト
+
+
+                Destroy(gameObject);
                 GameDirector.instance.isBossDestroy();
             }
         }
@@ -1634,6 +1682,9 @@ public class BossAI : MonoBehaviour {
         //parts[rand].Purge();
 
         _parts[_purgeIndex].Purge();
+
+        // パージ音
+        AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossPurge);
     }
 
     void EmissionColorChange(Color color1, Color color2, float time, float timeMax = 1.0f)
