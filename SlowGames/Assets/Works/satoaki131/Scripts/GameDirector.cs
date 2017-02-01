@@ -80,11 +80,11 @@ public class GameDirector : MonoBehaviour {
     /// <summary>
     /// 時間計測する関数
     /// </summary>
-    void PlayTimeCount()
-    {
-        if (!_gamePlay) return;
-        ScoreManager.instance.GameTimeCount();
-    }
+    //void PlayTimeCount()
+    //{
+    //    if (!_gamePlay) return;
+    //    ScoreManager.instance.GameTimeCount();
+    //}
 
     //////////////////////////////////////////////////////////////////////
 
@@ -114,7 +114,7 @@ public class GameDirector : MonoBehaviour {
 
     private void MainGameUpdate()
     {
-        PlayTimeCount();
+        //PlayTimeCount();
 
         if (_hp.PlayerHp <= 0 && _gamePlay)
         {
