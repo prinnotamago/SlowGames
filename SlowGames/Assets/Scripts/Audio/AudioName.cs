@@ -10,10 +10,15 @@ public enum BgmName
 public enum SeName
 {
 	Authentication,
+	BossApparance,
+	BossMove,
+	BossPurge,
 	BulletFlip,
 	Diying,
+	EnemyAppearance,
 	EnemyBulletShot,
 	EnemyExplotion,
+	EnemyMove,
 	Flying,
 	Genrtate,
 	gunreload1,
