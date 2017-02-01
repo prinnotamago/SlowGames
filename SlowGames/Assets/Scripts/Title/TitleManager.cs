@@ -63,8 +63,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private GameObject _logo = null;
 
-    [SerializeField]
-    private Animator _arrowAnim = null;
 
     [SerializeField]
     private Vector3[] TURTREAL_POS;
@@ -114,7 +112,6 @@ public class TitleManager : MonoBehaviour
 
         _viveControllerModel[0].SetActive(false);
         _viveControllerModel[1].SetActive(false);
-        _arrowAnim.gameObject.SetActive(false);
 
         for (int i = 0; i < _playerShot.Length; i++)
         {
