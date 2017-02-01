@@ -20,7 +20,7 @@ public class ResultManager : MonoBehaviour
     private PutGunStand[] _put = null;
 
     [SerializeField]
-    private Image _logo = null;
+    private Image[] _logo = null;
 
     [SerializeField]
     private TextMessage _thankyouText = null;
@@ -244,6 +244,7 @@ public class ResultManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.0f);
 
         AudioManager.instance.playSe(AudioName.SeName.TitleLogoEnding);
+
         //thank you for playing演出
         _thankyouText.isMoveText = true;
         while (!_thankyouText.isPopText)
@@ -251,14 +252,63 @@ public class ResultManager : MonoBehaviour
             yield return null;
         }
 
+        time = 0.0f;
+        while(time < 1.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            var a = (float)Easing.InOutQuad(time, 1.0f, -1.0f, 1.0f);
+            _thankyouText.setColor(new Color(_thankyouText.text.color.r, _thankyouText.text.color.g, _thankyouText.text.color.b, a));
+            yield return null;
+        }
+
+        _thankyouText.gameObject.SetActive(false);
+
         //Logo演出
+
+        //logoを出す
         time = 0.0f;
         while (time < _logoMoveEndTime)
         {
             time += Time.unscaledDeltaTime;
-            _logo.fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
+            _logo[0].fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
+            yield return null;
+        }        
+
+        //logoの円の演出
+        time = 0.0f;
+        while(time < 1.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            _logo[1].fillAmount = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
             yield return null;
         }
+
+        //logoの線の演出
+        time = 0.0f;
+        //while(time < 0.5f)
+        //{
+        //    time += Time.unscaledDeltaTime;
+        //    _logo[2].fillAmount = Mathf.Lerp(_logo[2].fillAmount, 0.446f, time / 0.5f);
+        //    yield return null;
+        //}
+        while (time < 1.0f)
+        {
+            time += Time.unscaledDeltaTime;
+            var a = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
+            _logo[2].color = new Color(_logo[2].color.r, _logo[2].color.g, _logo[2].color.b, a);
+            yield return null;
+        }
+
+        //_logo[2].fillAmount = 0.547f;
+        //yield return null;
+
+        //time = 0.0f;
+        //while (time < 0.5f)
+        //{
+        //    time += Time.unscaledDeltaTime;
+        //    _logo[2].fillAmount = Mathf.Lerp(_logo[2].fillAmount, 1.0f, time / 0.5f);
+        //    yield return null;
+        //}
 
         //ざらざら演出
         NoiseSwitch.instance.noise.enabled = true;
