@@ -8,6 +8,10 @@ public class TextMessage : MonoBehaviour {
     private string _message;
 
     private Text _text = null;
+    public Text text
+    {
+        get { return _text; }
+    }
 
     private int _count = 0;
 
@@ -71,5 +75,10 @@ public class TextMessage : MonoBehaviour {
         _text.text = _message;
         _missionText = _text.text.ToCharArray();
         _text.text = "";
+    }
+
+    public void setColor(Color color)
+    {
+        _text.color = color;
     }
 }
