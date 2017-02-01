@@ -10,6 +10,12 @@ public class NoiseSwitch : MonoBehaviour {
         get { return _noise; }
     }
 
+    private UnityStandardAssets.ImageEffects.Bloom _bloom = null;
+    public UnityStandardAssets.ImageEffects.Bloom bloom
+    {
+        get { return _bloom; }
+    }
+
     public static NoiseSwitch instance
     {
         get; private set;
@@ -23,5 +29,6 @@ public class NoiseSwitch : MonoBehaviour {
     void Start()
     {
         _noise = GetComponent<UnityStandardAssets.ImageEffects.NoiseAndGrain>();
+        _bloom = GetComponent<UnityStandardAssets.ImageEffects.Bloom>();
     }
 }
