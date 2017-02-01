@@ -131,9 +131,9 @@ public class EnemyBullet : MonoBehaviour {
 
         Vector3 randomDirec = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
         float deathTime   = 1.0f;
-        float acceraition = 3.0f;
-        float unacceration = 2.0f;
-        float firstTime = 800.0f;
+        float acceraition = 20.0f;
+        float unacceration = 20.0f;
+        float firstTime = 2000.0f;
 
         //初速
         transform.LookAt(randomDirec);
