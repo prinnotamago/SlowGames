@@ -230,7 +230,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1601191394965124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08199996, y: 30.490002, z: -6.82}
+  m_LocalPosition: {x: 0.08199996, y: 30.490002, z: 18.320002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4041587021103808}
@@ -374,13 +374,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 0.9686275, g: 0.7019608, b: 0.27450982, a: 1}
+  m_Color: {r: 1, g: 0.32434306, b: 0.06763625, a: 1}
   m_Intensity: 2.8
-  m_Range: 1.4668102
+  m_Range: 1.81
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -413,7 +413,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 95530460125222788}
   _currentAction: 0
   _playerToMaxDistance: 0.4
-  _currentTarget: {fileID: 0}
+  _currentTarget: {x: 0.25, y: 31.009998, z: 6.7120004}
   _justShotTime: 0.2
   _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
@@ -499,9 +499,9 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 1250608735552754}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 545972e3262034fb99b155cc0c1e6cba, type: 2}
