@@ -69,7 +69,7 @@ public class BossPurgeParts : MonoBehaviour
     {
         var particle = Instantiate(_sparkParticle);
         particle.transform.position = _particlePos.transform.position;
-        particle.transform.parent = transform.parent;
+        //particle.transform.parent = transform.parent;
         particle.transform.eulerAngles = _particleRotate;
 
         _collider.isTrigger = false;
