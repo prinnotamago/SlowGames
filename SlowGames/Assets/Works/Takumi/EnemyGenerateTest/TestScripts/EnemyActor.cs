@@ -141,6 +141,7 @@ public class EnemyActor : MonoBehaviour
     {
         _currentAction = action;
         _enemy._activeCounter = activeTime;
+
     }
 
 
@@ -319,9 +320,10 @@ public class EnemyActor : MonoBehaviour
 
     IEnumerator ShotMotion()
     {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
         float timeCount = 0;
-
+         this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         //撃つ数
         int shotCount = _enemy.info.chamberValue;
         //連弾する時の遅延時間
@@ -380,8 +382,10 @@ public class EnemyActor : MonoBehaviour
         }
 
         _isShot = false;
+       
         //stayに遷移
         ChangeAction(ActionType.Stay);
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         _enemyAnimator.SetInteger("ActionType",(int)AnimationState.Fighting);
 
 
