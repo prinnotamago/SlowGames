@@ -1702,7 +1702,7 @@ BoxCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 18.605404, y: 3, z: 3}
   m_Center: {x: 0, y: 6, z: 0}
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   _lastRandMoveLength: {x: 16, y: 5, z: 8}
   _lastRandomStopTimeMax: 0
   _lastPreparationPos: {x: 0, y: 5, z: 0}
-  _lastPreparationAngleSpeed: 10
+  _lastPreparationAngleSpeed: 5
   _lastPreparationAngleAcceleration: 2
   _lastPreparationMoveSpeed: 3
   _lastPreparationTime: 10
@@ -2095,15 +2095,24 @@ MonoBehaviour:
   _lastDownRotateMax: 30
   _lastDownSpeed: 1
   _lastSleepTime: 3
-  _lastSlowStartTime: 0.4
+  _lastSlowStartTime: 0.2
   _climaxVelocity: 7
   _climaxDestroyTime: 5
   _climaxUpPower: 3
+  _climaxFirstDebrisNum: 2
+  _climaxFirstDebrisSize: 0.1
+  _climaxLastDebrisNum: 1
+  _climaxLastDebrisSize: 1
+  _climaxDebrisPrefab: {fileID: 1490799041429932, guid: 0103cf95fd70bae46a570795fa29f6e0,
+    type: 2}
+  _climaxExplosionParticle: {fileID: 1116492907746294, guid: 2d186d8b95a8b494dbe4a575ea083140,
+    type: 2}
+  _climaxExplosionSize: 10
   _hitParticle: {fileID: 1944618370625110, guid: 6ecd9723f3a5c9d49be59d01e45103d0,
     type: 2}
   _hitLastParticle: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
-  _debugFlag: 1
+  _debugFlag: 0
   anglex: 0
   anglex2: 0
 --- !u!114 &114288619788247730

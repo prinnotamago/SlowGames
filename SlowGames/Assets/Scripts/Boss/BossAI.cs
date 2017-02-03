@@ -317,7 +317,9 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     GameObject _climaxDebrisPrefab = null;
     [SerializeField]
-    GameObject _climaxExplosion = null;
+    GameObject _climaxExplosionParticle = null;
+    [SerializeField]
+    float _climaxExplosionSize = 5.0f;
     //////////////////////////////////////////////////////////////////////////////
 
     // ヒットエフェクト
@@ -1573,9 +1575,10 @@ public class BossAI : MonoBehaviour {
                 }
 
                 // 爆発エフェクト
-                var effect = Instantiate(_climaxExplosion);
+                var effect = Instantiate(_climaxExplosionParticle);
                 effect.transform.position = _bossBodyParent.transform.position;
-                effect.transform.position = Vector3.zero;
+                //effect.transform.rotation = transform.rotation;
+                effect.transform.localScale = Vector3.one * _climaxExplosionSize;
 
                 Destroy(gameObject);
                 GameDirector.instance.isBossDestroy();
