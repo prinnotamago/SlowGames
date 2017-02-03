@@ -7,11 +7,13 @@ public class RingEmission : MonoBehaviour {
     [SerializeField]
     private Material _mat = null;
 
-    private Color _color = Color.white;
+    private Color _color;
 
     void Awake()
     {
         _color = _mat.color;
+        _mat.EnableKeyword("_EMISSION");
+        _mat.SetColor("_EmissionColor", _color * 2);
     }
 
     public Color EmissionColor(bool isEmission)
@@ -25,8 +27,14 @@ public class RingEmission : MonoBehaviour {
         else
         {
             _mat.EnableKeyword("_EMISSION");
-            _mat.SetColor("_EmissionColor", _color);
+            _mat.SetColor("_EmissionColor", _color * 2);
             return _mat.color;
         }
+    }
+
+    public void setBlueColor()
+    {
+        _mat.EnableKeyword("_EMISSION");
+        _mat.SetColor("_EmissionColor", _color * 2);
     }
 }

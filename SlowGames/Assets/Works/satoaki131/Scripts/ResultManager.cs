@@ -45,6 +45,9 @@ public class ResultManager : MonoBehaviour
 
     private Material[] _gunMaterial = null;
 
+    [SerializeField]
+    private RingEmission[] _ring = null;
+
     void Start()
     {
         _stateUpdate = new Dictionary<State, Action>();
@@ -142,9 +145,6 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _particle = null;
 
-
-    [SerializeField]
-    private RectTransform _maskPos = null;
 
     /// <summary>
     /// 最後の演出
@@ -250,6 +250,12 @@ public class ResultManager : MonoBehaviour
         {
             _desk[i].SetActive(false);
             _gun[i].SetActive(false);
+        }
+
+        for (int i = 0; i < _ring.Length; i++)
+        {
+            if (!_ring[i].gameObject.activeSelf) continue;
+            _ring[i].EmissionColor(false);
         }
 
         yield return new WaitForSecondsRealtime(1.0f);
