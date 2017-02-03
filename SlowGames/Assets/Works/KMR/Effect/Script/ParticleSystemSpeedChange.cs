@@ -15,6 +15,7 @@ public class ParticleSystemSpeedChange : MonoBehaviour
 
     void Update()
     {
+
         if (!SlowMotion._instance.isSlow)
         {
             _particleSystem.playbackSpeed = 1;
