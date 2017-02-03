@@ -307,7 +307,17 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _climaxUpPower = 10.0f;
     [SerializeField]
+    float _climaxFirstDebrisNum = 1.0f;
+    [SerializeField]
+    float _climaxFirstDebrisSize = 1.0f;
+    [SerializeField]
+    float _climaxLastDebrisNum = 1.0f;
+    [SerializeField]
+    float _climaxLastDebrisSize = 1.0f;
+    [SerializeField]
     GameObject _climaxDebrisPrefab = null;
+    [SerializeField]
+    GameObject _climaxExplosion = null;
     //////////////////////////////////////////////////////////////////////////////
 
     // ヒットエフェクト
@@ -1460,6 +1470,7 @@ public class BossAI : MonoBehaviour {
 
                     SlowMotion._instance.GameSpeed(0.1f);
                     SlowMotion._instance.isLimit = false;
+                    SlowMotion._instance.limiterFlag = true;    // リミッターフラグ解除
                 }
             }
             else
@@ -1485,6 +1496,7 @@ public class BossAI : MonoBehaviour {
         {
             SlowMotion._instance.ResetSpeed();
             SlowMotion._instance.isLimit = true;
+            SlowMotion._instance.limiterFlag = false;
 
             // タックルフラグを切る
             _lastTackleFlag = false;
@@ -1532,10 +1544,13 @@ public class BossAI : MonoBehaviour {
             particle.transform.position = _bossBodyParent.transform.position + randPos;
 
             // ボスのパーツ
-            var obj = Instantiate(_climaxDebrisPrefab);
-            obj.transform.position = particle.transform.position = _bossBodyParent.transform.position + randPos;
-            obj.transform.rotation = transform.rotation;
-            obj.transform.localScale = Vector3.one * 0.1f;
+            for (int i = 0; i < _climaxFirstDebrisNum; ++i)
+            {
+                var obj = Instantiate(_climaxDebrisPrefab);
+                obj.transform.position = _bossBodyParent.transform.position + randPos;
+                obj.transform.rotation = transform.rotation;
+                obj.transform.localScale = Vector3.one * _climaxFirstDebrisSize;
+            }
 
             _lastParticleCreateTime = 0;
         }
@@ -1549,12 +1564,18 @@ public class BossAI : MonoBehaviour {
             if (_hp <= 0)
             {
                 // ボスのパーツ
-                var obj = Instantiate(_climaxDebrisPrefab);
-                obj.transform.position = transform.position;
-                obj.transform.rotation = transform.rotation;
+                for (int i = 0; i < _climaxLastDebrisNum; ++i)
+                {
+                    var obj = Instantiate(_climaxDebrisPrefab);
+                    obj.transform.position = _bossBodyParent.transform.position;
+                    obj.transform.rotation = transform.rotation;
+                    obj.transform.localScale = Vector3.one * _climaxLastDebrisSize;
+                }
 
                 // 爆発エフェクト
-
+                var effect = Instantiate(_climaxExplosion);
+                effect.transform.position = _bossBodyParent.transform.position;
+                effect.transform.position = Vector3.zero;
 
                 Destroy(gameObject);
                 GameDirector.instance.isBossDestroy();

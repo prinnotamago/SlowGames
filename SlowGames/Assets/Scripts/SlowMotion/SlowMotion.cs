@@ -105,6 +105,13 @@ public class SlowMotion : MonoBehaviour {
     [SerializeField]
     UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration _v;
 
+    bool _limiterFlag = false;
+    public bool limiterFlag
+    {
+        get { return _limiterFlag; }
+        set { _limiterFlag = true; }
+    }
+
     // Use this for initialization
     void Awake()
     {
