@@ -25,7 +25,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private TextMessage _thankyouText = null;
 
-    [SerializeField, Range(2.0f, 6.0f)]
+    [SerializeField, Range(0.5f, 6.0f)]
     private float _logoMoveEndTime = 2.0f;
 
     [SerializeField]
@@ -57,7 +57,7 @@ public class ResultManager : MonoBehaviour
         {
             _gunMaterial[i] = _gun[i].GetComponent<Renderer>().material;
         }
-
+        _logo[0].material.color = new Color(_logo[0].material.color.r, _logo[0].material.color.g, _logo[0].material.color.b, 0);
         VoiceNumberStorage.setVoice();
         AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
         StartCoroutine(AudioMessage());
@@ -142,6 +142,10 @@ public class ResultManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _particle = null;
 
+
+    [SerializeField]
+    private RectTransform _maskPos = null;
+
     /// <summary>
     /// 最後の演出
     /// </summary>
@@ -188,7 +192,14 @@ public class ResultManager : MonoBehaviour
                 ));
         }
 
+        //光切ったらぽわぽわを出す
+        for(int i = 0; i < _particle.Length; i++)
+        {
+            _particle[i].SetActive(true); //ぽわぽわ出る
+        }
+
         time = 0.0f;
+        var fadeProduction = false;
         //音声終わるの待つ
         while (time < 5.5f)
         {
@@ -198,8 +209,9 @@ public class ResultManager : MonoBehaviour
                 fadeTime += Time.unscaledDeltaTime;
                 for (int i = 0; i < _gun.Length; i++)
                 {
-                    if (!_particle[i].activeSelf)
+                    if (!fadeProduction)
                     {
+
                         iTween.RotateTo(_gun[i], iTween.Hash(
                             "z", 330.0f,
                             "time", 2.5f,
@@ -211,8 +223,6 @@ public class ResultManager : MonoBehaviour
                             "time", 2.5f,
                             "easeType", iTween.EaseType.linear
                             ));
-
-                        _particle[i].SetActive(true); //ぽわぽわ出る
 
                         //銃のマテリアルの設定
                         var mat = _gun[i].GetComponent<Renderer>().material;
@@ -231,6 +241,7 @@ public class ResultManager : MonoBehaviour
                     var a = (float)Easing.Linear(fadeTime, 5.5f - 3.0f, 0, 1);
                     _gunMaterial[i].color = new Color(_gunMaterial[i].color.r, _gunMaterial[i].color.g, _gunMaterial[i].color.b, a); //fadeしていく
                 }
+                if(!fadeProduction)fadeProduction = true;
             }
             yield return null;
         }
@@ -270,16 +281,52 @@ public class ResultManager : MonoBehaviour
         while (time < _logoMoveEndTime)
         {
             time += Time.unscaledDeltaTime;
-            _logo[0].fillAmount = (float)Easing.InOutQuad(time, _logoMoveEndTime, 1.0f * 2, 0.0f);
+            //中心から見えるようにしていく
+            //var size = _maskPos.sizeDelta;
+            //size.x = (float)Easing.Linear(time, _logoMoveEndTime, 600.0f, 0.0f);
+            //_maskPos.sizeDelta = size;
+
+            //var a = (float)Easing.InExp(time, _logoMoveEndTime, 1, 3);
+            //var color = new Color(_logo[0].material.color.r, _logo[0].material.color.g, _logo[0].material.color.b, a);
+            //_logo[0].material.EnableKeyword("_EMISSION");
+            //_logo[0].material.SetColor("_EmissionColor", color);
+            var a = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
+            _logo[0].material.color = new Color(_logo[2].color.r, _logo[2].color.g, _logo[2].color.b, a);
+
             yield return null;
-        }        
+        }
+
+        time = 0.0f;
+        while (time < 0.3f)
+        {
+            time += Time.unscaledDeltaTime;
+            var a = (float)Easing.OutExp(time, 1.0f, 3.0f, 1.0f);
+            var color = new Color(a, a, a, a);
+            _logo[0].material.EnableKeyword("_EMISSION");
+            _logo[0].material.SetColor("_EmissionColor", color);
+
+            yield return null;
+        }
+
+        time = 0.0f;
+        while (time < 0.3f)
+        {
+            time += Time.unscaledDeltaTime;
+            var a = (float)Easing.OutExp(time, 1.0f, 1.0f, 3.0f);
+            var color = new Color(a, a, a, a);
+            _logo[0].material.EnableKeyword("_EMISSION");
+            _logo[0].material.SetColor("_EmissionColor", color);
+
+            yield return null;
+        }
+
 
         //logoの円の演出
         time = 0.0f;
         while(time < 1.0f)
         {
             time += Time.unscaledDeltaTime;
-            _logo[1].fillAmount = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
+            _logo[1].fillAmount = (float)Easing.OutExp(time, 1.0f, 1.0f, 0.0f);
             yield return null;
         }
 
