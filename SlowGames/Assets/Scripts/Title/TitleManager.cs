@@ -73,6 +73,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _slowTutorealMissile = null;
 
+    [SerializeField]
+    private RingEmission[] _ring; //たぶん2つ
     /// <summary>
     /// trueになる前にEnemyが死んだら復活させるためのbool
     /// Turtrealが終わったらtrueにして、シーン遷移時、必ずfalseにすること
@@ -118,7 +120,14 @@ public class TitleManager : MonoBehaviour
             _playerShot[i].isStart = false;
         }
 
+        for (int i = 0; i < _ring.Length; i++)
+        {
+            if (!_ring[i].gameObject.activeSelf) continue;
+            _ring[i].EmissionColor(false);
+        }
+
         VoiceNumberStorage.VoiceCustomSelect();
+
     }
 
     void Update()
@@ -144,6 +153,13 @@ public class TitleManager : MonoBehaviour
             NoiseSwitch.instance.noise.intensityMultiplier = (float)Easing.InCubic(time, 2.0f, 0.0f, 10.0f);
             yield return null;
         }
+        NoiseSwitch.instance.noise.enabled = false;
+        NoiseSwitch.instance.bloom.enabled = true;
+        for (int i = 0; i < _ring.Length; i++)
+        {
+            if (!_ring[i].gameObject.activeSelf) continue;
+            _ring[i].EmissionColor(true);
+        }
 
         iTween.ScaleTo(_logo.GetComponentInChildren<Image>().gameObject, iTween.Hash(
             "y", 0.0f,
@@ -153,6 +169,8 @@ public class TitleManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
         _logo.SetActive(false);
+
+
         StartCoroutine(Authentication());
     }
 
