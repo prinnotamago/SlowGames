@@ -135,16 +135,26 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 460356667}
+      objectReference: {fileID: 441789175}
     - target: {fileID: 23549098982892828, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1013048616}
+      objectReference: {fileID: 1639952946}
+    - target: {fileID: 198138719865101928, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198796332126836294, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
   m_IsPrefabParent: 0
---- !u!43 &460356667
+--- !u!43 &441789175
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -272,7 +282,7 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!21 &1013048616
+--- !u!21 &1639952946
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0

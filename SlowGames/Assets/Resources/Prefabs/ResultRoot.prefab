@@ -17276,7 +17276,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1851589627975076}
   serializedVersion: 5
-  lengthInSec: 1
+  lengthInSec: 4.5
   speed: 1
   looping: 0
   prewarm: 0
@@ -22346,7 +22346,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1748250072116528}
   serializedVersion: 5
-  lengthInSec: 1
+  lengthInSec: 4.5
   speed: 1
   looping: 0
   prewarm: 0
