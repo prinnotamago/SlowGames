@@ -571,6 +571,7 @@ public class BossAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        Debug.Log(SlowMotion._instance.limiterFlag);
         _changeColorTime += Time.deltaTime * _changeColorSpeed;
         float sin = Mathf.Abs(Mathf.Sin(_changeColorTime));
         EmissionColorChange(Color.red, Color.black, sin);

@@ -109,7 +109,7 @@ public class SlowMotion : MonoBehaviour {
     public bool limiterFlag
     {
         get { return _limiterFlag; }
-        set { _limiterFlag = true; }
+        set { _limiterFlag = value; }
     }
 
     // Use this for initialization
