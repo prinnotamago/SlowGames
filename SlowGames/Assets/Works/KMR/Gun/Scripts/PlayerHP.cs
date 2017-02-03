@@ -16,6 +16,9 @@ public class PlayerHP : MonoBehaviour {
     [SerializeField]
     GameObject BarrierEffect;
 
+    [SerializeField]
+    RingEmission _ring;
+
     int _playerHp;
 
     public int PlayerHp
@@ -76,9 +79,14 @@ public class PlayerHP : MonoBehaviour {
     }
    public void Damage(int damageValue)
     {
-        ScoreManager.instance.AddInpactDamageCount();
+        //ScoreManager.instance.AddInpactDamageCount();
         _playerHp -= damageValue;
         _isHit = true;
+
+        if(_playerHp < HP / 2)
+        {
+            _ring.ColorMoveChange(_ring.GetComponent<Renderer>().material.color, Color.yellow);
+        }
     }
 
     void TimeOutRecovery()
