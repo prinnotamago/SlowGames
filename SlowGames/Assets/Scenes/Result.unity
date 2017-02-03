@@ -135,12 +135,12 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 441789175}
+      objectReference: {fileID: 537936890}
     - target: {fileID: 23549098982892828, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1639952946}
+      objectReference: {fileID: 1251242950}
     - target: {fileID: 198138719865101928, guid: 8d5d48abd33d8634cb3f4a47442d550b,
         type: 2}
       propertyPath: lengthInSec
@@ -151,10 +151,36 @@ Prefab:
       propertyPath: lengthInSec
       value: 4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1476799222641026, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120625392185028, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736391381657306, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083561412962862, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 108508906980952606, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294932479
+      objectReference: {fileID: 0}
+    - target: {fileID: 108721981578227090, guid: 8d5d48abd33d8634cb3f4a47442d550b,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294932479
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d5d48abd33d8634cb3f4a47442d550b, type: 2}
   m_IsPrefabParent: 0
---- !u!43 &441789175
+--- !u!43 &537936890
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -282,7 +308,7 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!21 &1639952946
+--- !u!21 &1251242950
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0

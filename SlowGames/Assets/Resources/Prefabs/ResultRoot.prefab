@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 4197493407429644}
   - component: {fileID: 33634159612180450}
   - component: {fileID: 23533362409879902}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 4002905981275774}
   - component: {fileID: 33896549783449214}
   - component: {fileID: 23314588069839418}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2564,7 +2564,7 @@ GameObject:
   - component: {fileID: 4628317343752566}
   - component: {fileID: 33123627773249470}
   - component: {fileID: 23511326279317226}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +3968,7 @@ GameObject:
   - component: {fileID: 4494663312302002}
   - component: {fileID: 33088835486742834}
   - component: {fileID: 23909306777261054}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12121,7 +12121,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294965247
+    m_Bits: 4294932479
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -12189,7 +12189,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294965247
+    m_Bits: 4294932479
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
