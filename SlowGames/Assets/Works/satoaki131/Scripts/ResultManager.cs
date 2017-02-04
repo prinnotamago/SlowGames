@@ -60,7 +60,8 @@ public class ResultManager : MonoBehaviour
         {
             _gunMaterial[i] = _gun[i].GetComponent<Renderer>().material;
         }
-        _logo[0].material.color = new Color(_logo[0].material.color.r, _logo[0].material.color.g, _logo[0].material.color.b, 0);
+        _logo[3].material.color = new Color(_logo[3].material.color.r, _logo[3].material.color.g, _logo[3].material.color.b, 0);
+        _logo[2].material.color = new Color(_logo[2].material.color.r, _logo[2].material.color.g, _logo[2].material.color.b, 0);
         VoiceNumberStorage.setVoice();
         AudioManager.instance.playVoice(AudioName.VoiceName.IV16);
         StartCoroutine(AudioMessage());
@@ -281,7 +282,7 @@ public class ResultManager : MonoBehaviour
         _thankyouText.gameObject.SetActive(false);
 
         //Logo演出
-
+        //_logo[3].gameObject.SetActive(true);
         //logoを出す
         time = 0.0f;
         while (time < _logoMoveEndTime)
@@ -297,37 +298,20 @@ public class ResultManager : MonoBehaviour
             //_logo[0].material.EnableKeyword("_EMISSION");
             //_logo[0].material.SetColor("_EmissionColor", color);
             var a = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
-            _logo[0].material.color = new Color(_logo[2].color.r, _logo[2].color.g, _logo[2].color.b, a);
+            _logo[0].color = new Color(_logo[0].color.r, _logo[0].color.g, _logo[0].color.b, a);
+            _logo[3].material.color = new Color(_logo[3].color.r, _logo[3].color.g, _logo[3].color.b, a);
 
             yield return null;
         }
-
-        time = 0.0f;
-        while (time < 0.3f)
-        {
-            time += Time.unscaledDeltaTime;
-            var a = (float)Easing.OutExp(time, 1.0f, 3.0f, 1.0f);
-            var color = new Color(a, a, a, a);
-            _logo[0].material.EnableKeyword("_EMISSION");
-            _logo[0].material.SetColor("_EmissionColor", color);
-
-            yield return null;
-        }
-
-        time = 0.0f;
-        while (time < 0.3f)
-        {
-            time += Time.unscaledDeltaTime;
-            var a = (float)Easing.OutExp(time, 1.0f, 1.0f, 3.0f);
-            var color = new Color(a, a, a, a);
-            _logo[0].material.EnableKeyword("_EMISSION");
-            _logo[0].material.SetColor("_EmissionColor", color);
-
-            yield return null;
-        }
-
 
         //logoの円の演出
+        //iTween.ScaleTo(_logo[1].gameObject, iTween.Hash(
+        //    "x", 0.8f,
+        //    "y", 0.8f,
+        //    "z", 0.8f,
+        //    "time", 0.3f,
+        //    "easyType", iTween.EaseType.easeInExpo
+        //    ));
         time = 0.0f;
         while(time < 1.0f)
         {
@@ -344,13 +328,81 @@ public class ResultManager : MonoBehaviour
         //    _logo[2].fillAmount = Mathf.Lerp(_logo[2].fillAmount, 0.446f, time / 0.5f);
         //    yield return null;
         //}
-        while (time < 1.0f)
+        _logo[2].material.color = new Color(_logo[2].color.r, _logo[2].color.g, _logo[2].color.b, 1.0f);
+
+        time = 0.0f;
+        while (time < 0.3f)
         {
             time += Time.unscaledDeltaTime;
-            var a = (float)Easing.InOutQuad(time, 1.0f, 1.0f * 2, 0.0f);
-            _logo[2].color = new Color(_logo[2].color.r, _logo[2].color.g, _logo[2].color.b, a);
+            var a = (float)Easing.OutExp(time, 1.0f, 3.0f, 1.0f);
+            var color = new Color(a, a, a, a);
+            for (int i = 0; i < _logo.Length; i++)
+            {
+                if (_logo[i].material == null) continue;
+                _logo[i].material.EnableKeyword("_EMISSION");
+                _logo[i].material.SetColor("_EmissionColor", color);
+            }
             yield return null;
         }
+
+        time = 0.0f;
+        while (time < 0.3f)
+        {
+            time += Time.unscaledDeltaTime;
+            var a = (float)Easing.OutExp(time, 1.0f, 1.0f, 3.0f);
+            var color = new Color(a, a, a, a);
+            //_logo[3].material.EnableKeyword("_EMISSION");
+            //_logo[3].material.SetColor("_EmissionColor", color);
+
+            for (int i = 0; i < _logo.Length; i++)
+            {
+                if (_logo[i].material == null) continue;
+                _logo[i].material.EnableKeyword("_EMISSION");
+                _logo[i].material.SetColor("_EmissionColor", color);
+            }
+            yield return null;
+        }
+
+
+
+        _logo[3].gameObject.SetActive(false);
+        //time = 0.0f;
+        //while (time < 0.5f)
+        //{
+        //    time += Time.unscaledDeltaTime;
+        //    var a = (float)Easing.OutExp(time, 1.0f, 3.0f, 1.0f);
+        //    var color = new Color(a, a, a, a);
+        //    for(int i = 0; i < _logo.Length; i++)
+        //    {
+        //        if (_logo[i].material == null) continue;
+        //        _logo[i].material.EnableKeyword("_EMISSION");
+        //        _logo[i].material.SetColor("_EmissionColor", color);
+        //    }
+        //    //_logo[3].material.EnableKeyword("_EMISSION");
+        //    //_logo[3].material.SetColor("_EmissionColor", color);
+
+        //    yield return null;
+        //}
+
+        //time = 0.0f;
+        //while (time < 1.0f)
+        //{
+        //    time += Time.unscaledDeltaTime;
+        //    var a = (float)Easing.OutExp(time, 1.0f, 1.0f, 3.0f);
+        //    var color = new Color(a, a, a, a);
+        //    //_logo[3].material.EnableKeyword("_EMISSION");
+        //    //_logo[3].material.SetColor("_EmissionColor", color);
+
+        //    for (int i = 0; i < _logo.Length; i++)
+        //    {
+        //        if (_logo[i].material == null) continue;
+        //        _logo[i].material.EnableKeyword("_EMISSION");
+        //        _logo[i].material.SetColor("_EmissionColor", color);
+        //    }
+
+
+        //    yield return null;
+        //}
 
         //_logo[2].fillAmount = 0.547f;
         //yield return null;
@@ -377,6 +429,7 @@ public class ResultManager : MonoBehaviour
         yield return null;
         _state = State.End;
     }
+
 
     /// <summary>
     /// 演出が終わった後、タイトルに戻れるようにする処理

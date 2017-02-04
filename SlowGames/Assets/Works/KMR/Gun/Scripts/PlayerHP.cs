@@ -64,6 +64,7 @@ public class PlayerHP : MonoBehaviour {
             _playerHp = 0;
         }
 
+        if (_ring == null) return;
         if (_ring.isChange) return;
         if(_emissiveColor != _ring.emissiveColor) //自分のenumとringのenumが一緒じゃなかったら通る
         {
@@ -91,7 +92,10 @@ public class PlayerHP : MonoBehaviour {
         //ScoreManager.instance.AddInpactDamageCount();
         _playerHp -= damageValue;
         _isHit = true;
-        if(_playerHp > HP / 2) //HP100のとき50より大きかったらなら
+
+        if (_ring == null) return;
+
+        if (_playerHp > HP / 2) //HP100のとき50より大きかったらなら
         {
             _emissiveColor = RingEmission.Emissivecolor.blue;
         }
