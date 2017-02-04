@@ -12,10 +12,19 @@ public class StaraightEffect : MonoBehaviour {
     void Start()
     {
         Destroy(gameObject,_deathTime);
-        gameObject.transform.parent = null;
+        StartCoroutine(LeaveParent());
     }
 
 	// Update is called once per frame
+
+
+    IEnumerator LeaveParent()
+    {
+        yield return new WaitForSeconds(0.01f);
+        gameObject.transform.parent = null;
+        yield return null;
+    }
+    
 	void Update ()
     {
 		    transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * _moveSpeed;
