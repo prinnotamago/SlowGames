@@ -91,7 +91,6 @@ public class PlayerHP : MonoBehaviour {
         //ScoreManager.instance.AddInpactDamageCount();
         _playerHp -= damageValue;
         _isHit = true;
-
         if(_playerHp > HP / 2) //HP100のとき50より大きかったらなら
         {
             _emissiveColor = RingEmission.Emissivecolor.blue;
