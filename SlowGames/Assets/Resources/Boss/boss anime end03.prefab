@@ -2018,8 +2018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d33a308d46e0e43959651d9e944d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  _changeStateHP: 280000001400000000000000
+  _hp: 180
+  _changeStateHP: 820000003200000000000000
   _bossBodyParent: {fileID: 1758918414922428}
   _parts:
   - {fileID: 114124384295420056}
@@ -2030,7 +2030,7 @@ MonoBehaviour:
   - {fileID: 114288619788247730}
   - {fileID: 114398428893081896}
   - {fileID: 114802108780757598}
-  _purgeHP: 2d00000028000000230000001e000000130000000f0000000a00000005000000
+  _purgeHP: 36000000350000003400000033000000280000001e000000140000000a000000
   _frontGunObjPos: {fileID: 4866127858232164}
   _sideGunObjPos:
   - {fileID: 4380371267254688}
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 873e57b3c81ccde40aada66c673a2db4, type: 2}
   - {fileID: 2100000, guid: 89c7bdff2bd641e4796b97d2ee67462f, type: 2}
   - {fileID: 2100000, guid: fcbd42bc11d22e540b0de76f8936e261, type: 2}
-  _speedBulletHP: 2d0000001e000000
+  _speedBulletHP: 690000005000000037000000
   _speedBulletChargeMax: 5
   _speedBulletInformTime: 3
   _attackInterval: 0.5
@@ -2062,22 +2062,22 @@ MonoBehaviour:
   - {x: -10, y: 10, z: 1.65}
   - {x: 0, y: 5, z: 1.65}
   - {x: 10, y: 10, z: 1.65}
-  _level_1_moveHp: 5f0000005a00000055000000
-  _level_1_speed: 5
+  _level_1_moveHp: a50000009600000087000000
+  _level_1_speed: 15
   _level_2_maxHeight: 5
   _level_2_maxWidth: 16
   _level_2_minWidth: 10
   _level_2_Z: 20
-  _level_2_eightSpeed: 2
+  _level_2_eightSpeed: 2.6
   _level_2_centerPos: {x: 0, y: 7, z: 15}
   _level_2_moveObjPrefab: {fileID: 1154740623382328, guid: a144822d20e76cf4e8d3579a955bb181,
     type: 2}
-  _level_2_modeChangeHP: 2300000019000000
-  _level_2_randomMoveSpeed: 5
+  _level_2_modeChangeHP: 730000005a0000004b000000
+  _level_2_randomMoveSpeed: 7.2
   _level_2_randomStopTimeMax: 0
   _lastTacklePos: {x: 0, y: 7, z: 0}
   _lastTackleBeforePos: {x: 0, y: 30, z: 0}
-  _lastTackleSpeed: 2
+  _lastTackleSpeed: 1
   _lastMoveSpeed: 30
   _lastMoveNum: 4
   _lastRandMoveLength: {x: 16, y: 5, z: 8}
