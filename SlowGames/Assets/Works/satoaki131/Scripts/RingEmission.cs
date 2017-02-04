@@ -5,14 +5,48 @@ using UnityEngine;
 public class RingEmission : MonoBehaviour
 {
 
+    public enum Emissivecolor
+    {
+        blue,
+        yellow,
+        red
+    }
+
     [SerializeField]
     private Material _mat = null;
 
     private Color _color;
 
+    /// <summary>
+    /// 色の更新中かどうか
+    /// コルーチンが走ってるときtrueになる
+    /// </summary>
     public bool isChange
     {
         get; private set;
+    }
+
+    /// <summary>
+    /// 現在のいろをenumで管理
+    /// </summary>
+    private Emissivecolor _emissiveColor = Emissivecolor.blue;
+    public Emissivecolor emissiveColor
+    {
+        get { return _emissiveColor; }
+    }
+
+    public void setEmissiveColor(Emissivecolor color)
+    {
+        _emissiveColor = color;
+    }
+
+    /// <summary>
+    /// EmissiveColorの情報から現在のいろを取り出す
+    /// </summary>
+    private Dictionary<Emissivecolor, Color> _selectColor = null;
+    public Dictionary<Emissivecolor, Color> color
+    {
+        get { return _selectColor; }
     }
 
     void Awake()
@@ -21,6 +55,14 @@ public class RingEmission : MonoBehaviour
         _mat.EnableKeyword("_EMISSION");
         _mat.SetColor("_EmissionColor", _color * 2);
         isChange = false;
+    }
+
+    void Start()
+    {
+        _selectColor = new Dictionary<Emissivecolor, Color>();
+        _selectColor.Add(Emissivecolor.blue, new Color(0.0f, 148.0f / 255.0f, 1.0f));
+        _selectColor.Add(Emissivecolor.yellow, Color.yellow);
+        _selectColor.Add(Emissivecolor.red, Color.red);
     }
 
     public Color EmissionColor(bool isEmission)
