@@ -18,6 +18,7 @@ public class PlayerHP : MonoBehaviour {
 
     [SerializeField]
     RingEmission _ring;
+    private RingEmission.Emissivecolor _emissiveColor = RingEmission.Emissivecolor.blue;
 
     int _playerHp;
 
@@ -62,6 +63,13 @@ public class PlayerHP : MonoBehaviour {
         {
             _playerHp = 0;
         }
+
+        if (_ring.isChange) return;
+        if(_emissiveColor != _ring.emissiveColor) //自分のenumとringのenumが一緒じゃなかったら通る
+        {
+            _ring.ColorMoveChange(_ring.color[_ring.emissiveColor], _ring.color[_emissiveColor]); //リングの色から指定された色に変わるコルーチンを呼ぶ
+            _ring.setEmissiveColor(_emissiveColor); //リングが持つenumを更新
+        }
         
        // Debug.Log(_playerHp);
     }
@@ -77,15 +85,24 @@ public class PlayerHP : MonoBehaviour {
             Damage(1);
         }
     }
+
    public void Damage(int damageValue)
     {
         //ScoreManager.instance.AddInpactDamageCount();
         _playerHp -= damageValue;
         _isHit = true;
 
-        if(_playerHp < HP / 2)
+        if(_playerHp > HP / 2) //HP100のとき50より大きかったらなら
         {
-            _ring.ColorMoveChange(_ring.GetComponent<Renderer>().material.color, Color.yellow);
+            _emissiveColor = RingEmission.Emissivecolor.blue;
+        }
+        else if(_playerHp > HP / 10) //HP100のとき10より大きかったら
+        {
+            _emissiveColor = RingEmission.Emissivecolor.yellow;
+        }
+        else
+        {
+            _emissiveColor = RingEmission.Emissivecolor.red;
         }
     }
 
