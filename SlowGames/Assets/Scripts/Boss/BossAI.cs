@@ -727,20 +727,20 @@ public class BossAI : MonoBehaviour {
             if (_state == BossState.LEVEL_2)
             {
                 // 第２形態になったボイスを流す
-                AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.IV09);
+                //AudioManager.instance.stopAllVoice();
+                //AudioManager.instance.playVoice(AudioName.VoiceName.IV09);
             }
             else if(_state == BossState.LAST)
             {
                 // 突っ込んでくることを伝えるボイス
-                AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.IV11);
+                //AudioManager.instance.stopAllVoice();
+                //AudioManager.instance.playVoice(AudioName.VoiceName.IV11);
             }
             else if(_state == BossState.CLIMAX)
             {
                 // ボスを倒したことを伝えるボイス
-                AudioManager.instance.stopAllVoice();
-                AudioManager.instance.playVoice(AudioName.VoiceName.IV14);
+                //AudioManager.instance.stopAllVoice();
+                //AudioManager.instance.playVoice(AudioName.VoiceName.IV14);
             
                 //_anim.SetBool("down", true);
                 //_anim.Play("Down");
@@ -1362,10 +1362,26 @@ public class BossAI : MonoBehaviour {
             if (length.magnitude < 0.5f)
             {
                 Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z + Vector3.up * _lastRandMoveLength.y;
-                Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
-                                                                         Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
-                                                                         Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
-                _lastPreparationRandPos = lastRandPos + randLength;
+                //Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+                //                                                         Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+                //                                                         Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+                //_lastPreparationRandPos = lastRandPos + randLength;
+
+                //////
+
+                _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
+                var moveObj = _level_2_moveObjs[_level_2_randomIndex];
+                float x = moveObj.transform.localScale.x / 2.0f;
+                float y = moveObj.transform.localScale.y / 2.0f;
+                float z = moveObj.transform.localScale.z / 2.0f;
+                _lastPreparationRandPos = new Vector3
+                    (
+                        moveObj.transform.position.x + Random.Range(-x, x),
+                        moveObj.transform.position.y + Random.Range(-y, y),
+                        moveObj.transform.position.z + Random.Range(-z, z)
+                    );
+
+                //////
 
                 //_lastMoveIndex;
                 //_lastPreparationFlag = true;
@@ -1377,6 +1393,9 @@ public class BossAI : MonoBehaviour {
                 if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Tackle"))
                 {
                     _anim.Play("Tackle");
+                    // 突っ込んでくることを伝えるボイス
+                    AudioManager.instance.stopAllVoice();
+                    AudioManager.instance.playVoice(AudioName.VoiceName.IV11);
                 }
                 
             }
