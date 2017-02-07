@@ -147,6 +147,12 @@ public class PlayerShot : MonoBehaviour
             float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
             SetAnimFrame(value); //Animationの決定
         }
+
+        if(SlowMotion._instance.limiterFlag)
+        {
+            _shotType = shotType.notReload;
+        }
+
         ThreeBurst();
 
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
@@ -164,6 +170,7 @@ public class PlayerShot : MonoBehaviour
         {
             if (_bulletsNumber <= 0) return;
         }
+
         if (_isShot == false) return;
         _gunAnim.speed = 1.0f;
 
