@@ -17,10 +17,10 @@ public class OverHeatEffectCreate : MonoBehaviour
     {
         if (!SlowMotion._instance.limiterFlag)
         {
-            if (overHeatEffect.activeInHierarchy == true)
-            {
-                overHeatEffect.SetActive(false);
-            }
+            //if (overHeatEffect.activeInHierarchy == true)
+            //{
+            //    overHeatEffect.SetActive(false);
+            //}
             return;
         }
 
