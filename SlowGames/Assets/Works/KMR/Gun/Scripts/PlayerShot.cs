@@ -15,14 +15,8 @@ public class PlayerShot : MonoBehaviour
 
     Recoil _recoil;
 
-    //[SerializeField]
-    //int _oneShotCount = 3;
-
-    //[SerializeField]
-    //float _vibrationPower = 200;
-
-    //[SerializeField]
-    //float _burstIntervalTime = 0.2f;
+    [SerializeField]
+    Animator _ringAnim = null;
 
     [SerializeField]
     int _maxBulletsNumbers = 20;
@@ -35,6 +29,9 @@ public class PlayerShot : MonoBehaviour
     bool _isReload;
 
     int _bulletsNumber;
+
+    int _ringShotHash;
+
 
     public int maxBulletsNumbers
     {
@@ -95,6 +92,7 @@ public class PlayerShot : MonoBehaviour
         _isReload = false;
         _reloadHash = Animator.StringToHash("isReload");
         _reShotHash = Animator.StringToHash("reShot");
+        _ringShotHash = Animator.StringToHash("isShotRing");
         //_isStart = true;
         _recoil = GetComponent<Recoil>();
         //_shotType = shotType.autoReload;
@@ -173,6 +171,7 @@ public class PlayerShot : MonoBehaviour
 
         if (_isShot == false) return;
         _gunAnim.speed = 1.0f;
+        _ringAnim.speed = 1.0f;
 
         //_time -= Time.unscaledDeltaTime;
         //if (_time > 0) return;
@@ -205,6 +204,7 @@ public class PlayerShot : MonoBehaviour
         _reShot = true;
         //_gunAnim.speed = 1.0f;
         _gunAnim.SetBool(_reShotHash, _reShot);
+        _ringAnim.SetBool(_ringShotHash, _reShot);
         StartCoroutine(ShotInterval());
 
 
@@ -238,6 +238,7 @@ public class PlayerShot : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.05f);
         _reShot = false;
         _gunAnim.SetBool(_reShotHash, _reShot);
+        _ringAnim.SetBool(_ringShotHash, _reShot);
         yield return null;
     }
 
@@ -261,12 +262,14 @@ public class PlayerShot : MonoBehaviour
         if(_reload.isReload)
         {
             _isReload = true;
-            _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed(); ;
+            _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
+            _ringAnim.speed = 10.0f * SlowMotion._instance.RealSpeed(); ;
         }
         else
         if(!_reload.isReload)
         {
             _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
+            _ringAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
             _isReload = false;
 
         }
