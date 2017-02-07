@@ -24201,6 +24201,7 @@ MonoBehaviour:
   _timeRecovery: 5
   BarrierEffect: {fileID: 1457956601488092, guid: 1cc0da3e22669154c80cf62fb8339251,
     type: 2}
+  _ring: {fileID: 0}
 --- !u!114 &114750958299555556
 MonoBehaviour:
   m_ObjectHideFlags: 1

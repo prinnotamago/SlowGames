@@ -96,11 +96,12 @@ public class GameDirector : MonoBehaviour {
         _update.Add(GameState.Result,() => { });
         GameSet();
         _hp = FindObjectOfType<PlayerHP>();
+
+        VoiceNumberStorage.setVoice();
     }
 
     private void Start()
-    {
-        VoiceNumberStorage.setVoice();
+    { 
         StartCoroutine(GameStartCutIn());
     }
 
