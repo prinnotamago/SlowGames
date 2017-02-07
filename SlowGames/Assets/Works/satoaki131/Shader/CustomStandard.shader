@@ -62,7 +62,7 @@ Shader "Custom/Standard"
 		Tags{ "LightMode" = "ForwardBase" }
 
 		Blend[_SrcBlend][_DstBlend]
-		ZWrite[_ZWrite]
+		ZWrite On
 
 		CGPROGRAM
 #pragma target 3.0
@@ -220,7 +220,7 @@ Shader "Custom/Standard"
 		Tags{ "LightMode" = "ForwardBase" }
 
 		Blend[_SrcBlend][_DstBlend]
-		ZWrite[_ZWrite]
+		ZWrite On
 
 		CGPROGRAM
 #pragma target 2.0
