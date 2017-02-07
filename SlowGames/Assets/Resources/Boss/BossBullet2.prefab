@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4918755592998168}
   - component: {fileID: 96305245702420432}
   - component: {fileID: 114484021799724618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4941244748372880}
   - component: {fileID: 96061473421998482}
   - component: {fileID: 114425534143874032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4823163026012184}
   - component: {fileID: 96493654434332166}
   - component: {fileID: 114451885872082664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4889047002792494}
   - component: {fileID: 96935493647742406}
   - component: {fileID: 114782150249343498}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4171415430194768}
   - component: {fileID: 96564255078657530}
   - component: {fileID: 114910989378321508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4086652543483290}
   - component: {fileID: 96210521416981704}
   - component: {fileID: 114957093523828894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4600760211665542}
   - component: {fileID: 96244570689194522}
   - component: {fileID: 114555771130539440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4372522617703804}
   - component: {fileID: 96790100999126876}
   - component: {fileID: 114535828907620894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4425972832400860}
   - component: {fileID: 114834264632878622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ballistic 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,9 +177,9 @@ GameObject:
   - component: {fileID: 65287146930199192}
   - component: {fileID: 54099620896857538}
   - component: {fileID: 114584894900122834}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BossBullet2
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

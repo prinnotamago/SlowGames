@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4592207308340844}
   - component: {fileID: 198053858660352846}
   - component: {fileID: 199534542049684312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tornado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,6 +156,8 @@ MonoBehaviour:
   _deathEffect: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
   _targetDirection: {x: 0, y: 0, z: 0}
+  _slowStartTime: 0.01
+  _angleSpeed: 5
   _chargeEffect: {fileID: 1979463909858250, guid: a599030045c649648812c888c5a47697,
     type: 2}
 --- !u!198 &198053858660352846
