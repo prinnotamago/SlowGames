@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23112528356374480}
   m_Layer: 14
   m_Name: EffectPos
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 23309963695402288}
   m_Layer: 14
   m_Name: ChargeGun
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,22 @@ GameObject:
   - component: {fileID: 64657642058915906}
   m_Layer: 14
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1147953834631818
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4182557447950896}
+  m_Layer: 0
+  m_Name: BossSpot
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +115,7 @@ GameObject:
   - component: {fileID: 4700477956503626}
   m_Layer: 14
   m_Name: under wing left dammy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +137,7 @@ GameObject:
   - component: {fileID: 64737449323161834}
   m_Layer: 14
   m_Name: head parge 04
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +152,7 @@ GameObject:
   - component: {fileID: 4227048888430538}
   m_Layer: 14
   m_Name: parge bottom left particlePos
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +174,7 @@ GameObject:
   - component: {fileID: 64354842776225892}
   m_Layer: 14
   m_Name: parge bottom left
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,7 +189,23 @@ GameObject:
   - component: {fileID: 4938815944274050}
   m_Layer: 0
   m_Name: head jyoint dammy
-  m_TagString: Untagged
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1405750970704236
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4484364341446138}
+  - component: {fileID: 108955088522688712}
+  m_Layer: 0
+  m_Name: Spotlight (2)
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +227,7 @@ GameObject:
   - component: {fileID: 64186481689661568}
   m_Layer: 14
   m_Name: under wing right
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,7 +249,7 @@ GameObject:
   - component: {fileID: 64112175175384700}
   m_Layer: 14
   m_Name: head parge 03
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,7 +264,7 @@ GameObject:
   - component: {fileID: 4977092523647334}
   m_Layer: 14
   m_Name: under wing right dammy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,7 +282,7 @@ GameObject:
   - component: {fileID: 23153405662468288}
   m_Layer: 14
   m_Name: SideGun 2
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,7 +299,7 @@ GameObject:
   - component: {fileID: 23122030454538740}
   m_Layer: 14
   m_Name: head
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,7 +321,7 @@ GameObject:
   - component: {fileID: 64982870273838796}
   m_Layer: 14
   m_Name: parge bottom right
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +336,7 @@ GameObject:
   - component: {fileID: 4391269405191860}
   m_Layer: 14
   m_Name: body dammy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +373,7 @@ GameObject:
   - component: {fileID: 64153748026270624}
   m_Layer: 14
   m_Name: head parge 01
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +390,7 @@ GameObject:
   - component: {fileID: 23858157399766136}
   m_Layer: 0
   m_Name: jyoint001
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +408,7 @@ GameObject:
   - component: {fileID: 23911885692246554}
   m_Layer: 14
   m_Name: SideGun 1
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,7 +424,7 @@ GameObject:
   - component: {fileID: 95493123090654146}
   m_Layer: 14
   m_Name: boss anime end03
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -415,7 +446,7 @@ GameObject:
   - component: {fileID: 64344235044462954}
   m_Layer: 14
   m_Name: under wing left
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,7 +468,7 @@ GameObject:
   - component: {fileID: 64780807517554744}
   m_Layer: 14
   m_Name: head parge 02
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,7 +483,7 @@ GameObject:
   - component: {fileID: 4064812803026592}
   m_Layer: 14
   m_Name: parge bottom right particlePos
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,7 +501,7 @@ GameObject:
   - component: {fileID: 23329661011242284}
   m_Layer: 14
   m_Name: FlontGun
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -487,7 +518,23 @@ GameObject:
   - component: {fileID: 23720761966348880}
   m_Layer: 14
   m_Name: jyoint
-  m_TagString: Untagged
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1918647209781558
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4104345553910708}
+  - component: {fileID: 108604210453039272}
+  m_Layer: 0
+  m_Name: Spotlight (1)
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,7 +549,7 @@ GameObject:
   - component: {fileID: 4760587728097900}
   m_Layer: 14
   m_Name: head dammy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,6 +579,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4692236827874770}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4104345553910708
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1918647209781558}
+  m_LocalRotation: {x: 0.98073614, y: 0.009913839, z: -0.047609426, w: 0.18918711}
+  m_LocalPosition: {x: -3, y: 21.7, z: 26.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4182557447950896}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 158.159, y: 5.540985, z: -0.088012695}
+--- !u!4 &4182557447950896
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147953834631818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4104345553910708}
+  - {fileID: 4484364341446138}
+  m_Father: {fileID: 4753064635966720}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4210063517950848
 Transform:
@@ -657,6 +732,19 @@ Transform:
   m_Father: {fileID: 4391269405191860}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4484364341446138
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405750970704236}
+  m_LocalRotation: {x: 0.96136636, y: -0.03397639, z: -0.26155952, w: 0.07878494}
+  m_LocalPosition: {x: 18.499987, y: -0.69999117, z: 25.800007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4182557447950896}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 172.316, y: 30.854996, z: 6.171997}
 --- !u!4 &4499467176413750
 Transform:
   m_ObjectHideFlags: 1
@@ -704,7 +792,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758918414922428}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 250, z: 0}
+  m_LocalPosition: {x: 0, y: 500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4391269405191860}
@@ -769,6 +857,7 @@ Transform:
   - {fileID: 4938815944274050}
   - {fileID: 4760587728097900}
   - {fileID: 4321396381819238}
+  - {fileID: 4182557447950896}
   m_Father: {fileID: 4391269405191860}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1801,7 +1890,7 @@ BoxCollider:
   m_GameObject: {fileID: 1411024442994108}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 5.9698577, y: 7.379282, z: 2.5891812}
   m_Center: {x: 3.1164472, y: 1.0377728, z: -0.3031192}
@@ -1813,7 +1902,7 @@ BoxCollider:
   m_GameObject: {fileID: 1799954348040970}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6384951, y: 1.2710004, z: 0.8433615}
   m_Center: {x: -0.350241, y: 5.9315104, z: 1.8667339}
@@ -1825,7 +1914,7 @@ BoxCollider:
   m_GameObject: {fileID: 1411024442994108}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.9698577, y: 7.379282, z: 2.5891812}
   m_Center: {x: 3.1164472, y: 1.0377728, z: -0.3031192}
@@ -1837,7 +1926,7 @@ BoxCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 18.605404, y: 3, z: 3}
   m_Center: {x: 0, y: 6, z: 0}
@@ -1861,7 +1950,7 @@ BoxCollider:
   m_GameObject: {fileID: 1799954348040970}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.6384951, y: 1.2710004, z: 0.8433615}
   m_Center: {x: -0.350241, y: 5.9315104, z: 1.8667339}
@@ -1873,7 +1962,7 @@ BoxCollider:
   m_GameObject: {fileID: 1594959308681074}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4.2866507, y: 6.9221306, z: 6.9597983}
   m_Center: {x: 2.0482616, y: -0.76264083, z: -0.68825555}
@@ -1933,7 +2022,7 @@ BoxCollider:
   m_GameObject: {fileID: 1351001004056092}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.2866507, y: 6.9221306, z: 6.9597983}
   m_Center: {x: -2.0482616, y: -0.76264083, z: -0.68825555}
@@ -1945,7 +2034,7 @@ BoxCollider:
   m_GameObject: {fileID: 1648110958671036}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.6384951, y: 1.2710004, z: 0.8433615}
   m_Center: {x: 0.350241, y: 5.9315104, z: 1.8667339}
@@ -1957,7 +2046,7 @@ BoxCollider:
   m_GameObject: {fileID: 1351001004056092}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4.2866507, y: 6.9221306, z: 6.9597983}
   m_Center: {x: -2.0482616, y: -0.76264083, z: -0.68825555}
@@ -1969,7 +2058,7 @@ BoxCollider:
   m_GameObject: {fileID: 1648110958671036}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6384951, y: 1.2710004, z: 0.8433615}
   m_Center: {x: 0.350241, y: 5.9315104, z: 1.8667339}
@@ -1981,7 +2070,7 @@ BoxCollider:
   m_GameObject: {fileID: 1324749464072624}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.61317253, y: 1.2066784, z: 0.8401079}
   m_Center: {x: -0.3413294, y: 5.409451, z: 1.7068335}
@@ -2005,7 +2094,7 @@ BoxCollider:
   m_GameObject: {fileID: 1441005737207902}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.61317253, y: 1.2066784, z: 0.8401079}
   m_Center: {x: 0.3413294, y: 5.409451, z: 1.7068335}
@@ -2029,7 +2118,7 @@ BoxCollider:
   m_GameObject: {fileID: 1594959308681074}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.2866507, y: 6.9221306, z: 6.9597983}
   m_Center: {x: 2.0482616, y: -0.76264083, z: -0.68825555}
@@ -2041,7 +2130,7 @@ BoxCollider:
   m_GameObject: {fileID: 1789557800156030}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 5.9698577, y: 7.379282, z: 2.5891812}
   m_Center: {x: -3.1164472, y: 1.0377728, z: -0.3031192}
@@ -2053,7 +2142,7 @@ BoxCollider:
   m_GameObject: {fileID: 1789557800156030}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.9698577, y: 7.379282, z: 2.5891812}
   m_Center: {x: -3.1164472, y: 1.0377728, z: -0.3031192}
@@ -2065,7 +2154,7 @@ BoxCollider:
   m_GameObject: {fileID: 1324749464072624}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.61317253, y: 1.2066784, z: 0.8401079}
   m_Center: {x: -0.3413294, y: 5.409451, z: 1.7068335}
@@ -2077,7 +2166,7 @@ BoxCollider:
   m_GameObject: {fileID: 1441005737207902}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.61317253, y: 1.2066784, z: 0.8401079}
   m_Center: {x: 0.3413294, y: 5.409451, z: 1.7068335}
@@ -2089,7 +2178,7 @@ BoxCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 18.605404, y: 3, z: 3}
   m_Center: {x: 0, y: 6, z: 0}
@@ -2110,6 +2199,74 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!108 &108604210453039272
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1918647209781558}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 0.385705, g: 0.4079152, b: 0.42647058, a: 1}
+  m_Intensity: 3.4
+  m_Range: 130
+  m_SpotAngle: 58
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!108 &108955088522688712
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405750970704236}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 0.8602941, g: 0.9364097, b: 1, a: 1}
+  m_Intensity: 1.4
+  m_Range: 150
+  m_SpotAngle: 37
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114041800252559444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2153,8 +2310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d33a308d46e0e43959651d9e944d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 180
-  _changeStateHP: 820000003200000000000000
+  _hp: 110
+  _changeStateHP: 5a0000003200000000000000
   _bossBodyParent: {fileID: 1758918414922428}
   _parts:
   - {fileID: 114124384295420056}
@@ -2182,7 +2339,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 873e57b3c81ccde40aada66c673a2db4, type: 2}
   - {fileID: 2100000, guid: 89c7bdff2bd641e4796b97d2ee67462f, type: 2}
   - {fileID: 2100000, guid: fcbd42bc11d22e540b0de76f8936e261, type: 2}
-  _speedBulletHP: 690000005000000037000000
+  _speedBulletHP: 6e0000005a00000046000000
   _speedBulletChargeMax: 5
   _attackInterval: 0.5
   _patternRatio: 0.5
@@ -2206,7 +2363,7 @@ MonoBehaviour:
   _level_2_centerPos: {x: 0, y: 7, z: 15}
   _level_2_moveObjPrefab: {fileID: 1154740623382328, guid: a144822d20e76cf4e8d3579a955bb181,
     type: 2}
-  _level_2_modeChangeHP: 730000005a0000004b000000
+  _level_2_modeChangeHP: 5a00000046000000
   _level_2_randomMoveSpeed: 7.2
   _level_2_randomStopTimeMax: 0
   _lastTackleSpeed: 1
@@ -2241,7 +2398,7 @@ MonoBehaviour:
     type: 2}
   _hitLastParticle: {fileID: 1983096564665020, guid: 78ba3b28568487a44a0007af3b7a224e,
     type: 2}
-  _debugFlag: 1
+  _debugFlag: 0
 --- !u!114 &114288619788247730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2346,7 +2503,7 @@ SphereCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 6, z: 0}
@@ -2358,7 +2515,7 @@ SphereCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 6, z: 0}
@@ -2370,7 +2527,7 @@ SphereCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 1, z: -1.0656263}
@@ -2382,7 +2539,7 @@ SphereCollider:
   m_GameObject: {fileID: 1125454140075308}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 1, z: -1.0656263}
