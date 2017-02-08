@@ -51,7 +51,6 @@ public class RingEmission : MonoBehaviour
 
     void Awake()
     {
-        _color = _mat.color;
         isChange = false;
     }
 
@@ -61,13 +60,13 @@ public class RingEmission : MonoBehaviour
         _selectColor.Add(Emissivecolor.blue, new Color(0.0f, 148.0f / 255.0f, 1.0f));
         _selectColor.Add(Emissivecolor.yellow, Color.yellow);
         _selectColor.Add(Emissivecolor.red, Color.red);
-
         if(_mat.color != _selectColor[emissiveColor])
         {
             _mat.color = _selectColor[emissiveColor];
-            //_mat.EnableKeyword("_EMISSION");
-            //_mat.SetColor("_EmissionColor", _mat.color * 2);
+            _mat.EnableKeyword("_EMISSION");
+            _mat.SetColor("_EmissionColor", _mat.color * 2);
         }
+        _color = _mat.color;
     }
 
     public Color EmissionColor(bool isEmission)
