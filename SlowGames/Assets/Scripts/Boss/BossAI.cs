@@ -323,6 +323,7 @@ public class BossAI : MonoBehaviour {
     GameObject _climaxExplosionParticle = null;
     [SerializeField]
     float _climaxExplosionSize = 5.0f;
+    bool _isClimaxSe = true;
     //////////////////////////////////////////////////////////////////////////////
 
     // ヒットエフェクト
@@ -1594,6 +1595,13 @@ public class BossAI : MonoBehaviour {
             Physics.IgnoreLayerCollision(LayerName.Bullet, LayerName.Boss, true);
         }
 
+        if (_isClimaxSe)
+        {
+            // ボス爆発
+            AudioManager.instance.playSe(AudioName.SeName.BossLastProduction);
+            _isClimaxSe = false;
+        }
+
         //if (!_rigidbody.useGravity)
         //{
         //    _rigidbody.useGravity = true;
@@ -1647,7 +1655,8 @@ public class BossAI : MonoBehaviour {
         _climaxTime += Time.deltaTime;
         if(/*_climaxDestroyTime < _climaxTime*/ _climaxUpPower <= 0)
         {
-            Damage();
+            //Damage();
+            _hp = 0;
 
             // HP が 0 になったら死ぬ
             if (_hp <= 0)
