@@ -2577,7 +2577,7 @@ MonoBehaviour:
   _crossStartEffectPos: {fileID: 1412145615916536}
   _crossLastEffectPos: {fileID: 1697419097369908}
   _crossParent: {fileID: 1558943971485330}
-  _debugFlag: 1
+  _debugFlag: 0
 --- !u!114 &114288619788247730
 MonoBehaviour:
   m_ObjectHideFlags: 1
