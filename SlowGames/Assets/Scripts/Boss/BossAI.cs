@@ -337,7 +337,9 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     GameObject _crossParticle = null;
     [SerializeField]
-    GameObject _crossEffectPos = null;
+    GameObject _crossStartEffectPos = null;
+    [SerializeField]
+    GameObject _crossLastEffectPos = null;
     bool _isStartCross = true;
     bool _isLastCross = true;
     [SerializeField]
@@ -885,7 +887,8 @@ public class BossAI : MonoBehaviour {
             if (_isStartCross)
             {
                 var particle = Instantiate(_crossParticle);
-                particle.transform.position = _crossEffectPos.transform.position;
+                particle.transform.position = _crossStartEffectPos.transform.position;
+                particle.transform.rotation = _crossStartEffectPos.transform.rotation;
                 particle.transform.parent = _crossParent.transform;
 
                 _isStartCross = false;
@@ -1483,7 +1486,8 @@ public class BossAI : MonoBehaviour {
                 if (_isLastCross)
                 {
                     var particle = Instantiate(_crossParticle);
-                    particle.transform.position = _crossEffectPos.transform.position;
+                    particle.transform.position = _crossLastEffectPos.transform.position;
+                    particle.transform.rotation = _crossLastEffectPos.transform.rotation;
                     particle.transform.parent = _crossParent.transform;
                     _isLastCross = false;
                 }

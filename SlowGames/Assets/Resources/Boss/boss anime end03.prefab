@@ -232,6 +232,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1412145615916536
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4230286272201654}
+  m_Layer: 14
+  m_Name: crossStartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1441005737207902
 GameObject:
   m_ObjectHideFlags: 1
@@ -434,7 +449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317283344094572}
   m_Layer: 14
-  m_Name: crossPos
+  m_Name: crossLastPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,12 +725,12 @@ Transform:
   m_Father: {fileID: 4509551548794430}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4317283344094572
+--- !u!4 &4230286272201654
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697419097369908}
+  m_GameObject: {fileID: 1412145615916536}
   m_LocalRotation: {x: -0, y: -1.323489e-23, z: 6.617445e-23, w: 1}
   m_LocalPosition: {x: 0, y: 5.29, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -723,6 +738,19 @@ Transform:
   m_Father: {fileID: 4327903927320630}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4317283344094572
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697419097369908}
+  m_LocalRotation: {x: 0.3239932, y: -1.9852336e-23, z: 1.1911402e-22, w: 0.9460594}
+  m_LocalPosition: {x: 0, y: 4.47, z: 3.09}
+  m_LocalScale: {x: 0.999998, y: 0.9999978, z: 0.9999979}
+  m_Children: []
+  m_Father: {fileID: 4327903927320630}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 37.809002, y: 0, z: 0}
 --- !u!4 &4318666035970650
 Transform:
   m_ObjectHideFlags: 1
@@ -759,6 +787,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 1.5467094, z: -7.424232}
   m_LocalScale: {x: 1.1402754, y: 1.1402754, z: 1.1402755}
   m_Children:
+  - {fileID: 4230286272201654}
   - {fileID: 4317283344094572}
   m_Father: {fileID: 4760587728097900}
   m_RootOrder: 0
@@ -2545,7 +2574,8 @@ MonoBehaviour:
     type: 2}
   _crossParticle: {fileID: 1122164261775670, guid: 7bef83880e542ba4bb17e29ae01ca0c3,
     type: 2}
-  _crossEffectPos: {fileID: 1697419097369908}
+  _crossStartEffectPos: {fileID: 1412145615916536}
+  _crossLastEffectPos: {fileID: 1697419097369908}
   _crossParent: {fileID: 1558943971485330}
   _debugFlag: 1
 --- !u!114 &114288619788247730
