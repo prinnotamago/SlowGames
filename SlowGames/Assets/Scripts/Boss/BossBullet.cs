@@ -74,7 +74,10 @@ public class BossBullet : MonoBehaviour {
         }
         else
         {
-            _particle.transform.parent = null;
+            if (_particle != null)
+            {
+                _particle.transform.parent = null;
+            }
 
             transform.parent = null;
 

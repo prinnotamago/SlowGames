@@ -15,7 +15,7 @@ public class BossAI : MonoBehaviour {
     /// ボスの形態が変わるHP
     /// </summary>
     [SerializeField]
-    int[] _changeStateHP;
+    int[] _changeStateHP = null;
     int _changeStateIndex = 0;  // 形態が変わるごとに1つ進める  
 
     /// <summary>
@@ -28,40 +28,40 @@ public class BossAI : MonoBehaviour {
     /// パージするパーツ
     /// </summary>
     [SerializeField]
-    BossPurgeParts[] _parts;
+    BossPurgeParts[] _parts = null;
 
     /// <summary>
     /// パージするHP
     /// </summary>
     [SerializeField]
-    int[] _purgeHP;
+    int[] _purgeHP = null;
     int _purgeIndex = 0;    // 1つパージするごとに index を1つ進める
 
     /// <summary>
     /// ボスの機銃の位置
     /// </summary>
     [SerializeField]
-    Transform _frontGunObjPos;
+    Transform _frontGunObjPos = null;
     [SerializeField]
-    Transform[] _sideGunObjPos;
+    Transform[] _sideGunObjPos = null;
     [SerializeField]
-    Transform _SpeedGunObjPos;
+    Transform _SpeedGunObjPos = null;
 
     /// <summary>
     /// ボスの撃つ弾
     /// </summary>
     [SerializeField]
-    GameObject _normalBullet;   // 直線
+    GameObject _normalBullet = null;   // 直線
     [SerializeField]
-    GameObject _homingBullet;   // 誘導
+    GameObject _homingBullet = null;   // 誘導
     [SerializeField]
-    GameObject _speedBullet;    // 速い弾
+    GameObject _speedBullet = null;    // 速い弾
 
     /// <summary>
     /// ボスのエミッションをいじる
     /// </summary>
     [SerializeField]
-    Material[] _mat;
+    Material[] _mat = null;
     float _changeColorSpeed = 1.0f;
     float _changeColorTime = 0.0f;
 
@@ -69,14 +69,14 @@ public class BossAI : MonoBehaviour {
     /// 速い球を撃つHP
     /// </summary>
     [SerializeField]
-    int[] _speedBulletHP;
+    int[] _speedBulletHP = null;
     int _speedBulletIndex = 0;  // 速い弾を撃つごとに１つ進める
     bool _speedBulletFlag = false;  // 速い弾を撃つフラグ
     [SerializeField]
     float _speedBulletChargeMax = 2.0f;
     float _speedBulletChargeTime = 0.0f;
-    [SerializeField]
-    float _speedBulletInformTime = 3.0f;
+    //[SerializeField]
+    //float _speedBulletInformTime = 3.0f;
 
     bool _normalBulletFlag = true;  // 通常弾を撃つフラグ
 
@@ -115,18 +115,18 @@ public class BossAI : MonoBehaviour {
 
     // START の情報 //////////////////////////////////////////////////////////////
     [SerializeField]
-    Vector3 _startPos;  // 登場するときに向かう場所
+    Vector3 _startPos = Vector3.zero;  // 登場するときに向かう場所
     [SerializeField]
-    float _startSpeed;  // 落とす速さ
+    float _startSpeed = 0.0f;  // 落とす速さ
     //////////////////////////////////////////////////////////////////////////////
 
     // LEVEL_1 の情報 ////////////////////////////////////////////////////////////
     [SerializeField]
-    Vector3[] _level_1_pos;          // 各移動場所  
+    Vector3[] _level_1_pos = null;          // 各移動場所  
     int _level_1_posIndex = 1;       // 今いる場所のインデックス
     int _level_1_posIndexBefore = 1; // 前いた場所のインデックス
     [SerializeField]
-    int[] _level_1_moveHp;        // 各移動場所に動くための HP
+    int[] _level_1_moveHp = null;        // 各移動場所に動くための HP
     int _level_1_moveHpIndex = 0; // moveHp のインデックス、こいつを変えて移動場所を帰る
     [SerializeField]
     float _level_1_speed = 5.0f;  // 移動の速さ
@@ -149,10 +149,10 @@ public class BossAI : MonoBehaviour {
     float _level_2_moveAngle = 0.0f;       // 移動するのに Sin を使ってるのに 角度 で調節している
     float _level_2_moveAngle_Z = 0.0f;
     [SerializeField]
-    Vector3 _level_2_centerPos;                 // 中心距離
+    Vector3 _level_2_centerPos = Vector3.zero;                 // 中心距離
     int _level_2_changeCount = 0;  // ハチの字の横幅を変えるのに使う
     [SerializeField]
-    GameObject _level_2_moveObjPrefab;  // ランダムに移動する場所を決めるやつのプレハブ
+    GameObject _level_2_moveObjPrefab = null;  // ランダムに移動する場所を決めるやつのプレハブ
     List<GameObject> _level_2_moveObjs = new List<GameObject>();  // ランダムに移動する場所を決めるのに使う
     enum Level_2_Mode               // 第２形態のモードを決める
     {
@@ -161,7 +161,7 @@ public class BossAI : MonoBehaviour {
     }
     Level_2_Mode _level_2_mode = Level_2_Mode.RANDOM;
     [SerializeField]
-    int[] _level_2_modeChangeHP;    // 第２形態の動きを変えるのに使う
+    int[] _level_2_modeChangeHP = null;    // 第２形態の動きを変えるのに使う
     int _level_2_modeIndex = 0;    // 第２形態の動きを変えるのに使うインデックス
     [SerializeField]
     float _level_2_randomMoveSpeed = 5.0f;  // ランダムの動きの速さ
@@ -173,20 +173,23 @@ public class BossAI : MonoBehaviour {
     //////////////////////////////////////////////////////////////////////////////
 
     // LAST の情報////////////////////////////////////////////////////////////////
+    //[SerializeField]
+    //Vector3 _lastTacklePos;       // タックルをする座標
+    //[SerializeField]
+    //Vector3 _lastTackleBeforePos;       // タックルをする座標
     [SerializeField]
-    Vector3 _lastTacklePos;       // タックルをする座標
+    float _lastTackleSpeed = 0.0f;     // タックルするときの速さ
+    //List<Vector3> _lastMovePos = new List<Vector3>();   // タックルをする前に移動する場所
+    //[SerializeField]
+    //float _lastMoveSpeed = 0.0f;       // 移動するときの速さ
+    //[SerializeField]
+    //int _lastMoveNum = 3;         // 移動する回数
+    //int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
+    //[SerializeField]
+    //Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
     [SerializeField]
-    Vector3 _lastTackleBeforePos;       // タックルをする座標
-    [SerializeField]
-    float _lastTackleSpeed;     // タックルするときの速さ
-    List<Vector3> _lastMovePos = new List<Vector3>();   // タックルをする前に移動する場所
-    [SerializeField]
-    float _lastMoveSpeed;       // 移動するときの速さ
-    [SerializeField]
-    int _lastMoveNum = 3;         // 移動する回数
-    int _lastMoveIndex = 0;       // タックルをする前に移動する場所を操作するためのインデックス
-    [SerializeField]
-    Vector3 _lastRandMoveLength;  // 移動する場所を決めるのにランダムに使う奥
+    GameObject _last_moveObjPrefab = null;  // ランダムに移動する場所を決めるやつのプレハブ
+    List<GameObject> _last_moveObjs = new List<GameObject>();  // ランダムに移動する場所を決めるのに使う
     [SerializeField]
     float _lastRandomStopTimeMax = 1.0f;  // ランダムの動きで目的地に着いたらどのくらい止まるか最大値
     float _lastRandomStopTime = 0.0f;     // ランダムの動きで目的地に着いたらどのくらい止まるか数える
@@ -238,7 +241,7 @@ public class BossAI : MonoBehaviour {
     //float _lastBeforeLengthZ;
 
     [SerializeField]
-    Vector3 _lastPreparationPos;
+    Vector3 _lastPreparationPos = Vector3.zero;
     Vector3 _lastPreparationRandPos;
     [SerializeField]
     float _lastPreparationAngleSpeed = 1.0f;
@@ -252,22 +255,22 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     float _lastPreparationPoseTime = 5.0f;
 
-    [SerializeField]
-    float _lastStaggerSpeed = 1.0f;
+    //[SerializeField]
+    //float _lastStaggerSpeed = 1.0f;
     //[SerializeField]
     //float _lastStaggerAngleSpeed = 2.0f;
-    float _lastStaggerAngle = 1.0f;
+    //float _lastStaggerAngle = 1.0f;
     [SerializeField]
     float _lastStaggerLength = 1.0f;
 
-    bool _lastPreparationFlag = false;
+    //bool _lastPreparationFlag = false;
 
     //[SerializeField]
     float _lastParticleCreateTime = 1000.0f;
     [SerializeField]
     float _lastParticleInterval = 1;
     [SerializeField]
-    Vector3 _lastParticleRandPos;
+    Vector3 _lastParticleRandPos = Vector3.zero;
 
     //[SerializeField]
     float _lastDownRotate = 0.0f;
@@ -287,8 +290,8 @@ public class BossAI : MonoBehaviour {
     Rigidbody _rigidbody;
     [SerializeField]
     float _climaxVelocity = 5.0f;
-    [SerializeField]
-    float _climaxDestroyTime = 5.0f;
+    //[SerializeField]
+    //float _climaxDestroyTime = 5.0f;
     float _climaxTime = 0.0f;
     //[SerializeField]
     //int _climaxBoundNum = 2;    // バウンドする回数
@@ -532,21 +535,51 @@ public class BossAI : MonoBehaviour {
             _level_2_moveObjs.Add(objs[i].gameObject);
         }
 
-        // 第２形態の移動場所をあらかじめ決める
-        _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
-        var moveObj = _level_2_moveObjs[_level_2_randomIndex];
-        float x = moveObj.transform.localScale.x / 2.0f;
-        float y = moveObj.transform.localScale.y / 2.0f;
-        float z = moveObj.transform.localScale.z / 2.0f;
-        _level_2_movePos = new Vector3
-            (
-                moveObj.transform.position.x + Random.Range(-x, x),
-                moveObj.transform.position.y + Random.Range(-y, y),
-                moveObj.transform.position.z + Random.Range(-z, z)
-            );
-        _level_2_randomStopTime = _level_2_randomStopTimeMax;
-        _lastRandomStopTime = _lastRandomStopTimeMax;
-        _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f));
+        {
+            // 第２形態の移動場所をあらかじめ決める
+            _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
+            var moveObj = _level_2_moveObjs[_level_2_randomIndex];
+            float x = moveObj.transform.localScale.x / 2.0f;
+            float y = moveObj.transform.localScale.y / 2.0f;
+            float z = moveObj.transform.localScale.z / 2.0f;
+            _level_2_movePos = new Vector3
+                (
+                    moveObj.transform.position.x + Random.Range(-x, x),
+                    moveObj.transform.position.y + Random.Range(y, y * 2),
+                    moveObj.transform.position.z + Random.Range(-z, z)
+                );
+            _level_2_randomStopTime = _level_2_randomStopTimeMax;
+            _lastRandomStopTime = _lastRandomStopTimeMax;
+            _lastRandomVectorPos = new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f));
+        }
+
+        // ラストで使う MoveObj を生成する
+        var moveObjParentLast = Instantiate(_last_moveObjPrefab);
+        var objs_last = moveObjParentLast.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < objs_last.Length; ++i)
+        {
+            _last_moveObjs.Add(objs_last[i].gameObject);
+        }
+
+        // ラストの移動先をランダムで先に決める
+        //Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z;
+        //Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
+        //                                                         Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
+        //                                                         Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
+        //_lastPreparationRandPos = lastRandPos + randLength;
+        {
+            int last_randomIndex = Random.Range(0, _last_moveObjs.Count);
+            var last_moveObj = _last_moveObjs[last_randomIndex];
+            float x = last_moveObj.transform.localScale.x / 2.0f;
+            float y = last_moveObj.transform.localScale.y / 2.0f;
+            float z = last_moveObj.transform.localScale.z / 2.0f;
+            _lastPreparationRandPos = new Vector3
+                (
+                    last_moveObj.transform.position.x + Random.Range(-x, x),
+                    last_moveObj.transform.position.y + Random.Range(y, y * 2),
+                    last_moveObj.transform.position.z + Random.Range(-z, z)
+                );
+        }
 
         // ボス登場ボイス
         AudioManager.instance.stopAllVoice();
@@ -562,11 +595,6 @@ public class BossAI : MonoBehaviour {
         // サンドを落とす
         Instantiate(_standbySandParticle);
 
-        Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z;
-        Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
-                                                                 Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
-                                                                 Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
-        _lastPreparationRandPos = lastRandPos + randLength;
     }
 
     // Update is called once per frame
@@ -843,10 +871,10 @@ public class BossAI : MonoBehaviour {
             _state++;
         }
     }
-    [SerializeField]
-    float anglex = Mathf.PI / 4;
-    [SerializeField]
-    float anglex2 = Mathf.PI / 4;
+    //[SerializeField]
+    //float anglex = Mathf.PI / 4;
+    //[SerializeField]
+    //float anglex2 = Mathf.PI / 4;
     // 第一形態
     void Level_1_Update()
     {
@@ -1057,7 +1085,7 @@ public class BossAI : MonoBehaviour {
                     _level_2_movePos = new Vector3
                         (
                             moveObj.transform.position.x + Random.Range(-x, x),
-                            moveObj.transform.position.y + Random.Range(-y, y),
+                            moveObj.transform.position.y + Random.Range(y, y * 2),
                             moveObj.transform.position.z + Random.Range(-z, z)
                         );
                     _level_2_randomStopTime = _level_2_randomStopTimeMax;
@@ -1361,7 +1389,7 @@ public class BossAI : MonoBehaviour {
             var length = _lastPreparationRandPos - _bossBodyParent.transform.position;
             if (length.magnitude < 0.5f)
             {
-                Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z + Vector3.up * _lastRandMoveLength.y;
+                //Vector3 lastRandPos = _lastTacklePos + Vector3.forward * _lastRandMoveLength.z + Vector3.up * _lastRandMoveLength.y;
                 //Vector3 randLength = new Vector3(Random.Range(-_lastRandMoveLength.x, _lastRandMoveLength.x),
                 //                                                         Random.Range(-_lastRandMoveLength.y, _lastRandMoveLength.y),
                 //                                                         Random.Range(-_lastRandMoveLength.z, _lastRandMoveLength.z));
@@ -1369,17 +1397,19 @@ public class BossAI : MonoBehaviour {
 
                 //////
 
-                _level_2_randomIndex = Random.Range(0, _level_2_moveObjs.Count);
-                var moveObj = _level_2_moveObjs[_level_2_randomIndex];
-                float x = moveObj.transform.localScale.x / 2.0f;
-                float y = moveObj.transform.localScale.y / 2.0f;
-                float z = moveObj.transform.localScale.z / 2.0f;
-                _lastPreparationRandPos = new Vector3
-                    (
-                        moveObj.transform.position.x + Random.Range(-x, x),
-                        moveObj.transform.position.y + Random.Range(-y, y),
-                        moveObj.transform.position.z + Random.Range(-z, z)
-                    );
+                {
+                    int last_randomIndex = Random.Range(0, _last_moveObjs.Count);
+                    var last_moveObj = _last_moveObjs[last_randomIndex];
+                    float x = last_moveObj.transform.localScale.x / 2.0f;
+                    float y = last_moveObj.transform.localScale.y / 2.0f;
+                    float z = last_moveObj.transform.localScale.z / 2.0f;
+                    _lastPreparationRandPos = new Vector3
+                        (
+                            last_moveObj.transform.position.x + Random.Range(-x, x),
+                            last_moveObj.transform.position.y + Random.Range(y, y * 2),
+                            last_moveObj.transform.position.z + Random.Range(-z, z)
+                        );
+                }
 
                 //////
 
