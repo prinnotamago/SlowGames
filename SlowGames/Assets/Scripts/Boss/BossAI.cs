@@ -1745,6 +1745,8 @@ public class BossAI : MonoBehaviour {
         {
             Damage();
         }
+
+        Destroy(col.gameObject);
     }
 
     public void PargeDamage(Collider col)
