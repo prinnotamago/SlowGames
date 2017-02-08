@@ -20,4 +20,5 @@ public static class TagName
 	public const string Float = "Float";
 	public const string SlowCheck = "SlowCheck";
 	public const string Stand = "Stand";
+	public const string Boss = "Boss";
 }

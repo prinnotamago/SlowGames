@@ -79,7 +79,7 @@ ModelImporter:
     - serializedVersion: 16
       name: HandMove
       takeName: Take 001
-      firstFrame: 0
+      firstFrame: 2
       lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
