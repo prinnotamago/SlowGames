@@ -11,6 +11,7 @@ public enum SeName
 {
 	Authentication,
 	BossApparance,
+	BossLastProduction,
 	BossMove,
 	BossPurge,
 	BulletFlip,
