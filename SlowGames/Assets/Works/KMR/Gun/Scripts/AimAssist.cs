@@ -55,13 +55,13 @@ public class AimAssist : MonoBehaviour
     public void OrientationCorrection()
     {
         _enemyHit = false;
-        int layerMask = LayerMask.GetMask(new string[] { "Enemy" });
+        int layerMask = 1 << (int)LayerName.Enemy | 1 << (int)LayerName.Boss; ;//LayerMask.GetMask(new string[] { "Enemy" ,});
         isHit = Physics.SphereCast(transform.position, radius, transform.forward, out _hit, 100, layerMask);
 
 
         if (isHit)
         {
-            if (_hit.transform.tag == "Enemy" && _enemyHit == false || _hit.transform.tag == "EnemyBullet" && _enemyHit == false)
+            if (_hit.transform.tag == "Enemy" && _enemyHit == false || _hit.transform.tag == "EnemyBullet" && _enemyHit == false || _hit.transform.tag == TagName.Boss && _enemyHit == false)
             {
                 _enemyHit = true;
                 var distance = _hit.transform.gameObject.GetComponentInChildren<Renderer>().bounds.center - gameObject.transform.position;
