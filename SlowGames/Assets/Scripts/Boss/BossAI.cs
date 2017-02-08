@@ -333,6 +333,16 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     GameObject _hitLastParticle = null;
 
+    // 登場時と突進前に出す
+    [SerializeField]
+    GameObject _crossParticle = null;
+    [SerializeField]
+    GameObject _crossEffectPos = null;
+    bool _isStartCross = true;
+    bool _isLastCross = true;
+    [SerializeField]
+    GameObject _crossParent = null;
+
     Animator _anim;
 
     bool _oneHitFrame = true;   // 1フレームに複数回ダメージを受けるのを防ぐ
@@ -866,9 +876,20 @@ public class BossAI : MonoBehaviour {
 
         var vector = _startPos - _bossBodyParent.transform.position;
         _bossBodyParent.transform.position += vector / _startSpeed;
-        if(vector.magnitude <= 0.5f)
+        if (vector.magnitude <= 0.5f)
         {
             _state++;
+        }
+        else if (vector.magnitude <= 5.0f)
+        {
+            if (_isStartCross)
+            {
+                var particle = Instantiate(_crossParticle);
+                particle.transform.position = _crossEffectPos.transform.position;
+                particle.transform.parent = _crossParent.transform;
+
+                _isStartCross = false;
+            }
         }
     }
     //[SerializeField]
@@ -1454,6 +1475,18 @@ public class BossAI : MonoBehaviour {
             {
                 //_anim.Play("Tackle");
                 AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
+            }
+
+            // cross
+            if (_lastSleepTime <= 1.0f)
+            {
+                if (_isLastCross)
+                {
+                    var particle = Instantiate(_crossParticle);
+                    particle.transform.position = _crossEffectPos.transform.position;
+                    particle.transform.parent = _crossParent.transform;
+                    _isLastCross = false;
+                }
             }
 
             _bossBodyParent.transform.LookAt(_player.transform);
