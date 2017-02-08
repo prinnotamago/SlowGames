@@ -118,7 +118,7 @@ public class BossBullet : MonoBehaviour {
 
         //玉にあった時は弾かせて消す
 
-        if(_chargeTime > 0.0f || _standbyTime > 0.0f) { return; }
+        if(_chargeTime > 0.0f || _standbyTime > 0.0f || _slowStartTime > 0.0f) { return; }
 
         if (other.gameObject.tag == TagName.Bullet)
         {
