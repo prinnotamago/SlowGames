@@ -41,11 +41,9 @@ public enum VoiceName
 	IV06,
 	IV07,
 	IV08,
-	IV09,
 	IV10,
 	IV11,
 	IV13,
-	IV14,
 	IV15,
 	IV16,
 	IV17,
@@ -53,7 +51,6 @@ public enum VoiceName
 	V01a,
 	V01b,
 	V02,
-	V03,
 	V04,
 	V04b,
 	V05,
@@ -62,6 +59,5 @@ public enum VoiceName
 	V07c,
 	V07d,
 	V09,
-	V10,
 }
 }
