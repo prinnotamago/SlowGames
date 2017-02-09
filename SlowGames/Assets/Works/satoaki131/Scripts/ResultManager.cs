@@ -157,6 +157,8 @@ public class ResultManager : MonoBehaviour
         var time = 0.0f;
         var fadeTime = 0.0f;
 
+        AudioManager.instance.playSe(AudioName.SeName.TitleLogoEnding);
+
         //銃が光る演出
         while (time < 2.0f)
         {
@@ -193,8 +195,9 @@ public class ResultManager : MonoBehaviour
                 ));
         }
 
+
         //光切ったらぽわぽわを出す
-        for(int i = 0; i < _particle.Length; i++)
+        for (int i = 0; i < _particle.Length; i++)
         {
             _particle[i].SetActive(true); //ぽわぽわ出る
         }
@@ -261,7 +264,6 @@ public class ResultManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1.0f);
 
-        AudioManager.instance.playSe(AudioName.SeName.TitleLogoEnding);
 
         //thank you for playing演出
         _thankyouText.isMoveText = true;
