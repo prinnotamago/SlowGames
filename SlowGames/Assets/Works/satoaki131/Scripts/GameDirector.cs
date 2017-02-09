@@ -140,6 +140,10 @@ public class GameDirector : MonoBehaviour {
 
     private IEnumerator GameEndAudio()
     {
+        foreach(var gunSlowButtons in FindObjectsOfType<GunSlowButton>())
+        {
+            gunSlowButtons.enabled = false;
+        }
         foreach(var overHeat in _playerShot)
         {
             overHeat.gameObject.GetComponent<OverHeat>().FinishProduction();
