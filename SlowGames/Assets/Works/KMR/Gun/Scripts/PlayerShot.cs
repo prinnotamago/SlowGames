@@ -45,6 +45,7 @@ public class PlayerShot : MonoBehaviour
         set { _bulletsNumber = value; }
     }
 
+    //銃にのリロードするかしないかの状態
     enum shotType
     {
         notReload,
@@ -58,10 +59,7 @@ public class PlayerShot : MonoBehaviour
         get { return _isShot; }
     }
 
-    //float _time;
-
     int _burstCount;
-
 
     AimAssist _aimAssist;
 
@@ -72,7 +70,7 @@ public class PlayerShot : MonoBehaviour
     shotType _shotType = shotType.autoReload;
 
     [SerializeField]
-    Animator _gunAnim = null; 
+    Animator _gunAnim = null;
 
     bool _isStart = false;
 
@@ -80,7 +78,7 @@ public class PlayerShot : MonoBehaviour
 
     public bool isStart
     {
-        get{ return _isStart; }
+        get { return _isStart; }
         set { _isStart = value; }
     }
 
@@ -93,48 +91,27 @@ public class PlayerShot : MonoBehaviour
         _reloadHash = Animator.StringToHash("isReload");
         _reShotHash = Animator.StringToHash("reShot");
         _ringShotHash = Animator.StringToHash("isShotRing");
-        //_isStart = true;
         _recoil = GetComponent<Recoil>();
-        //_shotType = shotType.autoReload;
         _aimAssist = GetComponentInChildren<AimAssist>();
         _bulletsNumber = _maxBulletsNumbers;
         _reload = GetComponent<Reload>();
-        //_burstCount = _oneShotCount;
-       // _time = _burstIntervalTime;
         if (!SteamVR.active) return;
         _trackedObject = GetComponent<SteamVR_TrackedObject>();
-
         _bulletShotSe = AudioManager.instance.getSe(AudioName.SeName.PlayerGun);
     }
 
     void Update()
     {
-        //Debug.Log(_isReload);
         if (SteamVR.active) { _device = SteamVR_Controller.Input((int)_trackedObject.index); }
 
         if (!_isStart) return;
-        //Debug.Log(_reShot);
         ReloadAnim();
-
-
-        //_gunAnim.SetBool(_reShotHash, _reShot);
-
-
-        //if (_reShot)
-        //{
-        //    _reShot = false;
-        //    _gunAnim.SetBool(_reShotHash, _reShot);
-        //}
-        //if (_isShot) { _isShot = false; }
-
 
         if (_reload.isReload)
         {
             if (_isShot) _isShot = false;
             return;
         }
-
-        
 
         if (_reShot)
         {
@@ -146,23 +123,22 @@ public class PlayerShot : MonoBehaviour
             SetAnimFrame(value); //Animationの決定
         }
 
-        if(SlowMotion._instance.limiterFlag)
+        if (SlowMotion._instance.limiterFlag)
         {
             _shotType = shotType.notReload;
         }
 
-        ThreeBurst();
+        BulletCreate();
 
         if (!SteamVR.active && !Input.GetKeyDown(KeyCode.A) ||
             SteamVR.active && !_device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) { return; }
-        
+
         _aimAssist.OrientationCorrection();
         _isShot = true;
-        //_burstCount = _oneShotCount;
-        
     }
 
-    void ThreeBurst()
+    //弾の生成（弾の向きを決めている）
+    void BulletCreate()
     {
         if (_shotType == shotType.autoReload)
         {
@@ -173,19 +149,13 @@ public class PlayerShot : MonoBehaviour
         _gunAnim.speed = 1.0f;
         _ringAnim.speed = 1.0f;
 
-        //_time -= Time.unscaledDeltaTime;
-        //if (_time > 0) return;
-
         _bulletShotSe.Play();
-
-        //_recoil.RecoilAnimation();
 
         if (SteamVR.active)
         {
             _device.TriggerHapticPulse(4000);
         }
         GameObject shotBullet = Instantiate(_bullet);
-        //ScoreManager.instance.AddShotCount();
         if (_aimAssist.enemyHit == false)
         {
             shotBullet.transform.rotation = transform.rotation;
@@ -197,9 +167,6 @@ public class PlayerShot : MonoBehaviour
             shotBullet.transform.rotation = transform.rotation;
             shotBullet.GetComponent<Shot>().direction = _aimAssist.enemyDirection;
         }
-
-        //_gunAnim.SetTrigger("isShot");
-        //ResetShotMove();
 
         _reShot = true;
         //_gunAnim.speed = 1.0f;
@@ -215,26 +182,17 @@ public class PlayerShot : MonoBehaviour
         effect.transform.LookAt(shotBullet.transform);
         effect.transform.position = transform.position + transform.forward * 0.2f - transform.up * 0.2f;
 
-       //        _time = _burstIntervalTime;
-       _burstCount--;
+        _burstCount--;
         if (_shotType == shotType.autoReload)
         {
             _bulletsNumber--;
         }
-        //if (_burstCount < 1)
-        //{
-        //    _burstCount = _oneShotCount;
         _isShot = false;
-        //}
     }
 
+    //撃った時のアニメーションのインターバルの処理
     private IEnumerator ShotInterval()
     {
-        //var time = 0.0f;
-        //while(time < 0.05f)
-        //{
-        //    time += Time.unscaledDeltaTime;
-        //}
         yield return new WaitForSecondsRealtime(0.05f);
         _reShot = false;
         _gunAnim.SetBool(_reShotHash, _reShot);
@@ -242,31 +200,26 @@ public class PlayerShot : MonoBehaviour
         yield return null;
     }
 
+    //手のアニメーションをトリガーの入力の深さに対して動かしている処理
     void SetAnimFrame(float frame)
     {
-        //var clip = _animator.GetCurrentAnimatorClipInfo(0)[0].clip;
-
-        //float time = (float)frame / clip.frameRate;
         if (!_gunAnim.GetCurrentAnimatorStateInfo(0).IsName("Wait")) return;
         var animationHash = _gunAnim.GetCurrentAnimatorStateInfo(0).shortNameHash;
         _gunAnim.Play(animationHash, 0, frame);
     }
 
-    void ResetShotMove()
-    {
-        _gunAnim.Play(0, 0, 0);
-    }
 
+    //リロードのアニメーションの処理
     void ReloadAnim()
     {
-        if(_reload.isReload)
+        if (_reload.isReload)
         {
             _isReload = true;
             _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
             _ringAnim.speed = 10.0f * SlowMotion._instance.RealSpeed(); ;
         }
         else
-        if(!_reload.isReload)
+        if (!_reload.isReload)
         {
             _gunAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
             _ringAnim.speed = 10.0f * SlowMotion._instance.RealSpeed();
@@ -274,11 +227,6 @@ public class PlayerShot : MonoBehaviour
 
         }
         _gunAnim.SetBool(_reloadHash, _isReload);
-        
 
     }
-
-    
-
-
 }
