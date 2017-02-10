@@ -97,6 +97,8 @@ AudioMixerGroupController:
   - {fileID: 244000011309994828}
   - {fileID: 244849467557181786}
   - {fileID: 244719211579565364}
+  - {fileID: 244386917498536064}
+  - {fileID: 244642519322646622}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -228,6 +230,66 @@ AudioMixerEffectController:
     m_GUID: 706030fab5dec0c4d9afbb20b263193f
   - m_ParameterName: Sidechain Mix
     m_GUID: 81821bc041b20b94cb354b7020c86016
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244386917498536064
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 3d1b003981564224194e2e18f8e38609
+  m_EffectName: OculusSpatializer
+  m_MixLevel: db213204fcc271a4c9649373c57797bb
+  m_Parameters:
+  - m_ParameterName: Gain
+    m_GUID: 2b4a69151ff410549808e98b9ca2893a
+  - m_ParameterName: UseISq
+    m_GUID: 838364c1f25e4d548ae114fd205c8fe7
+  - m_ParameterName: Near
+    m_GUID: c30e9c7da1f2b4a43b5b9f29d7be6957
+  - m_ParameterName: Far
+    m_GUID: 3fb644b2de4b4d1489e7722d27f0bf42
+  - m_ParameterName: DsblRef
+    m_GUID: 701134611eab853469fb895d9e9cc419
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244642519322646622
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: e2bdf0dfdfe5435408577dc13977f64d
+  m_EffectName: OculusSpatializerReflection
+  m_MixLevel: 176884223f85c01438a95abd8e3113c2
+  m_Parameters:
+  - m_ParameterName: GScale
+    m_GUID: 6d32fa9108d614a458d4c41a90f8b98e
+  - m_ParameterName: E.Rflt On
+    m_GUID: 049917c28859f9a488d307c1f8ce01c2
+  - m_ParameterName: E.Rflt Rev On
+    m_GUID: 8f79e899686128a48a96637d09cf11a6
+  - m_ParameterName: Room X
+    m_GUID: 0eaed7e58e92cb441ac34f7320874921
+  - m_ParameterName: Room Y
+    m_GUID: a796d4cb27fbb8640b23f2538e7f4014
+  - m_ParameterName: Room Z
+    m_GUID: 070b92a604c205347820b5c1b765a4d4
+  - m_ParameterName: Left
+    m_GUID: 951b22882ca0a9a46bbd2296e2037f1b
+  - m_ParameterName: Right
+    m_GUID: f013055db464a8442b90b580e2e4c275
+  - m_ParameterName: Up
+    m_GUID: 3e9089a625da1e744b18c80758e5e2c0
+  - m_ParameterName: Down
+    m_GUID: 52fba29d7fcc39042b92e05b28e21b78
+  - m_ParameterName: Behind
+    m_GUID: 07d94414cd914ef4bacee5cb92e8d01d
+  - m_ParameterName: Front
+    m_GUID: 1ca2fc64dd1c19043a5fb6dd1b7bed1e
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0

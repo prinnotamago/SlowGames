@@ -9147,7 +9147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509526320091756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.012, y: 0, z: 0}
+  m_LocalPosition: {x: -0.012, y: -0.051, z: 0.036}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4506601362979878}
@@ -12124,7 +12124,7 @@ Light:
   serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 0.734, a: 1}
-  m_Intensity: 4.32
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -12142,7 +12142,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294932479
+    m_Bits: 4294934527
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -12192,7 +12192,7 @@ Light:
   serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 0.734, a: 1}
-  m_Intensity: 4.32
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -12210,7 +12210,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294932479
+    m_Bits: 4294934527
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -13319,6 +13319,7 @@ MonoBehaviour:
   _mazzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
     type: 2}
   _bullet: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
+  _ringAnim: {fileID: 0}
   _maxBulletsNumbers: 20
   _triggerAnim: {fileID: 0}
   _shotType: 1
@@ -13329,7 +13330,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1455660586748736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbd27327f1c1c7443a8be4af995311fc, type: 3}
   m_Name: 
@@ -13623,6 +13624,7 @@ MonoBehaviour:
   _mazzleFlush: {fileID: 1933052966857656, guid: 019980feaa8406a488be71535f08e7bc,
     type: 2}
   _bullet: {fileID: 1000014089496684, guid: 3cd77c866aefb6c4ea3d514ac31ce907, type: 2}
+  _ringAnim: {fileID: 0}
   _maxBulletsNumbers: 20
   _triggerAnim: {fileID: 95010017621213290}
   _shotType: 1
@@ -14470,7 +14472,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: dc14c794c34659140ba758a2c89005ab, type: 2}
+  - {fileID: 2100000, guid: 08f9a004f6742d148b88dac8b13deff0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14691,7 +14693,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: dc14c794c34659140ba758a2c89005ab, type: 2}
+  - {fileID: 2100000, guid: 08f9a004f6742d148b88dac8b13deff0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

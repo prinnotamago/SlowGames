@@ -47,6 +47,8 @@ public class BossBullet : MonoBehaviour {
         _particle = Instantiate(_chargeEffect);
         _particle.transform.position = transform.position;
         _particle.transform.parent = transform;
+
+        AudioManager.instance.playSe(AudioName.SeName.BossCharge);
     }
 
     void Update()
@@ -70,6 +72,8 @@ public class BossBullet : MonoBehaviour {
                 // 高速弾を撃つのを伝える
                 AudioManager.instance.stopAllVoice();
                 AudioManager.instance.playVoice(AudioName.VoiceName.IV06);
+
+                AudioManager.instance.playSe(AudioName.SeName.BossHighSpeedBullet);
             }
         }
         else

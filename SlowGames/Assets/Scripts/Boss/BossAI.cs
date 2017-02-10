@@ -597,7 +597,7 @@ public class BossAI : MonoBehaviour {
             _lastPreparationRandPos = new Vector3
                 (
                     last_moveObj.transform.position.x + Random.Range(-x, x),
-                    last_moveObj.transform.position.y + Random.Range(y, y * 2),
+                    last_moveObj.transform.position.y + Random.Range(0, y * 2),
                     last_moveObj.transform.position.z + Random.Range(-z, z)
                 );
         }
@@ -1153,7 +1153,6 @@ public class BossAI : MonoBehaviour {
 
                 // 移動音
                 AudioManager.instance.stop3DSe(gameObject, AudioName.SeName.BossMove);
-                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossMove);
             }
             // 向かう場所についてなかったらそこに移動する
             else
@@ -1466,7 +1465,7 @@ public class BossAI : MonoBehaviour {
                     _lastPreparationRandPos = new Vector3
                         (
                             last_moveObj.transform.position.x + Random.Range(-x, x),
-                            last_moveObj.transform.position.y + Random.Range(y, y * 2),
+                            last_moveObj.transform.position.y + Random.Range(0, y * 2),
                             last_moveObj.transform.position.z + Random.Range(-z, z)
                         );
                 }
@@ -1799,8 +1798,8 @@ public class BossAI : MonoBehaviour {
             var particle = Instantiate(_hitLastParticle);
             particle.transform.position = col.transform.position;
 
-            // ボス回転爆発
-            AudioManager.instance.playSe(AudioName.SeName.BossBulletDamage);
+            // ボスヒット音
+            AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossBulletDamage);
         }
         else
         {
@@ -1808,8 +1807,8 @@ public class BossAI : MonoBehaviour {
             var particle = Instantiate(_hitLastParticle);
             particle.transform.position = col.transform.position;
 
-            // ボス回転爆発
-            AudioManager.instance.playSe(AudioName.SeName.BossBulletDamage);
+            // ボスヒット音
+            AudioManager.instance.play3DSe(gameObject, AudioName.SeName.BossBulletDamage);
         }
             
         // 出現時は当たらないようにする

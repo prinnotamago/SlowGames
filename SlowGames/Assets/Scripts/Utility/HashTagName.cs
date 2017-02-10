@@ -20,4 +20,5 @@ public static class HashTagName
 	public static readonly int Float = "Float".GetHashCode();
 	public static readonly int SlowCheck = "SlowCheck".GetHashCode();
 	public static readonly int Stand = "Stand".GetHashCode();
+	public static readonly int Boss = "Boss".GetHashCode();
 }

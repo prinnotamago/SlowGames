@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 95744680356071520}
   - component: {fileID: 65993500604133232}
   - component: {fileID: 114007739710951674}
-  - component: {fileID: 114252259711463988}
   - component: {fileID: 195545306734548478}
   - component: {fileID: 114388104121814328}
   - component: {fileID: 54389570395737860}
@@ -190,8 +189,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242068687375224}
-  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: -0.01000005, y: 2.5500002, z: 23}
+  m_LocalRotation: {x: 4.9795354e-12, y: 0.53091407, z: 7.948157e-12, w: 0.8474257}
+  m_LocalPosition: {x: 24.34, y: 2.276, z: 1.5940695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4501423400839578}
@@ -413,7 +412,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 95744680356071520}
   _currentAction: 0
   _playerToMaxDistance: 0.4
-  _currentTarget: {x: -0.030000031, y: 2.256, z: 11.648}
+  _currentTarget: {x: 15.754, y: 2.0640001, z: 1.55}
   _justShotTime: 0.2
   _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
@@ -443,19 +442,6 @@ MonoBehaviour:
   _muzzleFlush: {fileID: 1706786483571582, guid: dff7704d5bbe539458904ae36e030ec9,
     type: 2}
   _isShotStart: 0
---- !u!114 &114252259711463988
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242068687375224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec432a1bd9a30345a67a62d3c5f6065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  length: 0.01
 --- !u!114 &114388104121814328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,7 +475,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 1
+  _generatePostion: 2
   _attackDamege: 2
 --- !u!137 &137031403495594404
 SkinnedMeshRenderer:

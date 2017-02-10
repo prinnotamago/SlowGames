@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 0}
   _generateManager: {fileID: 0}
   _gameStartTime: 2
-  _pointLight: {fileID: 0}
   _resultCanvas: {fileID: 0}
-  _gameClearImage: {fileID: 0}
-  _clearDeathCount: 30
+  _boss: {fileID: 1758918414922428, guid: 411dbb4d84520c64ea31459cdb3470fe, type: 2}
+  _voiceTiming: 10
+  _clearDeathCount: 36

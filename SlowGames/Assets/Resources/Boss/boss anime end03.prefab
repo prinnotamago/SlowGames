@@ -1026,7 +1026,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758918414922428}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 500, z: 0}
+  m_LocalPosition: {x: 0, y: 1500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4391269405191860}
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  _changeStateHP: 320000002800000000000000
+  _changeStateHP: 500000002800000000000000
   _bossBodyParent: {fileID: 1758918414922428}
   _parts:
   - {fileID: 114124384295420056}
@@ -2670,7 +2670,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 873e57b3c81ccde40aada66c673a2db4, type: 2}
   - {fileID: 2100000, guid: 89c7bdff2bd641e4796b97d2ee67462f, type: 2}
   - {fileID: 2100000, guid: fcbd42bc11d22e540b0de76f8936e261, type: 2}
-  _speedBulletHP: 640000003200000028000000
+  _speedBulletHP: 64000000500000003c000000
   _speedBulletChargeMax: 5
   _attackInterval: 0.5
   _attackIntervalRange: {x: 0.4, y: 0.6}
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   _level_2_centerPos: {x: 0, y: 7, z: 15}
   _level_2_moveObjPrefab: {fileID: 1154740623382328, guid: a144822d20e76cf4e8d3579a955bb181,
     type: 2}
-  _level_2_modeChangeHP: 5a00000046000000
+  _level_2_modeChangeHP: 500000003c000000
   _level_2_randomMoveSpeed: 6.5
   _level_2_randomStopTimeMax: 0
   _lastTackleSpeed: 1
@@ -2715,7 +2715,7 @@ MonoBehaviour:
   _lastDownSpeed: 1
   _lastSleepTime: 3
   _lastSlowStartTime: 0.2
-  _climaxVelocity: 7
+  _climaxVelocity: 5
   _climaxUpPower: 3
   _climaxFirstDebrisNum: 2
   _climaxFirstDebrisSize: 0.1
@@ -2735,7 +2735,7 @@ MonoBehaviour:
   _crossStartEffectPos: {fileID: 1412145615916536}
   _crossLastEffectPos: {fileID: 1697419097369908}
   _crossParent: {fileID: 1558943971485330}
-  _debugFlag: 1
+  _debugFlag: 0
 --- !u!114 &114288619788247730
 MonoBehaviour:
   m_ObjectHideFlags: 1

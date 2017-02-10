@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 223926037288941120}
   _text: {fileID: 114512130621911552}
+  _doCount: 1
 --- !u!114 &114619226172004304
 MonoBehaviour:
   m_ObjectHideFlags: 1

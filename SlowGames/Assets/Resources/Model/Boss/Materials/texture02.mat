@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: texture02
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _SPECGLOSSMAP
+  m_ShaderKeywords: _EMISSION _NORMALMAP _SPECGLOSSMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 4ca1074c4b1413145b359f70e6c64645, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3d6b5530fe8237948a62eceb386dcd19, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -72,7 +72,7 @@ Material:
     - first:
         name: _SpecGlossMap
       second:
-        m_Texture: {fileID: 2800000, guid: 09ee76930dd29fb4eb30d01811d2e068, type: 3}
+        m_Texture: {fileID: 2800000, guid: b716644c635e40e41a487adf8fd2bd8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -90,7 +90,7 @@ Material:
       second: 0
     - first:
         name: _GlossMapScale
-      second: 1
+      second: 0.347
     - first:
         name: _Glossiness
       second: 0.231
@@ -130,7 +130,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 0.14668588, g: 0, b: 0, a: 1}
+      second: {r: 0.9170214, g: 0, b: 0, a: 1}
     - first:
         name: _SpecColor
       second: {r: 0.28676468, g: 0.28676468, b: 0.28676468, a: 1}

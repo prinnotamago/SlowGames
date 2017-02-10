@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532482501004534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.038000047, y: 30.57, z: 18.320002}
+  m_LocalPosition: {x: 0.08199996, y: 30.490002, z: 18.320002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4875580712134376}
@@ -274,7 +274,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 3
+  _generatePostion: 4
   _attackDamege: 2
 --- !u!114 &114455878612764528
 MonoBehaviour:
@@ -290,7 +290,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 95205342271626618}
   _currentAction: 0
   _playerToMaxDistance: 0.4
-  _currentTarget: {x: 7.6140003, y: 30.849998, z: 6.3240004}
+  _currentTarget: {x: 0.25, y: 31.009998, z: 6.7120004}
   _justShotTime: 0.2
   _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
