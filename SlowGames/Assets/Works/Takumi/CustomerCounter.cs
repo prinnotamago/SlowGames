@@ -86,7 +86,7 @@ public class CustomerCounter : MonoBehaviour
             else
             {
                 _canvas.enabled = true;
-                _text.text =  GetCount().ToString(); 
+                _text.text =  "CustomerCount:" + GetCount().ToString(); 
             }
               
         }
