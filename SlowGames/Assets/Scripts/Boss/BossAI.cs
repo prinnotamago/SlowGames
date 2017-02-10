@@ -57,6 +57,9 @@ public class BossAI : MonoBehaviour {
     [SerializeField]
     GameObject _speedBullet = null;    // 速い弾
 
+    float _homingSoundTime = 0.0f;
+    bool _isHomingSound = false;
+
     /// <summary>
     /// ボスのエミッションをいじる
     /// </summary>
@@ -85,6 +88,8 @@ public class BossAI : MonoBehaviour {
     /// </summary>
     [SerializeField]
     float _attackInterval = 1.0f;  // 間隔
+    [SerializeField]
+    Vector2 _attackIntervalRange = Vector2.zero;
     float _attackTime = 0.0f;      // 何秒か数える
     [SerializeField, Range(0.0f, 1.0f)]
     float _patternRatio = 0.5f;           // 攻撃パターンの比率
@@ -284,6 +289,9 @@ public class BossAI : MonoBehaviour {
 
     [SerializeField]
     float _lastSlowStartTime = 1.0f;
+
+    bool _isBackSound = true;
+    bool _isBossRush = true;
     //////////////////////////////////////////////////////////////////////////////
 
     // CLIMAX の情報//////////////////////////////////////////////////////////////
@@ -626,6 +634,19 @@ public class BossAI : MonoBehaviour {
             Damage();
         }
 
+        // ホーミングの音
+        if (_isHomingSound)
+        {
+            _homingSoundTime += Time.deltaTime;
+            if (_homingSoundTime > 0.2f)
+            {
+                // 弾の撃つ音
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.EnemyBulletShot);
+                _homingSoundTime = 0.0f;
+                _isHomingSound = false;
+            }
+        }
+
         // STANDBYモードなら時間が過ぎるまで上で待機
         if(_state == BossState.STANDBY)
         {
@@ -691,11 +712,18 @@ public class BossAI : MonoBehaviour {
                 bullet1.transform.Rotate(0, -90, 0);
                 //Debug.Log("1");
 
+                // 弾の撃つ音
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.EnemyBulletShot);
+
                 var bullet2 = Instantiate(_homingBullet);
                 bullet2.transform.position = _sideGunObjPos[1].position;         
                 bullet2.transform.LookAt(_player.transform);               
                 bullet2.transform.Rotate(0, 90, 0);
                 //Debug.Log("2");
+
+                // 弾の撃つ音
+                //AudioManager.instance.play3DSe(gameObject, AudioName.SeName.EnemyBulletShot);
+                _isHomingSound = true;
             }
             else
             {
@@ -703,10 +731,14 @@ public class BossAI : MonoBehaviour {
                 var bullet = Instantiate(_normalBullet);
                 bullet.transform.position = _frontGunObjPos.position;
                 bullet.transform.LookAt(_player.transform);
+
+                // 弾の撃つ音
+                AudioManager.instance.play3DSe(gameObject, AudioName.SeName.EnemyBulletShot);
             }
             
             // 数値をリセット
             _attackTime = 0.0f;
+            _attackInterval = Random.Range(_attackIntervalRange.x, _attackIntervalRange.y);
         }
     }
 
@@ -892,6 +924,9 @@ public class BossAI : MonoBehaviour {
                 particle.transform.rotation = _crossStartEffectPos.transform.rotation;
                 particle.transform.parent = _crossParent.transform;
 
+                // ボス回転爆発
+                AudioManager.instance.playSe(AudioName.SeName.BossEyeEmission);
+
                 _isStartCross = false;
             }
         }
@@ -984,7 +1019,7 @@ public class BossAI : MonoBehaviour {
                );
 
         //Debug.Log(vector.magnitude);
-        if (vector.magnitude < 0.5f)
+        if (vector.magnitude < 2.0f)
         {
             _isLevel_1_shot = true;
 
@@ -1470,6 +1505,13 @@ public class BossAI : MonoBehaviour {
                     _lastParticleCreateTime = 0;
                 }
             }
+
+            if (_isBackSound)
+            {
+                // ボス回転爆発
+                AudioManager.instance.playSe(AudioName.SeName.BossBackExplosion);
+                _isBackSound = false;
+            }
         }
         // まだ止まる時間なら
         else if(_lastSleepTime > 0.0f)
@@ -1491,6 +1533,9 @@ public class BossAI : MonoBehaviour {
                     particle.transform.rotation = _crossLastEffectPos.transform.rotation;
                     particle.transform.parent = _crossParent.transform;
                     _isLastCross = false;
+
+                    // ボス回転爆発
+                    AudioManager.instance.playSe(AudioName.SeName.BossEyeEmission);
                 }
             }
 
@@ -1534,6 +1579,13 @@ public class BossAI : MonoBehaviour {
         // プレイヤーへのタックル
         else
         {
+            if (_isBossRush)
+            {
+                // ボス回転爆発
+                AudioManager.instance.playSe(AudioName.SeName.BossRush);
+                _isBossRush = false;
+            }
+
             var particle = Instantiate(_hitParticle);
             particle.transform.position = _bossBodyParent.transform.position + Vector3.forward * 3.0f;
 
@@ -1597,8 +1649,9 @@ public class BossAI : MonoBehaviour {
 
         if (_isClimaxSe)
         {
-            // ボス爆発
-            AudioManager.instance.playSe(AudioName.SeName.BossLastProduction);
+            // ボス回転爆発
+            AudioManager.instance.stopSe(AudioName.SeName.BossRush);
+            AudioManager.instance.playSe(AudioName.SeName.BossRotateExplosion);
             _isClimaxSe = false;
         }
 
@@ -1676,6 +1729,9 @@ public class BossAI : MonoBehaviour {
                 //effect.transform.rotation = transform.rotation;
                 effect.transform.localScale = Vector3.one * _climaxExplosionSize;
 
+                // ボス回転爆発
+                AudioManager.instance.playSe(AudioName.SeName.BossDustExplosion);
+
                 Destroy(gameObject);
                 GameDirector.instance.isBossDestroy();
             }
@@ -1742,12 +1798,18 @@ public class BossAI : MonoBehaviour {
         {
             var particle = Instantiate(_hitLastParticle);
             particle.transform.position = col.transform.position;
+
+            // ボス回転爆発
+            AudioManager.instance.playSe(AudioName.SeName.BossBulletDamage);
         }
         else
         {
             //var particle = Instantiate(_hitParticle);
             var particle = Instantiate(_hitLastParticle);
             particle.transform.position = col.transform.position;
+
+            // ボス回転爆発
+            AudioManager.instance.playSe(AudioName.SeName.BossBulletDamage);
         }
             
         // 出現時は当たらないようにする

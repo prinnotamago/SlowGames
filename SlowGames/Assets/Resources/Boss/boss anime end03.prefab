@@ -2641,8 +2641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d33a308d46e0e43959651d9e944d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 110
-  _changeStateHP: 5a0000003200000000000000
+  _hp: 100
+  _changeStateHP: 320000002800000000000000
   _bossBodyParent: {fileID: 1758918414922428}
   _parts:
   - {fileID: 114124384295420056}
@@ -2653,7 +2653,7 @@ MonoBehaviour:
   - {fileID: 114288619788247730}
   - {fileID: 114398428893081896}
   - {fileID: 114802108780757598}
-  _purgeHP: 36000000350000003400000033000000280000001e000000140000000a000000
+  _purgeHP: 55000000460000003700000028000000270000001e000000140000000a000000
   _frontGunObjPos: {fileID: 4866127858232164}
   _sideGunObjPos:
   - {fileID: 4380371267254688}
@@ -2670,9 +2670,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 873e57b3c81ccde40aada66c673a2db4, type: 2}
   - {fileID: 2100000, guid: 89c7bdff2bd641e4796b97d2ee67462f, type: 2}
   - {fileID: 2100000, guid: fcbd42bc11d22e540b0de76f8936e261, type: 2}
-  _speedBulletHP: 6e0000005a00000046000000
+  _speedBulletHP: 640000003200000028000000
   _speedBulletChargeMax: 5
   _attackInterval: 0.5
+  _attackIntervalRange: {x: 0.4, y: 0.6}
   _patternRatio: 0.5
   _state: 0
   _standbyTimeMax: 4
@@ -2695,7 +2696,7 @@ MonoBehaviour:
   _level_2_moveObjPrefab: {fileID: 1154740623382328, guid: a144822d20e76cf4e8d3579a955bb181,
     type: 2}
   _level_2_modeChangeHP: 5a00000046000000
-  _level_2_randomMoveSpeed: 7.2
+  _level_2_randomMoveSpeed: 6.5
   _level_2_randomStopTimeMax: 0
   _lastTackleSpeed: 1
   _last_moveObjPrefab: {fileID: 1807203054365852, guid: c29c77ffd2fd5194aa990ca3c7f85059,
@@ -2734,7 +2735,7 @@ MonoBehaviour:
   _crossStartEffectPos: {fileID: 1412145615916536}
   _crossLastEffectPos: {fileID: 1697419097369908}
   _crossParent: {fileID: 1558943971485330}
-  _debugFlag: 0
+  _debugFlag: 1
 --- !u!114 &114288619788247730
 MonoBehaviour:
   m_ObjectHideFlags: 1
