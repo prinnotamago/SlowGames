@@ -26,17 +26,17 @@ public abstract class SteamVR_Status : MonoBehaviour
 
 	protected abstract void SetAlpha(float a);
 
-	void OnEnable()
-	{
-		SteamVR_Utils.Event.Listen(message, OnEvent);
-	}
+    void OnEnable()
+    {
+        SteamVR_Utils.Event.Listen(message, OnEvent);
+    }
 
-	void OnDisable()
-	{
-		SteamVR_Utils.Event.Remove(message, OnEvent);
-	}
+    void OnDisable()
+    {
+        SteamVR_Utils.Event.Remove(message, OnEvent);
+    }
 
-	void OnEvent(params object[] args)
+    void OnEvent(params object[] args)
 	{
 		status = (bool)args[0];
 		if (status)

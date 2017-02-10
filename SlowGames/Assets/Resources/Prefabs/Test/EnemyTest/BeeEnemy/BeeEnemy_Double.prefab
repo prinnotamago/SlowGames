@@ -189,8 +189,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242068687375224}
-  m_LocalRotation: {x: -0, y: -0, z: 9.379163e-12, w: 1}
-  m_LocalPosition: {x: -0.01000005, y: 2.5500002, z: 23}
+  m_LocalRotation: {x: -6.223989e-12, y: -0.6635971, z: 7.016466e-12, w: 0.74809015}
+  m_LocalPosition: {x: -21.028, y: 2.73, z: 1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4501423400839578}
@@ -412,7 +412,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 95744680356071520}
   _currentAction: 0
   _playerToMaxDistance: 0.4
-  _currentTarget: {x: -0.030000031, y: 2.256, z: 11.648}
+  _currentTarget: {x: -15.308001, y: 1.548, z: 1.972}
   _justShotTime: 0.2
   _downLengthMax: 23
   _upRangeMinMax: {x: 5, y: 13}
@@ -475,7 +475,7 @@ MonoBehaviour:
     shotDelay: 1
     generateRate: 0
   _activeCounter: 0
-  _generatePostion: 1
+  _generatePostion: 0
   _attackDamege: 2
 --- !u!137 &137031403495594404
 SkinnedMeshRenderer:
