@@ -122,6 +122,13 @@ public class PlayerShot : MonoBehaviour
             float value = _device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x; //トリガーのニュウリョクの深さを0～1で受け取る
             SetAnimFrame(value); //Animationの決定
         }
+        if (_reShot)
+        {
+            if (SteamVR.active)
+            {
+                _device.TriggerHapticPulse(3999);
+            }
+        }
 
         if (SlowMotion._instance.limiterFlag)
         {
@@ -151,10 +158,7 @@ public class PlayerShot : MonoBehaviour
 
         _bulletShotSe.Play();
 
-        if (SteamVR.active)
-        {
-            _device.TriggerHapticPulse(4000);
-        }
+
         GameObject shotBullet = Instantiate(_bullet);
         if (_aimAssist.enemyHit == false)
         {
