@@ -210,10 +210,10 @@ public class TitleManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            isChange = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    isChange = true;
+        //}
 
         if (_voiceTime > 30.0f)
         {
