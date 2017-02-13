@@ -107,7 +107,8 @@ public class ViveGrab : MonoBehaviour {
                     }
                     GetComponent<BoxCollider>().enabled = false;
                     AudioManager.instance.playSe(AudioName.SeName.GunGet);
-                    device.TriggerHapticPulse(4000);
+                    //device.TriggerHapticPulse(3999);
+                    StartCoroutine(ViveInpalce());
                     _pickObj.SetActive(false);
                     _handModel.setGunState(true);            
                 }
@@ -115,6 +116,17 @@ public class ViveGrab : MonoBehaviour {
         }
     }
 
+    IEnumerator ViveInpalce()
+    {
+        var time = 0.0f;
+        while (time < 0.05f)
+        {
+            SteamVR_Controller.Device device = SteamVR_Controller.Input((int)_viveCon.index);
+            time += Time.unscaledDeltaTime;
+            device.TriggerHapticPulse(3999);
+            yield return null;
+        }
+    }
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == _tagName)
