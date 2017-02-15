@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 198748094660925436}
   - component: {fileID: 199308136431356968}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: BulletFireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1481,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1341324271
+  randomSeed: 1927261964
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4118,7 +4118,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1841048736
+  randomSeed: 2143235296
   InitialModule:
     serializedVersion: 3
     enabled: 1
